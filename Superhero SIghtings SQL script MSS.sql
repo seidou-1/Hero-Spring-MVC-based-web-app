@@ -8,3 +8,7 @@ DROP DATABASE IF EXISTS `SuperheroSightings`;
 CREATE DATABASE `SuperheroSightings`;
 
 USE `SuperheroSightings`;
+
+-- Sosa Making First Changes, just a comment
+
+USE `SuperheroSightings`;
