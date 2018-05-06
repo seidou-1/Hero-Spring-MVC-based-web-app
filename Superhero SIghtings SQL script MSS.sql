@@ -7,4 +7,6 @@ DROP DATABASE IF EXISTS `SuperheroSightings`;
 
 CREATE DATABASE `SuperheroSightings`;
 
-USE `SuperheroSightings`;
+USE `MyDatabase`;
+
+CREATE TABLE IF NOT EXISTS ();
