@@ -14,6 +14,11 @@
                            http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
 
-    <!-- Bean definitions go here -->
+       <bean id="SHService"
+              class="com.sg.superherosightings.service.SHService"/>
+    
+    <bean id="SuperheroSightingsDao"
+          class="DAOs.SuperheroSightingsDbDao"/>
+    
     
 </beans>
