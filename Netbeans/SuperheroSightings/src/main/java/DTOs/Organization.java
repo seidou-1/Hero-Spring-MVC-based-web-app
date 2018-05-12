@@ -17,6 +17,7 @@ public class Organization {
     String organizationName;
     Location location;
     List<Character> memberList;
+    String testing;
 
     public Organization() {
     }

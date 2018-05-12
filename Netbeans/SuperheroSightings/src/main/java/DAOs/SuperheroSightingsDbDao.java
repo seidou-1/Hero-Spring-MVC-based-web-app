@@ -56,11 +56,9 @@ private static final String SQL_SELECT_CHARACTER
 private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATION
     = ""; // revisit after checking out join statements;
 
-private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATION
-    = ""; 
 
 private static final String SQL_SELECT_ALL_CHARACTERS
-    = "select * from authors";
+    = "select * from Character";
 
     @Override
     public void addSighting(Sighting sighting) {
