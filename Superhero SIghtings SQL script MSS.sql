@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `SuperPower`(
 `SuperPowerID` int not null auto_increment,
 `SuperPowerType` VARCHAR(45),
 
-PRIMARY KEY (`SuperPowerType`)
+PRIMARY KEY (`SuperPowerID`) -- MISTAKE?
 );
 
 
