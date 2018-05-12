@@ -8,7 +8,9 @@ package DAOs;
 import DTOs.Location;
 import DTOs.Organization;
 import DTOs.Sighting;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -18,9 +20,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     private JdbcTemplate jdbcTemplate;
+    private Map<Integer, Character> allCharacters = new HashMap<Integer, Character>();
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        loadDummyData();
     }
     
     private static final String SQL_INSERT_SIGHTING
@@ -56,11 +60,25 @@ private static final String SQL_SELECT_CHARACTER
 private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATION
     = ""; // revisit after checking out join statements;
 
-private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATION
+private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATIONS
     = ""; 
 
 private static final String SQL_SELECT_ALL_CHARACTERS
     = "select * from authors";
+
+
+
+
+private void loadDummyData() {
+    
+//    String[] names = {"ALL "};
+//    String[] names = {"e"};
+//    String[] names = {"e"};
+    
+}
+
+
+
 
     @Override
     public void addSighting(Sighting sighting) {
