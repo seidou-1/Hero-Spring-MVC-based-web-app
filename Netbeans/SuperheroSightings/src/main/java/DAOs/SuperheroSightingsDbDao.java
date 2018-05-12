@@ -60,11 +60,9 @@ private static final String SQL_SELECT_CHARACTER
 private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATION
     = ""; // revisit after checking out join statements;
 
-<<<<<<< HEAD
-=======
 private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATIONS
     = ""; 
->>>>>>> 731a9d7deaec21eb353d62af9b8e1a286ea0b0b0
+
 
 private static final String SQL_SELECT_ALL_CHARACTERS
     = "select * from Character";
