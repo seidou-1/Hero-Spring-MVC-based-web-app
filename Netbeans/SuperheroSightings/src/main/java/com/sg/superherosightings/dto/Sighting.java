@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DTOs;
+package com.sg.superherosightings.dto;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -17,12 +17,12 @@ public class Sighting {
     int locationId;
     int characterId;
     private LocalDate sightingDate;
+    Characters character;
+    Location local;
 
     public Sighting() {
     }
     
-    
-
     public int getSightingId() {
         return sightingId;
     }

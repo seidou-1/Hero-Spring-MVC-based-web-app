@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DTOs;
+package com.sg.superherosightings.dto;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,8 +16,7 @@ public class Organization {
     int organizationId;
     String organizationName;
     Location location;
-    List<Character> memberList;
-    String testing;
+    List<Characters> memberList;
 
     public Organization() {
     }
