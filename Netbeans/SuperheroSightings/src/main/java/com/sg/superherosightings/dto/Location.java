@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DTOs;
+package com.sg.superherosightings.dto;
 
 import java.util.Objects;
 

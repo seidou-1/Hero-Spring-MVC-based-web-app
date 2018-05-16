@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DTOs;
+package com.sg.superherosightings.dto;
 
 import java.util.Objects;
 
@@ -11,11 +11,15 @@ import java.util.Objects;
  *
  * @author laptop
  */
-public class Character {
-    
+public class Characters {
+    int characterId;
     String name;
-    String Descriptin;
+    String description;
     boolean isSuperHero;
+    
+    public Characters(){
+        
+    }
 
     public String getName() {
         return name;
@@ -25,12 +29,12 @@ public class Character {
         this.name = name;
     }
 
-    public String getDescriptin() {
-        return Descriptin;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptin(String Descriptin) {
-        this.Descriptin = Descriptin;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isIsSuperHero() {
@@ -41,12 +45,21 @@ public class Character {
         this.isSuperHero = isSuperHero;
     }
 
+    public int getCharacterId() {
+        return characterId;
+    }
+
+    public void setCharacterId(int characterId) {
+        this.characterId = characterId;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.name);
-        hash = 37 * hash + Objects.hashCode(this.Descriptin);
-        hash = 37 * hash + (this.isSuperHero ? 1 : 0);
+        int hash = 3;
+        hash = 97 * hash + this.characterId;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + (this.isSuperHero ? 1 : 0);
         return hash;
     }
 
@@ -61,17 +74,24 @@ public class Character {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Character other = (Character) obj;
+        final Characters other = (Characters) obj;
+        if (this.characterId != other.characterId) {
+            return false;
+        }
         if (this.isSuperHero != other.isSuperHero) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.Descriptin, other.Descriptin)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         return true;
     }
+    
+    
+
+    
     
 }

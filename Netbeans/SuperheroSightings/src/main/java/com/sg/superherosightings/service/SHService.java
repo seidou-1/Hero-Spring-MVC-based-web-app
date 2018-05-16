@@ -6,7 +6,7 @@
 
 package com.sg.superherosightings.service;
 
-import DAOs.SuperheroSightingsDao;
+import com.sg.superherosightings.dao.SuperheroSightingsDao;
 import javax.inject.Inject;
 
 /**

@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAOs;
+package com.sg.superherosightings.dao;
 
-import DTOs.Location;
-import DTOs.Organization;
-import DTOs.Sighting;
+import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Location;
+import com.sg.superherosightings.dto.Organization;
+import com.sg.superherosightings.dto.Sighting;
 import java.util.List;
 
 /**
@@ -27,19 +28,19 @@ public interface SuperheroSightingsDao {
 
     public List<Sighting> getAllSightings();
 
-    public void addCharacter(Character character);
+    public void addCharacter(Characters character);
 
     public void deleteCharacter(int characterId);
 
-    public void updateCharacter(Character character);
+    public void updateCharacter(Characters character);
 
-    public Character getCharacterById(int characterId);
+    public Characters getCharacterById(int characterId);
 
-    public List<Character> getCharactersBySightingId(int sightingId);
+    public List<Characters> getCharactersBySightingId(int sightingId);
 
-    public List<Character> getCharactersByOrganizationId(int organizationId);
+    public List<Characters> getCharactersByOrganizationId(int organizationId);
 
-    public List<Character> getAllCharacters();
+    public List<Characters> getAllCharacters();
 
     public void addOrganization(Organization organization);
 
