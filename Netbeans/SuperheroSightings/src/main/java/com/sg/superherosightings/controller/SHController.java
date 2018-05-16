@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.sg.superherosightings.controller;
 
 import com.sg.superherosightings.service.SHService;
@@ -27,18 +26,40 @@ public class SHController {
     public SHController(SHService service) {
         this.service = service;
     }
-    
+
     @RequestMapping(value = {"/", "index", ""}, method = RequestMethod.GET)
     public String loadWindow(HttpServletRequest request, Model model) {
-        model.addAttribute("items", "Eff you bro");
-        System.out.println("Gaza");
         return "index";
     }
-    
-//    @RequestMapping(value = {"/load"}, method = RequestMethod.GET)
-//    public String loadstars(HttpServletRequest request, Model model) {
-//        model.addAttribute("items", "Eff you bro");
-//        System.out.println("Gaza");
-//        return "../hello";
-//    }
+
+    @RequestMapping(value = {"/viewSightings"}, method = RequestMethod.GET)
+    public String loadstars(HttpServletRequest request, Model model) {
+        return "sightings";
+    }
+
+    @RequestMapping(value = {"/viewHeroes"}, method = RequestMethod.GET)
+    public String loadHeroes(HttpServletRequest request, Model model) {
+        return "heroes";
+    }
+
+    @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
+    public String loadVillains(HttpServletRequest request, Model model) {
+        return "villains";
+    }
+
+    @RequestMapping(value = {"/viewOrganizations"}, method = RequestMethod.GET)
+    public String loadOrganizations(HttpServletRequest request, Model model) {
+        return "organizations";
+    }
+
+    @RequestMapping(value = {"/viewLocations"}, method = RequestMethod.GET)
+    public String loadLocations(HttpServletRequest request, Model model) {
+        return "locations";
+    }
+
+    @RequestMapping(value = {"/newSighting"}, method = RequestMethod.GET)
+    public String createSighting(HttpServletRequest request, Model model) {
+        return "creation";
+    }
+
 }
