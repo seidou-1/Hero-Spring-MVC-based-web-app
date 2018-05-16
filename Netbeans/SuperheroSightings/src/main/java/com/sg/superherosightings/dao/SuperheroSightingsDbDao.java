@@ -34,25 +34,25 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     // Sighting prepared statements
     private static final String SQL_INSERT_SIGHTING
-    = "insert into Sightings ( LocationID, CharacterID, SightingDate" +  "values (?, ?, ?)";
+    = "insert into Sighting ( LocationID, CharacterID, SightingDate" +  "values (?, ?, ?)";
 
     private static final String SQL_DELETE_SIGHTING
-        = "delete from Sightings where SightingID = ?";
+        = "delete from Sighting where SightingID = ?";
 
     private static final String SQL_UPDATE_SIGHTING
-        = "update Sightings set LocationId = ?, CharacterID = ? " + "where SightingID =  ?";
+        = "update Sighting set LocationId = ?, CharacterID = ? " + "where SightingID =  ?";
 
     private static final String SQL_SELECT_SIGHTING
-        = "select * from Sightings where SightingID = ?";
+        = "select * from Sighting where SightingID = ?";
 
     private static final String SQL_SELECT_SIGHTING_BY_SIGHTINGDATE =
-            "select * from Sightings where SightingDate = ?"; 
+            "select * from Sighting where SightingDate = ?"; 
 
     private static final String SQL_SELECT_ALL_SIGHTINGS
-        = "select * from Sightings";
+        = "select * from Sighting";
     
     private static final String SQL_SELECT_LAST_TEN_SIGHTINGS
-        = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10 ";
+        = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";
     
     // Character prepared statements
     private static final String SQL_INSERT_CHARACTER
@@ -153,6 +153,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
                                   new SightingMapper());  
     }
     
+    @Override
     public List<Sighting> getLastTenSightings() {
         return jdbcTemplate.query(SQL_SELECT_LAST_TEN_SIGHTINGS, 
                                   new SightingMapper());  
@@ -261,22 +262,26 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     // HELPER METHODS???
     
+    @Override
     public List<Location> getAssociatedLocations(List<Sighting> temp){
         List<Location> helperLocationList = new ArrayList<Location>();
         
         for(Sighting sight: temp){
             Location local = getLocationById(sight.getLocationId());
             helperLocationList.add(local);
+            sight.setLocation(local);
         }
         return helperLocationList;
     }
     
+    @Override
     public List<Characters> getAssociatedCharacters(List<Sighting> temp){
         List<Characters> helperCharacterList = new ArrayList<Characters>();
         
         for(Sighting sight: temp){
             Characters charact = getCharacterById(sight.getCharacterId());
             helperCharacterList.add(charact);
+            sight.setCharacter(charact);
         }
         return helperCharacterList;
     }

@@ -91,5 +91,13 @@ public class Sighting {
         }
         return true;
     }
+
+    public void setLocation(Location local) {
+        this.local = local;
+    }
+
+    public void setCharacter(Characters charact) {
+        this.character = charact; 
+    }
     
 }
