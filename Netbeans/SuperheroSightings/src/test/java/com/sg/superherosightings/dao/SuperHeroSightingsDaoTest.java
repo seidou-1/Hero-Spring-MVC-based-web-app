@@ -5,11 +5,18 @@
  */
 package com.sg.superherosightings.dao;
 
-import DAOs.SuperheroSightingsDao;
+import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Location;
+import com.sg.superherosightings.dto.Organization;
+import com.sg.superherosightings.dto.Sighting;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -18,6 +25,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author laptop
  */
 public class SuperHeroSightingsDaoTest {
+    
+    private SuperheroSightingsDao dao;
     
     public SuperHeroSightingsDaoTest() {
     }
@@ -36,18 +45,86 @@ public class SuperHeroSightingsDaoTest {
          ApplicationContext ctx
   = new ClassPathXmlApplicationContext("test-applicationContext.xml");
 
-    dao = ctx.getBean("SuperheroSightingsDao", SuperheroSightingsDao.class);
+    dao = ctx.getBean("superheroDao", SuperheroSightingsDao.class);
     
     //Clear out Character
+        List<Characters> characters = dao.getAllCharacters();
+        for (Characters currentCharacters : characters) {
+            dao.deleteCharacter(currentCharacters.getCharacterId()); 
+        //Notice it's getting the getters not the dao
+        //i.e. getCharacterId and not getCharacterById
+        //because we instantiated the DTO and passed it to the dao        
+        }
     
     //Clear out Location
+        List<Location> locations = dao.getAllLocations();
+        for(Location currentLocation : locations){
+            dao.deleteLocation(currentLocation.getLocationID());
+        }
     
     //Clear out Organization
+        List<Organization> organizations = dao.getAllOrganizations();
+        for (Organization currentOrganization : organizations){
+            dao.deleteOrganization(currentOrganization.getOrganizationId());
+        }
     
     //Clear out Sighting
-    
+        List<Sighting> sightings = dao.getAllSightings();
+        for (Sighting currentSighting : sightings){
+            dao.deleteSighting(currentSighting.getSightingId());
+        }
     
     }
+
+   
+    /*********************CHARACTERS********************/
+    @Test
+    public void addGetDeleteCharacter(){ //Test all 3 at once
+        
+        Characters myCharacters = new Characters();
+        myCharacters.setDescription("Spidey senses");
+        myCharacters.setIsSuperHero(true);
+        myCharacters.setName("Spiderman");
+        dao.addCharacter(myCharacters);
+        
+        //Test you can retrieve it
+        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+        assertEquals (fromDB, myCharacters);
+        
+        //Test it's been removed successfully
+        dao.deleteCharacter(myCharacters.getCharacterId());
+        assertNull(dao.getCharacterById(myCharacters.getCharacterId()));
+     
+    }
+    
+    @Test
+    public void getAllCharacters(){
+        
+        Characters myCharacters = new Characters();
+        myCharacters.setName("Wolverine");
+        myCharacters.setDescription("Alamantium");
+        myCharacters.setIsSuperHero(false); 
+        dao.addCharacter(myCharacters);
+        
+        myCharacters.setIsSuperHero(true);
+        dao.updateCharacter(myCharacters);
+        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+        assertEquals (fromDB, myCharacters);
+        
+    }
+    
+    /***************************************************/
+
+    
+    
+    
+    
+    
+    
+    /**********************LOCATION*********************/
+        
+    
+    /***************************************************/
     
     @After
     public void tearDown() {

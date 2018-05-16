@@ -37,7 +37,8 @@ public class Characters {
         this.description = description;
     }
 
-    public boolean isIsSuperHero() {
+    // Mo - There was a type here. Fixed it from "isIsSuperHero" to "getSuperHero"
+    public boolean getIsSuperHero() {
         return isSuperHero;
     }
 
