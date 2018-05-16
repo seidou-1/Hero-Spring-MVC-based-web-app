@@ -19,25 +19,13 @@
             <div class="row">
                 <!-- <div class="col-md-8" id="maindisplay">  -->
                 <div class="col-md-12">
-                    <ul id="navigation">
-                        <li role="presentation" class="active">
-                            <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewSightings">Sightings</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewOrganizations">Organizations</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewLocations">Locations</a>
-                        </li>
+                    <ul class="nav nav-tabs" id="navigation">
+                        <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+			<li role="presentation"><a href="${pageContext.request.contextPath}/viewSightings">Sightings</a></li>
+			<li role="presentation"><a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a></li>
+			<li role="presentation"><a href="${pageContext.request.contextPath}/viewVillains">Villains</a></li>
+			<li role="presentation"><a href="${pageContext.request.contextPath}/viewOrganizations">Organizations</a></li>
+			<li role="presentation"><a href="${pageContext.request.contextPath}/viewLocations">Locations</a></li>
                     </ul>
                     <hr/>
                 </div>
@@ -112,12 +100,47 @@
                             <td>NYC</td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="text-align: right"><a href="${pageContext.request.contextPath}/viewSightings" > View all Sightings >> </a></td>
+                            <td colspan="3" style="text-align: right">
+			    <a href="${pageContext.request.contextPath}/viewSightings" > View all Sightings >> </a>
+			    </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+                <div class="col-md-4"> 
+                    <h3>Sighting Filter</h3>
+                    
+                    <div class="dropdown">   
+                    <label for="characterSortBtn">1. </label>
+                        <button class="btn btn-default dropdown-toggle" type="button" id="characterSortBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Sort By Character
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">All Might</a></li>
+                            <li><a href="#">Kakashi</a></li>
+                            <li><a href="#">Itachi</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">All</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">   
+                            <label for="characterSortBtn">2. </label>
+                                <button class="btn btn-default dropdown-toggle" type="button" id="characterSortBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Sort By Organization
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">UAE</a></li>
+                                    <li><a href="#">Akatsuki</a></li>
+                                    <li><a href="#">Ninja</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">All</a></li>
+                                </ul>
+                            </div>
+                </div>
+
 
         <footer>
             <a>Developers</a>
