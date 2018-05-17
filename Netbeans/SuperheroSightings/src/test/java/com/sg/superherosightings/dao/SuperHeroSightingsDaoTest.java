@@ -78,60 +78,67 @@ public class SuperHeroSightingsDaoTest {
 
    
     /*********************CHARACTERS********************/
-    @Test
-    public void addGetDeleteCharacter(){ //Test all 3 at once
-        
-        Characters myCharacters = new Characters();
-        myCharacters.setDescription("Spidey senses");
-        myCharacters.setIsSuperHero(true);
-        myCharacters.setName("Spiderman");
-        dao.addCharacter(myCharacters);
-        
-        //Test you can retrieve it
-        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
-        assertEquals (fromDB, myCharacters);
-        
-        //Test it's been removed successfully
-        dao.deleteCharacter(myCharacters.getCharacterId());
-        assertNull(dao.getCharacterById(myCharacters.getCharacterId()));
-     
-    }
-    
-    @Test
-    public void addUpdateCharacter(){
-        Characters myCharacters = new Characters();
-        myCharacters.setName("Hulk");
-        myCharacters.setIsSuperHero(false);
-        myCharacters.setDescription("Hulk Smash");
-        
-        dao.addCharacter(myCharacters);
-        
-        myCharacters.setIsSuperHero(true);
-        
-        dao.updateCharacter(myCharacters);
-        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
-        assertEquals (fromDB, myCharacters);
-    }
-    
-    @Test
-    public void getAllCharacters(){
-        
-        Characters myCharacters = new Characters();
-        myCharacters.setName("Wolverine");
-        myCharacters.setDescription("Alamantium");
-        myCharacters.setIsSuperHero(false); 
-        dao.addCharacter(myCharacters);
-        
-        myCharacters.setIsSuperHero(true);
-        dao.updateCharacter(myCharacters);
-        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
-        assertEquals (fromDB, myCharacters);
-        
-    }
+//    @Test
+//    public void addGetDeleteCharacter(){ //Test all 3 at once
+//        
+//        Characters myCharacters = new Characters();
+//        myCharacters.setDescription("Spidey senses");
+//        myCharacters.setIsSuperHero(true);
+//        myCharacters.setName("Spiderman");
+//        dao.addCharacter(myCharacters);
+//        
+//        //Test you can retrieve it
+//        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+//        assertEquals (fromDB, myCharacters);
+//        
+//        //Test it's been removed successfully
+//        dao.deleteCharacter(myCharacters.getCharacterId());
+//        assertNull(dao.getCharacterById(myCharacters.getCharacterId()));
+//     
+//    }
+//    
+//    @Test
+//    public void addUpdateCharacter(){
+//        Characters myCharacters = new Characters();
+//        myCharacters.setName("Hulk");
+//        myCharacters.setIsSuperHero(false);
+//        myCharacters.setDescription("Hulk Smash");
+//        
+//        dao.addCharacter(myCharacters);
+//        
+//        myCharacters.setIsSuperHero(true);
+//        
+//        dao.updateCharacter(myCharacters);
+//        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+//        assertEquals (fromDB, myCharacters);
+//    }
+//    
+//    @Test
+//    public void getAllCharacters(){
+//        
+//        Characters myCharacters = new Characters();
+//        myCharacters.setName("Wolverine");
+//        myCharacters.setDescription("Alamantium");
+//        myCharacters.setIsSuperHero(false); 
+//        dao.addCharacter(myCharacters);
+//        
+//        myCharacters.setIsSuperHero(true);
+//        dao.updateCharacter(myCharacters);
+//        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+//        assertEquals (fromDB, myCharacters);
+//        
+//    }
     
     /***************************************************/
 
-   
+    /**********************ORGANIZATION*********************/
+    
+//    public void addUpdateOrganization(){
+//        Organization myOrganization = new Organization();
+//        myOrganization.setOrganizationName("X-Force");
+//        myOrganization.setDescription("DeadPool's Organization");
+//        myOrganization.setLocationId(0);
+//    }
     
     
     
@@ -145,12 +152,12 @@ public class SuperHeroSightingsDaoTest {
         myLocation.setCity("Nola");
         myLocation.setDescription("Nice city");
         myLocation.setLatitude(34.22);
-        myLocation.setLongitude(42.11);
+        myLocation.setLongitude(34.22);
         myLocation.setState("ATL");
         myLocation.setStreetName("Hero St.");
         myLocation.setStreetNumber("2332");
         myLocation.setZip("39023");
-        myLocation.setLocationName("The spot");
+        myLocation.setLocationName("Place");
         
         dao.addLocation(myLocation);
         Location fromDB = dao.getLocationById(myLocation.getLocationID());

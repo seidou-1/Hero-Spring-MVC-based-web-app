@@ -34,7 +34,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     // Sighting prepared statements
     private static final String SQL_INSERT_SIGHTING
-    = "insert into Sighting ( LocationID, CharacterID, SightingDate" +  "values (?, ?, ?)";
+    = "insert into Sighting ( LocationID, CharacterID, SightingDate)" +  "values (?, ?, ?)";
 
     private static final String SQL_DELETE_SIGHTING
         = "delete from Sighting where SightingID = ?";
@@ -56,13 +56,13 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     // Character prepared statements
     private static final String SQL_INSERT_CHARACTER
-    = "insert into Characters (Name, Description, IsSuperHero " + " values (?, ?, ?)";
+    = "insert into Characters (CharacterName, Description, IsSuperHero )" + " values (?, ?, ?)";
 
     private static final String SQL_DELETE_CHARACTER
         = "delete from Characters where CharacterID = ?";
 
     private static final String SQL_UPDATE_CHARACTER
-        = "update Characters set Name = ?, Description = ?, IsSuperHero = ?, "+ " where CharacterID =  ?";
+        = "update Characters set CharacterName = ?, Description = ?, IsSuperHero = ? " + "where CharacterID = ?";
 
     private static final String SQL_SELECT_CHARACTER
         = "select * from Characters where CharacterId = ?";
@@ -75,7 +75,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     //Organizations prepared statements
     private static final String SQL_INSERT_ORGANIZATION
-    = "insert into Organization (OrganizationName, LocationID, Description " + " values (?, ?, ?)";
+    = "insert into Organization (OrganizationName, LocationID, Description )" + " values (?, ?, ?)";
 
     private static final String SQL_DELETE_ORGANIZATION
         = "delete from Organization where OrganizationID = ?";
@@ -94,7 +94,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     //Locations prepared statements
     private static final String SQL_INSERT_LOCATION
-    = "insert into Location (Name, Description, Latitude, Longitude, StreetNumber, StreetName, City, State, ZipCode " + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    = "insert into Location (LocationName, Description, Latitude, Longitude, StreetNumber, StreetName, City, State, ZipCode )" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_DELETE_LOCATION
         = "delete from Location where LocationID = ?";
@@ -302,7 +302,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
                 location.getCity(),
                 location.getDescription(),
                 location.getLatitude(),
-                location.getLocationID(),
+//                location.getLocationID(),
                 location.getLocationName(),
                 location.getLongitude(),
                 location.getState(),
@@ -310,7 +310,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
                 location.getStreetNumber(),
                 location.getZip());
         
-        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID", Integer.class);
+        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
         
         location.setLocationID(newId);
         
@@ -444,8 +444,8 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             local.setLocationID(rs.getInt("LocationID"));
             local.setLocationName(rs.getString("LocationName"));
             local.setDescription(rs.getString("Description"));
-            local.setLatitude(rs.getDouble("Latitude"));
-            local.setLongitude(rs.getDouble("Longitude"));
+            local.setLatitude(Double.parseDouble(rs.getString("Latitude")));
+            local.setLongitude(Double.parseDouble(rs.getString("Longitude")));
             local.setStreetNumber(rs.getString("StreetNumber"));
             local.setStreetName(rs.getString("StreetName"));
             local.setCity(rs.getString("City"));
