@@ -75,13 +75,13 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     //Organizations prepared statements
     private static final String SQL_INSERT_ORGANIZATION
-    = "insert into Organization (OrganizationName, LocationID " + " values (?, ?)";
+    = "insert into Organization (OrganizationName, LocationID, Description " + " values (?, ?, ?)";
 
     private static final String SQL_DELETE_ORGANIZATION
         = "delete from Organization where OrganizationID = ?";
 
     private static final String SQL_UPDATE_ORGANIZATION
-        = "update Organization set OrganizationName = ?, LocationID = ?" + "where OrganizationID = ?";
+        = "update Organization set OrganizationName = ?, LocationID = ?, Description = ?" + "where OrganizationID = ?";
 
     private static final String SQL_SELECT_ORGANIZATION
         = "select * from Organiztion where OrganizationId = ?";
@@ -250,7 +250,8 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     public Organization addOrganization(Organization organization) {
         jdbcTemplate.update(SQL_INSERT_ORGANIZATION,
         organization.getOrganizationName(),
-        organization.getLocation());
+        organization.getLocationId(),
+        organization.getDescription());
         
         /*
         Query the database for the ID that was just assigned to the new row in the DB
@@ -272,8 +273,8 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     public void updateOrganization(Organization organization) {
         jdbcTemplate.update (SQL_UPDATE_ORGANIZATION,
                 organization.getOrganizationName(),
-                organization.getLocation(),
-                organization.getOrganizationId());
+                organization.getLocationId(),
+                organization.getDescription());
     }
 
     @Override
@@ -387,12 +388,14 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     private static final class OrganizationMapper implements RowMapper<Organization>{
         public Organization mapRow (ResultSet rs, int rowNum) throws SQLException{
             Organization organization = new Organization();
-            organization.setOrganizationName(rs.getString ("OrganizationName"));
             organization.setOrganizationId(rs.getInt("OrganizationId"));
+            organization.setOrganizationName(rs.getString ("OrganizationName"));
+            organization.setLocationId(rs.getInt("LocationId"));
+            organization.setDescription(rs.getString("Description"));
             
             
             /*
-            Mo - How do i set values for composition - lookups to other objects also Lists?
+            Mo - No need for these anymore:
             
             Location location;
             List<Characters> memberList;
