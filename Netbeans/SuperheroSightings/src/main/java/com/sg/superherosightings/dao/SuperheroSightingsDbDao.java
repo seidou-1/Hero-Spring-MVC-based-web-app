@@ -120,6 +120,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 //        }
 //    }
 
+    /**********************SIGHTINGS***************************/
     @Override
     public Sighting addSighting(Sighting sighting) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -158,6 +159,9 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
                                   new SightingMapper());  
     }
 
+    /**********************CHARACTERS***************************/
+
+    
     @Override
     @Transactional (propagation = Propagation.REQUIRED, readOnly = false)
     public Characters addCharacter(Characters character) {
@@ -187,7 +191,11 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
     @Override
     public void updateCharacter(Characters character) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update (SQL_UPDATE_CHARACTER,
+                character.getName(),
+                character.getDescription(),
+                character.getIsSuperHero(),
+                character.getCharacterId());
     }
 
     @Override
@@ -217,31 +225,57 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
         return jdbcTemplate.query(SQL_SELECT_ALL_CHARACTERS, 
                                   new CharactersMapper()); 
     }
+    
+    /**********************ORGANIZATION***************************/
+
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Organization addOrganization(Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_INSERT_ORGANIZATION,
+        organization.getOrganizationName(),
+        organization.getLocation());
+        
+        /*
+        Query the database for the ID that was just assigned to the new row in the DB
+        */
+        
+        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
+        
+        //Set the new id value on the Organization object and return it
+        organization.setOrganizationId(newId);
+        return organization;
     }
     
     @Override
     public void deleteOrganization(int organizationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update (SQL_DELETE_ORGANIZATION, organizationId);
     }
     
     @Override
     public void updateOrganization(Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update (SQL_UPDATE_ORGANIZATION,
+                organization.getOrganizationName(),
+                organization.getLocation(),
+                organization.getOrganizationId());
     }
 
     @Override
     public Organization getOrganizationById(int organizationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return jdbcTemplate.queryForObject(SQL_SELECT_ORGANIZATION, new OrganizationMapper(), organizationId);
+        } catch (EmptyResultDataAccessException ex) {
+            
+            return null;
+        }
     }
 
     @Override
     public List<Organization> getAllOrganizations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jdbcTemplate.query(SQL_SELECT_ALL_ORGANIZATIONS, new OrganizationMapper());
     }
+    
+    /**********************LOCATION***************************/
 
     @Override
     public Location addLocation(Location location) {
@@ -299,9 +333,28 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     }
     
     
+        /**********************Mapper Below***************************/
+
     
-    
-    
+    private static final class OrganizationMapper implements RowMapper<Organization>{
+        public Organization mapRow (ResultSet rs, int rowNum) throws SQLException{
+            Organization organization = new Organization();
+            organization.setOrganizationName(rs.getString ("OrganizationName"));
+            organization.setOrganizationId(rs.getInt("OrganizationId"));
+            
+            
+            /*
+            Mo - How do i set values for composition - lookups to other objects also Lists?
+            
+            Location location;
+            List<Characters> memberList;
+            */
+            
+        return organization;
+
+            
+        }
+    }
     
     
     
