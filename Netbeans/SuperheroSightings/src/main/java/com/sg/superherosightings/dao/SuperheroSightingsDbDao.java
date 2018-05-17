@@ -120,20 +120,35 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 //        }
 //    }
 
-    /**********************SIGHTINGS***************************/
+    /**********************SIGHTING***************************/
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Sighting addSighting(Sighting sighting) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_INSERT_SIGHTING,
+                sighting.getCharacterId(),
+                sighting.getLocationId(),
+                sighting.getSightingDate(),
+                sighting.getSightingId());
+        
+        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
+        
+        sighting.setSightingId(newId);
+        return sighting;
+        
     }
 
     @Override
     public void deleteSighting(int sightingId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_DELETE_SIGHTING, sightingId);
     }
 
     @Override
     public void updateSighting(Sighting sighting) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_UPDATE_SIGHTING,
+                sighting.getCharacterId(),
+                sighting.getLocationId(),
+                sighting.getSightingDate(),
+                sighting.getSightingId());
     }
 
     @Override
@@ -278,18 +293,46 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     /**********************LOCATION***************************/
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+
     public Location addLocation(Location location) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_INSERT_LOCATION, 
+                location.getCity(),
+                location.getDescription(),
+                location.getLatitude(),
+                location.getLocationID(),
+                location.getLocationName(),
+                location.getLongitude(),
+                location.getState(),
+                location.getStreetName(),
+                location.getStreetNumber(),
+                location.getZip());
+        
+        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID", Integer.class);
+        
+        location.setLocationID(newId);
+        
+        return location;
+        
     }
 
     @Override
     public void deleteLocation(int locationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_DELETE_LOCATION, locationId);
     }
 
     @Override
     public void updateLocation(Location location) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcTemplate.update(SQL_UPDATE_LOCATION, 
+                location.getCity(),
+                location.getDescription(),
+                location.getLatitude(),
+                location.getLocationID(),
+                location.getLocationName(),
+                location.getLongitude(),
+                location.getState(),
+                location.getStreetName(),
+                location.getStreetNumber());
     }
 
     @Override

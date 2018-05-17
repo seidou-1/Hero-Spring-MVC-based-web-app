@@ -98,6 +98,22 @@ public class SuperHeroSightingsDaoTest {
     }
     
     @Test
+    public void addUpdateCharacter(){
+        Characters myCharacters = new Characters();
+        myCharacters.setName("Hulk");
+        myCharacters.setIsSuperHero(false);
+        myCharacters.setDescription("Hulk Smash");
+        
+        dao.addCharacter(myCharacters);
+        
+        myCharacters.setIsSuperHero(true);
+        
+        dao.updateCharacter(myCharacters);
+        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+        assertEquals (fromDB, myCharacters);
+    }
+    
+    @Test
     public void getAllCharacters(){
         
         Characters myCharacters = new Characters();
@@ -115,6 +131,7 @@ public class SuperHeroSightingsDaoTest {
     
     /***************************************************/
 
+   
     
     
     
@@ -122,9 +139,40 @@ public class SuperHeroSightingsDaoTest {
     
     
     /**********************LOCATION*********************/
+    @Test
+    public void addGetDeleteLocation(){
+        Location myLocation = new Location();
+        myLocation.setCity("Nola");
+        myLocation.setDescription("Nice city");
+        myLocation.setLatitude(34.22);
+        myLocation.setLongitude(42.11);
+        myLocation.setState("ATL");
+        myLocation.setStreetName("Hero St.");
+        myLocation.setStreetNumber("2332");
+        myLocation.setZip("39023");
+        myLocation.setLocationName("The spot");
+        
+        dao.addLocation(myLocation);
+        Location fromDB = dao.getLocationById(myLocation.getLocationID());
+        assertEquals (fromDB, myLocation);
+        
+        dao.deleteLocation(myLocation.getLocationID());
+        assertNull (dao.getLocationById(myLocation.getLocationID()));
+        
+        /*
+        Pick up here and finish test methods for:
+        addUpdateLocation
+        getAllLocations
+        */
+    }
+    
         
     
     /***************************************************/
+    
+     /*
+    Mo - Add code below for search capabilities before tearDown
+    */
     
     @After
     public void tearDown() {
