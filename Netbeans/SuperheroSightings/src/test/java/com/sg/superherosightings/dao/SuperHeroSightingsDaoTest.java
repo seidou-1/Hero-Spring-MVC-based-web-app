@@ -78,56 +78,56 @@ public class SuperHeroSightingsDaoTest {
 
    
     /*********************CHARACTERS********************/
-//    @Test
-//    public void addGetDeleteCharacter(){ //Test all 3 at once
-//        
-//        Characters myCharacters = new Characters();
-//        myCharacters.setDescription("Spidey senses");
-//        myCharacters.setIsSuperHero(true);
-//        myCharacters.setName("Spiderman");
-//        dao.addCharacter(myCharacters);
-//        
-//        //Test you can retrieve it
-//        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
-//        assertEquals (fromDB, myCharacters);
-//        
-//        //Test it's been removed successfully
-//        dao.deleteCharacter(myCharacters.getCharacterId());
-//        assertNull(dao.getCharacterById(myCharacters.getCharacterId()));
-//     
-//    }
-//    
-//    @Test
-//    public void addUpdateCharacter(){
-//        Characters myCharacters = new Characters();
-//        myCharacters.setName("Hulk");
-//        myCharacters.setIsSuperHero(false);
-//        myCharacters.setDescription("Hulk Smash");
-//        
-//        dao.addCharacter(myCharacters);
-//        
-//        myCharacters.setIsSuperHero(true);
-//        
-//        dao.updateCharacter(myCharacters);
-//        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
-//        assertEquals (fromDB, myCharacters);
-//    }
-//    
-//    @Test
-//    public void getAllCharacters(){
-//        
-//        Characters myCharacters = new Characters();
-//        myCharacters.setName("Wolverine");
-//        myCharacters.setDescription("Alamantium");
-//        myCharacters.setIsSuperHero(false); 
-//        dao.addCharacter(myCharacters);
-//        
-//        myCharacters.setIsSuperHero(true);
-//        dao.updateCharacter(myCharacters);
-//        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
-//        assertEquals (fromDB, myCharacters);
-//        
-//    }
+    @Test
+    public void addGetDeleteCharacter(){ //Test all 3 at once
+        
+        Characters myCharacters = new Characters();
+        myCharacters.setDescription("Spidey senses");
+        myCharacters.setIsSuperHero(true);
+        myCharacters.setName("Spiderman");
+        dao.addCharacter(myCharacters);
+        
+        //Test you can retrieve it
+        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+        assertEquals (fromDB, myCharacters);
+        
+        //Test it's been removed successfully
+        dao.deleteCharacter(myCharacters.getCharacterId());
+        assertNull(dao.getCharacterById(myCharacters.getCharacterId()));
+     
+    }
+    
+    @Test
+    public void addUpdateCharacter(){
+        Characters myCharacters = new Characters();
+        myCharacters.setName("Hulk");
+        myCharacters.setIsSuperHero(false);
+        myCharacters.setDescription("Hulk Smash");
+        
+        dao.addCharacter(myCharacters);
+        
+        myCharacters.setIsSuperHero(true);
+        
+        dao.updateCharacter(myCharacters);
+        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+        assertEquals (fromDB, myCharacters);
+    }
+    
+    @Test
+    public void getAllCharacters(){
+        
+        Characters myCharacters = new Characters();
+        myCharacters.setName("Wolverine");
+        myCharacters.setDescription("Alamantium");
+        myCharacters.setIsSuperHero(false); 
+        dao.addCharacter(myCharacters);
+        
+        myCharacters.setIsSuperHero(true);
+        dao.updateCharacter(myCharacters);
+        Characters fromDB = dao.getCharacterById(myCharacters.getCharacterId());
+        assertEquals (fromDB, myCharacters);
+        
+    }
     
     /***************************************************/
 

@@ -24,94 +24,93 @@ import org.springframework.transaction.annotation.Transactional;
  * @sighting josesosa
  */
 public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
-    
+
     private JdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
     // Prepared statements for MySql, basically the query that will be run in MySql throught the Spring, JDBC hocus pocus
-    
+
     // Sighting prepared statements
     private static final String SQL_INSERT_SIGHTING
-    = "insert into Sighting ( LocationID, CharacterID, SightingDate)" +  "values (?, ?, ?)";
+            = "insert into Sighting ( LocationID, CharacterID, SightingDate)" + "values (?, ?, ?)";
 
     private static final String SQL_DELETE_SIGHTING
-        = "delete from Sighting where SightingID = ?";
+            = "delete from Sighting where SightingID = ?";
 
     private static final String SQL_UPDATE_SIGHTING
-        = "update Sighting set LocationId = ?, CharacterID = ? " + "where SightingID =  ?";
+            = "update Sighting set LocationId = ?, CharacterID = ? " + "where SightingID =  ?";
 
     private static final String SQL_SELECT_SIGHTING
-        = "select * from Sighting where SightingID = ?";
+            = "select * from Sighting where SightingID = ?";
 
-    private static final String SQL_SELECT_SIGHTING_BY_SIGHTINGDATE =
-            "select * from Sighting where SightingDate = ?"; 
+    private static final String SQL_SELECT_SIGHTING_BY_SIGHTINGDATE
+            = "select * from Sighting where SightingDate = ?";
 
     private static final String SQL_SELECT_ALL_SIGHTINGS
-        = "select * from Sighting";
-    
+            = "select * from Sighting";
+
     private static final String SQL_SELECT_LAST_TEN_SIGHTINGS
-        = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";
-    
+            = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";
+
     // Character prepared statements
     private static final String SQL_INSERT_CHARACTER
-    = "insert into Characters (CharacterName, Description, IsSuperHero )" + " values (?, ?, ?)";
+            = "insert into Characters (CharacterName, Description, IsSuperHero )" + " values (?, ?, ?)";
 
     private static final String SQL_DELETE_CHARACTER
-        = "delete from Characters where CharacterID = ?";
+            = "delete from Characters where CharacterID = ?";
 
     private static final String SQL_UPDATE_CHARACTER
-        = "update Characters set CharacterName = ?, Description = ?, IsSuperHero = ? " + "where CharacterID = ?";
+            = "update Characters set CharacterName = ?, Description = ?, IsSuperHero = ? " + "where CharacterID = ?";
 
     private static final String SQL_SELECT_CHARACTER
-        = "select * from Characters where CharacterId = ?";
+            = "select * from Characters where CharacterId = ?";
 
     private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATION
-        = ""; // revisit after checking out join statements;
+            = ""; // revisit after checking out join statements;
 
     private static final String SQL_SELECT_ALL_CHARACTERS
-        = "select * from Characters";
-    
+            = "select * from Characters";
+
     //Organizations prepared statements
     private static final String SQL_INSERT_ORGANIZATION
-    = "insert into Organization (OrganizationName, LocationID, Description )" + " values (?, ?, ?)";
+            = "insert into Organization (OrganizationName, LocationID, Description )" + " values (?, ?, ?)";
 
     private static final String SQL_DELETE_ORGANIZATION
-        = "delete from Organization where OrganizationID = ?";
+            = "delete from Organization where OrganizationID = ?";
 
     private static final String SQL_UPDATE_ORGANIZATION
-        = "update Organization set OrganizationName = ?, LocationID = ?, Description = ?" + "where OrganizationID = ?";
+            = "update Organization set OrganizationName = ?, LocationID = ?, Description = ?" + "where OrganizationID = ?";
 
     private static final String SQL_SELECT_ORGANIZATION
-        = "select * from Organiztion where OrganizationId = ?";
+            = "select * from Organiztion where OrganizationId = ?";
 
     private static final String SQL_SELECT_ORGANIZATIONS_BY_CHARACTER
-        = ""; // revisit after checking out join statements;
+            = ""; // revisit after checking out join statements;
 
     private static final String SQL_SELECT_ALL_ORGANIZATIONS
-        = "select * from Organization";
-    
+            = "select * from Organization";
+
     //Locations prepared statements
     private static final String SQL_INSERT_LOCATION
-    = "insert into Location (LocationName, Description, Latitude, Longitude, StreetNumber, StreetName, City, State, ZipCode )" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            = "insert into Location (LocationName, Description, Latitude, Longitude, StreetNumber, StreetName, City, State, ZipCode )" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SQL_DELETE_LOCATION
-        = "delete from Location where LocationID = ?";
+            = "delete from Location where LocationID = ?";
 
     private static final String SQL_UPDATE_LOCATION
-        = "update Location set LocationName = ?, Description = ?, Latitude = ?, Longitude = ?, StreetNumber = ?, StreetName = ?, City = ?, State = ?, ZipCode = ?  " + "where LocationID = ?";
+            = "update Location set LocationName = ?, Description = ?, Latitude = ?, Longitude = ?, StreetNumber = ?, StreetName = ?, City = ?, State = ?, ZipCode = ?  " + "where LocationID = ?";
 
     private static final String SQL_SELECT_LOCATION
-        = "select * from Location where LocationId = ?";
+            = "select * from Location where LocationId = ?";
 
     private static final String SQL_SELECT_LOCATION_BY_CHARACTER
-        = ""; // revisit after checking out join statements;
+            = ""; // revisit after checking out join statements;
 
     private static final String SQL_SELECT_ALL_LOCATIONS
-        = "select * from Location";
+            = "select * from Location";
 
-    
 //    public List<Sighting> getLastTen(){
 //        temp = code that gets last ten sightings;
 //        for(Sighting sight: temp ){
@@ -119,8 +118,9 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 //            temp.setCharacter(charTemp);
 //        }
 //    }
-
-    /**********************SIGHTING***************************/
+    /**
+     * ********************SIGHTING**************************
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Sighting addSighting(Sighting sighting) {
@@ -129,12 +129,12 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
                 sighting.getLocationId(),
                 sighting.getSightingDate(),
                 sighting.getSightingId());
-        
+
         int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-        
+
         sighting.setSightingId(newId);
         return sighting;
-        
+
     }
 
     @Override
@@ -165,36 +165,35 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
     @Override
     public List<Sighting> getAllSightings() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS, 
-                                  new SightingMapper());  
+        return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS,
+                new SightingMapper());
     }
-    
+
     @Override
     public List<Sighting> getLastTenSightings() {
-        return jdbcTemplate.query(SQL_SELECT_LAST_TEN_SIGHTINGS, 
-                                  new SightingMapper());  
+        return jdbcTemplate.query(SQL_SELECT_LAST_TEN_SIGHTINGS,
+                new SightingMapper());
     }
 
-    /**********************CHARACTERS***************************/
-
-    
+    /**
+     * ********************CHARACTERS**************************
+     */
     @Override
-    @Transactional (propagation = Propagation.REQUIRED, readOnly = false)
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Characters addCharacter(Characters character) {
-        jdbcTemplate.update (SQL_INSERT_CHARACTER,
+        jdbcTemplate.update(SQL_INSERT_CHARACTER,
                 character.getName(),
                 character.getDescription(),
                 character.getIsSuperHero());
-        
+
         /*
         The above creates the character
         
         The below queries the db for the id that was just assigned
         to the new row
-        */
-        
+         */
         int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-        
+
         //This sets the new id value on the Characters object and returns it
         character.setCharacterId(newId);
         return character;
@@ -202,12 +201,12 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
     @Override
     public void deleteCharacter(int characterId) {
-        jdbcTemplate.update (SQL_DELETE_CHARACTER, characterId);
+        jdbcTemplate.update(SQL_DELETE_CHARACTER, characterId);
     }
 
     @Override
     public void updateCharacter(Characters character) {
-        jdbcTemplate.update (SQL_UPDATE_CHARACTER,
+        jdbcTemplate.update(SQL_UPDATE_CHARACTER,
                 character.getName(),
                 character.getDescription(),
                 character.getIsSuperHero(),
@@ -238,40 +237,39 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
     @Override
     public List<Characters> getAllCharacters() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_CHARACTERS, 
-                                  new CharactersMapper()); 
+        return jdbcTemplate.query(SQL_SELECT_ALL_CHARACTERS,
+                new CharactersMapper());
     }
-    
-    /**********************ORGANIZATION***************************/
 
-
+    /**
+     * ********************ORGANIZATION**************************
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Organization addOrganization(Organization organization) {
         jdbcTemplate.update(SQL_INSERT_ORGANIZATION,
-        organization.getOrganizationName(),
-        organization.getLocationId(),
-        organization.getDescription());
-        
+                organization.getOrganizationName(),
+                organization.getLocationId(),
+                organization.getDescription());
+
         /*
         Query the database for the ID that was just assigned to the new row in the DB
-        */
-        
+         */
         int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-        
+
         //Set the new id value on the Organization object and return it
         organization.setOrganizationId(newId);
         return organization;
     }
-    
+
     @Override
     public void deleteOrganization(int organizationId) {
-        jdbcTemplate.update (SQL_DELETE_ORGANIZATION, organizationId);
+        jdbcTemplate.update(SQL_DELETE_ORGANIZATION, organizationId);
     }
-    
+
     @Override
     public void updateOrganization(Organization organization) {
-        jdbcTemplate.update (SQL_UPDATE_ORGANIZATION,
+        jdbcTemplate.update(SQL_UPDATE_ORGANIZATION,
                 organization.getOrganizationName(),
                 organization.getLocationId(),
                 organization.getDescription());
@@ -282,7 +280,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
         try {
             return jdbcTemplate.queryForObject(SQL_SELECT_ORGANIZATION, new OrganizationMapper(), organizationId);
         } catch (EmptyResultDataAccessException ex) {
-            
+
             return null;
         }
     }
@@ -291,31 +289,31 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     public List<Organization> getAllOrganizations() {
         return jdbcTemplate.query(SQL_SELECT_ALL_ORGANIZATIONS, new OrganizationMapper());
     }
-    
-    /**********************LOCATION***************************/
 
+    /**
+     * ********************LOCATION**************************
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 
     public Location addLocation(Location location) {
-        jdbcTemplate.update(SQL_INSERT_LOCATION, 
-                location.getCity(),
+        jdbcTemplate.update(SQL_INSERT_LOCATION,
+                location.getLocationName(),
                 location.getDescription(),
                 location.getLatitude(),
-//                location.getLocationID(),
-                location.getLocationName(),
                 location.getLongitude(),
-                location.getState(),
-                location.getStreetName(),
                 location.getStreetNumber(),
+                location.getStreetName(),
+                location.getCity(),
+                location.getState(),
                 location.getZip());
-        
+
         int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-        
+
         location.setLocationID(newId);
-        
+
         return location;
-        
+
     }
 
     @Override
@@ -325,7 +323,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
     @Override
     public void updateLocation(Location location) {
-        jdbcTemplate.update(SQL_UPDATE_LOCATION, 
+        jdbcTemplate.update(SQL_UPDATE_LOCATION,
                 location.getCity(),
                 location.getDescription(),
                 location.getLatitude(),
@@ -351,64 +349,58 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
     @Override
     public List<Location> getAllLocations() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_LOCATIONS, 
-                                  new LocationMapper()); 
+        return jdbcTemplate.query(SQL_SELECT_ALL_LOCATIONS,
+                new LocationMapper());
     }
-    
+
     // HELPER METHODS???
-    
     @Override
-    public List<Location> getAssociatedLocations(List<Sighting> temp){
+    public List<Location> getAssociatedLocations(List<Sighting> temp) {
         List<Location> helperLocationList = new ArrayList<Location>();
-        
-        for(Sighting sight: temp){
+
+        for (Sighting sight : temp) {
             Location local = getLocationById(sight.getLocationId());
             helperLocationList.add(local);
             sight.setLocation(local);
         }
         return helperLocationList;
     }
-    
+
     @Override
-    public List<Characters> getAssociatedCharacters(List<Sighting> temp){
+    public List<Characters> getAssociatedCharacters(List<Sighting> temp) {
         List<Characters> helperCharacterList = new ArrayList<Characters>();
-        
-        for(Sighting sight: temp){
+
+        for (Sighting sight : temp) {
             Characters charact = getCharacterById(sight.getCharacterId());
             helperCharacterList.add(charact);
             sight.setCharacter(charact);
         }
         return helperCharacterList;
     }
-    
-    
-        /**********************Mapper Below***************************/
 
-    
-    private static final class OrganizationMapper implements RowMapper<Organization>{
-        public Organization mapRow (ResultSet rs, int rowNum) throws SQLException{
+    /**
+     * ********************Mapper Below**************************
+     */
+    private static final class OrganizationMapper implements RowMapper<Organization> {
+
+        public Organization mapRow(ResultSet rs, int rowNum) throws SQLException {
             Organization organization = new Organization();
             organization.setOrganizationId(rs.getInt("OrganizationId"));
-            organization.setOrganizationName(rs.getString ("OrganizationName"));
+            organization.setOrganizationName(rs.getString("OrganizationName"));
             organization.setLocationId(rs.getInt("LocationId"));
             organization.setDescription(rs.getString("Description"));
-            
-            
+
             /*
             Mo - No need for these anymore:
             
             Location location;
             List<Characters> memberList;
-            */
-            
-        return organization;
+             */
+            return organization;
 
-            
         }
     }
-    
-    
-    
+
     private static final class SightingMapper implements RowMapper<Sighting> {
 
         public Sighting mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -417,11 +409,11 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             sighting.setLocationId(rs.getInt("LocationID"));
             sighting.setCharacterId(rs.getInt("CharacterID"));
             sighting.setSightingDate((rs.getTimestamp("SightingDate")).toLocalDateTime().toLocalDate());
-            
+
             return sighting;
         }
     }
-    
+
     private static final class CharactersMapper implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -430,13 +422,12 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             charact.setName(rs.getString("CharacterName"));
             charact.setDescription(rs.getString("Description"));
             charact.setIsSuperHero(rs.getBoolean("IsSuperHero"));
-            
+
             return charact;
-            
-   
+
         }
     }
-    
+
     private static final class LocationMapper implements RowMapper<Location> {
 
         public Location mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -444,16 +435,16 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             local.setLocationID(rs.getInt("LocationID"));
             local.setLocationName(rs.getString("LocationName"));
             local.setDescription(rs.getString("Description"));
-            local.setLatitude(Double.parseDouble(rs.getString("Latitude")));
-            local.setLongitude(Double.parseDouble(rs.getString("Longitude")));
+            local.setLatitude(rs.getDouble("Latitude"));
+            local.setLongitude(rs.getDouble("Longitude"));
             local.setStreetNumber(rs.getString("StreetNumber"));
             local.setStreetName(rs.getString("StreetName"));
             local.setCity(rs.getString("City"));
             local.setState(rs.getString("State"));
             local.setZip(rs.getString("ZipCode"));
-           
+
             return local;
-        
+
         }
     }
 
