@@ -76,7 +76,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     //Organizations prepared statements
     private static final String SQL_INSERT_ORGANIZATION
             = "insert into Organization (OrganizationName, LocationID, Description )" + " values (?, ?, ?)";
-
+                
     private static final String SQL_DELETE_ORGANIZATION
             = "delete from Organization where OrganizationID = ?";
 
@@ -84,7 +84,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             = "update Organization set OrganizationName = ?, LocationID = ?, Description = ?" + "where OrganizationID = ?";
 
     private static final String SQL_SELECT_ORGANIZATION
-            = "select * from Organiztion where OrganizationId = ?";
+            = "select * from Organization where OrganizationId = ?";
 
     private static final String SQL_SELECT_ORGANIZATIONS_BY_CHARACTER
             = ""; // revisit after checking out join statements;
@@ -100,7 +100,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             = "delete from Location where LocationID = ?";
 
     private static final String SQL_UPDATE_LOCATION
-            = "update Location set LocationName = ?, Description = ?, Latitude = ?, Longitude = ?, StreetNumber = ?, StreetName = ?, City = ?, State = ?, ZipCode = ?  " + "where LocationID = ?";
+            = "UPDATE Location SET LocationName = ?, Description = ?, Latitude = ?, Longitude = ?, StreetNumber = ?, StreetName = ?, City = ?, State = ?, ZipCode = ?  " + " WHERE LocationID = ? ";
 
     private static final String SQL_SELECT_LOCATION
             = "select * from Location where LocationId = ?";
@@ -272,7 +272,8 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
         jdbcTemplate.update(SQL_UPDATE_ORGANIZATION,
                 organization.getOrganizationName(),
                 organization.getLocationId(),
-                organization.getDescription());
+                organization.getDescription(),
+                organization.getOrganizationId());
     }
 
     @Override
@@ -324,15 +325,17 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     @Override
     public void updateLocation(Location location) {
         jdbcTemplate.update(SQL_UPDATE_LOCATION,
-                location.getCity(),
+                location.getLocationName(),
                 location.getDescription(),
                 location.getLatitude(),
-                location.getLocationID(),
-                location.getLocationName(),
                 location.getLongitude(),
-                location.getState(),
+                location.getStreetNumber(),
                 location.getStreetName(),
-                location.getStreetNumber());
+                location.getCity(),
+                location.getState(),
+                location.getZip(),
+                location.getLocationID());
+
     }
 
     @Override
