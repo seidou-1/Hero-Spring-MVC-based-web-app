@@ -67,6 +67,12 @@ public interface SuperheroSightingsDao {
     public Location getLocationById(int locationId);
 
     public List<Location> getAllLocations();
+
+    public List<Sighting> getLastTenSightings();
+
+    public List<Characters> getAssociatedCharacters(List<Sighting> sightings);
+
+    public List<Location> getAssociatedLocations(List<Sighting> sightings);
 }
     
 

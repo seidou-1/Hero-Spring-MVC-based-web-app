@@ -3,6 +3,13 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 40.658927, lng: -73.947733 },
         zoom: 10,
+        zoomControl: false,
+        mapTypeControl: false,
+        mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          mapTypeIds: ['roadmap']
+        },
+        streetViewControl: false,
         styles: [
             {
               "elementType": "geometry",
@@ -292,4 +299,10 @@ function initMap() {
         minZoom: 10,
         maxZoom: 15
     });
+
+    google.maps.event.addDomListener(map, 'click', function(event) {
+      console.log(event.latLng);
+    });
+
 }
+

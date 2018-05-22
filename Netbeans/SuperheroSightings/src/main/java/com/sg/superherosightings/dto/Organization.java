@@ -15,8 +15,18 @@ import java.util.Objects;
 public class Organization {
     int organizationId;
     String organizationName;
-    Location location;
-    List<Characters> memberList;
+//    Location location;
+    int locationId;
+    String description;
+//    List<Characters> memberList;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Organization() {
     }
@@ -37,20 +47,21 @@ public class Organization {
         this.organizationName = organizationName;
     }
 
-    public Location getLocation() {
-        return location;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + this.organizationId;
-        hash = 17 * hash + Objects.hashCode(this.organizationName);
-        hash = 17 * hash + Objects.hashCode(this.location);
+        int hash = 7;
+        hash = 97 * hash + this.organizationId;
+        hash = 97 * hash + Objects.hashCode(this.organizationName);
+        hash = 97 * hash + this.locationId;
+        hash = 97 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
@@ -69,14 +80,19 @@ public class Organization {
         if (this.organizationId != other.organizationId) {
             return false;
         }
+        if (this.locationId != other.locationId) {
+            return false;
+        }
         if (!Objects.equals(this.organizationName, other.organizationName)) {
             return false;
         }
-        if (!Objects.equals(this.location, other.location)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         return true;
     }
+
+    
     
     
     

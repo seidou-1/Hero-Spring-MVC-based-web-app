@@ -5,7 +5,12 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.dao.SuperheroSightingsDao;
+import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Location;
+import com.sg.superherosightings.dto.Sighting;
 import com.sg.superherosightings.service.SHService;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -21,14 +26,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SHController {
     
     SHService service;
+    SuperheroSightingsDao dao;
     
     @Inject
-    public SHController(SHService service) {
-        this.service = service;
+    public SHController(SuperheroSightingsDao dao) {
+        this.dao = dao;
     }
 
     @RequestMapping(value = {"/", "index", ""}, method = RequestMethod.GET)
     public String loadWindow(HttpServletRequest request, Model model) {
+        List<Sighting> sightings = dao.getAllSightings();
+//        List<Characters> characters = dao.getAssociatedCharacters(sightings);
+//        List<Location> locations = dao.getAssociatedLocations(sightings);
+        
+        model.addAttribute("sightings", sightings);
+//        model.addAttribute("locations", locations);
+//        model.addAttribute("characters", characters);
         return "index";
     }
 
