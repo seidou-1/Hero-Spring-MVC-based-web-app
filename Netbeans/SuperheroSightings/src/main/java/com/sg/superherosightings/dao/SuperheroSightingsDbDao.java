@@ -125,10 +125,10 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Sighting addSighting(Sighting sighting) {
         jdbcTemplate.update(SQL_INSERT_SIGHTING,
-                sighting.getCharacterId(),
                 sighting.getLocationId(),
-                sighting.getSightingDate(),
-                sighting.getSightingId());
+                sighting.getCharacterId(),
+                sighting.getSightingDate());
+//                sighting.getSightingId());
 
         int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
 
@@ -411,7 +411,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             sighting.setSightingId(rs.getInt("SightingID"));
             sighting.setLocationId(rs.getInt("LocationID"));
             sighting.setCharacterId(rs.getInt("CharacterID"));
-            sighting.setSightingDate((rs.getTimestamp("SightingDate")).toLocalDateTime().toLocalDate());
+            sighting.setSightingDate((rs.getTimestamp("SightingDate"))); //took out .toLocalDate()
 
             return sighting;
         }

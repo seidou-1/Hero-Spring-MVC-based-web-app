@@ -6,6 +6,8 @@
 package com.sg.superherosightings.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -16,7 +18,7 @@ public class Sighting {
     int sightingId;
     int locationId;
     int characterId;
-    private LocalDate sightingDate;
+    private Date sightingDate;
     Characters character;
     Location local;
 
@@ -47,11 +49,11 @@ public class Sighting {
         this.characterId = characterId;
     }
 
-    public LocalDate getSightingDate() {
+    public Date getSightingDate() {
         return sightingDate;
     }
 
-    public void setSightingDate(LocalDate sightingDate) {
+    public void setSightingDate(Date sightingDate) {
         this.sightingDate = sightingDate;
     }
 
