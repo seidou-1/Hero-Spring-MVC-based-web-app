@@ -64,7 +64,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="i" begin="1" end="${heroes.size() - 1}">
+                                                <c:forEach var="i" begin="1" end="${heroes.size()}">
                                                     <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
                                                         <td>
                                                             <c:out value="${heroes[i].name}"></c:out>
