@@ -356,9 +356,9 @@ public class SuperHeroSightingsDaoTest {
     public void addGetDeleteSighting() throws ParseException {
         //Create location
         //Create character
-        //Create sighting
         //These are both fk's
 
+        //Create sighting
         Location myLocation = new Location();
 
         myLocation.setCity("queens");
@@ -390,7 +390,7 @@ public class SuperHeroSightingsDaoTest {
         mySighting.setLocationId(LocationFromDb.getLocationID());
 
 //        String date = request.getParameter("date");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // your template here
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date dateStr = formatter.parse("2018-03-20");
         java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
 
@@ -399,7 +399,7 @@ public class SuperHeroSightingsDaoTest {
         dao.addSighting(mySighting);
 
         Sighting sightingFromDb = dao.getSightingById(mySighting.getSightingId());
-        assertEquals (mySighting, sightingFromDb);
+        assertEquals(mySighting, sightingFromDb);
 
         //Test it's been removed successfully
         dao.deleteSighting(mySighting.getSightingId());
@@ -407,103 +407,111 @@ public class SuperHeroSightingsDaoTest {
 
     }
 
-//    @Test
-//    public void addGetUpdateSighting(){
-//        //Create location
-//        //Create character
-//        //These are both dependencies
-//
-//        //Create sighting
-//        
-//        Location myLocation = new Location();
-//        
-//        myLocation.setCity("queens");
-//        myLocation.setDescription("Nice city");
-//        myLocation.setLatitude(34.22);
-//        myLocation.setLongitude(34.22);
-//        myLocation.setState("NY");
-//        myLocation.setStreetName("Hero St.");
-//        myLocation.setStreetNumber("2332");
-//        myLocation.setZip("39023");
-//        myLocation.setLocationName("Place"); 
-//        Location LocationFromDb = dao.getLocationById(myLocation.getLocationID());
-//
-//       
-//        dao.addLocation(myLocation);
-//        
-//        Characters myCharacters = new Characters();
-//        myCharacters.setName("Hulk");
-//        myCharacters.setIsSuperHero(false);
-//        myCharacters.setDescription("Hulk Smash");
-//        Characters CharactersFromDb = dao.getCharacterById(myCharacters.getCharacterId());
-//
-//        
-//        dao.addCharacter(myCharacters);
-//        
-//        Sighting mySighting = new Sighting();
-//        
-//        mySighting.setCharacter(myCharacters);
-//        mySighting.setCharacterId(CharactersFromDb.getCharacterId());
-//        mySighting.setLocation(myLocation);
-//        mySighting.setLocationId(LocationFromDb.getLocationID());
-//        mySighting.setSightingDate(LocalDate.now());
-//        
-//        mySighting.setSightingDate(LocalDate.ofYearDay(2017, 5));
-//        
-//        dao.updateSighting(mySighting);
-//        
-//        Sighting sightingFromDb = dao.getSightingById(mySighting.getSightingId()); 
-//        assertEquals(sightingFromDb, mySighting);
-//    }
-//    @Test
-//    public void getAllSightings(){
-//        //Create location
-//        //Create character
-//        //These are both dependencies
-//
-//        //Create sighting
-//        
-//        Location myLocation = new Location();
-//        
-//        myLocation.setCity("queens");
-//        myLocation.setDescription("Nice city");
-//        myLocation.setLatitude(34.22);
-//        myLocation.setLongitude(34.22);
-//        myLocation.setState("NY");
-//        myLocation.setStreetName("Hero St.");
-//        myLocation.setStreetNumber("2332");
-//        myLocation.setZip("39023");
-//        myLocation.setLocationName("Place"); 
-//        Location LocationFromDb = dao.getLocationById(myLocation.getLocationID());
-//
-//       
-//        dao.addLocation(myLocation);
-//        
-//        Characters myCharacters = new Characters();
-//        myCharacters.setName("Hulk");
-//        myCharacters.setIsSuperHero(false);
-//        myCharacters.setDescription("Hulk Smash");
-//        Characters CharactersFromDb = dao.getCharacterById(myCharacters.getCharacterId());
-//
-//        
-//        dao.addCharacter(myCharacters);
-//        
-//        Sighting mySighting = new Sighting();
-//        
-//        mySighting.setCharacter(myCharacters);
-//        mySighting.setCharacterId(CharactersFromDb.getCharacterId());
-//        mySighting.setLocation(myLocation);
-//        mySighting.setLocationId(LocationFromDb.getLocationID());
-//        mySighting.setSightingDate(LocalDate.now());
-//        
-//        mySighting.setSightingDate(LocalDate.ofYearDay(2017, 5));
-//        
-//        dao.addSighting(mySighting);
-//        
-//        List<Sighting> entireList = dao.getAllSightings();
-//        assertEquals(entireList.size(), 1);
-//        
-//    }
+    @Test
+    public void addGetUpdateSighting() throws ParseException {
+        //Create location
+        //Create character
+        //These are both fk's
+
+        //Create sighting
+        Location myLocation = new Location();
+
+        myLocation.setCity("queens");
+        myLocation.setDescription("Nice city");
+        myLocation.setLatitude(34.22);
+        myLocation.setLongitude(34.22);
+        myLocation.setState("NY");
+        myLocation.setStreetName("Hero St.");
+        myLocation.setStreetNumber("2332");
+        myLocation.setZip("39023");
+        myLocation.setLocationName("Place");
+        dao.addLocation(myLocation);
+
+        Location LocationFromDb = dao.getLocationById(myLocation.getLocationID());
+
+        Characters myCharacters = new Characters();
+        myCharacters.setName("Hulk");
+        myCharacters.setIsSuperHero(false);
+        myCharacters.setDescription("Hulk Smash");
+        dao.addCharacter(myCharacters);
+
+        Characters CharactersFromDb = dao.getCharacterById(myCharacters.getCharacterId());
+
+        Sighting mySighting = new Sighting();
+
+        mySighting.setCharacter(myCharacters);
+        mySighting.setCharacterId(CharactersFromDb.getCharacterId());
+        mySighting.setLocation(myLocation);
+        mySighting.setLocationId(LocationFromDb.getLocationID());
+
+//        String date = request.getParameter("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dateStr = formatter.parse("2018-03-20");
+        java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
+
+        mySighting.setSightingDate(dateDB);
+        
+        dao.addSighting(mySighting);
+        
+        //make a change to the date:
+        java.util.Date newDateStr = formatter.parse("2018-01-20");
+        mySighting.setSightingDate(newDateStr);
+        
+        //Call update method
+        dao.updateSighting(mySighting);
+
+    }
+    @Test
+    public void getAllSightings() throws ParseException{
+        //Create location
+        //Create character
+        //These are both fk's
+
+        //Create sighting
+        Location myLocation = new Location();
+
+        myLocation.setCity("queens");
+        myLocation.setDescription("Nice city");
+        myLocation.setLatitude(34.22);
+        myLocation.setLongitude(34.22);
+        myLocation.setState("NY");
+        myLocation.setStreetName("Hero St.");
+        myLocation.setStreetNumber("2332");
+        myLocation.setZip("39023");
+        myLocation.setLocationName("Place");
+        dao.addLocation(myLocation);
+
+        Location LocationFromDb = dao.getLocationById(myLocation.getLocationID());
+
+        Characters myCharacters = new Characters();
+        myCharacters.setName("Hulk");
+        myCharacters.setIsSuperHero(false);
+        myCharacters.setDescription("Hulk Smash");
+        dao.addCharacter(myCharacters);
+
+        Characters CharactersFromDb = dao.getCharacterById(myCharacters.getCharacterId());
+
+        Sighting mySighting = new Sighting();
+
+        mySighting.setCharacter(myCharacters);
+        mySighting.setCharacterId(CharactersFromDb.getCharacterId());
+        mySighting.setLocation(myLocation);
+        mySighting.setLocationId(LocationFromDb.getLocationID());
+
+//        String date = request.getParameter("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dateStr = formatter.parse("2018-03-20");
+        java.sql.Date dateDB = new java.sql.Date(dateStr.getTime());
+
+        mySighting.setSightingDate(dateDB);
+        
+        dao.addSighting(mySighting);
+        
+        List<Sighting> entireList = dao.getAllSightings();
+        assertEquals(entireList.size(), 1);
+        
+    }
+
     /**
      * ************************************************
      */

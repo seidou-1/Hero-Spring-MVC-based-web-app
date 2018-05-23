@@ -40,7 +40,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             = "delete from Sighting where SightingID = ?";
 
     private static final String SQL_UPDATE_SIGHTING
-            = "update Sighting set LocationId = ?, CharacterID = ? " + "where SightingID =  ?";
+            = "update Sighting set LocationId = ?, CharacterID = ?, SightingDate = ? " + "where SightingID =  ?";
 
     private static final String SQL_SELECT_SIGHTING
             = "select * from Sighting where SightingID = ?";
@@ -145,8 +145,8 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     @Override
     public void updateSighting(Sighting sighting) {
         jdbcTemplate.update(SQL_UPDATE_SIGHTING,
-                sighting.getCharacterId(),
                 sighting.getLocationId(),
+                sighting.getCharacterId(),
                 sighting.getSightingDate(),
                 sighting.getSightingId());
     }
