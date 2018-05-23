@@ -15,10 +15,10 @@ public class Characters {
     int characterId;
     String name;
     String description;
-    boolean isSuperHero;
+    boolean isSuperHero; 
     
-    public Characters(){
-        
+    public Characters() {
+
     }
 
     public String getName() {
@@ -90,9 +90,5 @@ public class Characters {
         }
         return true;
     }
-    
-    
 
-    
-    
 }
