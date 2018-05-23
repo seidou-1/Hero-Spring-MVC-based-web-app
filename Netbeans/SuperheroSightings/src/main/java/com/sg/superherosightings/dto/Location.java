@@ -17,15 +17,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Location {
     
     int locationID;
-    @NotEmpty(message = "Vio-Lation. You need to enter values for this.")
     
-    String locationName;
     @NotBlank(message = "Damn Daniel you forgot the Name?")
-    @Length(max = 50, message = "No less than 1 and no more than 50 characters in length.")
+    @Length(max = 45, message = "No less than 1 and no more than 50 characters in length.")
+    String locationName;
             
-    String description;
     @NotEmpty(message = "Damn Daniel you forgot the Description?")
-    @Length(min = 1, max = 100, message = "No less than 1 and no more than 50 characters in length.")
+    @Length(min = 1, max = 45, message = "No less than 1 and no more than 50 characters in length.")
+    String description;
             
     Double longitude;
     

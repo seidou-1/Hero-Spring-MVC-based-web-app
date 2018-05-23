@@ -15,18 +15,17 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class Characters {
     int characterId;
-    @NotEmpty(message = "Vio-Lation. You need to enter values for this.")
 
-    String name;
     @NotEmpty(message = "Damn Daniel you forgot the Name?")
-    @Length(max = 50, message = "First Name must be no more than 50 characters in length.")
+    @Length(max = 45, message = "First Name must be no more than 50 characters in length.")
+    String name;
 
-    String description;
     @NotEmpty(message = "You must supply a value for Description.")
-    @Length(max = 100, message = "First Name must be no more than 50 characters in length.")
+    @Length(max = 45, message = "First Name must be no more than 50 characters in length.")
+    String description;
 
-    boolean isSuperHero;
     @NotEmpty(message = "Man is this a superhero or not?")
+    boolean isSuperHero;
     
     public Characters(){
         
@@ -100,6 +99,10 @@ public class Characters {
             return false;
         }
         return true;
+    }
+
+    public void addOrganization(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

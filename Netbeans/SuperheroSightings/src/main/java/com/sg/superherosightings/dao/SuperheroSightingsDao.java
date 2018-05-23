@@ -8,6 +8,7 @@ package com.sg.superherosightings.dao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Organization;
+import com.sg.superherosightings.dto.Photo;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.List;
 
@@ -68,11 +69,17 @@ public interface SuperheroSightingsDao {
 
     public List<Location> getAllLocations();
 
-    public List<Sighting> getLastTenSightings();
-
     public List<Characters> getAssociatedCharacters(List<Sighting> sightings);
 
     public List<Location> getAssociatedLocations(List<Sighting> sightings);
+
+    public List<Characters> getAllHeroes();
+    
+    public List<Characters> getAllVillains();
+    
+    public Photo addImage (Photo image);
+    
+    public Photo getImageByID (int imageID);
 }
     
 

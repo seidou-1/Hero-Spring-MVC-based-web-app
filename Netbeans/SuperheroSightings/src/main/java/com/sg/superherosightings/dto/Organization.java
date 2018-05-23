@@ -7,18 +7,29 @@ package com.sg.superherosightings.dto;
 
 import java.util.List;
 import java.util.Objects;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author josesosa
  */
 public class Organization {
+
     int organizationId;
+
+    @NotBlank(message = "Damn Daniel you forgot the Name?")
+    @Length(max = 45, message = "No less than 1 and no more than 50 characters in length.")
     String organizationName;
-//    Location location;
+
     int locationId;
+    
+    
+    @NotEmpty(message = "Damn Daniel you forgot the Description?")
+    @Length(min = 1, max = 45, message = "No less than 1 and no more than 50 characters in length.")
     String description;
-//    List<Characters> memberList;
+
 
     public String getDescription() {
         return description;
@@ -92,9 +103,4 @@ public class Organization {
         return true;
     }
 
-    
-    
-    
-    
-    
 }

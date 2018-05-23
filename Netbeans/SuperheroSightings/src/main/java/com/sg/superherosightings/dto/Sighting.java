@@ -9,22 +9,30 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author josesosa
  */
 public class Sighting {
+
+    @NotEmpty(message = "Damn Daniel you forgot the ID?")
     int sightingId;
+
+    @NotEmpty(message = "Damn Daniel you forgot the ID?")
     int locationId;
+
+    @NotEmpty(message = "Damn Daniel you forgot the ID?")
     int characterId;
+
     private Date sightingDate;
     Characters character;
     Location local;
 
     public Sighting() {
     }
-    
+
     public int getSightingId() {
         return sightingId;
     }
@@ -99,7 +107,7 @@ public class Sighting {
     }
 
     public void setCharacter(Characters charact) {
-        this.character = charact; 
+        this.character = charact;
     }
-    
+
 }
