@@ -14,6 +14,8 @@ import java.util.Objects;
 public class Location {
     
     int locationID;
+    @NotEmpty(message = "You must supply a value for First Name.");
+    
     String locationName;
     String description;
     Double longitude;
