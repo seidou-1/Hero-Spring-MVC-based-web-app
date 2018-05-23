@@ -51,7 +51,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             = "select * from Sighting where SightingDate = ?";
 
     private static final String SQL_SELECT_ALL_SIGHTINGS
-            = "select * from Sighting";
+            = "select * from `Sighting`";
 
 //    private static final String SQL_SELECT_LAST_TEN_SIGHTINGS
 //            = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";

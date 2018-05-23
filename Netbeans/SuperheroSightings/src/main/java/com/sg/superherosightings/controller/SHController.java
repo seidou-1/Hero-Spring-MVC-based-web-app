@@ -31,6 +31,7 @@ public class SHController {
     @RequestMapping(value = {"/", "index", ""}, method = RequestMethod.GET)
     public String loadWindow(HttpServletRequest request, Model model) {
         List<Sighting> sightings = dao.getAllSightings();
+        System.out.println(sightings);
         List<Characters> characters = dao.getAssociatedCharacters(sightings);
         List<Location> locations = dao.getAssociatedLocations(sightings);
         model.addAttribute("sightings", sightings);

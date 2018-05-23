@@ -23,14 +23,11 @@ public class Characters {
     @NotEmpty(message = "You must supply a value for Description.")
     @Length(max = 45, message = "First Name must be no more than 50 characters in length.")
     String description;
-<<<<<<< HEAD
+
 
     @NotEmpty(message = "Man is this a superhero or not?")
     boolean isSuperHero;
-=======
-    boolean isSuperHero; 
->>>>>>> dev
-    
+
     public Characters() {
 
     }
@@ -104,14 +101,11 @@ public class Characters {
         }
         return true;
     }
-<<<<<<< HEAD
+
 
     public void addOrganization(String e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-=======
->>>>>>> dev
+   
 
 }
