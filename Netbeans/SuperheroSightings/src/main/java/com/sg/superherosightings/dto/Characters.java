@@ -6,6 +6,8 @@
 package com.sg.superherosightings.dto;
 
 import java.util.Objects;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -13,9 +15,18 @@ import java.util.Objects;
  */
 public class Characters {
     int characterId;
+    @NotEmpty(message = "Vio-Lation. You need to enter values for this.")
+
     String name;
+    @NotEmpty(message = "Damn Daniel you forgot the Name?")
+    @Length(max = 50, message = "First Name must be no more than 50 characters in length.")
+
     String description;
+    @NotEmpty(message = "You must supply a value for Description.")
+    @Length(max = 100, message = "First Name must be no more than 50 characters in length.")
+
     boolean isSuperHero;
+    @NotEmpty(message = "Man is this a superhero or not?")
     
     public Characters(){
         
