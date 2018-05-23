@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.dto;
 
+import java.util.List;
 import java.util.Objects;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -27,7 +28,11 @@ public class Characters {
 
     @NotEmpty(message = "Man is this a superhero or not?")
     boolean isSuperHero;
+    
+    List<Organization> orgList;
 
+
+    
     public Characters() {
 
     }
@@ -102,10 +107,19 @@ public class Characters {
         return true;
     }
 
-
     public void addOrganization(String e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
+    
+    public void setOrganizationList(List<Organization> organizationsByCharacter) {
+        this.orgList = organizationsByCharacter;
+    }
+
+    public List<Organization> getOrgList() {
+        return orgList;
+    }
+    
+    
+
 
 }

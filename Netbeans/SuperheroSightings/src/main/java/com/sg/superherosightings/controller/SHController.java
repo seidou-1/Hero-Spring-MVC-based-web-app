@@ -70,8 +70,9 @@ public class SHController {
     @RequestMapping(value = {"/viewHeroes"}, method = RequestMethod.GET)
     public String loadHeroes(HttpServletRequest request, Model model) {
         List<Characters> allHeroes = dao.getAllHeroes();
+        dao.setCharactersOrgList(allHeroes);
         model.addAttribute("heroes", allHeroes);
-        return "heroes";
+        return "heroes"; 
     }
     @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
     public String loadVillains(HttpServletRequest request, Model model) {
