@@ -8,7 +8,9 @@ package com.sg.superherosightings.dao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Organization;
+import com.sg.superherosightings.dto.Photo;
 import com.sg.superherosightings.dto.Sighting;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,9 +53,8 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     private static final String SQL_SELECT_ALL_SIGHTINGS
             = "select * from Sighting";
 
-    private static final String SQL_SELECT_LAST_TEN_SIGHTINGS
-            = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";
-
+//    private static final String SQL_SELECT_LAST_TEN_SIGHTINGS
+//            = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";
     // Character prepared statements
     private static final String SQL_INSERT_CHARACTER
             = "insert into Characters (CharacterName, Description, IsSuperHero )" + " values (?, ?, ?)";
@@ -73,10 +74,17 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     private static final String SQL_SELECT_ALL_CHARACTERS
             = "select * from Characters";
 
+    //Isolate characters
+    private static final String SQL_SELECT_ALL_HEROES
+            = "select * from `Characters` where isSuperHero = 1";
+
+    private static final String SQL_SELECT_ALL_VILLAINS
+            = "select * from `Characters` where isSuperHero = 0";
+
     //Organizations prepared statements
     private static final String SQL_INSERT_ORGANIZATION
             = "insert into Organization (OrganizationName, LocationID, Description )" + " values (?, ?, ?)";
-                
+
     private static final String SQL_DELETE_ORGANIZATION
             = "delete from Organization where OrganizationID = ?";
 
@@ -111,13 +119,13 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     private static final String SQL_SELECT_ALL_LOCATIONS
             = "select * from Location";
 
-//    public List<Sighting> getLastTen(){
-//        temp = code that gets last ten sightings;
-//        for(Sighting sight: temp ){
-//            charTemp = getCharacter(temp.CharacterID);
-//            temp.setCharacter(charTemp);
-//        }
-//    }
+    //Images prepared statements
+    private static final String SQL_INSERT_IMAGE
+            = "insert into `Images` (Name, ImageType, Image) " + " values (?, ?, ?)";
+
+    private static final String SQL_SELECT_IMAGE
+            = "select * from `Images` where ImageID = ?";
+
     /**
      * ********************SIGHTING**************************
      */
@@ -166,12 +174,6 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     @Override
     public List<Sighting> getAllSightings() {
         return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS,
-                new SightingMapper());
-    }
-
-    @Override
-    public List<Sighting> getLastTenSightings() {
-        return jdbcTemplate.query(SQL_SELECT_LAST_TEN_SIGHTINGS,
                 new SightingMapper());
     }
 
@@ -238,6 +240,25 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     @Override
     public List<Characters> getAllCharacters() {
         return jdbcTemplate.query(SQL_SELECT_ALL_CHARACTERS,
+                new CharactersMapper());
+    }
+
+    /**
+     * ********************HEROES**************************
+     */
+
+    @Override
+    public List<Characters> getAllHeroes() {
+        return jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
+                new CharactersMapper());
+    }
+
+    /**
+     * ********************VILLAINS**************************
+     */
+    @Override
+    public List<Characters> getAllVillains() {
+        return jdbcTemplate.query(SQL_SELECT_ALL_VILLAINS,
                 new CharactersMapper());
     }
 
@@ -380,6 +401,35 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
         }
         return helperCharacterList;
     }
+    
+    // Photo methods
+   @Override
+   @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+   public Photo addImage(Photo image) {
+       jdbcTemplate.update(SQL_INSERT_IMAGE,
+               image.getName(),
+               image.getType());
+
+       int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID", Integer.class);
+
+       image.setImageID(newId);
+
+       return image;
+
+   }
+
+   @Override
+   public Photo getImageByID(int imageID) {
+       try {
+           return jdbcTemplate.queryForObject(SQL_SELECT_IMAGE,
+                   new ImageMapper(), imageID);
+       } catch (Exception ex) {
+//            EmptyResultDataAccessException
+           System.out.println("I had an exception");
+
+           return null;
+       }
+   }
 
     /**
      * ********************Mapper Below**************************
@@ -450,5 +500,28 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
         }
     }
+    
+    private static final class ImageMapper implements RowMapper<Photo> {
+
+       public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {
+           Photo img = new Photo();
+           img.setImageID(rs.getInt("ImageID"));
+           img.setName(rs.getString("Name"));
+           img.setType(rs.getString("ImageType"));
+
+           Blob myImage = rs.getBlob(4);
+           int length = (int) myImage.length();
+
+           
+           
+           
+           return img;
+
+       }
+   }
+    
+    
+    
+    
 
 }

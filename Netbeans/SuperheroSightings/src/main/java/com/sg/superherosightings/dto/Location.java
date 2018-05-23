@@ -6,6 +6,9 @@
 package com.sg.superherosightings.dto;
 
 import java.util.Objects;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -14,15 +17,38 @@ import java.util.Objects;
 public class Location {
     
     int locationID;
+    
+    @NotBlank(message = "Damn Daniel you forgot the Name?")
+    @Length(max = 45, message = "No less than 1 and no more than 50 characters in length.")
     String locationName;
+            
+    @NotEmpty(message = "Damn Daniel you forgot the Description?")
+    @Length(min = 1, max = 45, message = "No less than 1 and no more than 50 characters in length.")
     String description;
+            
     Double longitude;
+    
     Double latitude;
+    
     String streetNumber;
+    @NotBlank(message = "Damn Daniel you forgot the Name?")
+    @Length(max = 10, message = "No less than 1 and no more than 50 characters in length.")
+            
     String streetName;
+    @NotBlank(message = "Damn Daniel you forgot the Street Name?")
+    @Length(max = 50, message = "No less than 1 and no more than 50 characters in length..")
+            
     String city;
+    @NotBlank(message = "Damn Daniel you forgot the City?")
+    @Length(max = 20, message = "No less than 1 and no more than 20 characters in length..")
+            
     String state;
+    @NotBlank(message = "Damn Daniel you forgot the State?")
+    @Length(max = 20, message = "First Name must be no more than 50 characters in length.")
+            
     String zip;
+    @NotBlank(message = "Damn Daniel you forgot the Zip?")
+    @Length(min = 1, max = 13, message = "Zip code must be no more than 50 characters in length.")
 
     public Location() {
     }

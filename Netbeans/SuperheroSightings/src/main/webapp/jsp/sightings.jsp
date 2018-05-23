@@ -24,7 +24,7 @@
                                         <a href="${pageContext.request.contextPath}/index">Home</a>
                                     </li>
                                     <li role="presentation" class="active">
-                                        <a href="${pageContext.request.contextPath}/viewSightings">Sightings</a>
+                                        <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
@@ -49,132 +49,81 @@
                                 <div id="toggleMap">
                                     <span>Sightings Table</span>
                                     <a href="${pageContext.request.contextPath}/newSighting" class="btn btn-primary">+ Create New</a>
-                                    <a href="${pageContext.request.contextPath}/sightings?mapView"> Toggle Map</a>
-                                </div>
 
-                                <table class="table" style="display: none">
-                                    <tr>
-                                        <th> Name </th>
-                                        <th> Personality </th>
-                                        <th> Date </th>
-                                        <th> Organization</th>
-                                        <th> Location</th>
-                                        <th></th>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>All Might</td>
-                                        <td>Hero</td>
-                                        <td>12/12/2018</td>
-                                        <td>UA School</td>
-                                        <td>NYC</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                            <a href="${pageContext.request.contextPath}">delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr id="sightingButtons">
-                                        <td colspan="6">
-                                            <div class="btn-group" role="group" aria-label="...">
-                                                <button type="button" class="btn btn-default">Previous</button>
-                                                <button type="button" class="btn btn-default">1 to 10</button>
-                                                <button type="button" class="btn btn-default">Next</button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <c:choose>
+                                        <c:when test="${viewType =='map'}">
+                                            <a href="${pageContext.request.contextPath}/viewSightings?viewType=table"> Toggle Map</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=all"> Toggle Map</a>
+                                        </c:otherwise>
+                                    </c:choose>
 
-                                </table>
-
-                                <div id="map">
 
                                 </div>
+
+                                <c:if test="${viewType == 'table'}">
+                                    <div class="scrollable">
+                                        <table id="sightingsTable" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th> Name </th>
+                                                    <th> Personality </th>
+                                                    <th> Date </th>
+                                                    <th> Organization </th>
+                                                    <th> Location</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="i" begin="0" end="${sightings.size()-1}">
+                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
+                                                        <td>
+                                                            <c:out value="${characters[i].name}"></c:out>
+                                                        </td>
+
+                                                        <td>
+                                                            <c:choose>
+                                                                    <c:when test="${characters[i].isSuperHero == true}">
+                                                                        <c:out value="Hero"></c:out>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <c:out value="Villain"></c:out>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                        </td>
+
+                                                        <td>
+                                                            <c:out value="${sightings[i].sightingDate}"></c:out>
+                                                        </td>
+
+                                                        <td>
+                                                            <c:out value="X-men"></c:out>
+                                                        </td>
+
+                                                        <td>
+                                                            <c:out value="${locations[i].locationName}"></c:out>
+                                                        </td>
+                                                        <td>
+                                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                            <a href="${pageContext.request.contextPath}">delete</a>
+                                                        </td>
+
+                                                    </tr>
+                                                </c:forEach>
+                                     
+                                            </tbody>
+                                    
+                                          
+                                        </table>
+
+                                    </div>
+                                </c:if>
+
+                                <c:if test="${viewType == 'map'}">
+                                    <input type="text" id="sightingID" value="${sightingID}" hidden>
+                                    <div id="map"> </div>
+                                </c:if>
 
                             </div>
 
@@ -183,104 +132,126 @@
                                 <div id="sortingFilterMenu">
                                     <h3>Sighting Filter</h3>
 
-                                    <div class="dropdown">
+                                    <!--Sort by character-->
 
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="characterSortBtn" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="true">
-                                            Sort By Character
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                            <li>
-                                                <a href="#">All Might</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Kakashi</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Itachi</a>
-                                            </li>
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="#">All Characters</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="dropdown">
-
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="organizationSortBtn" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="true">
-                                            Sort By Organization
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <li>
-                                                <a href="#">UAE</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Akatsuki</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Ninja*-</a>
-                                            </li>
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="#">All Organizations</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="dropdown">
-
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="locationSortBtn" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="true">
-                                            Sort By Location
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                                            <li>
-                                                <a href="#">Brooklyn</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Manhattan</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Bronx</a>
-                                            </li>
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="#">All Locations</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="dropdown">
-
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="locationSortBtn" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="true">
-                                            Sort By Date
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                                            <li>
-                                                <a href="#">10/20/1028</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">12/20/1028</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">10/20/1018</a>
-                                            </li>
-                                            <li role="separator" class="divider"></li>
-                                            <li>
-                                                <a href="#">All Dates</a>
-                                            </li>
-                                        </ul>
+                                    <div id="characterSort">
+                                        <a href="#" data-toggle="modal" data-target=".characterSortModal" class="btn btn-primary">Sort by Character</a>
                                     </div>
 
-                                    <a href="#/filterReset"> reset form </a>
-                                    <br>
-                                    <button id="filterBtn" class="btn btn-primary" style="margin-top: 15px; border-radius: 0">
-                                        Filter
-                                    </button>
+                                    <div class="modal fade characterSortModal" tabindex="-1" role="dialog" aria-labelledby="myCharacterSortModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-md">
+
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">All Characters</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4>Heroes</h4>
+                                                    <label>
+                                                        <input type="checkbox"> All Might
+                                                    </label>
+                                                    <hr>
+                                                    <h4>Villains</h4>
+                                                    <label>
+                                                        <input type="checkbox"> Dr. Evil
+                                                    </label>
+                                                    <hr>
+                                                    <label>
+                                                        <input type="checkbox"> All Characters
+                                                    </label>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end-->
+                                    <hr>
+                                    <!--Sort by organization-->
+                                    <div id="organizationSort">
+                                        <a href="#" data-toggle="modal" data-target=".organizationSortModal" class="btn btn-primary">Sort by Organization</a>
+                                    </div>
+
+                                    <div class="modal fade organizationSortModal" tabindex="-1" role="dialog" aria-labelledby="myOrganizationSortModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-md">
+
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">All Organizations</h4>
+                                                </div>
+                                                <div class="modal-body" id="organizationChoice"></div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    
+                                    
+                                    <!--end-->
+
+
+                                    <hr>
+                                    <!--Sort by location-->
+                                    <div id="locationSort">
+                                        <a href="#" data-toggle="modal" data-target=".locationSortSortModal" class="btn btn-primary">Sort by Location</a>
+                                    </div>
+
+                                    <div class="modal fade locationSortSortModal" tabindex="-1" role="dialog" aria-labelledby="myLocationSortModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-md">
+
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">All Locations</h4>
+                                                </div>
+                                                <div class="modal-body" id="locationChoice"></div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end-->
+
+
+                                    <hr>
+                                    <!--Sort by date-->
+                                    <div id="dateSort">
+                                        <a href="#" data-toggle="modal" data-target=".dateSortSortModal" class="btn btn-primary">Sort by Date</a>
+                                    </div>
+
+                                    <div class="modal fade dateSortSortModal" tabindex="-1" role="dialog" aria-labelledby="myDateSortModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-md">
+
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">All Locations</h4>
+                                                </div>
+                                                <div class="modal-body" id="dateChoice"></div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end-->
+
+
+
+                                    <a href="#/filterReset"> Reset Filter </a>
+
                                 </div>
                             </div>
                         </div>
@@ -296,7 +267,8 @@
                     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
                     <script src="${pageContext.request.contextPath}/js/script.js"></script>
                     <script src="${pageContext.request.contextPath}/js/map.js"></script>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYul2fBF6a03a9OqShrMK6SVzJdfAm-NY&callback=initMap" async defer></script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYul2fBF6a03a9OqShrMK6SVzJdfAm-NY&callback=initMap" async
+                        defer></script>
 
                 </body>
 

@@ -6,6 +6,8 @@
 package com.sg.superherosightings.dto;
 
 import java.util.Objects;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -13,9 +15,21 @@ import java.util.Objects;
  */
 public class Characters {
     int characterId;
+
+    @NotEmpty(message = "Damn Daniel you forgot the Name?")
+    @Length(max = 45, message = "First Name must be no more than 50 characters in length.")
     String name;
+
+    @NotEmpty(message = "You must supply a value for Description.")
+    @Length(max = 45, message = "First Name must be no more than 50 characters in length.")
     String description;
+<<<<<<< HEAD
+
+    @NotEmpty(message = "Man is this a superhero or not?")
+    boolean isSuperHero;
+=======
     boolean isSuperHero; 
+>>>>>>> dev
     
     public Characters() {
 
@@ -90,5 +104,14 @@ public class Characters {
         }
         return true;
     }
+<<<<<<< HEAD
+
+    public void addOrganization(String e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+=======
+>>>>>>> dev
 
 }
