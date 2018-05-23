@@ -7,6 +7,7 @@ package com.sg.superherosightings.controller;
 import com.sg.superherosightings.dao.SuperheroSightingsDao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
+import com.sg.superherosightings.dto.Organization;
 import com.sg.superherosightings.dto.Sighting;
 import com.sg.superherosightings.service.SHService;
 import java.util.List;
@@ -81,6 +82,9 @@ public class SHController {
     }
     @RequestMapping(value = {"/viewOrganizations"}, method = RequestMethod.GET)
     public String loadOrganizations(HttpServletRequest request, Model model) {
+        List<Organization> allOrganizations = dao.getAllOrganizations();
+        
+        model.addAttribute("organizations", allOrganizations);
         return "organizations";
     }
     @RequestMapping(value = {"/viewLocations"}, method = RequestMethod.GET)

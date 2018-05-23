@@ -56,185 +56,34 @@
                                         <thead>
                                             <tr>
                                                 <th> Name </th>
-                                                <th> Good or Evil</th>
-                                                <th> Location </th>
+                                                <th> Disbanded</th>
+                                                <th> Description </th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>UA School</td>
-                                                <td>Good</td>
-                                                <td>Brooklyn</td>
-                                                <td>
-                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                    <a href="${pageContext.request.contextPath}">delete</a>
-                                                </td>
-                                            </tr>
+                                                <c:forEach var="i" begin="1" end="${organizations.size() -1 }">
+                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewOrganization?viewType=view&organizationID=${oranizations[i].organizationId}">
+                                                        <td>
+                                                            <c:out value="${organizations[i].organizationName}"></c:out>
+                                                        </td>
 
-                                        </tbody>
+                                                        <td>
+                                                            <c:out value="NO"></c:out>
+                                                        </td>
+
+                                                        <td>
+                                                            <c:out value="${organizations[i].description}"></c:out>
+                                                        </td>
+                                                        <td>
+                                                            <a href="${pageContext.request.contextPath}/viewOranization?id=${oranizations[i].organizationId}">edit |</a>
+                                                            <a href="${pageContext.request.contextPath}/deleteOrganization?id=${oranizations[i].organizationId}">delete</a>
+                                                        </td>
+
+                                                    </tr>
+                                                </c:forEach>
+
+                                            </tbody>
 
                                     </table>
 
