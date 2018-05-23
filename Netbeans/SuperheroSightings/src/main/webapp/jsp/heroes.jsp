@@ -71,7 +71,7 @@
                                                         </td>
 
                                                         <td>
-                                                            <c:out value="X-Men"></c:out>
+                                                            <c:out value="${heroes[i].orgList[0].organizationName}"></c:out>
                                                         </td>
 
                                                         <td>
