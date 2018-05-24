@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.hibernate.validator.constraints.Length;
@@ -30,6 +31,8 @@ public class Characters {
     boolean isSuperHero;
     
     List<Organization> orgList;
+    
+    List<Integer> organizationIDs = new ArrayList<>();
 
 
     
@@ -107,9 +110,19 @@ public class Characters {
         return true;
     }
 
-    public void addOrganization(String e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addOrganization(String id) {
+        this.organizationIDs.add(Integer.parseInt(id));        
     }
+
+    public boolean isIsSuperHero() {
+        return isSuperHero;
+    }
+
+    public List<Integer> getOrganizationIDs() {
+        return organizationIDs;
+    }
+    
+    
     
     public void setOrganizationList(List<Organization> organizationsByCharacter) {
         this.orgList = organizationsByCharacter;

@@ -27,7 +27,7 @@
                                         <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
+                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>

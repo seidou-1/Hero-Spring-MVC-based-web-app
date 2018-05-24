@@ -26,7 +26,7 @@
                                         <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
+                                        <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
@@ -42,217 +42,217 @@
                             </div>
 
                         </div>
-                        <div class="row"> 
-                            <div class="col-md-5"  > 
+                        <div class="row">
+                            <div class="col-md-5">
                                 <span class="font-size: 14px; padding: 10px 0; font-weight: bold;">Locations Archive</span>
-                                 <div class="scrollable">
+                                <div class="scrollable">
 
-                                            <table class="table text-center displayTable" >
-                                                    <thead>
-                                                          <tr>
-                                                                  <th> Name </th>
-                                                                  <th> Description </th>
-                                                                  <th> Address </th>
-                                                                  <th></th>
-                                                                  </tr>
-                                                    </thead>
-                                                          <tbody>
-                                                              
-                                                                  <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                          
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                          
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                          
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                          <td>Lady Liberty</td>
-                                                                          <td>Ellis Island</td>
-                                                                          <td>NYC</td>
-                                                                          <td>
-                                                                              <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                                              <a href="${pageContext.request.contextPath}">delete</a>
-                                                                          </td>
-                                                                      </tr>
-                                                                 
-                                                          </tbody>
-                                                  </table>
-                                    </div>
+                                    <table class="table text-center displayTable">
+                                        <thead>
+                                            <tr>
+                                                <th> Name </th>
+                                                <th> Description </th>
+                                                <th> Address </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lady Liberty</td>
+                                                <td>Ellis Island</td>
+                                                <td>NYC</td>
+                                                <td>
+                                                    <a href="${pageContext.request.contextPath}/edit">edit |</a>
+                                                    <a href="${pageContext.request.contextPath}">delete</a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </div>
 
 
                             <div class="col-md-7" id="locationTab">
 
                                 <h5>Create a new location</h5>
 
-                                <div class="col-md-12"  id="locationMap">
+                                <div class="col-md-12" id="locationMap">
                                     <div></div>
                                 </div>
                                 <div class="col-md-12">
@@ -266,12 +266,12 @@
 
                                     <div class="col-md-6">
 
-                                        <label for="name">Name: </label> 
+                                        <label for="name">Name: </label>
                                         <input class="formInput" type="text" id="name" placeholder="Example (Garden of Eden)" />
 
-                                        <label for="description">Description: </label> 
+                                        <label for="description">Description: </label>
                                         <input class="formInput" type="text" id="description" placeholder="Example (East New York)" />
-                                    
+
                                         <label for="latititude">Latitude: </label>
                                         <br>
                                         <input class="formInput" type="text" id="latitude" placeholder="Example (40.34564)" />
@@ -284,17 +284,17 @@
 
                                     <div class="col-md-6">
 
-                                        <label for="streetNumber">Street Number </label> 
+                                        <label for="streetNumber">Street Number </label>
                                         <input class="formInput" type="text" id="streetNumber" placeholder="Example (193)" />
-                                   
+
                                         <label for="streetName">Street Name </label>
                                         <br>
                                         <input class="formInput" type="text" id="streetName" placeholder="Example (East 14th Street)" />
-                                   
+
                                         <label for="city">City </label>
                                         <br>
                                         <input class="formInput" type="text" id="city" placeholder="Example (Brooklyn)" />
-                                       
+
                                         <label for="state">State </label>
                                         <br>
                                         <input class="formInput" type="text" id="state" placeholder="Example (New York)" />
@@ -308,7 +308,8 @@
 
 
                             </div>
-                            <br><br>
+                            <br>
+                            <br>
 
                         </div>
                     </div>

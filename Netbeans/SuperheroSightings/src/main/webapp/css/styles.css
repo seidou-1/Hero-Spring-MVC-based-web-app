@@ -95,7 +95,6 @@
  
  #characterImg img {
      width: 100%;
-     height: 100px !important;
      border: 1px solid blue;
  }
  #locationMap  {
@@ -295,4 +294,13 @@ input[type=text]:focus {
 .inputfile:focus + label {
     outline: 1px dotted #000;
     outline: -webkit-focus-ring-color auto 5px;
+}
+
+.viewImage {
+    height: 200px  !important;
+    border: 3px solid gold;
+}
+
+.creatingImage {
+    height: 100px  !important;
 }
