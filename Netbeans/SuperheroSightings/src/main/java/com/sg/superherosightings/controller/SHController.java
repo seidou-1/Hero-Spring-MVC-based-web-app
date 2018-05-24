@@ -77,6 +77,7 @@ public class SHController {
     @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
     public String loadVillains(HttpServletRequest request, Model model) {
         List<Characters> allVillains = dao.getAllVillains();
+        dao.setCharactersOrgList(allVillains);
         model.addAttribute("villains", allVillains);
         return "villains";
     }
