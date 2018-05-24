@@ -64,22 +64,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="i" begin="1" end="${heroes.size()}">
-                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
+                                                <c:forEach var="i" begin="1" end="${villains.size()}">
+                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewVillains?viewType=map&villainID=${villains[i].characterId}">
                                                         <td>
-                                                            <c:out value="${heroes[i].name}"></c:out>
+                                                            <c:out value="${villains[i].name}"></c:out>
                                                         </td>
 
                                                         <td>
-                                                            <c:out value="X-Men"></c:out>
+                                                            <c:out value="${villains[i].orgList[0].organizationName}"></c:out>
                                                         </td>
 
                                                         <td>
-                                                            <c:out value="${heroes[i].name}"></c:out>
+                                                            <c:out value="${villains[i].name}"></c:out>
                                                         </td>
                                                         <td>
-                                                            <a href="${pageContext.request.contextPath}/viewHeroes?id=${i}">edit |</a>
-                                                            <a href="${pageContext.request.contextPath}/deleteHero?id=${i}">delete</a>
+                                                            <a href="${pageContext.request.contextPath}/viewHeroes?id=${villains[i].characterId}">edit |</a>
+                                                            <a href="${pageContext.request.contextPath}/deleteHero?id=${villains[i].characterId}">delete</a>
                                                         </td>
 
                                                     </tr>
