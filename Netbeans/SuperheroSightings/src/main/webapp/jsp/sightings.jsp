@@ -27,7 +27,7 @@
                                         <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
+                                        <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
@@ -76,7 +76,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="i" begin="0" end="${sightings.size()-1}">
+                                                <c:forEach var="i" begin="1" end="5">
                                                     <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
                                                         <td>
                                                             <c:out value="${characters[i].name}"></c:out>
@@ -84,13 +84,13 @@
 
                                                         <td>
                                                             <c:choose>
-                                                                    <c:when test="${characters[i].isSuperHero == true}">
-                                                                        <c:out value="Hero"></c:out>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <c:out value="Villain"></c:out>
-                                                                    </c:otherwise>
-                                                                </c:choose>
+                                                                <c:when test="${characters[i].isSuperHero == true}">
+                                                                    <c:out value="Hero"></c:out>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:out value="Villain"></c:out>
+                                                                </c:otherwise>
+                                                            </c:choose>
                                                         </td>
 
                                                         <td>
@@ -111,10 +111,10 @@
 
                                                     </tr>
                                                 </c:forEach>
-                                     
+
                                             </tbody>
-                                    
-                                          
+
+
                                         </table>
 
                                     </div>
@@ -192,9 +192,9 @@
                                         </div>
                                     </div>
 
-                                    
-                                    
-                                    
+
+
+
                                     <!--end-->
 
 
@@ -238,23 +238,23 @@
                                                     <h4 class="modal-title" id="myModalLabel">All Locations</h4>
                                                 </div>
                                                 <div class="modal-body" id="dateChoice"></div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                    <button type="button" class="btn btn-primary">Submit</button>
-                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--end-->
-
-
-
-                                    <a href="#/filterReset"> Reset Filter </a>
-
                                 </div>
+                                <!--end-->
+
+
+
+                                <a href="#/filterReset"> Reset Filter </a>
+
                             </div>
                         </div>
+                    </div>
                     </div>
 
 

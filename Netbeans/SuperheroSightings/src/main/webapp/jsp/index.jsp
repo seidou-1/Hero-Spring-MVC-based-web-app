@@ -27,7 +27,7 @@
                                         <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
+                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
@@ -50,7 +50,7 @@
                                     of all the super-heroes and super-villains in the metropolitan city. This application
                                     is designed to serve as the go to destination for all things super!
                                 </p>
-                                
+
                                 <img src="${pageContext.request.contextPath}/img/vs.jpg" alt="Heroes Vs Villains" id="vs">
                             </div>
 
@@ -67,7 +67,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="i" begin="0" end="9">
-                                        <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
+                                            <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
                                                 <td>
                                                     <c:out value="${characters[i].name}"></c:out>
                                                 </td>
@@ -79,7 +79,7 @@
                                                 <td>
                                                     <c:out value="${locations[i].locationName}"></c:out>
                                                 </td>
-                                         
+
                                             </tr>
                                         </c:forEach>
                                         <tr>

@@ -32,6 +32,7 @@ public class SHController {
     @RequestMapping(value = {"/", "index", ""}, method = RequestMethod.GET)
     public String loadWindow(HttpServletRequest request, Model model) {
         List<Sighting> sightings = dao.getAllSightings();
+        System.out.println(sightings);
         List<Characters> characters = dao.getAssociatedCharacters(sightings);
         List<Location> locations = dao.getAssociatedLocations(sightings);
         model.addAttribute("sightings", sightings);
@@ -72,6 +73,13 @@ public class SHController {
         List<Characters> allHeroes = dao.getAllHeroes();
         dao.setCharactersOrgList(allHeroes);
         model.addAttribute("heroes", allHeroes);
+         
+        String display = (request.getParameter("viewType"));
+        model.addAttribute("display", display);
+        
+        
+        
+        
         return "heroes"; 
     }
     @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
@@ -79,6 +87,13 @@ public class SHController {
         List<Characters> allVillains = dao.getAllVillains();
         dao.setCharactersOrgList(allVillains);
         model.addAttribute("villains", allVillains);
+        
+        String display = (request.getParameter("viewType"));
+        model.addAttribute("display", display);
+        
+        
+        
+        
         return "villains";
     }
     @RequestMapping(value = {"/viewOrganizations"}, method = RequestMethod.GET)

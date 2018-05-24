@@ -28,7 +28,7 @@
                                             <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
                                         </li>
                                         <li role="presentation" class="active">
-                                            <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
+                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                         </li>
                                         <li role="presentation">
                                             <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
@@ -64,8 +64,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="i" begin="1" end="${heroes.size() - 1}">
-                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
+                                                <c:forEach var="i" begin="1" end="${heroes.size()}">
+                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewHeroes?viewType=view&characterId=${heroes[i].characterId}">
                                                         <td>
                                                             <c:out value="${heroes[i].name}"></c:out>
                                                         </td>
@@ -78,7 +78,7 @@
                                                             <c:out value="${heroes[i].name}"></c:out>
                                                         </td>
                                                         <td>
-                                                            <a href="${pageContext.request.contextPath}/viewHeroes?id=${i}">edit |</a>
+                                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit |</a>
                                                             <a href="${pageContext.request.contextPath}/deleteHero?id=${i}">delete</a>
                                                         </td>
 
@@ -96,25 +96,79 @@
                                     <div id="heroForm">
 
                                         <div class="col-md-5" id="characterImg">
-                                            <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="">
-                                            <br><br>
-                                            <form>
-                                                <!-- Credit to https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/  -->
-                                                <input type="file" name="file" id="imagesToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple />
-                                                <label for="imagesToUpload">
-                                                <div class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></div>    
-                                                <span>Choose a file</span>
-                                                </label>
-                                                <br><br>
-                                                <p class="btn btn-danger"  onclick="uploadImages()"> Upload </p>
-                                            </form>
 
-                                            <div>
-                                                <h3>Instructions</h3>
-                                                <p>Please enter valid data in the form.</p>
-                                                <p>If the hero's organization is not available in the dropdown,
-                                                    <a href="${pageContext.request.contextPath}/viewOrganizations"> click here </a> to add a new one.</p>
-                                            </div>
+
+                                            <c:choose>
+                                                <c:when test="${display == 'edit'}">
+                                                    <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="small" class="viewImage">
+                                                    <hr>
+                                                    <div>
+                                                        <h4>Instructions</h4>
+                                                        <ul>
+                                                            <li>Enter new data then click Update now to commit.</li>
+                                                            <li>If the hero's organization is not available in the dropdown,
+                                                                <a href="${pageContext.request.contextPath}/viewOrganizations"> click here </a> to add a new one.</li>
+                                                        </ul>
+                                                    </div>
+                                                </c:when>
+
+                                                <c:when test="${display == 'view'}">
+                                                    <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="small" class="viewImage">
+                                                    <hr>
+                                                    <div>
+                                                        <table class="table-condensed table">
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-info"> Create Sighting</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-info"> Edit Hero</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-info"> Delete Hero</a>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+
+                                                        <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="small" class="creatingImage">
+                                                        <br>
+                                                        <br>
+    
+                                                        <form>
+                                                            <input type="file" name="file" id="imagesToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
+                                                            <label for="imagesToUpload">
+                                                                <div class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></div>
+                                                                <span>Choose a file</span>
+                                                            </label>
+                                                            <br>
+                                                            <br>
+                                                            <p class="btn btn-danger" onclick="uploadImages()"> Upload </p>
+                                                        </form>
+                                                        <div>
+                                                            <h4>Instructions</h4>
+                                                            <ul>
+                                                                <li>Add image (Optional)</li>
+                                                                <li>Fill in the form with valid data then click submit hero.</li>
+                                                                <li>If the hero's organization is not available in the dropdown,
+                                                                    <a href="${pageContext.request.contextPath}/viewOrganizations"> click here </a> to add a new one.</li>
+                                                            </ul>
+                                                        </div>
+                                                    </c:otherwise>
+
+
+
+                                            </c:choose>
+
+
+
+
 
                                         </div>
 
