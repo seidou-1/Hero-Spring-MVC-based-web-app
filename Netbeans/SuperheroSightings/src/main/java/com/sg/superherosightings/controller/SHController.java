@@ -90,10 +90,14 @@ public class SHController {
     }
     @RequestMapping(value = {"/viewLocations"}, method = RequestMethod.GET)
     public String loadLocations(HttpServletRequest request, Model model) {
+        List<Location> allLocations = dao.getAllLocations();
+        
+        model.addAttribute("locations", allLocations);
         return "locations";
     }
     @RequestMapping(value = {"/newSighting"}, method = RequestMethod.GET)
     public String createSighting(HttpServletRequest request, Model model) {
+        
         return "creation";
     }
     
