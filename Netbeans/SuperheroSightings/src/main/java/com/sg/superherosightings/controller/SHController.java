@@ -73,6 +73,13 @@ public class SHController {
         List<Characters> allHeroes = dao.getAllHeroes();
         dao.setCharactersOrgList(allHeroes);
         model.addAttribute("heroes", allHeroes);
+         
+        String display = (request.getParameter("viewType"));
+        model.addAttribute("display", display);
+        
+        
+        
+        
         return "heroes"; 
     }
     @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
@@ -80,6 +87,13 @@ public class SHController {
         List<Characters> allVillains = dao.getAllVillains();
         dao.setCharactersOrgList(allVillains);
         model.addAttribute("villains", allVillains);
+        
+        String display = (request.getParameter("viewType"));
+        model.addAttribute("display", display);
+        
+        
+        
+        
         return "villains";
     }
     @RequestMapping(value = {"/viewOrganizations"}, method = RequestMethod.GET)

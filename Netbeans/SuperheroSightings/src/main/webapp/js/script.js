@@ -1,18 +1,22 @@
-(document).ready(function () {
-    $.ajax({
-        type: 'GET',
-        url: 'https://api.imgur.com/3/image/w0S7um9',
-        success: function (data) {
-            data.forEach(e => {
-                locationChoice.append(` <label>
-                <input type="checkbox" value="${e.locationID}"> ${e.locationName}
-                </label><br>`);
-            })
-        },
-        error: function () {
-            console.log("Problems found")
-        }
-    });
+console.log(true)
+$(document).ready(function () {
+  
+
+
+    // $.ajax({
+    //     type: 'GET',
+    //     url: 'https://api.imgur.com/3/image/w0S7um9',
+    //     success: function (data) {
+    //         data.forEach(e => {
+    //             locationChoice.append(` <label>
+    //             <input type="checkbox" value="${e.locationID}"> ${e.locationName}
+    //             </label><br>`);
+    //         })
+    //     },
+    //     error: function () {
+    //         console.log("Problems found")
+    //     }
+    // });
     loadEndpointsForSightings();
     loadPills();
     var organizationSave = $("#saveOrganizations");
@@ -20,6 +24,7 @@
         loadPills();
     });
     $(".clickable-row").click(function () {
+        
         window.location = $(this).data("href");
     });
 });
