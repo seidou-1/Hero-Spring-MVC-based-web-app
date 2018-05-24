@@ -119,6 +119,18 @@ public class SHController {
         model.addAttribute("organizations", allOrganizations);
         return "organizations";
     }
+    
+    @RequestMapping(value = {"/newOrganization"}, method = RequestMethod.POST)
+    public String createOrganization(HttpServletRequest request, Model model) {
+        Organization myOrganization = new Organization();
+        
+        myOrganization.setOrganizationName(request.getParameter("organizationNameJSP"));
+        myOrganization.setDescription(request.getParameter("organizationDescription"));
+        myOrganization.setLocationId(Integer.parseInt(request.getParameter("locationId")));
+
+        return "redirect:viewOrganizations";
+    }
+    
     @RequestMapping(value = {"/viewLocations"}, method = RequestMethod.GET)
     public String loadLocations(HttpServletRequest request, Model model) {
         List<Location> allLocations = dao.getAllLocations();
@@ -126,10 +138,54 @@ public class SHController {
         model.addAttribute("locations", allLocations);
         return "locations";
     }
+    
+    @RequestMapping(value = {"/newLocation"}, method = RequestMethod.POST)
+    public String createLocation(HttpServletRequest request, Model model) {
+        Location myLocation = new Location();
+        myLocation.setLocationName(request.getParameter("locationNameJSP"));
+        myLocation.setDescription(request.getParameter("descriptionNameJSP"));
+        myLocation.setLatitude(Double.parseDouble(request.getParameter("latitudeJSP")));
+        myLocation.setLongitude(Double.parseDouble(request.getParameter("longitudeJSP")));
+        myLocation.setStreetNumber(request.getParameter("streetNumberJSP"));
+        myLocation.setStreetName(request.getParameter("streetNameJSP"));
+        myLocation.setCity(request.getParameter("cityJSP"));
+        myLocation.setState(request.getParameter("stateJSP"));
+        myLocation.setZip(request.getParameter("zipJSP"));
+        
+        model.addAttribute("location", request.getParameterValues("locations"));
+        dao.addLocation(myLocation);
+ 
+        return "redirect:viewLocations";
+        
+        
+    }
+    
     @RequestMapping(value = {"/newSighting"}, method = RequestMethod.GET)
     public String createSighting(HttpServletRequest request, Model model) {
         
         return "creation";
     }
+    
+    
+ 
+    
+    
+//    
+//    
+//    
+//    @RequestMapping(value = "/createHero", method = RequestMethod.POST)
+//    public String createHero(HttpServletRequest request, Model model) {
+//        Characters hero = new Characters();
+//        hero.setName(request.getParameter("heroName"));
+//        hero.setDescription(request.getParameter("description"));
+//        hero.setIsSuperHero(true);
+//        for (String e : request.getParameterValues("organizations")) {
+//            hero.addOrganization(e);
+//        }
+//        System.out.println(hero);
+//        model.addAttribute("organization", request.getParameterValues("organizations"));
+//        dao.addCharacter(hero);
+//        return "redirect:viewHeroes";
+//    }
     
 }

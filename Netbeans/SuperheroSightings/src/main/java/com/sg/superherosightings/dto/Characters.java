@@ -19,11 +19,11 @@ public class Characters {
     int characterId;
 
     @NotEmpty(message = "Damn Daniel you forgot the Name?")
-    @Length(max = 45, message = "First Name must be no more than 50 characters in length.")
+    @Length(max = 100, message = "First Name must be no more than 50 characters in length.")
     String name;
 
     @NotEmpty(message = "You must supply a value for Description.")
-    @Length(max = 45, message = "First Name must be no more than 50 characters in length.")
+    @Length(max = 100, message = "First Name must be no more than 50 characters in length.")
     String description;
 
 
@@ -33,6 +33,16 @@ public class Characters {
     List<Organization> orgList;
     
     List<Integer> organizationIDs = new ArrayList<>();
+    
+    List<String> superPowerList = new ArrayList<>();
+
+    public List<String> getSuperPowerList() {
+        return superPowerList;
+    }
+
+    public void setSuperPowerList(List<String> superPowerList) {
+        this.superPowerList = superPowerList;
+    }
 
 
     

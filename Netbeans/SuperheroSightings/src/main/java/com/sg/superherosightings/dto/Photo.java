@@ -6,7 +6,6 @@
 
 package com.sg.superherosightings.dto;
 
-import com.mysql.jdbc.Blob;
 import java.util.Objects;
 
 /**
