@@ -5,7 +5,6 @@
  */
 package com.sg.superherosightings.dto;
 
-import java.util.List;
 import java.util.Objects;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -20,14 +19,14 @@ public class Organization {
     int organizationId;
 
     @NotBlank(message = "Damn Daniel you forgot the Name?")
-    @Length(max = 45, message = "No less than 1 and no more than 50 characters in length.")
+    @Length(max = 100, message = "No less than 1 and no more than 50 characters in length.")
     String organizationName;
 
     int locationId;
     
     
     @NotEmpty(message = "Damn Daniel you forgot the Description?")
-    @Length(min = 1, max = 45, message = "No less than 1 and no more than 50 characters in length.")
+    @Length(min = 1, max = 100, message = "No less than 1 and no more than 50 characters in length.")
     String description;
 
 

@@ -5,8 +5,6 @@
  */
 package com.sg.superherosightings.dto;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 import org.hibernate.validator.constraints.NotEmpty;
