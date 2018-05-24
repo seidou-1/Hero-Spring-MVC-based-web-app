@@ -59,7 +59,7 @@
                             <tbody>
 
                                 <c:forEach var="i" begin="1" end="${locations.size() -1 }">
-                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewOrganization?viewType=view&organizationID=${oranizations[i].organizationId}">
+                                    <tr class='clickable-row' data`-href="${pageContext.request.contextPath}/viewOrganization?viewType=view&organizationID=${oranizations[i].organizationId}">
                                         <td>
                                             <c:out value="${locations[i].locationName}"></c:out>
                                             </td>
@@ -104,18 +104,18 @@
                         <div class="col-md-6">
 
                             <label for="name">Name: </label> 
-                            <input class="formInput" type="text" id="name" placeholder="Example (Garden of Eden)" />
+                            <input class="formInput" type="text" id="name" name ="locationNameJSP" placeholder="Example (Garden of Eden)" />
 
                             <label for="description">Description: </label> 
-                            <input class="formInput" type="text" id="description" placeholder="Example (East New York)" />
+                            <input class="formInput" type="text" id="description" name = "descriptionNameJSP" placeholder="Example (East New York)" />
 
                             <label for="latititude">Latitude: </label>
                             <br>
-                            <input class="formInput" type="text" id="latitude" placeholder="Example (40.34564)" />
+                            <input class="formInput" type="number" id="latitude" name = "latitudeJSP" placeholder="Example (40.34564)" />
 
                             <label for="longitude">Longitude: </label>
                             <br>
-                            <input class="formInput" type="text" id="longitude" placeholder="Example (-74.34564)" />
+                            <input class="formInput" type="Double" id="longitude" name = "longitudeJSP" placeholder="Example (-74.34564)" />
 
                         </div>
 

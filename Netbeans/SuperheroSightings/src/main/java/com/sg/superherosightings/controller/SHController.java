@@ -101,4 +101,34 @@ public class SHController {
         return "creation";
     }
     
+    @RequestMapping(value = {"/newLocation"}, method = RequestMethod.GET)
+    public String createLocation(HttpServletRequest request, Model model) {
+        Location myLocation = new Location();
+        myLocation.setCity(request.getParameter("locationNameJSP"));
+        myLocation.setDescription(request.getParameter("descriptionNameJSP"));
+        myLocation.setLatitude(Double.parseDouble(request.getParameter("latitudeJSP")));
+        myLocation.setLongitude(Double.parseDouble(request.getParameter("longitudeJSP")));
+        return "creation";
+    }
+ 
+    
+    
+//    
+//    
+//    
+//    @RequestMapping(value = "/createHero", method = RequestMethod.POST)
+//    public String createHero(HttpServletRequest request, Model model) {
+//        Characters hero = new Characters();
+//        hero.setName(request.getParameter("heroName"));
+//        hero.setDescription(request.getParameter("description"));
+//        hero.setIsSuperHero(true);
+//        for (String e : request.getParameterValues("organizations")) {
+//            hero.addOrganization(e);
+//        }
+//        System.out.println(hero);
+//        model.addAttribute("organization", request.getParameterValues("organizations"));
+//        dao.addCharacter(hero);
+//        return "redirect:viewHeroes";
+//    }
+    
 }
