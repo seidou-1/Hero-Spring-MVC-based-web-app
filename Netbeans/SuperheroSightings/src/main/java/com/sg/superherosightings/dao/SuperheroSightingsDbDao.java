@@ -130,6 +130,10 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             = "select org.OrganizationId , org.OrganizationName , org.LocationID , org.Description from Organization org"
             + " Join Character_Organization corg on org.OrganizationId  = corg.OrganizationId where CharacterId = ?";
 
+    private static final String SQL_SELECT_SUPERPOWERS_BY_CHARACTERID
+           = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
+           + " Join Character_SuperPower cs on sp.SuperpowerID  = cS.SuperpowerId where CharacterId = ?";
+    
     /**
      * ********************SIGHTING**************************
      */
@@ -420,7 +424,26 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             charact.setOrganizationList(getOrganizationsByCharacter(charact));
             
         } 
+        
+    
+        
     }
+    
+    @Override
+   public List<String> getSuperPowersByCharacter(Characters tempChar){
+       List<String> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
+                new SuperPowerMapper(),tempChar.getCharacterId());
+       return helperSuperPowerList;
+   }
+
+   @Override
+   public void setCharactersSPList(List<Characters> temp) {
+       
+       for(Characters charact : temp){
+           charact.setSuperPowerList(getSuperPowersByCharacter(charact));
+           
+       }
+   }
 
 
     // Photo methods
@@ -538,5 +561,15 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
         }
     }
+    
+    private static final class SuperPowerMapper implements RowMapper<String> {
+
+       public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+           String superPower;
+           superPower = rs.getString("SuperPowerType");
+           
+           return superPower;
+       }
+   }
 
 }

@@ -17,14 +17,14 @@ import java.util.List;
  * @sighting josesosa
  */
 public interface SuperheroSightingsDao {
-    
-/*
+
+    /*
     Mo - changed the return type of the create methods from void to the object 
     i.e. addCharacters was void and changed it to "public Characters addCharacter"
     
     Same for Location, Sighting, and Organization
     
-    */
+     */
     public Sighting addSighting(Sighting sighting);
 
     public void deleteSighting(int sightingId);
@@ -58,7 +58,7 @@ public interface SuperheroSightingsDao {
     public Organization getOrganizationById(int organizationId);
 
     public List<Organization> getAllOrganizations();
-    
+
     public Location addLocation(Location location);
 
     public void deleteLocation(int locationId);
@@ -74,16 +74,19 @@ public interface SuperheroSightingsDao {
     public List<Location> getAssociatedLocations(List<Sighting> sightings);
 
     public List<Characters> getAllHeroes();
-    
-    public List<Characters> getAllVillains();
-    
-    public Photo addImage (Photo image);
-    
-    public Photo getImageByID (int imageID);
-    
-    public List<Organization> getOrganizationsByCharacter(Characters tempChar);
-    
-    public void setCharactersOrgList(List<Characters> temp);
-}
-    
 
+    public List<Characters> getAllVillains();
+
+    public Photo addImage(Photo image);
+
+    public Photo getImageByID(int imageID);
+
+    public List<Organization> getOrganizationsByCharacter(Characters tempChar);
+
+    public void setCharactersOrgList(List<Characters> temp);
+
+    public List<String> getSuperPowersByCharacter(Characters tempChar);
+
+    public void setCharactersSPList(List<Characters> temp);
+
+    }

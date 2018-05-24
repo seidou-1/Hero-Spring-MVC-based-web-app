@@ -33,6 +33,16 @@ public class Characters {
     List<Organization> orgList;
     
     List<Integer> organizationIDs = new ArrayList<>();
+    
+    List<String> superPowerList = new ArrayList<>();
+
+    public List<String> getSuperPowerList() {
+        return superPowerList;
+    }
+
+    public void setSuperPowerList(List<String> superPowerList) {
+        this.superPowerList = superPowerList;
+    }
 
 
     
