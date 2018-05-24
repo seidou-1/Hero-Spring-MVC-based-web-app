@@ -157,7 +157,8 @@ input[type=text]:focus {
     border-color: darkcyan;
     outline-width: 0;
 }
-#organizationsDisplay {
+
+#organizationsDisplay, #superPowerDisplay {
     background: rgb(223, 220, 220);
     border: 1px solid rgb(108, 108, 119);
     padding: 5px; 
@@ -303,4 +304,35 @@ input[type=text]:focus {
 
 .creatingImage {
     height: 100px  !important;
+}
+
+
+ul.displayDetails {
+    margin-top: 30px;
+}
+
+
+.viewButtons {
+    width: 150px;
+}
+
+
+ul.displayDetails li {
+    display: block;
+    list-style-type: none;
+    margin: 10px;
+}
+
+
+ul li .heading{
+    font-weight: bold;
+    width: 100px;
+    font-size: 20px;
+    border-bottom: 2px solid brown;
+}
+
+ul li .information{
+    font-weight: bold;
+    width: 100px;
+    font-size: 16px;
 }
