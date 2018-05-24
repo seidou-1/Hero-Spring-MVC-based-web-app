@@ -6,7 +6,7 @@
 <html>
 
     <head>
-        <title>Villains</title>
+        <title>Locations</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
@@ -59,7 +59,7 @@
                             <tbody>
 
                                 <c:forEach var="i" begin="1" end="${locations.size() -1 }">
-                                    <tr class='clickable-row' data`-href="${pageContext.request.contextPath}/viewOrganization?viewType=view&organizationID=${oranizations[i].organizationId}">
+                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewOrganization?viewType=view&organizationID=${oranizations[i].organizationId}">
                                         <td>
                                             <c:out value="${locations[i].locationName}"></c:out>
                                             </td>
@@ -100,47 +100,71 @@
 
 
                     <div class="col-md-12">
+                        <form action="newLocation" class="displayForm" method="POST">
 
-                        <div class="col-md-6">
+                            <div class="col-md-6">
 
-                            <label for="name">Name: </label> 
-                            <input class="formInput" type="text" id="name" name ="locationNameJSP" placeholder="Example (Garden of Eden)" />
+                                <label for="name">Name: </label> 
+                                <input class="formInput" type="text" id="name" name ="locationNameJSP" placeholder="Example (Garden of Eden)" />
 
-                            <label for="description">Description: </label> 
-                            <input class="formInput" type="text" id="description" name = "descriptionNameJSP" placeholder="Example (East New York)" />
+                                <label for="description">Description: </label> 
+                                <input class="formInput" type="text" id="description" name = "descriptionNameJSP" placeholder="Example (East New York)" />
 
-                            <label for="latititude">Latitude: </label>
-                            <br>
-                            <input class="formInput" type="number" id="latitude" name = "latitudeJSP" placeholder="Example (40.34564)" />
+                                <label for="latititude">Latitude: </label>
+                                <br>
+                                <input class="formInput" type="double" id="latitude" name = "latitudeJSP" placeholder="Example (40.34564)" />
 
-                            <label for="longitude">Longitude: </label>
-                            <br>
-                            <input class="formInput" type="Double" id="longitude" name = "longitudeJSP" placeholder="Example (-74.34564)" />
+                                <label for="longitude">Longitude: </label>
+                                <br>
+                                <input class="formInput" type="double" id="longitude" name = "longitudeJSP" placeholder="Example (-74.34564)" />
 
-                        </div>
+                                <label for="zip">Zip </label>
+                                <br>
+                                <input class="formInput" type="text" id="zip" name = "zipJSP" placeholder="Example (11101)" />
 
-                        <div class="col-md-6">
+                            </div>
 
-                            <label for="streetNumber">Street Number </label> 
-                            <input class="formInput" type="text" id="streetNumber" placeholder="Example (193)" />
+                            <div class="col-md-6">
 
-                            <label for="streetName">Street Name </label>
-                            <br>
-                            <input class="formInput" type="text" id="streetName" placeholder="Example (East 14th Street)" />
+                                <label for="streetNumber">Street Number: </label>
+                                <br>
+                                <input class="formInput" type="number" id="streetNumber" name = "streetNumberJSP" placeholder="Example (2719)" />
 
-                            <label for="city">City </label>
-                            <br>
-                            <input class="formInput" type="text" id="city" placeholder="Example (Brooklyn)" />
+                                <label for="streetName">Street Name </label>
+                                <br>
+                                <input class="formInput" type="text" id="streetName" name = "streetNameJSP" placeholder="Example (Columbus Circle)" />
 
-                            <label for="state">State </label>
-                            <br>
-                            <input class="formInput" type="text" id="state" placeholder="Example (New York)" />
+                                <label for="city">City </label>
+                                <br>
+                                <input class="formInput" type="text" id="city" name = "cityJSP" placeholder="Example (New York)" />
 
-                        </div>
+                                <label for="state">State </label>
+                                <br>
+                                <input class="formInput" type="text" id="state" name = "stateJSP" placeholder="Example (NY)" />
 
 
-                        <button class="btn btn-primary"> Submit Location </button>
 
+
+                                <!--                            <label for="streetNumber">Street Number </label> 
+                                                            <input class="formInput" type="text" id="streetNumber" placeholder="Example (193)" />
+                                
+                                                            <label for="streetName">Street Name </label>
+                                                            <br>
+                                                            <input class="formInput" type="text" id="streetName" placeholder="Example (East 14th Street)" />
+                                
+                                                            <label for="city">City </label>
+                                                            <br>
+                                                            <input class="formInput" type="text" id="city" placeholder="Example (Brooklyn)" />
+                                
+                                                            <label for="state">State </label>
+                                                            <br>
+                                                            <input class="formInput" type="text" id="state" placeholder="Example (New York)" />-->
+
+                            </div>
+
+
+                            <button class="btn btn-primary"> Submit Location </button>
+                        </form>
                     </div>
 
 
