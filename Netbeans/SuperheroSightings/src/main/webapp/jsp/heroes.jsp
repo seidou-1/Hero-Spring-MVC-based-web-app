@@ -79,8 +79,26 @@
                                                         </td>
                                                         <td>
                                                             <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit |</a>
-                                                            <a href="${pageContext.request.contextPath}/deleteHero?id=${i}">delete</a>
+                                                            <a href="${pageContext.request.contextPath}/deleteHero?viewType=create&characterId=${heroes[i].characterId}">delete</a>
+                                                            <!-- <a href="#" data-toggle="modal" data-target=".deleteMe"> delete </a>
+                                                            <div class="modal fade deleteMe" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-md">
+                        
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                                <h4 class="modal-title" id="myModalLabel3">Is you sure you wanna delete that bro?</h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                                                                                <a href="${pageContext.request.contextPath}/deleteHero?viewType=create&characterId=${heroes[i].characterId}" class="btn btn-danger" data-dismiss="modal" id="save">Delete</a>
+                                                                            </div>
+                        
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
                                                         </td>
+                                                     
 
                                                     </tr>
                                                 </c:forEach>
@@ -89,7 +107,12 @@
                                         </table>
                                     </div>
 
-                                </div>
+                                    </div>
+
+                                
+            
+
+
 
 
                                 <div class="col-md-7">
@@ -119,48 +142,56 @@
                                                         <table class="table-condensed table">
                                                             <tr>
                                                                 <td>
-                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-info"> Create Sighting</a>
+                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-danger viewButtons"> Create Sighting</a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-info"> Edit Hero</a>
+                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-danger viewButtons"> Edit Hero</a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-info"> Delete Hero</a>
+                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-danger viewButtons"> Delete Hero</a>
                                                                 </td>
                                                             </tr>
                                                         </table>
                                                     </div>
+
+
+                                                    
+
+
+                                 
+
+
                                                 </c:when>
                                                 <c:otherwise>
 
-                                                        <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="small" class="creatingImage">
+                                                    <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="small" class="creatingImage">
+                                                    <br>
+                                                    <br>
+
+                                                    <form>
+                                                        <input type="file" name="file" id="imagesToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
+                                                        <label for="imagesToUpload">
+                                                            <div class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></div>
+                                                            <span>Choose a file</span>
+                                                        </label>
                                                         <br>
                                                         <br>
-    
-                                                        <form>
-                                                            <input type="file" name="file" id="imagesToUpload" class="inputfile" data-multiple-caption="{count} files selected" multiple/>
-                                                            <label for="imagesToUpload">
-                                                                <div class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></div>
-                                                                <span>Choose a file</span>
-                                                            </label>
-                                                            <br>
-                                                            <br>
-                                                            <p class="btn btn-danger" onclick="uploadImages()"> Upload </p>
-                                                        </form>
-                                                        <div>
-                                                            <h4>Instructions</h4>
-                                                            <ul>
-                                                                <li>Add image (Optional)</li>
-                                                                <li>Fill in the form with valid data then click submit hero.</li>
-                                                                <li>If the hero's organization is not available in the dropdown,
-                                                                    <a href="${pageContext.request.contextPath}/viewOrganizations"> click here </a> to add a new one.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </c:otherwise>
+                                                        <p class="btn btn-danger" onclick="uploadImages()"> Upload </p>
+                                                    </form>
+                                                    <div>
+                                                        <h4>Instructions</h4>
+                                                        <ul>
+                                                            <li>Add image (Optional)</li>
+                                                            <li>Fill in the form with valid data then click submit hero.</li>
+                                                            <li>If the hero's organization is not available in the dropdown,
+                                                                <a href="${pageContext.request.contextPath}/viewOrganizations"> click here </a> to add a new one.</li>
+                                                        </ul>
+                                                    </div>
+                                                </c:otherwise>
 
 
 
@@ -175,68 +206,137 @@
 
 
                                         <div class="col-md-6" id="createHeroForm">
-                                            <h4 class="formHead">Create a new hero</h4>
-                                            <form action="createHero" class="displayForm" method="POST">
+                                            <c:choose>
+                                                <c:when test="${display == 'view'}">
+                                                    <h4 class="formHead">View a hero</h4>
+                                                </c:when>
+                                                <c:when test="${display == 'edit'}">
+                                                    <h4 class="formHead">Edit a hero</h4>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h4 class="formHead">Create a hero</h4>
+                                                </c:otherwise>
+                                            </c:choose>
 
-                                                <label for="heroName">Name: </label>
-                                                <br>
-                                                <input class="formInput" type="text" id="name" name="heroName" placeholder="Enter hero name" />
 
-                                                <label for="superp">Super Power: </label>
-                                                <br>
-                                                <input class="formInput" type="text" id="superp" name="superPower" placeholder="Enter hero super power" />
+                                            <c:choose>
+                                                <c:when test="${display == 'view'}">
+                                                    <ul class="displayDetails">
+                                                        <li>
+                                                            <span class="heading">Hero Name</span>
+                                                            <br>
+                                                            <span class="information">
+                                                                <c:out value="${hero.name}"></c:out>
+                                                            </span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="heading">Description</span>
+                                                            <br>
+                                                            <span class="information">
+                                                                <c:out value="${hero.description}"></c:out>
+                                                            </span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="heading">Super Powers</span>
+                                                            <br>
+                                                            <span class="information">
+                                                                <c:out value="Regeneration"></c:out>
+                                                            </span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="heading">Organizations</span>
+                                                            <br>
+                                                            <span class="information">
+                                                                <c:out value="Akatsuki"></c:out>
+                                                            </span>
+                                                        </li>
 
-                                                <label for="description">Description: </label>
-                                                <br>
-                                                <input class="formInput" type="text" id="description" name="description" placeholder="Enter description" />
+                                                    </ul>
 
-                                                <label for="description">Organizations: </label>
-                                                <div id="organizationsDisplay">
 
-                                                    <div class="row">
-                                                        <div class="col-md-12" id="myOrganizations">
-                                                            <div class="col-md-5 pill">
-                                                                <div class="closePill" onclick="removePill(this)" data-type="UA School">
-                                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </c:when>
+
+                                                <c:otherwise>
+                                                    <form action="createHero" class="displayForm" method="POST">
+
+                                                        <label for="heroName">Name: </label>
+                                                        <br>
+                                                        <input class="formInput" type="text" value="${hero.name}" id="name" name="heroName" placeholder="Enter hero name" />
+
+                                                        <label for="description">Description: </label>
+                                                        <br>
+                                                        <input class="formInput" type="text" value="${hero.description}" id="description" name="description" placeholder="Enter description"
+                                                        />
+
+                                                        <label for="description">Organizations: </label>
+                                                        <div id="organizationsDisplay">
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="myOrganizations">
                                                                 </div>
-                                                                <div class="pillData">
-                                                                    UA School
+                                                                <div class="col-md-12 text-center">
+                                                                    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add an Organization</a>
                                                                 </div>
                                                             </div>
-
                                                         </div>
 
+                                                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-md">
 
-
-                                                        <div class="col-md-12 text-center">
-                                                            <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add an Organization</a>
-                                                        </div>
-                                                    </div>
-
-
-
-                                                </div>
-
-                                                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-md">
-
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title" id="myModalLabel">All Organization</h4>
-                                                            </div>
-                                                            <div class="modal-body" id="organizationChoice"></div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveOrganizations">Save</button>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                        <h4 class="modal-title" id="myModalLabel">All Organization</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" id="organizationChoice"></div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveOrganizations">Save</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
 
-                                                <button class="btn btn-primary" id="newHero"> Submit Hero </button>
-                                            </form>
+                                                        <label for="description">Super Powers: </label>
+                                                        <div id="superPowerDisplay">
+                                                            <div class="row">
+                                                                <div class="col-md-12" id="mySuperPowers">
+                                                                </div>
+                                                                <div class="col-md-12 text-center">
+                                                                    <a href="#" data-toggle="modal" data-target=".superPowerModal">
+                                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Super Power</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade superPowerModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-md">
+
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                        <h4 class="modal-title" id="myModalLabel2">All Super Powers</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" id="superPowerChoice"></div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <button class="btn btn-primary" id="newHero"> Submit Hero </button>
+                                                    </form>
+                                                </c:otherwise>
+                                            </c:choose>
+
+
+
+
+
+
+
                                         </div>
 
 

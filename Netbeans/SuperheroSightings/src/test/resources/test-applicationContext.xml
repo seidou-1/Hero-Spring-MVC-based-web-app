@@ -24,7 +24,7 @@
       <property name="url" 
                 value="jdbc:mysql://localhost:3306/SuperheroSightingsTest" /> <!-- Using the test database  -->
       <property name="Username" value="root" />
-      <property name="Password" value="Eulelife0320" /> <!-- Note the value here is the users MySql password  -->
+      <property name="Password" value="root" /> <!-- Note the value here is the users MySql password  -->
       <property name="initialSize" value="5" />
       <property name="maxTotal" value="10" />
     </bean>
