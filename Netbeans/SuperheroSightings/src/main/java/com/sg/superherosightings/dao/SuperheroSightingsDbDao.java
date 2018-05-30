@@ -14,7 +14,9 @@ import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -126,14 +128,31 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     private static final String SQL_SELECT_IMAGE
             = "select * from `Images` where ImageID = ?";
 
+    private static final String SQL_SELECT_ORGANIZATION_BY_LOCATION_ID
+            = "select * from Organization where LocationId = ?";
+
+    private static final String SQL_SELECT_SIGHTING_BY_LOCATION_ID
+            = "select * from Sighting where LocationId = ?";
+
     private static final String SQL_SELECT_ORGANIZATIONS_BY_CHARACTERID
             = "select org.OrganizationId , org.OrganizationName , org.LocationID , org.Description from Organization org"
             + " Join Character_Organization corg on org.OrganizationId  = corg.OrganizationId where CharacterId = ?";
 
     private static final String SQL_SELECT_SUPERPOWERS_BY_CHARACTERID
-           = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
-           + " Join Character_SuperPower cs on sp.SuperpowerID  = cS.SuperpowerId where CharacterId = ?";
-    
+            = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
+            + " Join Character_SuperPower cs on sp.SuperpowerID  = cS.SuperpowerId where CharacterId = ?";
+
+    private static final String SQL_SELECT_SIGHTINGS_BY_SIGHTINGID
+            = "select sight.SightingID, sight.SightingDate,  chara.CharacterID, chara.CharacterName, loc.LocationName, loc.LocationID, loc.Latitude, loc.Longitude from `Location` loc"
+            + " inner join `Sighting` sight on loc.LocationID =  sight.LocationID"
+            + " inner join `Characters` chara on sight.CharacterID = chara.CharacterID"
+            + " where sight.sightingID = ?";
+
+    private static final String SQL_SELECT_ALL_SIGHTINGS_JOINED
+            = "select sight.SightingID, sight.SightingDate,  chara.CharacterID, chara.CharacterName, loc.LocationName, loc.LocationID, loc.Latitude, loc.Longitude from `Location` loc"
+            + " inner join `Sighting` sight on loc.LocationID =  sight.LocationID"
+            + " inner join `Characters` chara on sight.CharacterID = chara.CharacterID";
+
     /**
      * ********************SIGHTING**************************
      */
@@ -180,9 +199,57 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     }
 
     @Override
+    public Map<String, String> getSightingByIdJoined(int sightingId) {
+        try {
+            return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTINGS_BY_SIGHTINGID,
+                    new JoinedSightingMapper(), sightingId);
+        } catch (EmptyResultDataAccessException ex) {
+            // there were no results for the given contact id - we just 
+            // want to return null in this case
+            return null;
+        }
+    }
+
+    @Override
+    public List<Map<String, String>> getAllSightingsJoined() {
+        try {
+            return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS_JOINED,
+                    new JoinedSightingMapper());
+        } catch (EmptyResultDataAccessException ex) {
+            // there were no results for the given contact id - we just 
+            // want to return null in this case
+            return null;
+        }
+    }
+
+    @Override
     public List<Sighting> getAllSightings() {
         return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS,
                 new SightingMapper());
+    }
+
+    @Override
+    public List<Sighting> getSightingByLocationId(int locationId) {
+        try {
+            return jdbcTemplate.query(SQL_SELECT_SIGHTING_BY_LOCATION_ID,
+                    new SightingMapper(), locationId);
+        } catch (EmptyResultDataAccessException ex) {
+            // there were no results for the given contact id - we just
+            // want to return null in this case
+            return null;
+        }
+    }
+
+    @Override
+    public List<Organization> getOrganizationByLocationId(int locationId) {
+        try {
+            return jdbcTemplate.query(SQL_SELECT_ORGANIZATION_BY_LOCATION_ID,
+                    new OrganizationMapper(), locationId);
+        } catch (EmptyResultDataAccessException ex) {
+            // there were no results for the given contact id - we just
+            // want to return null in this case
+            return null;
+        }
     }
 
     /**
@@ -408,43 +475,40 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
         }
         return helperCharacterList;
     }
-    
+
     @Override
-    public List<Organization> getOrganizationsByCharacter(Characters tempChar){
+    public List<Organization> getOrganizationsByCharacter(Characters tempChar) {
         List<Organization> helperOrganizationList = jdbcTemplate.query(SQL_SELECT_ORGANIZATIONS_BY_CHARACTERID,
-                 new OrganizationMapper(),tempChar.getCharacterId());
+                new OrganizationMapper(), tempChar.getCharacterId());
         return helperOrganizationList;
     }
 
     @Override
     public void setCharactersOrgList(List<Characters> temp) {
         List<String> helperOrganizationStringList = new ArrayList<String>();
-        
-        for(Characters charact : temp){
+
+        for (Characters charact : temp) {
             charact.setOrganizationList(getOrganizationsByCharacter(charact));
-            
-        } 
-        
-    
-        
+
+        }
+
     }
-    
+
     @Override
-   public List<String> getSuperPowersByCharacter(Characters tempChar){
-       List<String> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
-                new SuperPowerMapper(),tempChar.getCharacterId());
-       return helperSuperPowerList;
-   }
+    public List<String> getSuperPowersByCharacter(Characters tempChar) {
+        List<String> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
+                new SuperPowerMapper(), tempChar.getCharacterId());
+        return helperSuperPowerList;
+    }
 
-   @Override
-   public void setCharactersSPList(List<Characters> temp) {
-       
-       for(Characters charact : temp){
-           charact.setSuperPowerList(getSuperPowersByCharacter(charact));
-           
-       }
-   }
+    @Override
+    public void setCharactersSPList(List<Characters> temp) {
 
+        for (Characters charact : temp) {
+            charact.setSuperPowerList(getSuperPowersByCharacter(charact));
+
+        }
+    }
 
     // Photo methods
     @Override
@@ -512,6 +576,40 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
         }
     }
 
+    private static final class JoinedSightingMapper implements RowMapper<Map<String, String>> {
+
+        public Map<String, String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Map<String, String> sightings = new HashMap<>();
+
+            sightings.put("SightingID", rs.getString("SightingID"));
+            sightings.put("SightingDate", rs.getTimestamp("SightingDate").toString());
+            sightings.put("CharacterID", rs.getString("CharacterID"));
+            sightings.put("CharacterName", rs.getString("CharacterName"));
+            sightings.put("LocationID", rs.getString("LocationID"));
+            sightings.put("LocationName", rs.getString("LocationName"));
+            sightings.put("latitude", rs.getString("Latitude"));
+            sightings.put("longitude", rs.getString("Longitude"));
+
+            return sightings;
+        }
+
+        public Map<String, Object> mapRow(ResultSet rs) throws SQLException {
+            Map<String, Object> sightings = new HashMap<>();
+
+            sightings.put("SightingID", rs.getString("SightingID"));
+            sightings.put("SightingDate", rs.getTimestamp("SightingDate").toString());
+            sightings.put("CharacterID", rs.getString("CharacterID"));
+            sightings.put("CharacterName", rs.getString("CharacterName"));
+            sightings.put("LocationID", rs.getString("LocationID"));
+            sightings.put("LocationName", rs.getString("LocationName"));
+            sightings.put("latitude", rs.getString("Latitude"));
+            sightings.put("longitude", rs.getString("Longitude"));
+
+            return sightings;
+        }
+
+    }
+
     private static final class CharactersMapper implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -561,15 +659,15 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
         }
     }
-    
+
     private static final class SuperPowerMapper implements RowMapper<String> {
 
-       public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-           String superPower;
-           superPower = rs.getString("SuperPowerType");
-           
-           return superPower;
-       }
-   }
+        public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+            String superPower;
+            superPower = rs.getString("SuperPowerType");
+
+            return superPower;
+        }
+    }
 
 }

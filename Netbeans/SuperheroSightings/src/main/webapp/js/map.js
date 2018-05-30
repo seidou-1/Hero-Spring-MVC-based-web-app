@@ -1,150 +1,175 @@
-var allSightings = [
-  {
-    lat: 40.658927,
-    lng: -73.947733,
-    sightingID: 1
-  },
-  {
-    lat: 40.785091,
-    lng: -73.968285,
-    sightingID: 2
-  },
-  {
-    lat: 40.758896,
-    lng: -73.985130,
-    sightingID: 3
-  },
-  {
-    lat: 40.618825,
-    lng: -74.117483,
-    sightingID: 4
-  },
-  {
-    lat: 40.71722,
-    lng: -74.029915,
-    sightingID: 5
-  },
-  {
-    lat: 40.628927,
-    lng: -73.942733,
-    sightingID: 6
-  },
-  {
-    lat: 40.782341,
-    lng: -73.962245,
-    sightingID: 7
-  },
-  {
-    lat: 40.752894,
-    lng: -73.982134,
-    sightingID: 8
-  },
-  {
-    lat: 40.618221,
-    lng: -74.127482,
-    sightingID: 9
-  },
-  {
-    lat: 40.7272541,
-    lng: -74.139925,
-    sightingID: 10
-  }
-];
-var allLocations = [
-  {
-    lat: 40.758896,
-    lng: -73.985130
-  },
-  {
-    lat: 40.618825,
-    lng: -74.117483
-  },
-  {
-    lat: 40.717251,
-    lng: -74.039915
-  }
-];
-var map;
-var mapToLoad = document.getElementById("locationMap");
-function getCorrectMap() {
-  if (document.getElementById("locationMap")) {
-    currentMap = "locationMap";
-    return document.getElementById("locationMap");
-  }
-  if (document.getElementById("map")) {
-    currentMap = "sightingsMap";
-    return document.getElementById("map");
-  }
-  if (document.getElementById("createSightingMap")) {
-    return document.getElementById("createSightingMap");
-  }
+$(document).ready(function () {
+
+
+
+});
+
+
+
+
+
+
+function searchUrl(keyword) {
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  return url.searchParams.get(keyword);
 }
+
+
 function initMap() {
-  map = new google.maps.Map(getCorrectMap(), {
-    center: { lat: 40.658927, lng: -73.947733 },
-    zoom: 10,
-    zoomControl: false,
-    mapTypeControl: false,
-    mapTypeControlOptions: {
-      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-      mapTypeIds: ['roadmap']
-    },
-    streetViewControl: false,
-    styles: getMapStyles()
-  });
-  map.setOptions({
-    minZoom: 5,
-    maxZoom: 15
-  });
-  var geocoder = new google.maps.Geocoder;
-  var infowindow = new google.maps.InfoWindow;
-  if (currentMap === "locationMap") {
-    allLocations.forEach(e => {
+  console.log(true)
+  var currentPage = searchUrl('page');
+  myMap = new GoogleMap(currentPage + 'Map', { lat: 40.658927, lng: -73.947732 }, { start: 10, min: 5, max: 15 });
+  myMap.initMap();
+}
+
+class GoogleMap {
+
+  constructor(mapType, center, zoom) {
+    this.mapType = document.getElementById(mapType);
+    this.center = center;
+    this.zoom = zoom;
+    this.map = null;
+    this.initMap();
+  }
+
+
+  initMap() {
+
+
+    const map = new google.maps.Map(this.mapType, {
+      center: { lat: this.center.lat, lng: this.center.lng },
+      zoom: this.zoom.start,
+      zoomControl: false,
+      mapTypeControl: false,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        mapTypeIds: ['roadmap']
+      },
+      streetViewControl: false,
+      styles: getMapStyles()
+    });
+
+    map.setOptions({
+      minZoom: this.zoom.min,
+      maxZoom: this.zoom.max
+    });
+
+    var geocoder = new google.maps.Geocoder;
+    var infowindow = new google.maps.InfoWindow;
+
+    map.addListener('click', function (e) {
+      console.log(12345);
+      // console.log(geocodeLocation(geocoder, map, infowindow, e));
+    });
+
+
+    this.map = map;
+    this.initMarkers();
+
+  }
+
+
+  initMarkers() {
+
+    var page = searchUrl("page");
+    var filter = searchUrl(page + 'ID');
+
+
+
+    if (isNaN(filter)) {
+      filter = '';
+    }
+
+
+
+    var data = performAjaxCall(page, filter);
+
+    console.log(page, filter)
+    if (!Array.isArray(data)) {
+      data = [data];
+      console.log(data);
+    }
+
+    data.forEach(e => {
+
+
       var marker = new google.maps.Marker({
-        position: e,
-        map: map,
-        title: 'View More Info',
+        position: { lat: parseFloat(e.latitude), lng: parseFloat(e.longitude) },
+        map: this.map,
+        title: e.description,
         icon: {
-          url: "http://localhost:8080/SuperheroSightings/img/location.svg",
+          url: `http://localhost:8080/SuperheroSightings/img/${page}.svg`,
           scaledSize: new google.maps.Size(15, 15)
         }
       });
-      map.addListener('click', function (e) {
-        console.log(geocodeLocation(geocoder, map, infowindow, e));
-      });
-      marker.addListener('click', function () {
-        geocodeLatLng(geocoder, map, infowindow, this);
-      });
-    });
-  }
-  if (currentMap === "sightingsMap") {
-    var sightingToShow = $("#sightingID")[0].value;
-    allSightings.forEach(e => {
-      if (e.sightingID == sightingToShow || sightingToShow == 'all') {
-        var marker = new google.maps.Marker({
-          position: e,
-          map: map,
-          title: 'View More Info',
-          icon: {
-            url: "http://localhost:8080/SuperheroSightings/img/hero.svg",
-            scaledSize: new google.maps.Size(15, 15)
-          }
-        });
-        map.addListener('click', function (e) {
-          console.log(geocodeLocation(geocoder, map, infowindow, e));
-        });
-        marker.addListener('click', function () {
-          geocodeLatLng(geocoder, map, infowindow, this);
-        });
-        if (e.sightingID == sightingToShow) {
-          var sighting = performAjaxCall("sighting", sightingToShow);
-          openInformationWindow(sighting, map, infowindow, marker);
-          geocodeLatLng(geocoder, map, infowindow, this);
-        }
+
+      if (filter !== "") {
+        openInformationWindow(e, this.map, marker);
       }
+
+      marker.addListener('click', function () {
+        openInformationWindow(e, this.map, this);
+      });
     });
   }
+
+
 }
+
+
+function openInformationWindow(content, map, marker) {
+
+
+  const infowindow = new google.maps.InfoWindow;
+  infowindow.setContent(loadInfo(content));
+  infowindow.open(map, marker);
+  var windowStyles = $(".displaySighting");
+  // windowStyles.parent().parent().parent().css({ width: '100px !important' });
+}
+
+function loadInfo(data) {
+  return `<div class="displaySighting" style="text-align: center">
+     
+      <div class="caption preDisplay">
+        <h4>Name: ${data.locationName}</h4>
+        <h4>Description: ${data.description}</h4>
+        <h4>Address: ${data.streetNumber} ${data.streetName} ${data.city} </h4>
+        <ul class="displayList">
+          <li>  <a href="#" class="btn btn-danger">Delete</a>  </li>
+          <li onclick="toggleDetails()">  <a href="#" class="btn btn-primary">Toggle Details</a>  </li>
+        </ul>
+        <hr>
+
+      </div>
+    
+      <div id="displayDetails">
+       <span style="margin-top: 0" class="text-left"> Details: </span>
+        <h4> Organizations </h4>
+        <h5> There is currently ${data.associatedOrgs.length} organization(s) at this location</h5>
+        <a href="#"> See ralated organizations </a>
+        <h4> Sightings </h4>
+        <h5> There have been ${data.associatedSightings.length} sighting(s) at this location</h5>
+        <a href="#"> See related sightings </a>
+      </div>
+    </div>`;
+}
+
+
+
+function toggleDetails() {
+  var myDisplay = $("#displayDetails");
+  myDisplay.toggle(
+    function() {
+      myDisplay.addClass('hideDetails')
+    },
+    function() {
+      myDisplay.addClass('showDetails')
+    }
+  )
+  console.log();
+}
+
 function performAjaxCall(endpoint, extraParameter) {
   var returnData;
   $.ajax({
@@ -154,7 +179,6 @@ function performAjaxCall(endpoint, extraParameter) {
     url: `http://localhost:8080/SuperheroSightings/${endpoint}/${extraParameter}`,
     success: function (data) {
       returnData = data;
-      
     },
     error: function () {
       returnData = null;
@@ -162,53 +186,7 @@ function performAjaxCall(endpoint, extraParameter) {
   });
   return returnData;
 }
-function geocodeLatLng(geocoder, map, infowindow, marker) {
-  var latlng = { lat: marker.position.lat(), lng: marker.position.lng() };
-  geocoder.geocode({ 'location': latlng }, function (results, status) {
-    if (status === 'OK') {
-      if (results[0]) {
-        openInformationWindow("Forever and another day", map, infowindow, marker);
-      } else {
-        window.alert('No results found');
-      }
-    } else {
-      window.alert('Geocoder failed due to: ' + status);
-    }
-  });
-}
-function openInformationWindow(content, map, infowindow, marker) {
-  infowindow.setContent(loadInfo(content));
-  infowindow.open(map, marker);
-  var windowStyles = $(".displaySighting");
-  windowStyles.parent().parent().parent().css({ width: '100px !important' });
-}
-function geocodeLocation(geocoder, map, infowindow, location) {
-  var latlng = { lat: location.latLng.lat(), lng: location.latLng.lng() };
-  return geocoder.geocode({ 'location': latlng }, function (results, status) {
-    if (status === 'OK') {
-      if (results[0]) {
-        fillInLocationForm(results[0]);
-      } else {
-        return 'The address entered is not valid';
-      }
-    } else {
-      return 'Geocoder failed due to: ' + status;
-    }
-  });
-}
-function loadInfo(data) {
-  console.log(data)
-  return `<div class="displaySighting" style="text-align: center">
-    <img src="http://localhost:8080/SuperheroSightings/img/hero.jpg" alt="Image">
-    <div class="caption">
-      <h4>Charater Name</h4>
-      <h4>Sighting Date</h4>
-      <h4>Location Name</h4>
-      
-      <p><a href="#" class="btn btn-primary" role="button">View Hero</a> </p>
-    </div>
-    </div>`;
-}
+
 function getMapStyles() {
   return [
     {
@@ -494,19 +472,4 @@ function getMapStyles() {
       ]
     }
   ];
-}
-/* Location Form Variables for autocompletion */
-var latitude = $("#latitude")[0];
-var longitude = $("#longitude")[0];
-var streetNumber = $("#streetNumber")[0];
-var streetName = $("#streetName")[0];
-var city = $("#city")[0];
-var state = $("#state")[0];
-function fillInLocationForm(data) {
-  streetNumber.value = data.address_components[0].long_name;
-  streetName.value = data.address_components[1].long_name;
-  city.value = data.address_components[3].long_name;
-  state.value = data.address_components[5].long_name;
-  latitude.value = data.geometry.location.lat();
-  longitude.value = data.geometry.location.lng();
 }

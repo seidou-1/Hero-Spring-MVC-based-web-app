@@ -1,4 +1,5 @@
-`<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+`
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
             <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,19 +26,19 @@
                                             <a href="${pageContext.request.contextPath}/index">Home</a>
                                         </li>
                                         <li role="presentation">
-                                            <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
+                                            <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table">Sightings</a>
                                         </li>
                                         <li role="presentation" class="active">
                                             <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                         </li>
                                         <li role="presentation">
-                                            <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
+                                            <a href="${pageContext.request.contextPath}/viewVillains?viewType=create">Villains</a>
                                         </li>
                                         <li role="presentation">
-                                            <a href="${pageContext.request.contextPath}/viewOrganizations">Organizations</a>
+                                            <a href="${pageContext.request.contextPath}/viewOrganizations?viewType=create">Organizations</a>
                                         </li>
                                         <li role="presentation">
-                                            <a href="${pageContext.request.contextPath}/viewLocations">Locations</a>
+                                            <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=create&locationsID=all">Locations</a>
                                         </li>
                                     </ul>
                                     <hr>
@@ -64,9 +65,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="i" begin="1" end="${heroes.size()}">
+                                                <c:forEach var="i" begin="1" end="${heroes.size() - 1}">
                                                     <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewHeroes?viewType=view&characterId=${heroes[i].characterId}">
-                                                        <td>
+                                                        <td> 
                                                             <c:out value="${heroes[i].name}"></c:out>
                                                         </td>
 
@@ -78,43 +79,15 @@
                                                             <c:out value="${heroes[i].name}"></c:out>
                                                         </td>
                                                         <td>
-                                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit |</a>
-                                                            <a href="${pageContext.request.contextPath}/deleteHero?viewType=create&characterId=${heroes[i].characterId}">delete</a>
-                                                            <!-- <a href="#" data-toggle="modal" data-target=".deleteMe"> delete </a>
-                                                            <div class="modal fade deleteMe" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-md">
-                        
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                                <h4 class="modal-title" id="myModalLabel3">Is you sure you wanna delete that bro?</h4>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
-                                                                                <a href="${pageContext.request.contextPath}/deleteHero?viewType=create&characterId=${heroes[i].characterId}" class="btn btn-danger" data-dismiss="modal" id="save">Delete</a>
-                                                                            </div>
-                        
-                                                                        </div>
-                                                                    </div>
-                                                                </div> -->
+                                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit</a>
                                                         </td>
-                                                     
-
                                                     </tr>
-                                                </c:forEach>
-
+                                                </c:forEach> 
                                             </tbody>
                                         </table>
                                     </div>
 
-                                    </div>
-
-                                
-            
-
-
-
-
+                                </div>
                                 <div class="col-md-7">
                                     <div id="heroForm">
 
@@ -147,23 +120,36 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-danger viewButtons"> Edit Hero</a>
+                                                                    <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${hero.characterId}" class="btn btn-danger viewButtons">Edit Hero</a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <a href="${pageContext.request.contextPath}/" class="btn btn-danger viewButtons"> Delete Hero</a>
+                                                                    <a href="" data-toggle="modal" data-target="#confirmDelete" class="btn btn-danger viewButtons"> Delete Hero</a>
+                                                 
+                                                                    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                   <h4>Are you sure you want to delete that hero?</h4>
+                                                                                </div>
+                                                                                <div class="modal-footer"> 
+                                                                                    <a href="" class="btn btn-primary"  data-dismiss="modal">Cancel</a>
+                                                                                    <a href="${pageContext.request.contextPath}/deleteHero?characterId=${hero.characterId}" class="btn btn-danger">Delete</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
                                                         </table>
                                                     </div>
-
-
-                                                    
-
-
-                                 
-
 
                                                 </c:when>
                                                 <c:otherwise>

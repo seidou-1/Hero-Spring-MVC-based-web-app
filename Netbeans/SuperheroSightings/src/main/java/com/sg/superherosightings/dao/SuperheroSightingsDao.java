@@ -11,6 +11,7 @@ import com.sg.superherosightings.dto.Organization;
 import com.sg.superherosightings.dto.Photo;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -32,6 +33,10 @@ public interface SuperheroSightingsDao {
     public void updateSighting(Sighting sighting);
 
     public Sighting getSightingById(int sightingId);
+    
+    public Map<String, String>getSightingByIdJoined(int sightingId);
+    
+    public List<Map<String, String>> getAllSightingsJoined();
 
     public List<Sighting> getAllSightings();
 
@@ -88,5 +93,9 @@ public interface SuperheroSightingsDao {
     public List<String> getSuperPowersByCharacter(Characters tempChar);
 
     public void setCharactersSPList(List<Characters> temp);
+
+    public List<Organization> getOrganizationByLocationId(int id);
+
+    public List<Sighting> getSightingByLocationId(int id);
 
     }

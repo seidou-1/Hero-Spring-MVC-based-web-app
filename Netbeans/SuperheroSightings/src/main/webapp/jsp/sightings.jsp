@@ -24,19 +24,19 @@
                                         <a href="${pageContext.request.contextPath}/index">Home</a>
                                     </li>
                                     <li role="presentation" class="active">
-                                        <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
+                                        <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
+                                        <a href="${pageContext.request.contextPath}/viewHeroes?page=heroes&viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
+                                        <a href="${pageContext.request.contextPath}/viewVillains?page=villains&viewType=create">Villains</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewOrganizations">Organizations</a>
+                                        <a href="${pageContext.request.contextPath}/viewOrganizations?page=organizations&viewType=create">Organizations</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewLocations">Locations</a>
+                                        <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=create&locationsID=all">Locations</a>
                                     </li>
                                 </ul>
                                 <hr>
@@ -48,14 +48,14 @@
                             <div class="col-md-8">
                                 <div id="toggleMap">
                                     <span>Sightings Table</span>
-                                    <a href="${pageContext.request.contextPath}/newSighting" class="btn btn-primary">+ Create New</a>
+                                    <a href="${pageContext.request.contextPath}/newSighting?page=locations&viewType=map&locationsID=all" class="btn btn-primary">+ Create New</a>
 
                                     <c:choose>
                                         <c:when test="${viewType =='map'}">
-                                            <a href="${pageContext.request.contextPath}/viewSightings?viewType=table"> Toggle Map</a>
+                                            <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table&sightingsID=all"> Toggle Map</a>
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=all"> Toggle Map</a>
+                                            <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=map&sightingsID=all"> Toggle Map</a>
                                         </c:otherwise>
                                     </c:choose>
 
@@ -76,8 +76,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="i" begin="1" end="5">
-                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
+                                                <c:forEach var="i" begin="1" end="${characters.size() - 1}">
+                                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=map&sightingsID=${i}">
                                                         <td>
                                                             <c:out value="${characters[i].name}"></c:out>
                                                         </td>
@@ -122,7 +122,7 @@
 
                                 <c:if test="${viewType == 'map'}">
                                     <input type="text" id="sightingID" value="${sightingID}" hidden>
-                                    <div id="map"> </div>
+                                    <div id="sightingsMap" class="map"> </div>
                                 </c:if>
 
                             </div>
