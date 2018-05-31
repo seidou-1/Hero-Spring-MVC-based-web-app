@@ -1,3 +1,4 @@
+
 .container {
     padding: 0;
 }
@@ -97,7 +98,7 @@
      width: 100%;
      border: 1px solid blue;
  }
- #locationMap  {
+ #locationsMap  {
    height: 300px;
  }
  #locationTable {
@@ -190,7 +191,7 @@ input[type=text]:focus {
 .mugshot {
     width: 40px;
 }
-#map {
+.map {
     width: 100%;
     height: 400px;
     background: papayawhip;
@@ -199,6 +200,11 @@ input[type=text]:focus {
     width: 100px;
     margin: 0 auto;
 }
+
+.displaySighting {
+    position: relative;
+}
+
 .scrollable thead, .scrollable tbody, .scrollable tr, .scrollable td, .scrollable th { display: block; }
 .scrollable tr:after {
     content: ' ';
@@ -211,12 +217,12 @@ input[type=text]:focus {
     text-align: center;
     background: lightseagreen;    
 }
-.scrollable tbody {
+tbody {
     height: 370px;
     overflow-y: auto;
 }
-.scrollable thead {
-}
+
+ 
 .scrollable > #sightingsTable tbody td, .scrollable > #sightingsTable  thead th {
     width: 16.66%;
     float: left;
@@ -335,4 +341,76 @@ ul li .information{
     font-weight: bold;
     width: 100px;
     font-size: 16px;
+}
+
+.displayList {
+    display: flex;
+    justify-content: space-between;
+    list-style: none; 
+    padding: 0;
+}
+
+
+
+/* .displayList > ul{
+   
+   
+} */
+
+.displayList li a{
+    width: 150px;
+    border-radius: none;
+}
+
+#displayDetails {
+   
+    overflow-y: hidden; 
+    height: 200px;
+}
+
+#displayDetails.hideDetails { 
+    animation: 1s hideDetails ease-in-out forwards;
+}
+
+#displayDetails.showDetails { 
+    animation: 2s showDetails ease-in-out forwards;
+}
+
+
+/* .showDetails {
+    animation: 1s showDetails;
+}
+
+.hideDetails {
+    animation: 1s hideDetails ease-out forwards;
+} */
+
+@keyframes showDetails {
+    0% { 
+        opacity:0;
+        max-height:0;
+    }
+
+    40% { 
+        opacity: 0.5;
+    }
+
+    100% { 
+        opacity: 1;
+        max-height: 200px;
+        transform:rotateY(360deg);
+    }
+}
+
+@keyframes hideDetails {
+    0% { 
+        max-height: 200px;
+    }
+    40% { 
+        opacity:0;
+    }
+    100% { 
+        opacity:0;
+        max-height:0;
+    }
 }

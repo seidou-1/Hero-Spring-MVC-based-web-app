@@ -11,7 +11,10 @@ import com.sg.superherosightings.dto.Photo;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Organization;
 import com.sg.superherosightings.dto.Sighting;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -55,14 +58,12 @@ public class RestController {
 //        return dao.addImage(image);
 //    }
 //    
-    
 //    RETRIEVE CHARACTER ENDPOINT
     @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Photo getImage(@PathVariable("id") long id) {
         return dao.getImageByID((int) id);
     }
-
 
 // DELETE CHARACTER ENDPOINT
     @RequestMapping(value = "/character/{id}", method = RequestMethod.DELETE)
@@ -123,16 +124,24 @@ public class RestController {
 //GET ALL SIGHTINGS ENDPOINT
     @RequestMapping(value = "/sightings", method = RequestMethod.GET)
     @ResponseBody
-    public List<Sighting> getAllSightings() {
-        return dao.getAllSightings();
+    public List<Map<String, String>> getAllSightings() {
+        List<Map<String, String>> sightings = dao.getAllSightingsJoined();
+        return sightings;
     }
 
 //RETRIEVE SIGHTING ENDPOINT
-    @RequestMapping(value = "/sighting/{id}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/sighting/{id}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public Sighting getSighting(@PathVariable("id") long id) {
+//        return dao.getSightingById((int) id);
+//    }
+//    
+    @RequestMapping(value = "/sightings/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Sighting getSighting(@PathVariable("id") long id) {
-        return dao.getSightingById((int) id);
+    public Map<String, String> getJoinedSighting(@PathVariable("id") long id) {
+        return dao.getSightingByIdJoined((int) id);
     }
+
 
 //----------------------------------------------------------------- LOCATION
 // CREATE LOCATION ENDPOINT
@@ -164,12 +173,23 @@ public class RestController {
     public List<Location> getAllLocations() {
         return dao.getAllLocations();
     }
+    
+    
 
 //RETRIEVE LOCATIONS ENDPOINT
     @RequestMapping(value = "/locations/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Location getLocation(@PathVariable("id") long id) {
-        return dao.getLocationById((int) id);
+    public Location  getLocation(@PathVariable("id") int id) {
+
+        Location locale = dao.getLocationById(id);
+       
+        List<Organization> orgs = dao.getOrganizationByLocationId(id);
+        List<Sighting> sights = dao.getSightingByLocationId(id);
+        
+        locale.setAssociatedOrgs(orgs);
+        locale.setAssociatedSightings(sights);
+
+        return locale;
     }
 
 //------------------------------------------------------------------------ ORGANIZATIONS

@@ -10,6 +10,7 @@
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
+        <link rel="shortcut icon"  href="${pageContext.request.contextPath}/img/hero.jpg" type="image/x-icon">
     </head>
 
     <body>
@@ -23,19 +24,19 @@
                             <a href="${pageContext.request.contextPath}/index">Home</a>
                         </li>
                         <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
+                            <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table">Sightings</a>
                         </li>
                         <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewHeroes">Heroes</a>
+                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                         </li>
                         <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
+                            <a href="${pageContext.request.contextPath}/viewVillains?viewType=create">Villains</a>
                         </li>
                         <li role="presentation">
-                            <a href="${pageContext.request.contextPath}/viewOrganizations">Organizations</a>
+                            <a href="${pageContext.request.contextPath}/viewOrganizations?viewType=create">Organizations</a>
                         </li>
                         <li role="presentation" class="active">
-                            <a href="${pageContext.request.contextPath}/viewLocations">Locations</a>
+                            <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=create&locationsID=all">Locations</a>
                         </li>
                     </ul>
                     <hr>
@@ -59,7 +60,7 @@
                             <tbody>
 
                                 <c:forEach var="i" begin="1" end="${locations.size() -1 }">
-                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewOrganization?viewType=view&organizationID=${oranizations[i].organizationId}">
+                                    <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=view&locationsID=${locations[i].locationID}">
                                         <td>
                                             <c:out value="${locations[i].locationName}"></c:out>
                                             </td>
@@ -72,8 +73,8 @@
                                             <c:out value="${locations[i].city }" ></c:out>
                                             </td>
                                             <td>
-                                                <a href="${pageContext.request.contextPath}/viewOranization?id=${oranizations[i].organizationId}">edit |</a>
-                                            <a href="${pageContext.request.contextPath}/deleteOrganization?id=${oranizations[i].organizationId}">delete</a>
+                                                <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=edit&locationsID=${locations[i].locationID}">edit |</a>
+                                            <a href="${pageContext.request.contextPath}/deleteLocation?locationsID=${locations[i].locationID}">delete</a>
                                         </td>
 
                                     </tr>
@@ -86,86 +87,86 @@
 
 
                 <div class="col-md-7" id="locationTab">
-
-                    <h5>Create a new location</h5>
-
-                    <div class="col-md-12"  id="locationMap">
-                        <div></div>
-                    </div>
-                    <div class="col-md-12">
-                        <h3></h3>
-                        <p>Pro Tip: You could fill in the details manually, or you could use the interactive map
-                            to select the address.</p>
-                    </div>
-
-
-                    <div class="col-md-12">
-                        <form action="newLocation" class="displayForm" method="POST">
-
-                            <div class="col-md-6">
-
-                                <label for="name">Name: </label> 
-                                <input class="formInput" type="text" id="name" name ="locationNameJSP" placeholder="Example (Garden of Eden)" />
-
-                                <label for="description">Description: </label> 
-                                <input class="formInput" type="text" id="description" name = "descriptionNameJSP" placeholder="Example (East New York)" />
-
-                                <label for="latititude">Latitude: </label>
-                                <br>
-                                <input class="formInput" type="double" id="latitude" name = "latitudeJSP" placeholder="Example (40.34564)" />
-
-                                <label for="longitude">Longitude: </label>
-                                <br>
-                                <input class="formInput" type="double" id="longitude" name = "longitudeJSP" placeholder="Example (-74.34564)" />
-
-                                <label for="zip">Zip </label>
-                                <br>
-                                <input class="formInput" type="text" id="zip" name = "zipJSP" placeholder="Example (11101)" />
-
-                            </div>
-
-                            <div class="col-md-6">
-
-                                <label for="streetNumber">Street Number: </label>
-                                <br>
-                                <input class="formInput" type="number" id="streetNumber" name = "streetNumberJSP" placeholder="Example (2719)" />
-
-                                <label for="streetName">Street Name </label>
-                                <br>
-                                <input class="formInput" type="text" id="streetName" name = "streetNameJSP" placeholder="Example (Columbus Circle)" />
-
-                                <label for="city">City </label>
-                                <br>
-                                <input class="formInput" type="text" id="city" name = "cityJSP" placeholder="Example (New York)" />
-
-                                <label for="state">State </label>
-                                <br>
-                                <input class="formInput" type="text" id="state" name = "stateJSP" placeholder="Example (NY)" />
+                        <c:choose>
+                                <c:when test="${display == 'view'}">
+                                    <h4 class="formHead">View a Location</h4>
+                                </c:when>
+                                <c:when test="${display == 'edit'}">
+                                    <h4 class="formHead">Edit a Location</h4>
+                                </c:when>
+                                <c:otherwise>
+                                    <h4 class="formHead">Create a new Location</h4>
+                                </c:otherwise>
+                            </c:choose>
 
 
+                            <c:choose>
+                                    <c:when test="${display == 'view'}">
+                                        <div class="col-md-12"  id="locationsMap" style="height: 500px">
+                                    </c:when> 
+                                    <c:otherwise> 
 
+                                            <div class="col-md-12"  id="locationsMap">
+                                                <div></div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h3></h3>
+                                                <p>Pro Tip: You could fill in the details manually, or you could use the interactive map
+                                                    to select the address.</p>
+                                            </div>
+                        
+                        
+                                            <div class="col-md-12">
+                                                <form action="newLocation" class="displayForm" method="POST">
+                        
+                                                    <div class="col-md-6">
+                        
+                                                        <label for="name">Name: </label> 
+                                                        <input class="formInput" type="text" id="name" name ="locationNameJSP" value="${location.locationName}" placeholder="Example (Garden of Eden)" />
+                        
+                                                        <label for="description">Description: </label> 
+                                                        <input class="formInput" type="text" id="description" value="${location.description}" name = "descriptionNameJSP" placeholder="Example (East New York)" />
+                        
+                                                        <label for="latititude">Latitude: </label>
+                                                        <br>
+                                                        <input class="formInput" type="double" id="latitude" value="${location.latitude}" name = "latitudeJSP" placeholder="Example (40.34564)" />
+                        
+                                                        <label for="longitude">Longitude: </label>
+                                                        <br>
+                                                        <input class="formInput" type="double" id="longitude" value="${location.longitude}" name = "longitudeJSP" placeholder="Example (-74.34564)" />
+                        
+                                                        <label for="zip">Zip </label>
+                                                        <br>
+                                                        <input class="formInput" type="text" id="zip" value="${location.zip}" name = "zipJSP" placeholder="Example (11101)" />
+                        
+                                                    </div>
+                        
+                                                    <div class="col-md-6">
+                        
+                                                        <label for="streetNumber">Street Number: </label>
+                                                        <br>
+                                                        <input class="formInput" type="text" id="streetNumber" value="${location.streetNumber}" name = "streetNumberJSP" placeholder="Example (2719)" />
+                        
+                                                        <label for="streetName">Street Name </label>
+                                                        <br>
+                                                        <input class="formInput" type="text" id="streetName" value="${location.streetName}" name = "streetNameJSP" placeholder="Example (Columbus Circle)" />
+                        
+                                                        <label for="city">City </label>
+                                                        <br>
+                                                        <input class="formInput" type="text" id="city" value="${location.city}" name = "cityJSP" placeholder="Example (New York)" />
+                        
+                                                        <label for="state">State </label>
+                                                        <br>
+                                                        <input class="formInput" type="text" id="state" value="${location.state}" name = "stateJSP" placeholder="Example (NY)" />
+                         </div>
+                        
+                        
+                                                    <button class="btn btn-primary"> Submit Location </button>
+                                                </form>
+                                            </div>
+                                    </c:otherwise>
+                                </c:choose>
 
-                                <!--                            <label for="streetNumber">Street Number </label> 
-                                                            <input class="formInput" type="text" id="streetNumber" placeholder="Example (193)" />
-                                
-                                                            <label for="streetName">Street Name </label>
-                                                            <br>
-                                                            <input class="formInput" type="text" id="streetName" placeholder="Example (East 14th Street)" />
-                                
-                                                            <label for="city">City </label>
-                                                            <br>
-                                                            <input class="formInput" type="text" id="city" placeholder="Example (Brooklyn)" />
-                                
-                                                            <label for="state">State </label>
-                                                            <br>
-                                                            <input class="formInput" type="text" id="state" placeholder="Example (New York)" />-->
-
-                            </div>
-
-
-                            <button class="btn btn-primary"> Submit Location </button>
-                        </form>
-                    </div>
 
 
                 </div>
