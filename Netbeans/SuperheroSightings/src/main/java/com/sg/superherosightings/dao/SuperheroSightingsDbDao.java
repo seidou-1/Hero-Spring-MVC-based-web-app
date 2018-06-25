@@ -173,7 +173,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTING,
                     new SightingMapper(), sightingId);
         } catch (EmptyResultDataAccessException ex) {
-            // there were no results for the given contact id - we just 
+            // there were no results for the given sighting id - we just 
             // want to return null in this case
             return null;
         }
