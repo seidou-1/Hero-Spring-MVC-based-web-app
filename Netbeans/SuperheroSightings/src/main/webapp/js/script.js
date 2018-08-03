@@ -1,7 +1,9 @@
 console.log(true)
 $(document).ready(function () {
   
-
+    $('#confirmDelete').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+      })
 
     // $.ajax({
     //     type: 'GET',

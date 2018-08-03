@@ -29,9 +29,39 @@ public class Organization {
     @Length(min = 1, max = 100, message = "No less than 1 and no more than 50 characters in length.")
     String description;
 
+    
+    String email = "organization@evil.com";
+            
+    String phone  = "1343563634";
+    
+    boolean isGood = true;
 
     public String getDescription() {
         return description;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public boolean isIsGood() {
+        return isGood;
+    }
+
+    public void setIsGood(boolean isGood) {
+        this.isGood = isGood;
     }
 
     public void setDescription(String description) {

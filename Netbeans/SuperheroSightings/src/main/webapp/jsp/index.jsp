@@ -24,19 +24,19 @@
                                         <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewSightings?viewType=table">Sightings</a>
+                                        <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
                                             <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewVillains">Villains</a>
+                                        <a href="${pageContext.request.contextPath}/viewVillains?viewType=create">Villains</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewOrganizations">Organizations</a>
+                                        <a href="${pageContext.request.contextPath}/viewOrganizations?viewType=create">Organizations</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewLocations">Locations</a>
+                                        <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=create&locationsID=all">Locations</a>
                                     </li>
                                 </ul>
                                 <hr/>

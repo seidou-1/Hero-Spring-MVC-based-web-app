@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.dto;
 
+import java.util.List;
 import java.util.Objects;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -49,7 +50,27 @@ public class Location {
     String zip;
     @NotBlank(message = "Damn Daniel you forgot the Zip?")
     @Length(min = 1, max = 100, message = "Zip code must be no more than 50 characters in length.")
+    
+    List<Organization> associatedOrgs;
+    List<Sighting> associatedSightings;
 
+    public List<Organization> getAssociatedOrgs() {
+        return associatedOrgs;
+    }
+
+    public void setAssociatedOrgs(List<Organization> associatedOrgs) {
+        this.associatedOrgs = associatedOrgs;
+    }
+
+    public List<Sighting> getAssociatedSightings() {
+        return associatedSightings;
+    }
+
+    public void setAssociatedSightings(List<Sighting> associatedSightings) {
+        this.associatedSightings = associatedSightings;
+    }
+    
+    
     public Location() {
     }
 
