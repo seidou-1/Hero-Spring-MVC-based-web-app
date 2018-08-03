@@ -30,8 +30,8 @@ public class Characters {
     @NotEmpty(message = "Man is this a superhero or not?")
     boolean isSuperHero;
     
-    List<Organization> orgList;
-    
+    List<Organization> orgList; //used in the heroes JSP -  <c:out value="${heroes[i].orgList[0].organizationName}"></c:out>
+ 
     List<Integer> organizationIDs = new ArrayList<>();
     
     List<String> superPowerList = new ArrayList<>();
