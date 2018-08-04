@@ -50,8 +50,7 @@ public interface SuperheroSightingsDao {
 
     public List<Location> getAllLocations();
 
-    public List<Characters> getAssociatedCharacters(List<Sighting> sightings);
-
+    
     public List<Location> getAssociatedLocations(List<Sighting> sightings);
 
     public List<Characters> getAllHeroes();
