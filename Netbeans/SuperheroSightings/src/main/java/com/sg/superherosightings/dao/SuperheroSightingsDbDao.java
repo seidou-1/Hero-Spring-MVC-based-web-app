@@ -61,23 +61,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             = "select * from Organization";
 
     //Locations prepared statements
-    private static final String SQL_INSERT_LOCATION
-            = "insert into Location (LocationName, Description, Latitude, Longitude, StreetNumber, StreetName, City, State, ZipCode )" + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    private static final String SQL_DELETE_LOCATION
-            = "delete from Location where LocationID = ?";
-
-    private static final String SQL_UPDATE_LOCATION
-            = "UPDATE Location SET LocationName = ?, Description = ?, Latitude = ?, Longitude = ?, StreetNumber = ?, StreetName = ?, City = ?, State = ?, ZipCode = ?  " + " WHERE LocationID = ? ";
-
-    private static final String SQL_SELECT_LOCATION
-            = "select * from Location where LocationId = ?";
-
-    private static final String SQL_SELECT_LOCATION_BY_CHARACTER
-            = ""; // revisit after checking out join statements;
-
-    private static final String SQL_SELECT_ALL_LOCATIONS
-            = "select * from Location";
+    
 
     //Images prepared statements
     private static final String SQL_INSERT_IMAGE
@@ -197,81 +181,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     /**
      * ********************LOCATION**************************
      */
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-
-    public Location addLocation(Location location) {
-        jdbcTemplate.update(SQL_INSERT_LOCATION,
-                location.getLocationName(),
-                location.getDescription(),
-                location.getLatitude(),
-                location.getLongitude(),
-                location.getStreetNumber(),
-                location.getStreetName(),
-                location.getCity(),
-                location.getState(),
-                location.getZip());
-
-        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-
-        location.setLocationID(newId);
-
-        return location;
-
-    }
-
-    @Override
-    public void deleteLocation(int locationId) {
-        jdbcTemplate.update(SQL_DELETE_LOCATION, locationId);
-    }
-
-    @Override
-    public void updateLocation(Location location) {
-        jdbcTemplate.update(SQL_UPDATE_LOCATION,
-                location.getLocationName(),
-                location.getDescription(),
-                location.getLatitude(),
-                location.getLongitude(),
-                location.getStreetNumber(),
-                location.getStreetName(),
-                location.getCity(),
-                location.getState(),
-                location.getZip(),
-                location.getLocationID());
-
-    }
-
-    @Override
-    public Location getLocationById(int locationId) {
-        try {
-            return jdbcTemplate.queryForObject(SQL_SELECT_LOCATION,
-                    new LocationMapper(), locationId);
-        } catch (EmptyResultDataAccessException ex) {
-            // there were no results for the given contact id - we just 
-            // want to return null in this case
-            return null;
-        }
-    }
-
-    @Override
-    public List<Location> getAllLocations() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_LOCATIONS,
-                new LocationMapper());
-    }
-
-    // HELPER METHODS???
-    @Override
-    public List<Location> getAssociatedLocations(List<Sighting> temp) {
-        List<Location> helperLocationList = new ArrayList<Location>();
-
-        for (Sighting sight : temp) {
-            Location local = getLocationById(sight.getLocationId());
-            helperLocationList.add(local);
-            sight.setLocation(local);
-        }
-        return helperLocationList;
-    }
-
+    
     
     @Override
     public List<Organization> getOrganizationsByCharacter(Characters tempChar) {
@@ -363,26 +273,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
 
 
-    private static final class LocationMapper implements RowMapper<Location> {
-
-        public Location mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Location local = new Location();
-            local.setLocationID(rs.getInt("LocationID"));
-            local.setLocationName(rs.getString("LocationName"));
-            local.setDescription(rs.getString("Description"));
-            local.setLatitude(rs.getDouble("Latitude"));
-            local.setLongitude(rs.getDouble("Longitude"));
-            local.setStreetNumber(rs.getString("StreetNumber"));
-            local.setStreetName(rs.getString("StreetName"));
-            local.setCity(rs.getString("City"));
-            local.setState(rs.getString("State"));
-            local.setZip(rs.getString("ZipCode"));
-
-            return local;
-
-        }
-    }
-
+    
     private static final class ImageMapper implements RowMapper<Photo> {
 
         public Photo mapRow(ResultSet rs, int rowNum) throws SQLException {

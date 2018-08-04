@@ -40,18 +40,7 @@ public interface SuperheroSightingsDao {
 
     public List<Organization> getAllOrganizations();
 
-    public Location addLocation(Location location);
-
-    public void deleteLocation(int locationId);
-
-    public void updateLocation(Location location);
-
-    public Location getLocationById(int locationId);
-
-    public List<Location> getAllLocations();
-
     
-    public List<Location> getAssociatedLocations(List<Sighting> sightings);
 
     public List<Characters> getAllHeroes();
 
