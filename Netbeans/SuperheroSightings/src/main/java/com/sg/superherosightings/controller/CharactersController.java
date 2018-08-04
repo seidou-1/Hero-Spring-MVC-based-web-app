@@ -5,10 +5,14 @@
  */
 package com.sg.superherosightings.controller;
 
+import org.springframework.stereotype.Controller;
+
 /**
  *
  * @author laptop
  */
-public class LocationsController {
+
+@Controller
+public class CharactersController {
     
 }
