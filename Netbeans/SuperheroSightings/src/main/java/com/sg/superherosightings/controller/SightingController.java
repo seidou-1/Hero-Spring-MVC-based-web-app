@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.dao.SightingDaoDbImpl;
 import com.sg.superherosightings.dao.SuperheroSightingsDao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
@@ -25,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SightingController {
      //Change these later to include SightingService and SightingDao
     SHService service;
-    SuperheroSightingsDao dao;
+    SightingDaoDbImpl dao; //Change this to more specific SightingDao
+    
+    //Add dao for Character, Location, and Organization
     
     @RequestMapping(value = {"/viewSightings"}, method = RequestMethod.GET)
     public String loadsightings(HttpServletRequest request, Model model) {
