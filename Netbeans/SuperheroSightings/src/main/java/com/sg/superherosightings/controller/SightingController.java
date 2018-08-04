@@ -11,6 +11,8 @@ import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Sighting;
 import com.sg.superherosightings.service.SHService;
+import com.sg.superherosightings.service.SightingService;
+
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -26,13 +28,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SightingController {
      //Change these later to include SightingService and SightingDao
     SHService service;
-    SightingDaoDbImpl dao; //Change this to more specific SightingDao
+    SightingService sightingService; //Change this to more specific SightingDao
     
-    //Add dao for Character, Location, and Organization
+    //Add Service dependency injection for Character, Location, and Organization
     
     @RequestMapping(value = {"/viewSightings"}, method = RequestMethod.GET)
     public String loadsightings(HttpServletRequest request, Model model) {
-        List<Sighting> sightings = dao.getAllSightings();
+        List<Sighting> sightings = sightingService.getAllSightings();
         List<Characters> characters = dao.getAssociatedCharacters(sightings);
         List<Location> locations = dao.getAssociatedLocations(sightings);
         model.addAttribute("sightings", sightings);

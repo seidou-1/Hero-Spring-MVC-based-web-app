@@ -28,19 +28,7 @@ public interface SuperheroSightingsDao {
      */
     
 
-    public Characters addCharacter(Characters character);
-
-    public void deleteCharacter(int characterId);
-
-    public void updateCharacter(Characters character);
-
-    public Characters getCharacterById(int characterId);
-
-    public List<Characters> getCharactersBySightingId(int sightingId);
-
-    public List<Characters> getCharactersByOrganizationId(int organizationId);
-
-    public List<Characters> getAllCharacters();
+    
 
     public Organization addOrganization(Organization organization);
 
