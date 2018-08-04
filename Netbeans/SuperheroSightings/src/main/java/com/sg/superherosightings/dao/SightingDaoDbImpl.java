@@ -30,8 +30,43 @@ public class SightingDaoDbImpl implements SightingDao{
         this.jdbcTemplate = jdbcTemplate;
     }
     
+    //Prepared Statements
+     private static final String SQL_INSERT_SIGHTING
+            = "insert into Sighting ( LocationID, CharacterID, SightingDate)" + "values (?, ?, ?)";
+
+    private static final String SQL_DELETE_SIGHTING
+            = "delete from Sighting where SightingID = ?";
+
+    private static final String SQL_UPDATE_SIGHTING
+            = "update Sighting set LocationId = ?, CharacterID = ?, SightingDate = ? " + "where SightingID =  ?";
+
+    private static final String SQL_SELECT_SIGHTING
+            = "select * from Sighting where SightingID = ?";
+
+    private static final String SQL_SELECT_SIGHTING_BY_SIGHTINGDATE
+            = "select * from Sighting where SightingDate = ?";
+
+    private static final String SQL_SELECT_ALL_SIGHTINGS
+            = "select * from `Sighting`";
+
+//    private static final String SQL_SELECT_LAST_TEN_SIGHTINGS
+//            = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";
     
+    /*************IMAGES******************/
+    //Create seperate Images Dao later
+    private static final String SQL_SELECT_ALL_SIGHTINGS_JOINED
+            = "select sight.SightingID, sight.SightingDate,  chara.CharacterID, chara.CharacterName, loc.LocationName, loc.LocationID, loc.Latitude, loc.Longitude from `Location` loc"
+            + " inner join `Sighting` sight on loc.LocationID =  sight.LocationID"
+            + " inner join `Characters` chara on sight.CharacterID = chara.CharacterID";
+
+    private static final String SQL_SELECT_SIGHTINGS_BY_SIGHTINGID
+            = "select sight.SightingID, sight.SightingDate,  chara.CharacterID, chara.CharacterName, loc.LocationName, loc.LocationID, loc.Latitude, loc.Longitude from `Location` loc"
+            + " inner join `Sighting` sight on loc.LocationID =  sight.LocationID"
+            + " inner join `Characters` chara on sight.CharacterID = chara.CharacterID"
+            + " where sight.sightingID = ?";
     
+    private static final String SQL_SELECT_SIGHTING_BY_LOCATION_ID
+            = "select * from Sighting where LocationId = ?";
     
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
@@ -67,7 +102,7 @@ public class SightingDaoDbImpl implements SightingDao{
     public Sighting getSightingById(int sightingId) {
         try {
             return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTING,
-                    new SuperheroSightingsDbDao.SightingMapper(), sightingId);
+                    new SightingDaoDbImpl.SightingMapper(), sightingId);
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given sighting id - we just 
             // want to return null in this case
@@ -79,7 +114,7 @@ public class SightingDaoDbImpl implements SightingDao{
     public Map<String, String> getSightingByIdJoined(int sightingId) {
         try {
             return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTINGS_BY_SIGHTINGID,
-                    new SuperheroSightingsDbDao.JoinedSightingMapper(), sightingId);
+                    new SightingDaoDbImpl.JoinedSightingMapper(), sightingId);
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given contact id - we just 
             // want to return null in this case
@@ -91,7 +126,7 @@ public class SightingDaoDbImpl implements SightingDao{
     public List<Map<String, String>> getAllSightingsJoined() {
         try {
             return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS_JOINED,
-                    new SuperheroSightingsDbDao.JoinedSightingMapper());
+                    new SightingDaoDbImpl.JoinedSightingMapper());
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given contact id - we just 
             // want to return null in this case
@@ -102,7 +137,7 @@ public class SightingDaoDbImpl implements SightingDao{
     @Override
     public List<Sighting> getAllSightings() {
         return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS,
-                new SuperheroSightingsDbDao.SightingMapper());
+                new SightingDaoDbImpl.SightingMapper());
     }
 
     @Override
