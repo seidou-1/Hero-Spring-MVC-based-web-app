@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sg.superherosightings.dao;
+package com.sg.superherosightings.service;
 
 import com.sg.superherosightings.dto.Sighting;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author laptop
  */
-public interface SightingDao {
+public interface SightingService {
     
     public Sighting addSighting(Sighting sighting);
 
@@ -30,4 +30,5 @@ public interface SightingDao {
     public List<Sighting> getAllSightings();
     
     public List<Sighting> getSightingByLocationId(int id);
+    
 }

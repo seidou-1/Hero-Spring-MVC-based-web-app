@@ -46,20 +46,7 @@ public class SHController {
         return "index";
     }
 
-    @RequestMapping(value = {"/viewSightings"}, method = RequestMethod.GET)
-    public String loadsightings(HttpServletRequest request, Model model) {
-        List<Sighting> sightings = dao.getAllSightings();
-        List<Characters> characters = dao.getAssociatedCharacters(sightings);
-        List<Location> locations = dao.getAssociatedLocations(sightings);
-        model.addAttribute("sightings", sightings);
-        model.addAttribute("locations", locations);
-        model.addAttribute("characters", characters);
-        String sightingID = request.getParameter("sightingID");
-        String viewType = (request.getParameter("viewType"));
-        model.addAttribute("sightingID", sightingID);
-        model.addAttribute("viewType", viewType);
-        return "sightings";
-    }
+    
 
     @RequestMapping(value = "/createHero", method = RequestMethod.POST)
     public String createHero(HttpServletRequest request, Model model) {
@@ -194,11 +181,7 @@ public class SHController {
 
     }
 
-    @RequestMapping(value = {"/newSighting"}, method = RequestMethod.GET)
-    public String createSighting(HttpServletRequest request, Model model) {
-
-        return "creation";
-    }
+    
 
 //    
 //    

@@ -37,26 +37,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     // Prepared statements for MySql, basically the query that will be run in MySql throught the Spring, JDBC hocus pocus
 
     // Sighting prepared statements
-    private static final String SQL_INSERT_SIGHTING
-            = "insert into Sighting ( LocationID, CharacterID, SightingDate)" + "values (?, ?, ?)";
-
-    private static final String SQL_DELETE_SIGHTING
-            = "delete from Sighting where SightingID = ?";
-
-    private static final String SQL_UPDATE_SIGHTING
-            = "update Sighting set LocationId = ?, CharacterID = ?, SightingDate = ? " + "where SightingID =  ?";
-
-    private static final String SQL_SELECT_SIGHTING
-            = "select * from Sighting where SightingID = ?";
-
-    private static final String SQL_SELECT_SIGHTING_BY_SIGHTINGDATE
-            = "select * from Sighting where SightingDate = ?";
-
-    private static final String SQL_SELECT_ALL_SIGHTINGS
-            = "select * from `Sighting`";
-
-//    private static final String SQL_SELECT_LAST_TEN_SIGHTINGS
-//            = "select * FROM Sighting ORDER BY SightingID DESC LIMIT 10";
+   
     // Character prepared statements
     private static final String SQL_INSERT_CHARACTER
             = "insert into Characters (CharacterName, Description, IsSuperHero )" + " values (?, ?, ?)";
@@ -131,8 +112,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     private static final String SQL_SELECT_ORGANIZATION_BY_LOCATION_ID
             = "select * from Organization where LocationId = ?";
 
-    private static final String SQL_SELECT_SIGHTING_BY_LOCATION_ID
-            = "select * from Sighting where LocationId = ?";
+    
 
     private static final String SQL_SELECT_ORGANIZATIONS_BY_CHARACTERID
             = "select org.OrganizationId , org.OrganizationName , org.LocationID , org.Description from Organization org"
@@ -142,116 +122,28 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
             = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
             + " Join Character_SuperPower cs on sp.SuperpowerID  = cS.SuperpowerId where CharacterId = ?";
 
-    private static final String SQL_SELECT_SIGHTINGS_BY_SIGHTINGID
-            = "select sight.SightingID, sight.SightingDate,  chara.CharacterID, chara.CharacterName, loc.LocationName, loc.LocationID, loc.Latitude, loc.Longitude from `Location` loc"
-            + " inner join `Sighting` sight on loc.LocationID =  sight.LocationID"
-            + " inner join `Characters` chara on sight.CharacterID = chara.CharacterID"
-            + " where sight.sightingID = ?";
+    
 
-    private static final String SQL_SELECT_ALL_SIGHTINGS_JOINED
-            = "select sight.SightingID, sight.SightingDate,  chara.CharacterID, chara.CharacterName, loc.LocationName, loc.LocationID, loc.Latitude, loc.Longitude from `Location` loc"
-            + " inner join `Sighting` sight on loc.LocationID =  sight.LocationID"
-            + " inner join `Characters` chara on sight.CharacterID = chara.CharacterID";
-
+    
     /**
      * ********************SIGHTING**************************
      */
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public Sighting addSighting(Sighting sighting) {
-        jdbcTemplate.update(SQL_INSERT_SIGHTING,
-                sighting.getLocationId(),
-                sighting.getCharacterId(),
-                sighting.getSightingDate());
-//                sighting.getSightingId());
-
-        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-
-        sighting.setSightingId(newId);
-        return sighting;
-
-    }
-
-    @Override
-    public void deleteSighting(int sightingId) {
-        jdbcTemplate.update(SQL_DELETE_SIGHTING, sightingId);
-    }
-
-    @Override
-    public void updateSighting(Sighting sighting) {
-        jdbcTemplate.update(SQL_UPDATE_SIGHTING,
-                sighting.getLocationId(),
-                sighting.getCharacterId(),
-                sighting.getSightingDate(),
-                sighting.getSightingId());
-    }
-
-    @Override
-    public Sighting getSightingById(int sightingId) {
-        try {
-            return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTING,
-                    new SightingMapper(), sightingId);
-        } catch (EmptyResultDataAccessException ex) {
-            // there were no results for the given sighting id - we just 
-            // want to return null in this case
-            return null;
-        }
-    }
-
-    @Override
-    public Map<String, String> getSightingByIdJoined(int sightingId) {
-        try {
-            return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTINGS_BY_SIGHTINGID,
-                    new JoinedSightingMapper(), sightingId);
-        } catch (EmptyResultDataAccessException ex) {
-            // there were no results for the given contact id - we just 
-            // want to return null in this case
-            return null;
-        }
-    }
-
-    @Override
-    public List<Map<String, String>> getAllSightingsJoined() {
-        try {
-            return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS_JOINED,
-                    new JoinedSightingMapper());
-        } catch (EmptyResultDataAccessException ex) {
-            // there were no results for the given contact id - we just 
-            // want to return null in this case
-            return null;
-        }
-    }
-
-    @Override
-    public List<Sighting> getAllSightings() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS,
-                new SightingMapper());
-    }
-
-    @Override
-    public List<Sighting> getSightingByLocationId(int locationId) {
-        try {
-            return jdbcTemplate.query(SQL_SELECT_SIGHTING_BY_LOCATION_ID,
-                    new SightingMapper(), locationId);
-        } catch (EmptyResultDataAccessException ex) {
-            // there were no results for the given contact id - we just
-            // want to return null in this case
-            return null;
-        }
-    }
+    
+    
+    
 
     @Override
     public List<Organization> getOrganizationByLocationId(int locationId) {
         try {
             return jdbcTemplate.query(SQL_SELECT_ORGANIZATION_BY_LOCATION_ID,
-                    new OrganizationMapper(), locationId);
+                    new SuperheroSightingsDbDao.OrganizationMapper(), locationId);
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given contact id - we just
             // want to return null in this case
             return null;
         }
     }
-
+    
     /**
      * ********************CHARACTERS**************************
      */
@@ -563,52 +455,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
         }
     }
 
-    private static final class SightingMapper implements RowMapper<Sighting> {
-
-        public Sighting mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Sighting sighting = new Sighting();
-            sighting.setSightingId(rs.getInt("SightingID"));
-            sighting.setLocationId(rs.getInt("LocationID"));
-            sighting.setCharacterId(rs.getInt("CharacterID"));
-            sighting.setSightingDate((rs.getTimestamp("SightingDate"))); //took out .toLocalDate()
-
-            return sighting;
-        }
-    }
-
-    private static final class JoinedSightingMapper implements RowMapper<Map<String, String>> {
-
-        public Map<String, String> mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Map<String, String> sightings = new HashMap<>();
-
-            sightings.put("SightingID", rs.getString("SightingID"));
-            sightings.put("SightingDate", rs.getTimestamp("SightingDate").toString());
-            sightings.put("CharacterID", rs.getString("CharacterID"));
-            sightings.put("CharacterName", rs.getString("CharacterName"));
-            sightings.put("LocationID", rs.getString("LocationID"));
-            sightings.put("LocationName", rs.getString("LocationName"));
-            sightings.put("latitude", rs.getString("Latitude"));
-            sightings.put("longitude", rs.getString("Longitude"));
-
-            return sightings;
-        }
-
-        public Map<String, Object> mapRow(ResultSet rs) throws SQLException {
-            Map<String, Object> sightings = new HashMap<>();
-
-            sightings.put("SightingID", rs.getString("SightingID"));
-            sightings.put("SightingDate", rs.getTimestamp("SightingDate").toString());
-            sightings.put("CharacterID", rs.getString("CharacterID"));
-            sightings.put("CharacterName", rs.getString("CharacterName"));
-            sightings.put("LocationID", rs.getString("LocationID"));
-            sightings.put("LocationName", rs.getString("LocationName"));
-            sightings.put("latitude", rs.getString("Latitude"));
-            sightings.put("longitude", rs.getString("Longitude"));
-
-            return sightings;
-        }
-
-    }
+    
 
     private static final class CharactersMapper implements RowMapper<Characters> {
 

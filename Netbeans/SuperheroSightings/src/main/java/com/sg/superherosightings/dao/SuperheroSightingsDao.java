@@ -26,19 +26,7 @@ public interface SuperheroSightingsDao {
     Same for Location, Sighting, and Organization
     
      */
-    public Sighting addSighting(Sighting sighting);
-
-    public void deleteSighting(int sightingId);
-
-    public void updateSighting(Sighting sighting);
-
-    public Sighting getSightingById(int sightingId);
     
-    public Map<String, String>getSightingByIdJoined(int sightingId);
-    
-    public List<Map<String, String>> getAllSightingsJoined();
-
-    public List<Sighting> getAllSightings();
 
     public Characters addCharacter(Characters character);
 
@@ -96,6 +84,6 @@ public interface SuperheroSightingsDao {
 
     public List<Organization> getOrganizationByLocationId(int id);
 
-    public List<Sighting> getSightingByLocationId(int id);
+    
 
     }
