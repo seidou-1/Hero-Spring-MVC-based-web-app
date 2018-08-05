@@ -11,6 +11,7 @@ import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Sighting;
 import com.sg.superherosightings.service.CharactersService;
+import com.sg.superherosightings.service.LocationsService;
 import com.sg.superherosightings.service.SHService;
 import com.sg.superherosightings.service.SightingService;
 
@@ -31,13 +32,14 @@ public class SightingController {
     SHService service;
     SightingService sightingService; //Change this to more specific SightingDao
     CharactersService charactersService;
-    //Add Service dependency injection for Character, Location, and Organization
+    LocationsService locationsService;
+    //Add Service dependency injection for Organization
     
     @RequestMapping(value = {"/viewSightings"}, method = RequestMethod.GET)
     public String loadsightings(HttpServletRequest request, Model model) {
         List<Sighting> sightings = sightingService.getAllSightings();
         List<Characters> characters = charactersService.getAssociatedCharacters(sightings);
-        List<Location> locations = dao.getAssociatedLocations(sightings);
+        List<Location> locations = locationsService.getAssociatedLocations(sightings);
         model.addAttribute("sightings", sightings);
         model.addAttribute("locations", locations);
         model.addAttribute("characters", characters);
