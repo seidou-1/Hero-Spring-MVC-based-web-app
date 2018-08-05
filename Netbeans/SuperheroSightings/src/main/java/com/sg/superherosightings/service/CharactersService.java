@@ -30,5 +30,9 @@ public interface CharactersService {
     public List<Characters> getAllCharacters();
 
     public List<Characters> getAssociatedCharacters(List<Sighting> sightings);
+    
+    public List<Characters> getAllHeroes();
+
+    public List<Characters> getAllVillains();
 
 }

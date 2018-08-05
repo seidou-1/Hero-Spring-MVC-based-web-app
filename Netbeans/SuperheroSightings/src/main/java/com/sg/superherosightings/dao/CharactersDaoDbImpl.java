@@ -129,6 +129,18 @@ public class CharactersDaoDbImpl implements CharactersDao {
         return helperCharacterList;
     }
 
+    @Override
+    public List<Characters> getAllVillains() {
+        return jdbcTemplate.query(SQL_SELECT_ALL_VILLAINS,
+                new CharactersMapper());
+    }
+    
+    @Override
+    public List<Characters> getAllHeroes() {
+        return jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
+                new CharactersMapper());
+    }
+    
     private static final class CharactersMapper implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {

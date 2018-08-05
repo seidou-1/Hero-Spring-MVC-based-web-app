@@ -6,6 +6,7 @@
 package com.sg.superherosightings.service;
 
 import com.sg.superherosightings.dao.CharactersDao;
+import com.sg.superherosightings.dao.CharactersDaoDbImpl;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.ArrayList;
@@ -72,5 +73,14 @@ public class CharactersServiceImpl implements CharactersService{
         return helperCharacterList;
     }
 
+    @Override
+    public List<Characters> getAllVillains() {
+        return charactersDao.getAllVillains();
+    }
+    
+    @Override
+    public List<Characters> getAllHeroes() {
+        return charactersDao.getAllHeroes();
+    }
     
 }

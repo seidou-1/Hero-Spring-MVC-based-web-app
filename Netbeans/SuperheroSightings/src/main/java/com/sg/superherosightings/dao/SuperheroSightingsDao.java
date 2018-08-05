@@ -30,21 +30,11 @@ public interface SuperheroSightingsDao {
 
     
 
-    public Organization addOrganization(Organization organization);
-
-    public void deleteOrganization(int organizationId);
-
-    public void updateOrganization(Organization organization);
-
-    public Organization getOrganizationById(int organizationId);
-
-    public List<Organization> getAllOrganizations();
+    
 
     
 
-    public List<Characters> getAllHeroes();
-
-    public List<Characters> getAllVillains();
+   
 
     public Photo addImage(Photo image);
 

@@ -113,20 +113,12 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     /**
      * ********************HEROES**************************
      */
-    @Override
-    public List<Characters> getAllHeroes() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
-                new CharactersMapper());
-    }
+    
 
     /**
      * ********************VILLAINS**************************
      */
-    @Override
-    public List<Characters> getAllVillains() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_VILLAINS,
-                new CharactersMapper());
-    }
+    
 
     /**
      * ********************ORGANIZATION**************************
