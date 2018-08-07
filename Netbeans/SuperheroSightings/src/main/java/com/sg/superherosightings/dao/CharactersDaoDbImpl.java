@@ -141,6 +141,8 @@ public class CharactersDaoDbImpl implements CharactersDao {
                 new CharactersMapper());
     }
     
+    
+    
     private static final class CharactersMapper implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {

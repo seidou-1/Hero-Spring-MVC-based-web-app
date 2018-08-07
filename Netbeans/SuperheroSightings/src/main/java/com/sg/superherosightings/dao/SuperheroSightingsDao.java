@@ -36,9 +36,7 @@ public interface SuperheroSightingsDao {
 
    
 
-    public Photo addImage(Photo image);
-
-    public Photo getImageByID(int imageID);
+   
 
     public List<Organization> getOrganizationsByCharacter(Characters tempChar);
 

@@ -9,6 +9,7 @@ import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Organization;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -119,6 +120,17 @@ public class OrganizationsDaoDbImpl implements OrganizationsDao{
             // want to return null in this case
             return null;
         }
+    }
+    
+    //Mo: Below method not inherited through interface
+    public void setCharactersOrgList(List<Characters> temp) {
+        List<String> helperOrganizationStringList = new ArrayList<String>();
+
+        for (Characters charact : temp) {
+            charact.setOrganizationList(getOrganizationsByCharacter(charact));
+
+        }
+
     }
     
     private static final class OrganizationMapper implements RowMapper<Organization> {
