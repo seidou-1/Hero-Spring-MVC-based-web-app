@@ -54,6 +54,12 @@ public class CharactersDaoDbImpl implements CharactersDao {
     private static final String SQL_SELECT_ALL_VILLAINS
             = "select * from `Characters` where isSuperHero = 0";
 
+    private static final String SQL_SELECT_SUPERPOWERS_BY_CHARACTERID
+            = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
+            + " Join Character_SuperPower cs on sp.SuperpowerID  = cS.SuperpowerId where CharacterId = ?";
+
+    
+    
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Characters addCharacter(Characters character) {
@@ -141,8 +147,22 @@ public class CharactersDaoDbImpl implements CharactersDao {
                 new CharactersMapper());
     }
     
-    
-    
+    @Override
+    public List<String> getSuperPowersByCharacter(Characters tempChar) {
+        List<String> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
+                new CharactersDaoDbImpl.SuperPowerMapper(), tempChar.getCharacterId());
+        return helperSuperPowerList;
+    }
+
+    @Override
+    public void setCharactersSPList(List<Characters> temp) {
+
+        for (Characters charact : temp) {
+            charact.setSuperPowerList(getSuperPowersByCharacter(charact));
+
+        }
+    }
+
     private static final class CharactersMapper implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -154,6 +174,16 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
             return charact;
 
+        }
+    }
+    
+    private static final class SuperPowerMapper implements RowMapper<String> {
+
+        public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+            String superPower;
+            superPower = rs.getString("SuperPowerType");
+
+            return superPower;
         }
     }
 

@@ -82,5 +82,15 @@ public class CharactersServiceImpl implements CharactersService{
     public List<Characters> getAllHeroes() {
         return charactersDao.getAllHeroes();
     }
+
+    @Override
+    public List<String> getSuperPowersByCharacter(Characters tempChar) {
+        return charactersDao.getSuperPowersByCharacter(tempChar);
+    }
+
+    @Override
+    public void setCharactersSPList(List<Characters> temp) {
+        charactersDao.setCharactersSPList(temp);
+    }
     
 }
