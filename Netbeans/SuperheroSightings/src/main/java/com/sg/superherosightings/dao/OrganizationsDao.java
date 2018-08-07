@@ -5,10 +5,30 @@
  */
 package com.sg.superherosightings.dao;
 
+import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Organization;
+import java.util.List;
+
 /**
  *
  * @author laptop
  */
 public interface OrganizationsDao {
+    
+    public Organization addOrganization(Organization organization);
+    
+    public void deleteOrganization(int organizationId);
+    
+    public void updateOrganization(Organization organization);
+    
+    public Organization getOrganizationById(int organizationId);
+    
+    public List<Organization> getAllOrganizations();
+    
+    public List<Organization> getOrganizationsByCharacter(Characters tempChar);
+    
+    public List<Organization> getOrganizationByLocationId(int locationId);
+    
+    
     
 }
