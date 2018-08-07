@@ -52,7 +52,7 @@ public class PhotosDaoDbImpl implements PhotosDao {
     public Photo getImageByID(int imageID) {
         try {
             return jdbcTemplate.queryForObject(SQL_SELECT_IMAGE,
-                    new SuperheroSightingsDbDao.ImageMapper(), imageID);
+                    new PhotosDaoDbImpl.ImageMapper(), imageID);
         } catch (Exception ex) {
 //            EmptyResultDataAccessException
             System.out.println("I had an exception");
