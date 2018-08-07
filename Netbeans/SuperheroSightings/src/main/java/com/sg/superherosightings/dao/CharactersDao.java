@@ -34,6 +34,10 @@ public interface CharactersDao{
     public List<Characters> getAllHeroes();
 
     public List<Characters> getAllVillains();
+    
+    public List<String> getSuperPowersByCharacter(Characters tempChar);
+    
+    public void setCharactersSPList(List<Characters> temp);
 
     
 }

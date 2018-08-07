@@ -35,4 +35,7 @@ public interface CharactersService {
 
     public List<Characters> getAllVillains();
 
-}
+    public List<String> getSuperPowersByCharacter(Characters tempChar);
+    
+    public void setCharactersSPList(List<Characters> temp);
+}   

@@ -50,31 +50,12 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     //Images prepared statements
     
 
-    private static final String SQL_SELECT_SUPERPOWERS_BY_CHARACTERID
-            = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
-            + " Join Character_SuperPower cs on sp.SuperpowerID  = cS.SuperpowerId where CharacterId = ?";
-
     
 
     
     /**
      * ********************SIGHTING**************************
      */
-    
-    
-    
-
-    @Override
-    public List<Organization> getOrganizationByLocationId(int locationId) {
-        try {
-            return jdbcTemplate.query(SQL_SELECT_ORGANIZATION_BY_LOCATION_ID,
-                    new SuperheroSightingsDbDao.OrganizationMapper(), locationId);
-        } catch (EmptyResultDataAccessException ex) {
-            // there were no results for the given contact id - we just
-            // want to return null in this case
-            return null;
-        }
-    }
     
     /**
      * ********************CHARACTERS**************************
@@ -94,53 +75,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     /**
      * ********************ORGANIZATION**************************
      */
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public Organization addOrganization(Organization organization) {
-        jdbcTemplate.update(SQL_INSERT_ORGANIZATION,
-                organization.getOrganizationName(),
-                organization.getLocationId(),
-                organization.getDescription());
-
-        /*
-        Query the database for the ID that was just assigned to the new row in the DB
-         */
-        int newId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-
-        //Set the new id value on the Organization object and return it
-        organization.setOrganizationId(newId);
-        return organization;
-    }
-
-    @Override
-    public void deleteOrganization(int organizationId) {
-        jdbcTemplate.update(SQL_DELETE_ORGANIZATION, organizationId);
-    }
-
-    @Override
-    public void updateOrganization(Organization organization) {
-        jdbcTemplate.update(SQL_UPDATE_ORGANIZATION,
-                organization.getOrganizationName(),
-                organization.getLocationId(),
-                organization.getDescription(),
-                organization.getOrganizationId());
-    }
-
-    @Override
-    public Organization getOrganizationById(int organizationId) {
-        try {
-            return jdbcTemplate.queryForObject(SQL_SELECT_ORGANIZATION, new OrganizationMapper(), organizationId);
-        } catch (EmptyResultDataAccessException ex) {
-
-            return null;
-        }
-    }
-
-    @Override
-    public List<Organization> getAllOrganizations() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_ORGANIZATIONS, new OrganizationMapper());
-    }
-
+    
     /**
      * ********************LOCATION**************************
      */
@@ -149,22 +84,7 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     
     
 
-    @Override
-    public List<String> getSuperPowersByCharacter(Characters tempChar) {
-        List<String> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
-                new SuperPowerMapper(), tempChar.getCharacterId());
-        return helperSuperPowerList;
-    }
-
-    @Override
-    public void setCharactersSPList(List<Characters> temp) {
-
-        for (Characters charact : temp) {
-            charact.setSuperPowerList(getSuperPowersByCharacter(charact));
-
-        }
-    }
-
+    
     // Photo methods
     
 
@@ -176,14 +96,6 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
 
     
     
-    private static final class SuperPowerMapper implements RowMapper<String> {
-
-        public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-            String superPower;
-            superPower = rs.getString("SuperPowerType");
-
-            return superPower;
-        }
-    }
+    
 
 }
