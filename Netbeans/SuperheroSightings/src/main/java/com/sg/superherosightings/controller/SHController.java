@@ -31,11 +31,7 @@ public class SHController {
     SightingsService sightingsService;
     LocationsService locationsService;
     
-    /*
-    
-    Pick up here. Move the request mappings to the appropriate
-    classes
-    */
+   
 
     @Inject
     public SHController(CharactersService charactersService, SightingsService sightingsService, LocationsService locationsService) {

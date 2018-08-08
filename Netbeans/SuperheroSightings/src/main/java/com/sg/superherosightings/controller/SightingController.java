@@ -5,16 +5,12 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.dao.SightingDaoDbImpl;
-import com.sg.superherosightings.dao.SuperheroSightingsDao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Sighting;
 import com.sg.superherosightings.service.CharactersService;
 import com.sg.superherosightings.service.LocationsService;
-import com.sg.superherosightings.service.SHService;
-import com.sg.superherosightings.service.SightingService;
-
+import com.sg.superherosightings.service.SightingsService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -28,16 +24,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class SightingController {
-     //Change these later to include SightingService and SightingDao
-    SHService service;
-    SightingService sightingService; //Change this to more specific SightingDao
+    SightingsService sightingsService; 
     CharactersService charactersService;
     LocationsService locationsService;
-    //Add Service dependency injection for Organization
+    
+    public SightingController(SightingsService sightingsService,
+ 			CharactersService charactersService, LocationsService locationsService) {
+ 		
+ 		this.sightingsService = sightingsService;
+ 		this.charactersService = charactersService;
+ 		this.locationsService = locationsService;
+ 	}
     
     @RequestMapping(value = {"/viewSightings"}, method = RequestMethod.GET)
     public String loadsightings(HttpServletRequest request, Model model) {
-        List<Sighting> sightings = sightingService.getAllSightings();
+        List<Sighting> sightings = sightingsService.getAllSightings();
         List<Characters> characters = charactersService.getAssociatedCharacters(sightings);
         List<Location> locations = locationsService.getAssociatedLocations(sightings);
         model.addAttribute("sightings", sightings);
@@ -50,7 +51,9 @@ public class SightingController {
         return "sightings";
     }
     
-    @RequestMapping(value = {"/newSighting"}, method = RequestMethod.GET)
+ 
+
+	@RequestMapping(value = {"/newSighting"}, method = RequestMethod.GET)
     public String createSighting(HttpServletRequest request, Model model) {
 
         return "creation";
