@@ -56,33 +56,9 @@ public class SHController {
 
     
 
-    @RequestMapping(value = "/deleteHero", method = RequestMethod.GET)
-    public String deletHero(HttpServletRequest request, Model model) {
-        int heroID = Integer.parseInt(request.getParameter("characterId"));
-        dao.deleteCharacter(heroID);
-        return "redirect:viewHeroes";
-    }
+    
 
-    @RequestMapping(value = {"/viewHeroes"}, method = RequestMethod.GET)
-    public String loadHeroes(HttpServletRequest request, Model model) {
-        List<Characters> allHeroes = dao.getAllHeroes();
-        dao.setCharactersOrgList(allHeroes);
-        model.addAttribute("heroes", allHeroes);
-
-        String display = (request.getParameter("viewType"));
-        model.addAttribute("display", display);
-
-        try {
-            int id = Integer.parseInt(request.getParameter("characterId"));
-            Characters hero = dao.getCharacterById(id);
-            model.addAttribute("hero", hero);
-
-        } catch (Exception e) {
-
-        }
-
-        return "heroes";
-    }
+    
 
     @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
     public String loadVillains(HttpServletRequest request, Model model) {

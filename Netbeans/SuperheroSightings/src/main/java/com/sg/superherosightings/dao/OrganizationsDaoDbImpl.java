@@ -122,7 +122,8 @@ public class OrganizationsDaoDbImpl implements OrganizationsDao{
         }
     }
     
-    //Mo: Below method not inherited through interface
+    //Mo: Below method is inherited through interface. Might make it independant
+    @Override
     public void setCharactersOrgList(List<Characters> temp) {
         List<String> helperOrganizationStringList = new ArrayList<String>();
 

@@ -29,6 +29,7 @@ public interface OrganizationsDao {
     
     public List<Organization> getOrganizationByLocationId(int locationId);
     
-    
+    public void setCharactersOrgList(List<Characters> temp);
+
     
 }

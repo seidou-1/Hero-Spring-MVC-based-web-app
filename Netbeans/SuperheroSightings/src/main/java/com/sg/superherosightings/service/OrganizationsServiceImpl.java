@@ -56,5 +56,10 @@ public class OrganizationsServiceImpl implements OrganizationsService {
     public List<Organization> getOrganizationByLocationId(int id) {
         return organizationsDao.getOrganizationByLocationId(id);
     }
+
+    @Override
+    public void setCharactersOrgList(List<Characters> temp) {
+    organizationsDao.setCharactersOrgList(temp);
+    }
     
 }
