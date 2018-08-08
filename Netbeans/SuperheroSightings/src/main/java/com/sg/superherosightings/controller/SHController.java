@@ -59,56 +59,12 @@ public class SHController {
     
 
     
+    
+   
 
-    @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
-    public String loadVillains(HttpServletRequest request, Model model) {
-        List<Characters> allVillains = dao.getAllVillains();
-        dao.setCharactersOrgList(allVillains);
-        model.addAttribute("villains", allVillains);
+    
 
-        String display = (request.getParameter("viewType"));
-        model.addAttribute("display", display);
-
-        try {
-            int id = Integer.parseInt(request.getParameter("characterId"));
-            Characters villain = dao.getCharacterById(id);
-            model.addAttribute("villain", villain);
-        } catch (Exception e) {
-
-        }
-
-        return "villains";
-    }
-
-    @RequestMapping(value = {"/viewOrganizations"}, method = RequestMethod.GET)
-    public String loadOrganizations(HttpServletRequest request, Model model) {
-        List<Organization> allOrganizations = dao.getAllOrganizations();
-        model.addAttribute("organizations", allOrganizations);
-
-        String display = (request.getParameter("viewType"));
-        model.addAttribute("display", display);
-
-        try {
-            int id = Integer.parseInt(request.getParameter("organizationId"));
-            Organization organization = dao.getOrganizationById(id);
-            model.addAttribute("organization", organization);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        return "organizations";
-    }
-
-    @RequestMapping(value = {"/newOrganization"}, method = RequestMethod.POST)
-    public String createOrganization(HttpServletRequest request, Model model) {
-        Organization myOrganization = new Organization();
-
-        myOrganization.setOrganizationName(request.getParameter("organizationNameJSP"));
-        myOrganization.setDescription(request.getParameter("organizationDescription"));
-        myOrganization.setLocationId(Integer.parseInt(request.getParameter("locationId")));
-
-        return "redirect:viewOrganizations";
-    }
+    
 
     @RequestMapping(value = {"/viewLocations"}, method = RequestMethod.GET)
     public String loadLocations(HttpServletRequest request, Model model) {

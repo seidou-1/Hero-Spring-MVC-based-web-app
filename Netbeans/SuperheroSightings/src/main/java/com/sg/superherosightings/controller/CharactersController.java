@@ -53,7 +53,6 @@ public CharactersController(CharactersService charactersService) {
         return "redirect:viewHeroes";
     }
     
-    
 @RequestMapping(value = {"/viewHeroes"}, method = RequestMethod.GET)
     public String loadHeroes(HttpServletRequest request, Model model) {
         List<Characters> allHeroes = charactersService.getAllHeroes();
@@ -75,7 +74,25 @@ public CharactersController(CharactersService charactersService) {
         return "heroes";
     }
 
+@RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
+    public String loadVillains(HttpServletRequest request, Model model) {
+        List<Characters> allVillains = charactersService.getAllVillains();
+        organizationsService.setCharactersOrgList(allVillains);
+        model.addAttribute("villains", allVillains);
 
+        String display = (request.getParameter("viewType"));
+        model.addAttribute("display", display);
+
+        try {
+            int id = Integer.parseInt(request.getParameter("characterId"));
+            Characters villain = charactersService.getCharacterById(id);
+            model.addAttribute("villain", villain);
+        } catch (Exception e) {
+
+        }
+
+        return "villains";
+    }
 
 
 
