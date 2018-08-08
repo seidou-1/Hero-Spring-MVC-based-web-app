@@ -28,6 +28,12 @@ public class SHController {
 
     SHService service;
     SuperheroSightingsDao dao;
+    
+    /*
+    
+    Pick up here. Move the request mappings to the appropriate
+    classes
+    */
 
     @Inject
     public SHController(SuperheroSightingsDao dao) {
@@ -48,19 +54,7 @@ public class SHController {
 
     
 
-    @RequestMapping(value = "/createHero", method = RequestMethod.POST)
-    public String createHero(HttpServletRequest request, Model model) {
-        Characters hero = new Characters();
-        hero.setName(request.getParameter("heroName"));
-        hero.setDescription(request.getParameter("description"));
-        hero.setIsSuperHero(true);
-        for (String e : request.getParameterValues("organizations")) {
-            hero.addOrganization(e);
-        }
-        model.addAttribute("organization", request.getParameterValues("organizations"));
-        dao.addCharacter(hero);
-        return "redirect:viewHeroes";
-    }
+    
 
     @RequestMapping(value = "/deleteHero", method = RequestMethod.GET)
     public String deletHero(HttpServletRequest request, Model model) {
