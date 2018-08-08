@@ -5,7 +5,7 @@
  */
 package com.sg.superherosightings.service;
 
-import com.sg.superherosightings.dao.SightingDao;
+import com.sg.superherosightings.dao.SightingsDao;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.List;
 import java.util.Map;
@@ -16,50 +16,50 @@ import java.util.Map;
  */
 public class SightingsServiceImpl implements SightingsService {
     
-    SightingDao sightingDao;
+    SightingsDao sightingsDao;
 
-    public SightingsServiceImpl(SightingDao sightingDao) {
-		this.sightingDao = sightingDao;
+    public SightingsServiceImpl(SightingsDao sightingsDao) {
+		this.sightingsDao = sightingsDao;
 	}
 
 	@Override
     public Sighting addSighting(Sighting sighting) {
-        return sightingDao.addSighting(sighting);
+        return sightingsDao.addSighting(sighting);
     }
 
     @Override
     public void deleteSighting(int sightingId) {
-        sightingDao.deleteSighting(sightingId);
+        sightingsDao.deleteSighting(sightingId);
     }
 
     @Override
     public void updateSighting(Sighting sighting) {
-        sightingDao.updateSighting(sighting);
+        sightingsDao.updateSighting(sighting);
     }
 
     @Override
     public Sighting getSightingById(int sightingId) {
-        return sightingDao.getSightingById(sightingId);
+        return sightingsDao.getSightingById(sightingId);
     }
 
     @Override
     public Map<String, String> getSightingByIdJoined(int sightingId) {
-        return sightingDao.getSightingByIdJoined(sightingId);
+        return sightingsDao.getSightingByIdJoined(sightingId);
     }
 
     @Override
     public List<Map<String, String>> getAllSightingsJoined() {
-    	return sightingDao.getAllSightingsJoined();
+    	return sightingsDao.getAllSightingsJoined();
     }
 
     @Override
     public List<Sighting> getAllSightings() {
-        return sightingDao.getAllSightings();
+        return sightingsDao.getAllSightings();
     }
 
     @Override
     public List<Sighting> getSightingByLocationId(int id) {
-        return sightingDao.getSightingByLocationId(id);
+        return sightingsDao.getSightingByLocationId(id);
     }
     
 }

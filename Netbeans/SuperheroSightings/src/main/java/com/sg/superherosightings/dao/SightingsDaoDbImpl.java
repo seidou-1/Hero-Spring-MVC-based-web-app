@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author laptop
  */
-public class SightingDaoDbImpl implements SightingDao{
+public class SightingsDaoDbImpl implements SightingsDao{
     
     private JdbcTemplate jdbcTemplate;
     
@@ -102,7 +102,7 @@ public class SightingDaoDbImpl implements SightingDao{
     public Sighting getSightingById(int sightingId) {
         try {
             return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTING,
-                    new SightingDaoDbImpl.SightingMapper(), sightingId);
+                    new SightingsDaoDbImpl.SightingMapper(), sightingId);
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given sighting id - we just 
             // want to return null in this case
@@ -114,7 +114,7 @@ public class SightingDaoDbImpl implements SightingDao{
     public Map<String, String> getSightingByIdJoined(int sightingId) {
         try {
             return jdbcTemplate.queryForObject(SQL_SELECT_SIGHTINGS_BY_SIGHTINGID,
-                    new SightingDaoDbImpl.JoinedSightingMapper(), sightingId);
+                    new SightingsDaoDbImpl.JoinedSightingMapper(), sightingId);
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given contact id - we just 
             // want to return null in this case
@@ -126,7 +126,7 @@ public class SightingDaoDbImpl implements SightingDao{
     public List<Map<String, String>> getAllSightingsJoined() {
         try {
             return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS_JOINED,
-                    new SightingDaoDbImpl.JoinedSightingMapper());
+                    new SightingsDaoDbImpl.JoinedSightingMapper());
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given contact id - we just 
             // want to return null in this case
@@ -137,14 +137,14 @@ public class SightingDaoDbImpl implements SightingDao{
     @Override
     public List<Sighting> getAllSightings() {
         return jdbcTemplate.query(SQL_SELECT_ALL_SIGHTINGS,
-                new SightingDaoDbImpl.SightingMapper());
+                new SightingsDaoDbImpl.SightingMapper());
     }
 
     @Override
     public List<Sighting> getSightingByLocationId(int locationId) {
         try {
             return jdbcTemplate.query(SQL_SELECT_SIGHTING_BY_LOCATION_ID,
-                    new SightingDaoDbImpl.SightingMapper(), locationId);
+                    new SightingsDaoDbImpl.SightingMapper(), locationId);
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given contact id - we just
             // want to return null in this case

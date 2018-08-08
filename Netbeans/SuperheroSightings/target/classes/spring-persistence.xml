@@ -40,10 +40,32 @@
         <!--    Dao Implementation beans: -->
 
    
-    <bean id="superheroDao"
-         class="com.sg.superherosightings.dao.SuperheroSightingsDbDao">
+    <bean id="CharactersDao"
+         class="com.sg.superherosightings.dao.CharactersDaoDbImpl">
        <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
+    
+    <bean id="LocationsDao"
+         class="com.sg.superherosightings.dao.LocationsDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="OrganizationsDao"
+         class="com.sg.superherosightings.dao.OrganizationsDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="PhotosDao"
+         class="com.sg.superherosightings.dao.PhotosDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="SightingsDao"
+         class="com.sg.superherosightings.dao.SightingsDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    
     
         <!-- Service Implementation beans: -->    
 

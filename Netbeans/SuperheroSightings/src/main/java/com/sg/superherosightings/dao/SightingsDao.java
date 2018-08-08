@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author laptop
  */
-public interface SightingDao {
+public interface SightingsDao {
     
     public Sighting addSighting(Sighting sighting);
 
