@@ -38,16 +38,6 @@ public interface SuperheroSightingsDao {
 
    
 
-    public List<Organization> getOrganizationsByCharacter(Characters tempChar);
-
-    public void setCharactersOrgList(List<Characters> temp);
-
-    public List<String> getSuperPowersByCharacter(Characters tempChar);
-
-    public void setCharactersSPList(List<Characters> temp);
-
-    public List<Organization> getOrganizationByLocationId(int id);
-
     
 
     }

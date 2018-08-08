@@ -28,8 +28,9 @@ public class CharactersController {
     OrganizationsService organizationsService;
 
 @Inject
-public CharactersController(CharactersService charactersService) {
+public CharactersController(CharactersService charactersService, OrganizationsService organizationsService) {
 		this.charactersService = charactersService;
+                this.organizationsService = organizationsService;
 	}
     
 @RequestMapping(value = "/createHero", method = RequestMethod.POST)

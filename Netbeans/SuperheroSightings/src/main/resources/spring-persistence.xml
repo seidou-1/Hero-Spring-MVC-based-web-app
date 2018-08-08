@@ -36,13 +36,32 @@
          class="org.springframework.jdbc.core.JdbcTemplate">
        <property name="dataSource" ref="dataSource" />
     </bean>
+    
+        <!--    Dao Implementation beans: -->
+
    
     <bean id="superheroDao"
          class="com.sg.superherosightings.dao.SuperheroSightingsDbDao">
        <property name="jdbcTemplate" ref="jdbcTemplate" />
     </bean>
     
+        <!-- Service Implementation beans: -->    
+
+    
     <bean id="SHService"
-              class="com.sg.superherosightings.service.SHService"/>
+              class="com.sg.superherosightings.service.SHService">
+    </bean>
+    
+    <bean id="CharactersService"
+          class="com.sg.superherosightings.service.CharactersServiceImpl">
+    </bean>
+    
+    <bean id="LocationsService"
+          class="com.sg.superherosightings.service.LocationsServiceImpl">
+    </bean>
+    
+    <bean id="OrganizationsService"
+          class="com.sg.superherosightings.service.OrganizationsServiceImpl">
+    </bean>
     
 </beans>
