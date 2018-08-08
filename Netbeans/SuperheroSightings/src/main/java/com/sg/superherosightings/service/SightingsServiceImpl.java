@@ -14,11 +14,11 @@ import java.util.Map;
  *
  * @author laptop
  */
-public class SightingServiceImpl implements SightingService {
+public class SightingsServiceImpl implements SightingsService {
     
     SightingDao sightingDao;
 
-    public SightingServiceImpl(SightingDao sightingDao) {
+    public SightingsServiceImpl(SightingDao sightingDao) {
 		this.sightingDao = sightingDao;
 	}
 
