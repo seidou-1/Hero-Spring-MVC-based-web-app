@@ -48,9 +48,6 @@
         <!-- Service Implementation beans: -->    
 
     
-    <bean id="SHService"
-              class="com.sg.superherosightings.service.SHService">
-    </bean>
     
     <bean id="CharactersService"
           class="com.sg.superherosightings.service.CharactersServiceImpl">
@@ -62,6 +59,18 @@
     
     <bean id="OrganizationsService"
           class="com.sg.superherosightings.service.OrganizationsServiceImpl">
+    </bean>
+    
+    <bean id="PhotosService"
+          class="com.sg.superherosightings.service.PhotosServiceImpl">
+    </bean>
+    
+    <bean id="SHService"
+              class="com.sg.superherosightings.service.SHService">
+    </bean>
+    
+    <bean id="SightingsService"
+          class="com.sg.superherosightings.service.SightingsServiceImpl">
     </bean>
     
 </beans>

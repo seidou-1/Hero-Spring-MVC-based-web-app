@@ -6,7 +6,6 @@
 package com.sg.superherosightings.service;
 
 import com.sg.superherosightings.dao.CharactersDao;
-import com.sg.superherosightings.dao.CharactersDaoDbImpl;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.ArrayList;
