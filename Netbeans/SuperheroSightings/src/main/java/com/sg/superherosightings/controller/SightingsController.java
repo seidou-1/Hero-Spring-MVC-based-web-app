@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author laptop
  */
 @Controller
-public class SightingController {
+public class SightingsController {
     SightingsService sightingsService; 
     CharactersService charactersService;
     LocationsService locationsService;
     
-    public SightingController(SightingsService sightingsService,
+    public SightingsController(SightingsService sightingsService,
  			CharactersService charactersService, LocationsService locationsService) {
  		
  		this.sightingsService = sightingsService;

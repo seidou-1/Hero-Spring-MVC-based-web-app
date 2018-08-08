@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author laptop
  */
-public class LocationController {
+public class LocationsController {
     
     LocationsService locationsService;
 
-	public LocationController(LocationsService locationsService) {
+	public LocationsController(LocationsService locationsService) {
 		this.locationsService = locationsService;
 	}
     

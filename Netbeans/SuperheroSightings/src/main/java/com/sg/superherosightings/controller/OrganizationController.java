@@ -5,9 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Organization;
-import com.sg.superherosightings.service.LocationsService;
 import com.sg.superherosightings.service.OrganizationsService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
