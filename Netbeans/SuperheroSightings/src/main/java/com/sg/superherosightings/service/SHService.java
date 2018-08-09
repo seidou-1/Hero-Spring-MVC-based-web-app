@@ -15,6 +15,10 @@ import javax.inject.Inject;
  */
 public class SHService {
     
+    /*
+    Mo: Delete this class - no longer needed
+    */
+    
 //    SuperheroSightingsDao dao;
 //    
 ////    @Inject
