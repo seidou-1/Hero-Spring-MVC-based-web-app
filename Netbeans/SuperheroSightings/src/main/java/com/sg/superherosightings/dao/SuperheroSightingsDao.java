@@ -20,11 +20,7 @@ import java.util.Map;
 public interface SuperheroSightingsDao {
 
     /*
-    Mo - changed the return type of the create methods from void to the object 
-    i.e. addCharacters was void and changed it to "public Characters addCharacter"
-    
-    Same for Location, Sighting, and Organization
-    
+    Mo: delete this class, no longer needed.
      */
     
 

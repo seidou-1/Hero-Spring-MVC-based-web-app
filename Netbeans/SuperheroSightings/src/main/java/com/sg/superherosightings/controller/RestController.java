@@ -36,6 +36,12 @@ public class RestController {
 
     private SuperheroSightingsDao dao;
 
+    /*
+    Mo: At some point will replace SuperheroSightingsDao with appropriate
+    dependency injection
+    */
+    
+    
 //    @Inject
 //    public RestController(SuperheroSightingsDao dao) {
 //        this.dao = dao;

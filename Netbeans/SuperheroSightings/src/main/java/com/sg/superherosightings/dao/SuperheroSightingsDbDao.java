@@ -34,7 +34,16 @@ public class SuperheroSightingsDbDao implements SuperheroSightingsDao {
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    // Prepared statements for MySql, basically the query that will be run in MySql throught the Spring, JDBC hocus pocus
+    
+    /*
+    Mo: Moved all of the below to their own respective classes 
+    as part of loose coupeling
+    
+    Will delete this class and SHService class later.
+
+    */
+
+// Prepared statements for MySql, basically the query that will be run in MySql throught the Spring, JDBC hocus pocus
 
     // Sighting prepared statements
    
