@@ -29,8 +29,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author laptop
  */
 public class SuperHeroSightingsDaoTest {
+    
+    /*
+    Mo: Refactor this unit test at some point to reflect loose coupling 
+    (different daos, service layers, etc)
+    
+    */
 
-    private SuperheroSightingsDao dao;
+//    private SuperheroSightingsDao dao;
 
     public SuperHeroSightingsDaoTest() {
     }

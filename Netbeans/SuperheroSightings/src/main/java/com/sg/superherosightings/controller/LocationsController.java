@@ -9,6 +9,7 @@ import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.service.LocationsService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author laptop
  */
+@Controller
 public class LocationsController {
     
     LocationsService locationsService;

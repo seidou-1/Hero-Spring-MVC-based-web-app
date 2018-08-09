@@ -15,13 +15,13 @@ import javax.inject.Inject;
  */
 public class SHService {
     
-    SuperheroSightingsDao dao;
-    
-//    @Inject
-    public SHService(SuperheroSightingsDao dao) {
-        this.dao = dao;
-    }
-    
-    
+//    SuperheroSightingsDao dao;
+//    
+////    @Inject
+//    public SHService(SuperheroSightingsDao dao) {
+//        this.dao = dao;
+//    }
+//    
+//    
 
 }
