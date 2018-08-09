@@ -17,7 +17,7 @@ public class SHService {
     
     SuperheroSightingsDao dao;
     
-    @Inject
+//    @Inject
     public SHService(SuperheroSightingsDao dao) {
         this.dao = dao;
     }

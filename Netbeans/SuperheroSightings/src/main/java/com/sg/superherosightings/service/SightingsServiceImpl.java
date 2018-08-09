@@ -17,7 +17,7 @@ import java.util.Map;
 public class SightingsServiceImpl implements SightingsService {
     
     SightingsDao sightingsDao;
-
+    
     public SightingsServiceImpl(SightingsDao sightingsDao) {
 		this.sightingsDao = sightingsDao;
 	}

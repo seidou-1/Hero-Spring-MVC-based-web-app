@@ -5,7 +5,6 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.dao.SuperheroSightingsDao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Sighting;
