@@ -79,5 +79,12 @@ public class CharactersDaoUnitTest {
     
     private Characters addCharacter (Characters character){
         Characters myCharacter = new Characters();
+        
+        myCharacter.setDescription("Able to recover quickly");
+        myCharacter.setIsSuperHero(true);
+        myCharacter.setName("Sir Mixalot");
+//        myCharacter.setOrganizationList(organizationsByCharacter);
+        
+        return myCharacter;
     }
 }
