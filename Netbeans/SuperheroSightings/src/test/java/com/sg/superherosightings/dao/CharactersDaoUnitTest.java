@@ -5,6 +5,8 @@
  */
 package com.sg.superherosightings.dao;
 
+import com.sg.superherosightings.dto.Characters;
+import java.text.ParseException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -55,15 +57,27 @@ public class CharactersDaoUnitTest {
     
     @Before
     public void setUp() {
+        //Mo: using the above annotations, no need to clear out each Dao
+    }
+    
+    public void testAddCharacter() throws ParseException {
+        
+        //Arrange
+        
+        
+        //Act
+        
+        
+        //Assert
     }
     
     @After
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    //Methods below to create the object with the setter values
+    
+    private Characters addCharacter (Characters character){
+        Characters myCharacter = new Characters();
+    }
 }
