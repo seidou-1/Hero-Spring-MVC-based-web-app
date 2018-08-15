@@ -6,26 +6,24 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.dto.Characters;
-import java.text.ParseException;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import com.sg.superherosightings.dto.Organization;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author laptop
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-applicationContext.xml"})
-@Rollback
-@Transactional
+/*
+Mo: Get back to this later. Pick up here
+
+*/
+
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"/test-applicationContext.xml"})
+//@Rollback
+//@Transactional
 
 /*
 Mo:
@@ -47,44 +45,56 @@ public class CharactersDaoUnitTest {
     public CharactersDaoUnitTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-        //Mo: using the above annotations, no need to clear out each Dao
-    }
-    
-    public void testAddCharacter() throws ParseException {
-        
-        //Arrange
-        
-        
-        //Act
-        
-        
-        //Assert
-    }
-    
-    @After
-    public void tearDown() {
-    }
+//    @BeforeClass
+//    public static void setUpClass() {
+//    }
+//    
+//    @AfterClass
+//    public static void tearDownClass() {
+//    }
+//    
+//    @Before
+//    public void setUp() {
+//        //Mo: using the above annotations, no need to clear out each Dao
+//    }
+//    
+//    public void testAddCharacter() throws ParseException {
+//        
+//        //Arrange
+//        
+//        
+//        //Act
+//        
+//        
+//        //Assert
+//    }
+//    
+//    @After
+//    public void tearDown() {
+//    }
 
     //Methods below to create the object with the setter values
     
-    private Characters addCharacter (Characters character){
-        Characters myCharacter = new Characters();
-        
-        myCharacter.setDescription("Able to recover quickly");
-        myCharacter.setIsSuperHero(true);
-        myCharacter.setName("Sir Mixalot");
-//        myCharacter.setOrganizationList(organizationsByCharacter);
-        
-        return myCharacter;
-    }
+//    private Characters addCharacter (Characters character){
+//        Characters myCharacter = new Characters();
+//        
+//        myCharacter.setDescription("Able to recover quickly");
+//        myCharacter.setIsSuperHero(true);
+//        myCharacter.setName("Sir Mixalot");
+//        
+////      Create the List, add values, set setSuperPowerList using the value(s)
+//        List <String> superPowerList = new ArrayList<>();
+//        superPowerList.add("batman");
+//        
+//        myCharacter.setSuperPowerList(superPowerList);
+//       
+////      Create the List, add organization objects, set setOrganizationList using the organization(s)
+//        List <Organization> organizationList = new ArrayList<>();
+//        Organization myOrganization = new Organization();
+//        organizationList.add(myOrganization);
+//        
+//        myCharacter.setOrganizationList(organizationList);
+//        
+//        return myCharacter;
+//    }
 }
