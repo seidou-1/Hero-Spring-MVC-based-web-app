@@ -80,6 +80,9 @@ public class CharactersDaoUnitTest {
         
         //Arrange
         Characters myCharacter = createCharacter();
+        Location myLocation = createLocation();
+        Organization myOrganization = createOrganization();
+        Sighting mySighting = createSighting();
         
         //Act
         
