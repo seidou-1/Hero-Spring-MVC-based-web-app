@@ -98,9 +98,16 @@ public class CharactersDaoUnitTest {
         }
         
         //Act
-        
+        myCharacter = charactersDao.addCharacter(myCharacter);
         
         //Assert
+        assert myCharacter.getCharacterId() !=0;//shorthand for assert true. As long as we get an Id back.
+        assert myCharacter.getDescription().equals("Able to recover quickly");
+        assert myCharacter.getIsSuperHero() == myCharacter.getIsSuperHero();//Initially got a a cannot be referenced error. So changing to "==" instead of .equals fixes it
+        assert myCharacter.getName().equals("Sir Mixalot");
+        assert myCharacter.getOrgList() == myCharacter.getOrgList();
+        assert myCharacter.getOrganizationIDs() == myCharacter.getOrganizationIDs();
+        assert myCharacter.getSuperPowerList() == myCharacter.getSuperPowerList();
     }
     
     @After
