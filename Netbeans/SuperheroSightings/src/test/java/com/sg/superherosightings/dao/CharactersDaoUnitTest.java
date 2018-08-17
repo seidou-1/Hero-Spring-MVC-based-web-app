@@ -7,11 +7,11 @@ package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.dto.Characters;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -169,12 +169,30 @@ public class CharactersDaoUnitTest {
     public void testDeleteCharacter() throws ParseException {
         //Arrange
         Characters myCharacter = createCharacter();
+        charactersDao.addCharacter(myCharacter);
         
         //Act
         
-        //Assert
+        charactersDao.deleteCharacter(myCharacter.getCharacterId());
         
+        //Assert
+        assert charactersDao.getCharacterById(myCharacter.getCharacterId()) == null;
     }
+    
+    @Test
+    public void testGetAllCharacters() throws ParseException {
+        //Arrange
+        Characters myCharacter = createCharacter();
+        Characters mySecondCharacter = createCharacter();
+        charactersDao.addCharacter(myCharacter);
+        charactersDao.addCharacter(mySecondCharacter);
+        //Act
+        
+        //Assert
+        List<Characters> entireList = charactersDao.getAllCharacters();
+        assertEquals(entireList.size(), 2);
+    }
+    
 //*************Methods below to create the object with the setter values**************
     
     private Characters createCharacter (/*Organization myOrganization*/){ 
