@@ -84,6 +84,19 @@ public class CharactersDaoUnitTest {
         Organization myOrganization = createOrganization();
         Sighting mySighting = createSighting();
         
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        
+        java.util.Date dateStr;
+        
+        java.sql.Date dateDB = null;
+        
+        try {
+            dateStr = formatter.parse("2018-08-16");
+            dateDB = new java.sql.Date(dateStr.getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(CharactersDaoUnitTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //Act
         
         
