@@ -75,27 +75,34 @@ public class CharactersDaoUnitTest {
         //Mo: using the above annotations, no need to clear out each Dao
     }
     
+    @After
+    public void tearDown() {
+    }
+    
+//************************CRUD methods to test**********************************
+
     @Test
     public void testAddCharacter() throws ParseException {
         
         //Arrange
-        Characters myCharacter = createCharacter();
-        Location myLocation = createLocation();
         Organization myOrganization = createOrganization();
+        Characters myCharacter = createCharacter(myOrganization);
+        Location myLocation = createLocation();
+        
         Sighting mySighting = createSighting();
         
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-        
-        java.util.Date dateStr;
-        
-        java.sql.Date dateDB = null;
-        
-        try {
-            dateStr = formatter.parse("2018-08-16");
-            dateDB = new java.sql.Date(dateStr.getTime());
-        } catch (ParseException ex) {
-            Logger.getLogger(CharactersDaoUnitTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+//        
+//        java.util.Date dateStr;
+//        
+//        java.sql.Date dateDB = null;
+//        
+//        try {
+//            dateStr = formatter.parse("2018-08-16");
+//            dateDB = new java.sql.Date(dateStr.getTime());
+//        } catch (ParseException ex) {
+//            Logger.getLogger(CharactersDaoUnitTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         //Act
         myCharacter = charactersDao.addCharacter(myCharacter);
@@ -110,15 +117,55 @@ public class CharactersDaoUnitTest {
         assert myCharacter.getSuperPowerList() == myCharacter.getSuperPowerList();
     }
     
-    @After
-    public void tearDown() {
+//    @Test
+    public void testUpdateCharacter() throws ParseException{
+        //Arrange
+        
+        Characters myCharacter = createCharacter();
+        
+        myCharacter = charactersDao.addCharacter(myCharacter);
+        
+        //Changes
+        myCharacter.setDescription("Not able to recover quickly");
+        myCharacter.setIsSuperHero(false);
+        myCharacter.setName("The Joker");
+        
+        
+        /*
+        1. Create the ArrayList
+        2. Add values
+        3. Set Set using values
+        */
+        
+        List myOrganizationList = new ArrayList<>();
+        myOrganizationList.add("Suicide Squad");
+        myCharacter.setOrganizationList(myOrganizationList);
+        
+        
+        /*
+        1. Create the ArrayList
+        2. Add values
+        3. Set Set using values
+        */
+        List mySuperPowerList = new ArrayList<>();
+        mySuperPowerList.add("I mean.. it's the joker");
+        myCharacter.setSuperPowerList(mySuperPowerList);
+        
+        //Act
+        charactersDao.updateCharacter(myCharacter);
+        
+        Characters myUpdatedCharacter = charactersDao.getCharacterById(myCharacter.getCharacterId());
+        
+        //Assert
+        assert myUpdatedCharacter.getDescription().equals("I mean.. it's the joker");
+        assert myUpdatedCharacter.getIsSuperHero()==myUpdatedCharacter.getIsSuperHero();
+        assert myUpdatedCharacter.getName().equals("The Joker");
+//        assert myUpdatedCharacter.getOrganizationIDs()
     }
-
-    
 
 //*************Methods below to create the object with the setter values**************
     
-    private Characters createCharacter (){ //Mo: Purposely removed the (Characters character) argument because wer're not adding, we're creating
+    private Characters createCharacter (Organization myOrganization){ 
         Characters myCharacter = new Characters();
         
         myCharacter.setDescription("Able to recover quickly");
@@ -133,10 +180,10 @@ public class CharactersDaoUnitTest {
        
 //      Create the List, add organization objects, set setOrganizationList using the organization(s)
         List <Organization> organizationList = new ArrayList<>();
-        Organization myOrganization = createOrganization(); //Calls the createOrganization method below which already has all the values
         organizationList.add(myOrganization);
         
         myCharacter.setOrganizationList(organizationList);
+        
 //        
         return myCharacter;
     }
