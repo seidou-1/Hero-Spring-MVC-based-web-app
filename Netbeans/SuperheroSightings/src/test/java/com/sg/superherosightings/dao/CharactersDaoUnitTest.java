@@ -6,15 +6,10 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.dto.Characters;
-import com.sg.superherosightings.dto.Location;
-import com.sg.superherosightings.dto.Organization;
-import com.sg.superherosightings.dto.Sighting;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.inject.Inject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -56,6 +51,7 @@ the entire test as one transaction
 
 public class CharactersDaoUnitTest {
     
+    @Inject
     private CharactersDao charactersDao; //Inject the dao interface
     private OrganizationsDao organizationDao;
     
@@ -85,24 +81,11 @@ public class CharactersDaoUnitTest {
     public void testAddCharacter() throws ParseException {
         
         //Arrange
-        Organization myOrganization = createOrganization();
-        Characters myCharacter = createCharacter(myOrganization);
-        Location myLocation = createLocation();
-        
-        Sighting mySighting = createSighting();
-        
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+//        Organization myOrganization = createOrganization();
+        Characters myCharacter = createCharacter(/*myOrganization*/);
+//        Location myLocation = createLocation();
 //        
-//        java.util.Date dateStr;
-//        
-//        java.sql.Date dateDB = null;
-//        
-//        try {
-//            dateStr = formatter.parse("2018-08-16");
-//            dateDB = new java.sql.Date(dateStr.getTime());
-//        } catch (ParseException ex) {
-//            Logger.getLogger(CharactersDaoUnitTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+//        Sighting mySighting = createSighting();
         
         //Act
         myCharacter = charactersDao.addCharacter(myCharacter);
@@ -112,12 +95,12 @@ public class CharactersDaoUnitTest {
         assert myCharacter.getDescription().equals("Able to recover quickly");
         assert myCharacter.getIsSuperHero() == myCharacter.getIsSuperHero();//Initially got a a cannot be referenced error. So changing to "==" instead of .equals fixes it
         assert myCharacter.getName().equals("Sir Mixalot");
-        assert myCharacter.getOrgList() == myCharacter.getOrgList();
-        assert myCharacter.getOrganizationIDs() == myCharacter.getOrganizationIDs();
-        assert myCharacter.getSuperPowerList() == myCharacter.getSuperPowerList();
+//        assert myCharacter.getOrgList() == myCharacter.getOrgList();
+//        assert myCharacter.getOrganizationIDs() == myCharacter.getOrganizationIDs();
+//        assert myCharacter.getSuperPowerList() == myCharacter.getSuperPowerList();
     }
     
-//    @Test
+    @Test
     public void testUpdateCharacter() throws ParseException{
         //Arrange
         
@@ -126,7 +109,7 @@ public class CharactersDaoUnitTest {
         myCharacter = charactersDao.addCharacter(myCharacter);
         
         //Changes
-        myCharacter.setDescription("Not able to recover quickly");
+        myCharacter.setDescription("I mean.. it's the joker");
         myCharacter.setIsSuperHero(false);
         myCharacter.setName("The Joker");
         
@@ -137,19 +120,19 @@ public class CharactersDaoUnitTest {
         3. Set Set using values
         */
         
-        List myOrganizationList = new ArrayList<>();
-        myOrganizationList.add("Suicide Squad");
-        myCharacter.setOrganizationList(myOrganizationList);
-        
-        
-        /*
-        1. Create the ArrayList
-        2. Add values
-        3. Set Set using values
-        */
-        List mySuperPowerList = new ArrayList<>();
-        mySuperPowerList.add("I mean.. it's the joker");
-        myCharacter.setSuperPowerList(mySuperPowerList);
+//        List myOrganizationList = new ArrayList<>();
+//        myOrganizationList.add("Suicide Squad");
+//        myCharacter.setOrganizationList(myOrganizationList);
+//        
+//        
+//        /*
+//        1. Create the ArrayList
+//        2. Add values
+//        3. Set Set using values
+//        */
+//        List mySuperPowerList = new ArrayList<>();
+//        mySuperPowerList.add("I mean.. it's the joker");
+//        myCharacter.setSuperPowerList(mySuperPowerList);
         
         //Act
         charactersDao.updateCharacter(myCharacter);
@@ -163,9 +146,38 @@ public class CharactersDaoUnitTest {
 //        assert myUpdatedCharacter.getOrganizationIDs()
     }
 
+    @Test
+    public void testGetCharacterById() throws ParseException {
+    // Arrange
+        Characters myCharacter = createCharacter();
+        
+        myCharacter = charactersDao.addCharacter(myCharacter);
+        
+    //Act
+    
+        Characters myCreatedCharacter = charactersDao.getCharacterById(myCharacter.getCharacterId());
+    
+    //Assert
+    
+        assert myCreatedCharacter.getCharacterId() == myCharacter.getCharacterId();
+        assert myCreatedCharacter.getDescription().equals(myCharacter.getDescription());
+        assert myCreatedCharacter.getIsSuperHero() == myCharacter.getIsSuperHero();
+        assert myCreatedCharacter.getName().equals(myCharacter.getName());
+    }
+    
+    @Test
+    public void testDeleteCharacter() throws ParseException {
+        //Arrange
+        Characters myCharacter = createCharacter();
+        
+        //Act
+        
+        //Assert
+        
+    }
 //*************Methods below to create the object with the setter values**************
     
-    private Characters createCharacter (Organization myOrganization){ 
+    private Characters createCharacter (/*Organization myOrganization*/){ 
         Characters myCharacter = new Characters();
         
         myCharacter.setDescription("Able to recover quickly");
@@ -173,104 +185,110 @@ public class CharactersDaoUnitTest {
         myCharacter.setName("Sir Mixalot");
         
 //      Create the List, add values, set setSuperPowerList using the value(s)
-        List <String> superPowerList = new ArrayList<>();
-        superPowerList.add("batman");
-        
-        myCharacter.setSuperPowerList(superPowerList);
+//        List <String> superPowerList = new ArrayList<>();
+//        superPowerList.add("batman");
+//        
+//        myCharacter.setSuperPowerList(superPowerList);
        
-//      Create the List, add organization objects, set setOrganizationList using the organization(s)
-        List <Organization> organizationList = new ArrayList<>();
-        organizationList.add(myOrganization);
+        //The Character table doesn't take an Organization. Will refactor to make more efficient:
         
-        myCharacter.setOrganizationList(organizationList);
+//      Create the List, add organization objects, set setOrganizationList using the organization(s)
+//        List <Organization> organizationList = new ArrayList<>();
+//        organizationList.add(myOrganization);
+//        
+//        myCharacter.setOrganizationList(organizationList);
         
 //        
         return myCharacter;
     }
     
-    private Organization createOrganization (){
-        
-        Organization myOrganization = new Organization();
-        Location myLocation = new Location(); //Need to instantiate a location because Organization depends on it
-        
-        myOrganization.setDescription("A force to be wreckened with");
-        myOrganization.setEmail("example@email.com");
-        myOrganization.setIsGood(true);
-        myOrganization.setPhone("555-555-5555");
-//        myOrganization.setOrganizationId(0);
-
-        myOrganization.setLocationId(myLocation.getLocationID());
-        
-        return myOrganization;
-    }
     
-    private Location createLocation(){
+    /*
+    Mo: Will use the Organization, Location, Sighting methods at another time```
+    */
     
-        Location myLocation = new Location();
-        
-        myLocation.setZip("90210");
-        myLocation.setStreetNumber("447");
-        myLocation.setStreetName("Grand");
-        myLocation.setState("CA");
-        myLocation.setLocationName("The Bat Cave");
-        myLocation.setLatitude(36.778259);
-        myLocation.setLongitude(-119.417931);
-        myLocation.setDescription("The best location");
-        myLocation.setCity("Los Angeles");
-        
-        /* Mo:
-        1. create the ArrayList (to store stuff)
-        2. create the object
-        3. add the object to the ArrayList (storing)
-        */
-        
-        List<Sighting> mySightingList = new ArrayList<>();
-        Sighting mySightings = createSighting();
-        mySightingList.add(mySightings);  
-        myLocation.setAssociatedSightings(mySightingList);
-        
-        //Rinse and repeat like above
-        List <Organization> myLocationList = new ArrayList<>();
-        Organization myOrganizations = createOrganization();
-        myLocationList.add(myOrganizations);
-        myLocation.setAssociatedOrgs(myLocationList);
-        
-//        myLocation.setLocationID(0); No need to set a location id because the DAO does it for me
-        
-        return myLocation;
-    }
-    
-    private Sighting createSighting(){
-        
-    Sighting mySighting = new Sighting();
-    
-    //Need to pass a Character
-    Characters newCharacter = createCharacter();
-    mySighting.setCharacter(newCharacter);
-    mySighting.setCharacterId(newCharacter.getCharacterId());
-        
-    //Need to pass a Location
-    Location newLocation = createLocation();
-    mySighting.setLocation(newLocation);
-    mySighting.setLocationId(newLocation.getLocationID());
-    
-    //Adding a Date
-    
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date dateStr;
-        
-        java.sql.Date dateDB = null;
-        try {
-            dateStr = formatter.parse("2018-08-11");
-            dateDB = new java.sql.Date(dateStr.getTime());
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(CharactersDaoUnitTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-        mySighting.setSightingDate(dateDB);
-        
-        return mySighting;
-        
-    }
+//    private Organization createOrganization (Location myLocation){
+//        
+//        Organization myOrganization = new Organization();
+//        
+//        myOrganization.setDescription("A force to be wreckened with");
+//        myOrganization.setEmail("example@email.com");
+//        myOrganization.setIsGood(true);
+//        myOrganization.setPhone("555-555-5555");
+////        myOrganization.setOrganizationId(0);
+//
+//        myOrganization.setLocationId(myLocation.getLocationID());
+//        
+//        return myOrganization;
+//    }
+//    
+//    private Location createLocation(){
+//    
+//        Location myLocation = new Location();
+//        
+//        myLocation.setZip("90210");
+//        myLocation.setStreetNumber("447");
+//        myLocation.setStreetName("Grand");
+//        myLocation.setState("CA");
+//        myLocation.setLocationName("The Bat Cave");
+//        myLocation.setLatitude(36.778259);
+//        myLocation.setLongitude(-119.417931);
+//        myLocation.setDescription("The best location");
+//        myLocation.setCity("Los Angeles");
+//        
+//        /* Mo:
+//        1. create the ArrayList (to store stuff)
+//        2. create the object
+//        3. add the object to the ArrayList (storing)
+//        */
+//        
+//        List<Sighting> mySightingList = new ArrayList<>();
+//        Sighting mySightings = createSighting();
+//        mySightingList.add(mySightings);  
+//        myLocation.setAssociatedSightings(mySightingList);
+//        
+//        //Rinse and repeat like above
+//        List <Organization> myLocationList = new ArrayList<>();
+//        Organization myOrganizations = createOrganization();
+//        myLocationList.add(myOrganizations);
+//        myLocation.setAssociatedOrgs(myLocationList);
+//        
+////        myLocation.setLocationID(0); No need to set a location id because the DAO does it for me
+//        
+//        return myLocation;
+//    }
+//    
+//    private Sighting createSighting(){
+//        
+//    Sighting mySighting = new Sighting();
+//    
+//    //Need to pass a Character
+//    Characters newCharacter = createCharacter();
+//    mySighting.setCharacter(newCharacter);
+//    mySighting.setCharacterId(newCharacter.getCharacterId());
+//        
+//    //Need to pass a Location
+//    Location newLocation = createLocation();
+//    mySighting.setLocation(newLocation);
+//    mySighting.setLocationId(newLocation.getLocationID());
+//    
+//    //Adding a Date
+//    
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        java.util.Date dateStr;
+//        
+//        java.sql.Date dateDB = null;
+//        try {
+//            dateStr = formatter.parse("2018-08-11");
+//            dateDB = new java.sql.Date(dateStr.getTime());
+//            
+//        } catch (ParseException ex) {
+//            Logger.getLogger(CharactersDaoUnitTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    
+//        mySighting.setSightingDate(dateDB);
+//        
+//        return mySighting;
+//        
+//    }
 }
