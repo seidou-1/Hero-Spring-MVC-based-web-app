@@ -5,7 +5,6 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.dao.SuperheroSightingsDao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Photo;
 import com.sg.superherosightings.dto.Location;
@@ -34,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class RestController {
 
-    private SuperheroSightingsDao dao;
+//    private SuperheroSightingsDao dao;
 
     /*
     Mo: At some point will replace SuperheroSightingsDao with appropriate
