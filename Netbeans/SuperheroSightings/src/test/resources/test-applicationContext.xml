@@ -39,9 +39,62 @@
        <property name="dataSource" ref="dataSource" />
     </bean>
    
-    <bean id="superheroDao"
-         class="com.sg.superherosightings.dao.SuperheroSightingsDbDao">
+       <!--    Dao Implementation beans: -->
+
+   
+    <bean id="CharactersDao"
+         class="com.sg.superherosightings.dao.CharactersDaoDbImpl">
        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="LocationsDao"
+         class="com.sg.superherosightings.dao.LocationsDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="OrganizationsDao"
+         class="com.sg.superherosightings.dao.OrganizationsDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="PhotosDao"
+         class="com.sg.superherosightings.dao.PhotosDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="SightingsDao"
+         class="com.sg.superherosightings.dao.SightingsDaoDbImpl">
+       <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    
+    
+        <!-- Service Implementation beans: -->    
+
+    
+    
+    <bean id="CharactersService"
+          class="com.sg.superherosightings.service.CharactersServiceImpl">
+    </bean>
+    
+    <bean id="LocationsService"
+          class="com.sg.superherosightings.service.LocationsServiceImpl">
+    </bean>
+    
+    <bean id="OrganizationsService"
+          class="com.sg.superherosightings.service.OrganizationsServiceImpl">
+    </bean>
+    
+    <bean id="PhotosService"
+          class="com.sg.superherosightings.service.PhotosServiceImpl">
+    </bean>
+    
+<!--    <bean id="SHService"
+              class="com.sg.superherosightings.service.SHService">
+    </bean>
+    -->
+    <bean id="SightingsService"
+          class="com.sg.superherosightings.service.SightingsServiceImpl">
     </bean>
     
 </beans>

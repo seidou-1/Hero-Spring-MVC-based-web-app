@@ -32,7 +32,7 @@ public class SightingsDaoDbImpl implements SightingsDao{
     
     //Prepared Statements
      private static final String SQL_INSERT_SIGHTING
-            = "insert into Sighting ( LocationID, CharacterID, SightingDate)" + "values (?, ?, ?)";
+            = "insert into `Sighting` ( LocationID, CharacterID, SightingDate)" + "values (?, ?, ?)";
 
     private static final String SQL_DELETE_SIGHTING
             = "delete from Sighting where SightingID = ?";

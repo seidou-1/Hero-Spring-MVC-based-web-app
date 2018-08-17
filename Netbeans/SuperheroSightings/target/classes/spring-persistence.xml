@@ -86,11 +86,7 @@
     <bean id="PhotosService"
           class="com.sg.superherosightings.service.PhotosServiceImpl">
     </bean>
-    
-    <bean id="SHService"
-              class="com.sg.superherosightings.service.SHService">
-    </bean>
-    
+ 
     <bean id="SightingsService"
           class="com.sg.superherosightings.service.SightingsServiceImpl">
     </bean>
