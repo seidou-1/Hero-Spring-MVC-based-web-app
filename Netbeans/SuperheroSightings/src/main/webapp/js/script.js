@@ -1,24 +1,40 @@
 console.log(true)
 $(document).ready(function () {
+
+
+    $(".locationSortModal").on('shown.bs.modal', () => {
+        $('#locationSubmit').click(() => {
+           $(".locationIn:checked").each((index, element) => {
+             $("#hiddenLocation").val($(element).val());
+           }); 
+        });
+    });
+
+    $(".characterSortModal").on('shown.bs.modal', () => {
+        $('#characterSubmit').click(() => {
+            var characters = "";
+
+           $(".charactersSelect:checked").each((index, element) => {
+               characters += $(element).val() + "_";
+           }); 
+
+           $("#hiddenCharacters").val(characters);
+        });
+    });
+
+//
+//    console.log($("#datetimepicker").)
+//    // $("#sightingDate").val()
+
+
+
+
   
     $('#confirmDelete').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
       })
 
-    // $.ajax({
-    //     type: 'GET',
-    //     url: 'https://api.imgur.com/3/image/w0S7um9',
-    //     success: function (data) {
-    //         data.forEach(e => {
-    //             locationChoice.append(` <label>
-    //             <input type="checkbox" value="${e.locationID}"> ${e.locationName}
-    //             </label><br>`);
-    //         })
-    //     },
-    //     error: function () {
-    //         console.log("Problems found")
-    //     }
-    // });
+ 
     loadEndpointsForSightings();
     loadPills();
     var organizationSave = $("#saveOrganizations");
@@ -127,7 +143,13 @@ Array.prototype.forEach.call(inputs, function (input) {
         }
     });
 });
-function uploadImages() {
-    var imagesToUpload = $("#imagesToUpload");
-    console.log(imagesToUpload[0].files);
+function setLocation() {
+    // var imagesToUpload = $("#imagesToUpload");
+    console.log(true);
 }
+
+ 
+
+
+
+
