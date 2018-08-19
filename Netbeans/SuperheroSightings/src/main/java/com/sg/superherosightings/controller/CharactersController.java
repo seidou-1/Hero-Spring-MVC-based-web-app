@@ -6,6 +6,7 @@
 package com.sg.superherosightings.controller;
 
 import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Organization;
 import com.sg.superherosightings.service.CharactersService;
 import com.sg.superherosightings.service.OrganizationsService;
 import java.util.List;
@@ -39,6 +40,10 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
         hero.setName(request.getParameter("heroName"));
         hero.setDescription(request.getParameter("description"));
         hero.setIsSuperHero(true);
+        
+        List<Organization> allOrganizations = organizationsService.getAllOrganizations();
+        model.addAttribute("organizations", allOrganizations);
+
         for (String e : request.getParameterValues("organizations")) {
             hero.addOrganization(e);
         }

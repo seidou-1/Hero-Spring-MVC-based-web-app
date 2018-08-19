@@ -1,4 +1,4 @@
-`
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -272,9 +272,25 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                        <h4 class="modal-title" id="myModalLabel">All Organization</h4>
+                                                                        <h4 class="modal-title" id="myModalLabel">All Organization</h4>    
                                                                     </div>
-                                                                    <div class="modal-body" id="organizationChoice"></div>
+                                                                    <div class="modal-body" id="organizationChoice">
+                                                                    
+                                                                    <!--Code here to display all organizations-->
+                                                                    
+                                                                    <label>
+                                                                     
+                                                                        <c:forEach var="i" begin="1" end="${organizations.size()-1}">
+                                                                            
+                                                                            <c:out value="${organizations[i].organizationName}"></c:out>
+                                                                            
+                                                                        </c:forEach>
+                                                                        
+                                                                    </label>
+                                                                    
+                                                                    <!--Code here to display all organizations-->
+                                                                    </div>
+                                                                    
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                                         <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveOrganizations">Save</button>
