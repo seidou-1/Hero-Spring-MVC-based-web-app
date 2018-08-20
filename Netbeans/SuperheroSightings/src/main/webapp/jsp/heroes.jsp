@@ -329,7 +329,7 @@
                                                         <c:forEach var="i" begin="1" end="${powers.size()-1}">
 
                                                                 <label>
-                                                                    <input type="checkbox" class="organizationSelection" name="powers" data-name="${powers[i].powerType} " value="${powers[i].powerId}">
+                                                                    <input type="checkbox" class="superPowerSelection" name="powers" data-name="${powers[i].powerType} " value="${powers[i].powerId}">
                                                                     
                                                                     <c:out value="${powers[i].powerType}"></c:out>
                                                                     
@@ -343,7 +343,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savePowers">Save</button>
                                                     </div>
                                                 </div>
                                             </div>
