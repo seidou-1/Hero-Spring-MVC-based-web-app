@@ -326,7 +326,18 @@
                                                     </div>
                                                     <div class="modal-body" id="superPowerChoice">
                                                         
-                                                        
+                                                        <c:forEach var="i" begin="1" end="${powers.size()-1}">
+
+                                                                <label>
+                                                                    <input type="checkbox" class="organizationSelection" name="powers" data-name="${powers[i].powerType} " value="${powers[i].powerId}">
+                                                                    
+                                                                    <c:out value="${powers[i].powerType}"></c:out>
+                                                                    
+                                                                </label><br>
+
+                                                                
+
+                                                            </c:forEach>
                                                         
                                                         
                                                     </div>

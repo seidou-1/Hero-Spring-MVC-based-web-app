@@ -194,6 +194,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
         public Power mapRow(ResultSet rs, int rowNum) throws SQLException {
             Power newPower = new Power();
             newPower.setPowerType(rs.getString("SuperPowerType"));
+            newPower.setPowerId(Integer.parseInt(rs.getString("SuperpowerID")));
                  
             return newPower;
         }

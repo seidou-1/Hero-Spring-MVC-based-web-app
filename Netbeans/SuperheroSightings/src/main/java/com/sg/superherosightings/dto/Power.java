@@ -12,6 +12,16 @@ package com.sg.superherosightings.dto;
 public class Power {
     
     private String powerType;
+    
+    private int powerId;
+
+    public int getPowerId() {
+        return powerId;
+    }
+
+    public void setPowerId(int powerId) {
+        this.powerId = powerId;
+    }
 
     public String getPowerType() {
         return powerType;
