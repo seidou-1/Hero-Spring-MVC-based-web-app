@@ -324,7 +324,12 @@
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                         <h4 class="modal-title" id="myModalLabel2">All Super Powers</h4>
                                                     </div>
-                                                    <div class="modal-body" id="superPowerChoice"></div>
+                                                    <div class="modal-body" id="superPowerChoice">
+                                                        
+                                                        
+                                                        
+                                                        
+                                                    </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                         <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>

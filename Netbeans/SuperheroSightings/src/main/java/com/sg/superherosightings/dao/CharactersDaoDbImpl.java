@@ -6,6 +6,7 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Power;
 import com.sg.superherosightings.dto.Sighting;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,6 +54,9 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     private static final String SQL_SELECT_ALL_VILLAINS
             = "select * from `Characters` where isSuperHero = 0";
+    
+    private static final String SQL_SELECT_ALL_POWERS
+            = "select * from `SuperPower`";
 
     private static final String SQL_SELECT_SUPERPOWERS_BY_CHARACTERID
             = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
@@ -148,8 +152,8 @@ public class CharactersDaoDbImpl implements CharactersDao {
     }
     
     @Override
-    public List<String> getSuperPowersByCharacter(Characters tempChar) {
-        List<String> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
+    public List<Power> getSuperPowersByCharacter(Characters tempChar) {
+        List<Power> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
                 new CharactersDaoDbImpl.SuperPowerMapper(), tempChar.getCharacterId());
         return helperSuperPowerList;
     }
@@ -161,6 +165,14 @@ public class CharactersDaoDbImpl implements CharactersDao {
             charact.setSuperPowerList(getSuperPowersByCharacter(charact));
 
         }
+    }
+
+    @Override
+    public List<Power> getAllPowers() {
+        
+        return jdbcTemplate.query(SQL_SELECT_ALL_POWERS,
+                new SuperPowerMapper());
+        
     }
 
     private static final class CharactersMapper implements RowMapper<Characters> {
@@ -177,13 +189,13 @@ public class CharactersDaoDbImpl implements CharactersDao {
         }
     }
     
-    private static final class SuperPowerMapper implements RowMapper<String> {
+    private static final class SuperPowerMapper implements RowMapper<Power> {
 
-        public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-            String superPower;
-            superPower = rs.getString("SuperPowerType");
-
-            return superPower;
+        public Power mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Power newPower = new Power();
+            newPower.setPowerType(rs.getString("SuperPowerType"));
+                 
+            return newPower;
         }
     }
 
