@@ -44,7 +44,7 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
         
         
         for (String e : request.getParameterValues("organizations")) {
-            hero.addOrganization(e); //Or is it hero.setOrgList??
+            hero.addOrganization(e);  
         }
         model.addAttribute("organization", request.getParameterValues("organizations"));
         charactersService.addCharacter(hero);

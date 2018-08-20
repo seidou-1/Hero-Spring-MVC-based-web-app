@@ -1,4 +1,4 @@
-console.log(true)
+
 $(document).ready(function () {
 
     $('#confirmDelete').on('shown.bs.modal', function () {
@@ -37,35 +37,46 @@ $(document).ready(function () {
     });
 });
 function removeChecks(pill) {
-    var allOrganizations = $(".organizationSelection");
-    allOrganizations.each((index, element) => {
-        if ($(element)[0].value === pill.dataset.type) {
-            $(element)[0].checked = false;
-        }
-    });
-    loadPills();
+   var allOfType;
+   var pillType = pill.dataset.source;
+       
+   if (pillType === "organizations") {
+       allOfType = $(".organizationSelection");
+
+  } else {
+      allOfType = $(".superPowerSelection");
+  }
+
+   allOfType.each((index, element) => {
+       if ($(element)[0].value === pill.dataset.type) {
+           $(element)[0].checked = false;
+       }
+   });
+   loadPills(pillType);
+
 }
+
 function loadPills(pillType) {
-    var display, allOfType;
-    
+   var display, allOfType;
 
-    if (pillType === "organizations") {
-        display = $("#myOrganizations");
-        allOfType = $(".organizationSelection");
-    } else {
-        display = $("#mySuperPowers");
-        allOfType = $(".superPowerSelection");
-    console.log(pillType);
-    }
+   if (pillType === "organizations") {
+       display = $("#myOrganizations");
+       allOfType = $(".organizationSelection");
+       
+   } else {
+       display = $("#mySuperPowers");
+       allOfType = $(".superPowerSelection");
+       stringDisplay = "super";
+   }
 
 
-    display.empty();
-    allOfType.each((index, element) => {
-        if ($(element)[0].checked) {
-            // console.log($(element)[0].dataset.name)
-            display.append(preparePill($(element)[0]));
-        }
-    });
+   display.empty();
+   allOfType.each((index, element) => {
+       if ($(element)[0].checked) {
+           // console.log($(element)[0].dataset.name)
+           display.append(preparePill($(element)[0],pillType));
+       }
+   });
 }
 // var showing = "#map";
 // var hiding = "#sightingsTable";
@@ -76,20 +87,24 @@ function loadPills(pillType) {
 //     hiding = (hiding == "#sightingsTable") ? "#map" : "#sightingsTable";
 // }
 function removePill(pill) {
-    removeChecks($(pill)[0]);
+   removeChecks($(pill)[0]);
 }
-function preparePill(data) {
-    return `</div>
-            <div class="col-md-5 pill">
-            <div class="closePill" onclick="removePill(this)" data-type="${data.value}">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            </div>
-            <div class="pillData">
-            ${data.dataset.name}
-            </div>
-            </div>
-            </div>`;
+
+
+function preparePill(data, pill) {
+   
+   return `</div>
+           <div class="col-md-5 pill">
+           <div class="closePill" onclick="removePill(this)" data-source="${data.dataset.pill}" data-type="${data.value}">
+           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+           </div>
+           <div class="pillData">
+           ${data.dataset.name}
+           </div>
+           </div>
+           </div>`;
 }
+
 /* Load checkboxes for various restpoints */
 function loadEndpointsForSightings() {
     var organizationChoice = $('#organizationChoice');

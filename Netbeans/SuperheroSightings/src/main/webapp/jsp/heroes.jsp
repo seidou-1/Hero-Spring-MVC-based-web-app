@@ -282,7 +282,7 @@
                                                             <c:forEach var="i" begin="1" end="${organizations.size()-1}">
 
                                                                 <label>
-                                                                    <input type="checkbox" class="organizationSelection" name="organizations" data-name="${organizations[i].organizationName} " value="${organizations[i].organizationId}">
+                                                                    <input type="checkbox" class="organizationSelection" name="organizations" data-pill="organizations" data-name="${organizations[i].organizationName} " value="${organizations[i].organizationId}">
                                                                     
                                                                     <c:out value="${organizations[i].organizationName}"></c:out>
                                                                     
@@ -329,7 +329,7 @@
                                                         <c:forEach var="i" begin="1" end="${powers.size()-1}">
 
                                                                 <label>
-                                                                    <input type="checkbox" class="superPowerSelection" name="powers" data-name="${powers[i].powerType} " value="${powers[i].powerId}">
+                                                                    <input type="checkbox" class="superPowerSelection" name="powers" data-pillType = "superPowers" data-name="${powers[i].powerType} " value="${powers[i].powerId}">
                                                                     
                                                                     <c:out value="${powers[i].powerType}"></c:out>
                                                                     
