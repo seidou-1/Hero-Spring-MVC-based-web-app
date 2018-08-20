@@ -41,11 +41,10 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
         hero.setDescription(request.getParameter("description"));
         hero.setIsSuperHero(true);
         
-        List<Organization> allOrganizations = organizationsService.getAllOrganizations();
-        model.addAttribute("organizations", allOrganizations);
 
+        
         for (String e : request.getParameterValues("organizations")) {
-            hero.addOrganization(e);
+            hero.addOrganization(e); //Or is it hero.setOrgList??
         }
         model.addAttribute("organization", request.getParameterValues("organizations"));
         charactersService.addCharacter(hero);
@@ -64,6 +63,9 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
         List<Characters> allHeroes = charactersService.getAllHeroes();
         organizationsService.setCharactersOrgList(allHeroes);
         model.addAttribute("heroes", allHeroes);
+        
+        List<Organization> allOrganizations = organizationsService.getAllOrganizations();
+        model.addAttribute("organizations", allOrganizations);
 
         String display = (request.getParameter("viewType"));
         model.addAttribute("display", display);
@@ -85,6 +87,9 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
         List<Characters> allVillains = charactersService.getAllVillains();
         organizationsService.setCharactersOrgList(allVillains);
         model.addAttribute("villains", allVillains);
+        
+        List<Organization> allOrganizations = organizationsService.getAllOrganizations();
+        model.addAttribute("organizations", allOrganizations);
 
         String display = (request.getParameter("viewType"));
         model.addAttribute("display", display);

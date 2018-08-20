@@ -115,7 +115,7 @@ public class CharactersDaoUnitTest {
         
         
         /*
-        1. Create the ArrayList
+        1. Create the Arr`ayList
         2. Add values
         3. Set Set using values
         */
