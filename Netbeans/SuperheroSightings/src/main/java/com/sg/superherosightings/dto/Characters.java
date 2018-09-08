@@ -6,6 +6,7 @@
 package com.sg.superherosightings.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import org.hibernate.validator.constraints.Length;
@@ -39,16 +40,21 @@ public class Characters {
     public List<Power> getSuperPowerList() {
         return superPowerList;
     }
+    
+    Date mostRecentSightingDate;
+
+    public Date getMostRecentSightingDate() {
+        return mostRecentSightingDate;
+    }
+
+    public void setMostRecentSightingDate(Date mostRecentSightingDate) {
+        this.mostRecentSightingDate = mostRecentSightingDate;
+    }
 
     public void setSuperPowerList(List<Power> superPowerList) {
         this.superPowerList = superPowerList;
     }
 
-
-    
-    public Characters() {
-
-    }
 
     public String getName() {
         return name;

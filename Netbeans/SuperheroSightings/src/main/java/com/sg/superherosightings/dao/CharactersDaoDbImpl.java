@@ -11,6 +11,7 @@ import com.sg.superherosightings.dto.Sighting;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CharactersDaoDbImpl implements CharactersDao {
 
     private JdbcTemplate jdbcTemplate;
-    
+
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -54,7 +55,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     private static final String SQL_SELECT_ALL_VILLAINS
             = "select * from `Characters` where isSuperHero = 0";
-    
+
     private static final String SQL_SELECT_ALL_POWERS
             = "select * from `SuperPower`";
 
@@ -62,10 +63,18 @@ public class CharactersDaoDbImpl implements CharactersDao {
             = "select sp.SuperpowerId , sp.SuperPowerType from Superpower sp"
             + " Join Character_SuperPower cs on sp.SuperpowerID  = cS.SuperpowerId where CharacterId = ?";
 
-    
+    private static final String SQL_SELECT_CHARACTER_BY_SIGHTINGDATE
+            = "SELECT * FROM SuperheroSightings.Sighting\n"
+            + "\n"
+            + "WHERE `CharacterID` = '?'\n"
+            + "\n"
+            + "ORDER BY `SightingDate` DESC\n"
+            + "\n"
+            + "Limit 1";
     
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+
     public Characters addCharacter(Characters character) {
         jdbcTemplate.update(SQL_INSERT_CHARACTER,
                 character.getName(),
@@ -126,7 +135,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
         return jdbcTemplate.query(SQL_SELECT_ALL_CHARACTERS,
                 new CharactersDaoDbImpl.CharactersMapper());
     }
-    
+
     @Override
     public List<Characters> getAssociatedCharacters(List<Sighting> temp) {
         List<Characters> helperCharacterList = new ArrayList<Characters>();
@@ -144,13 +153,13 @@ public class CharactersDaoDbImpl implements CharactersDao {
         return jdbcTemplate.query(SQL_SELECT_ALL_VILLAINS,
                 new CharactersMapper());
     }
-    
+
     @Override
     public List<Characters> getAllHeroes() {
         return jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
                 new CharactersMapper());
     }
-    
+
     @Override
     public List<Power> getSuperPowersByCharacter(Characters tempChar) {
         List<Power> helperSuperPowerList = jdbcTemplate.query(SQL_SELECT_SUPERPOWERS_BY_CHARACTERID,
@@ -169,10 +178,10 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     @Override
     public List<Power> getAllPowers() {
-        
+
         return jdbcTemplate.query(SQL_SELECT_ALL_POWERS,
                 new SuperPowerMapper());
-        
+
     }
 
     private static final class CharactersMapper implements RowMapper<Characters> {
@@ -188,14 +197,23 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
         }
     }
-    
+    private static final class DateMapper implements RowMapper<Date> {
+
+        public Date mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Date myDate = new Date();
+           
+            return myDate;
+
+        }
+    }
+
     private static final class SuperPowerMapper implements RowMapper<Power> {
 
         public Power mapRow(ResultSet rs, int rowNum) throws SQLException {
             Power newPower = new Power();
             newPower.setPowerType(rs.getString("SuperPowerType"));
             newPower.setPowerId(Integer.parseInt(rs.getString("SuperpowerID")));
-                 
+
             return newPower;
         }
     }

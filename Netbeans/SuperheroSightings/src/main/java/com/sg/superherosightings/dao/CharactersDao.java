@@ -41,6 +41,8 @@ public interface CharactersDao{
     public List<Power> getSuperPowersByCharacter(Characters tempChar);
     
     public void setCharactersSPList(List<Characters> temp);
+    
+    
 
     
 }
