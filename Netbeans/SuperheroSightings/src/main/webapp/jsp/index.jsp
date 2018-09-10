@@ -27,7 +27,7 @@
                                         <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
-                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
+                                        <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/viewVillains?viewType=create">Villains</a>
@@ -98,6 +98,40 @@
                         <a>Developers</a>
                         Copyright 2018 &copy;
                     </footer>
+
+
+                    <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="moreInfoTitle">Curious? Find out more here</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>If you enter your phone number that you used to register you can do the following things.</h6>
+                                    <ul>
+                                        <li>See your current location's five day forecast</li>
+                                        <li>See the time and current weather conditions in Dominica and 2 other places of your
+                                            choice in the world.</li>
+                                        <li>Like and share our favorite quotes with your friends. They might just be having a
+                                            tough day</li>
+                                    </ul>
+                                    <hr>
+                                    <h6>Option 1: Alright. All of that sounds great! Get started by clicking sign up below</h6>
+                                    <h6>Option 2: I already signed up, but I can't remember my phone number. To get it back sent
+                                        to you, click reset below</h6>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <a class="btn btn-danger" href="#" data-dismiss="modal" data-toggle="modal" data-target="#resetMe"> Reset</a>
+                                    <a class="btn btn-primary" href="#" data-dismiss="modal" data-toggle="modal" data-target="#registerMe"> Sign Up</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <!-- Placed at the end of the document so the pages load faster -->
                     <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>

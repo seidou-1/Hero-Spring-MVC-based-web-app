@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `Characters` (
  `CharacterName` VARCHAR(100) NOT NULL,
  `Description` VARCHAR(100) NULL,
  `IsSuperHero` BOOLEAN NOT NULL,
+ `Photograph` VARCHAR(100) NOT NULL,
  PRIMARY KEY (`CharacterID`));
 CREATE TABLE IF NOT EXISTS `Superpower` (
  `SuperpowerID` INT NOT NULL AUTO_INCREMENT,
