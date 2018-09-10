@@ -206,6 +206,19 @@ public class CharactersDaoDbImpl implements CharactersDao {
             charact.setName(rs.getString("CharacterName"));
             charact.setDescription(rs.getString("Description"));
             charact.setIsSuperHero(rs.getBoolean("IsSuperHero"));
+
+            return charact;
+
+        }
+    }
+    private static final class CharactersMapperWithSightingDate implements RowMapper<Characters> {
+
+        public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Characters charact = new Characters();
+            charact.setCharacterId(rs.getInt("CharacterID"));
+            charact.setName(rs.getString("CharacterName"));
+            charact.setDescription(rs.getString("Description"));
+            charact.setIsSuperHero(rs.getBoolean("IsSuperHero"));
             charact.setMostRecentSightingDate(rs.getDate("SightingDate"));
 
             return charact;

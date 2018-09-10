@@ -76,7 +76,7 @@
                                             </td>
 
                                             <td>
-                                            <c:out value="${heroes[i].name}"></c:out>
+                                            <c:out value="${heroes[i].mostRecentSightingDate}"></c:out>
                                             </td>
                                             <td>
                                                 <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit</a>

@@ -31,10 +31,10 @@ Mo: Get back to this later. Pick up here
 
 */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-applicationContext.xml"})
-@Rollback
-@Transactional
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"/test-applicationContext.xml"})
+//@Rollback
+//@Transactional
 
 /*
 Mo:
@@ -77,7 +77,7 @@ public class CharactersDaoUnitTest {
     
 //************************CRUD methods to test**********************************
 
-    @Test
+//    @Test
     public void testAddCharacter() throws ParseException {
         
         //Arrange
@@ -100,7 +100,7 @@ public class CharactersDaoUnitTest {
 //        assert myCharacter.getSuperPowerList() == myCharacter.getSuperPowerList();
     }
     
-    @Test
+//    @Test
     public void testUpdateCharacter() throws ParseException{
         //Arrange
         
@@ -146,7 +146,7 @@ public class CharactersDaoUnitTest {
 //        assert myUpdatedCharacter.getOrganizationIDs()
     }
 
-    @Test
+//    @Test
     public void testGetCharacterById() throws ParseException {
     // Arrange
         Characters myCharacter = createCharacter();
@@ -165,7 +165,7 @@ public class CharactersDaoUnitTest {
         assert myCreatedCharacter.getName().equals(myCharacter.getName());
     }
     
-    @Test
+//    @Test
     public void testDeleteCharacter() throws ParseException {
         //Arrange
         Characters myCharacter = createCharacter();
@@ -179,7 +179,7 @@ public class CharactersDaoUnitTest {
         assert charactersDao.getCharacterById(myCharacter.getCharacterId()) == null;
     }
     
-    @Test
+//    @Test
     public void testGetAllCharacters() throws ParseException {
         //Arrange
         Characters myCharacter = createCharacter();
