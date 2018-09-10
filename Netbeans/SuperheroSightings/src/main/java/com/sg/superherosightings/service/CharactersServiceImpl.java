@@ -7,6 +7,7 @@ package com.sg.superherosightings.service;
 
 import com.sg.superherosightings.dao.CharactersDao;
 import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Power;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,13 +84,18 @@ public class CharactersServiceImpl implements CharactersService{
     }
 
     @Override
-    public List<String> getSuperPowersByCharacter(Characters tempChar) {
+    public List<Power> getSuperPowersByCharacter(Characters tempChar) {
         return charactersDao.getSuperPowersByCharacter(tempChar);
     }
 
     @Override
     public void setCharactersSPList(List<Characters> temp) {
         charactersDao.setCharactersSPList(temp);
+    }
+
+    @Override
+    public List<Power> getAllPowers() {
+        return charactersDao.getAllPowers();
     }
     
 }
