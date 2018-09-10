@@ -5,25 +5,22 @@
  */
 package com.sg.superherosightings.controller;
 
+
+import com.sg.superherosightings.dao.CharactersDao;
+import com.sg.superherosightings.dao.LocationsDao;
+import com.sg.superherosightings.dao.SightingsDao;
 import com.sg.superherosightings.dto.Characters;
-import com.sg.superherosightings.dto.Photo;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Organization;
 import com.sg.superherosightings.dto.Sighting;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.inject.Inject;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
@@ -33,18 +30,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class RestController {
 
+    private SightingsDao sightingsDao;
+    private CharactersDao characterDao;
+    private LocationsDao locationDao;
+
 //    private SuperheroSightingsDao dao;
+
 
     /*
     Mo: At some point will replace SuperheroSightingsDao with appropriate
     dependency injection
-    */
-    
-    
-//    @Inject
-//    public RestController(SuperheroSightingsDao dao) {
-//        this.dao = dao;
-//    }
+     */
+    @Inject
+    public RestController(SightingsDao sightingsDao, CharactersDao characterDao, LocationsDao locationDao) {
+        this.sightingsDao = sightingsDao;
+        this.characterDao = characterDao;
+        this.locationDao = locationDao;
+    }
 //
 //    //----------------------------------------------------------------- CHARACTERS  
 ////CREATE CHARACTER ENDPOINT
@@ -52,7 +54,7 @@ public class RestController {
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @ResponseBody
 //    public Characters addCharacter(@RequestBody Characters character) {
-//        return dao.addCharacter(character);
+//        return sightingsDao.addCharacter(character);
 //    }
 //
 ////    //CREATE IMAGE ENDPOINT
@@ -60,21 +62,21 @@ public class RestController {
 ////    @ResponseStatus(HttpStatus.CREATED)
 ////    @ResponseBody
 ////    public Photo addImage(@RequestBody Photo image) {
-////        return dao.addImage(image);
+////        return sightingsDao.addImage(image);
 ////    }
 ////    
 ////    RETRIEVE CHARACTER ENDPOINT
 //    @RequestMapping(value = "/image/{id}", method = RequestMethod.GET)
 //    @ResponseBody
 //    public Photo getImage(@PathVariable("id") long id) {
-//        return dao.getImageByID((int) id);
+//        return sightingsDao.getImageByID((int) id);
 //    }
 //
 //// DELETE CHARACTER ENDPOINT
 //    @RequestMapping(value = "/character/{id}", method = RequestMethod.DELETE)
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    public void deleteCharacter(@PathVariable("id") long id) {
-//        dao.deleteCharacter((int) id);
+//        sightingsDao.deleteCharacter((int) id);
 //    }
 //
 //// UPDATE CHARACTER ENDPOINT
@@ -83,21 +85,22 @@ public class RestController {
 //    public void updateCharacter(@PathVariable("id") long id, @RequestBody Characters character) {
 //        // favor the path variable over the id in the object if they differ
 //        character.setCharacterId((int) id);
-//        dao.updateCharacter(character);
+//        sightingsDao.updateCharacter(character);
 //    }
 //
-//// GET ALL CHARACTERS ENDPOINT
-//    @RequestMapping(value = "/character", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Characters> getAllCharacters() {
-//        return dao.getAllCharacters();
-//    }
+// GET ALL CHARACTERS ENDPOINT
+
+    @RequestMapping(value = "/getCharacters", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Characters> getAllCharacters() {
+        return characterDao.getAllCharacters();
+    }
 //
 ////RETRIEVE CHARACTER ENDPOINT
 //    @RequestMapping(value = "/character/{id}", method = RequestMethod.GET)
 //    @ResponseBody
 //    public Characters getCharacter(@PathVariable("id") long id) {
-//        return dao.getCharacterById((int) id);
+//        return sightingsDao.getCharacterById((int) id);
 //    }
 //
 ////----------------------Sighting
@@ -108,14 +111,14 @@ public class RestController {
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @ResponseBody
 //    public Sighting addSighting(@RequestBody Sighting sighting) {
-//        return dao.addSighting(sighting);
+//        return sightingsDao.addSighting(sighting);
 //    }
 ////DELETE SIGHTING ENDPOINT
 //
 //    @RequestMapping(value = "/sighting/{id}", method = RequestMethod.DELETE)
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    public void deleteSighting(@PathVariable("id") long id) {
-//        dao.deleteSighting((int) id);
+//        sightingsDao.deleteSighting((int) id);
 //    }
 //
 //// UPDATE SIGHTING ENDPOINT
@@ -123,14 +126,14 @@ public class RestController {
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    public void updateSighting(@PathVariable("id") long id, @RequestBody Sighting sighting) {
 //        sighting.setSightingId((int) id);
-//        dao.updateSighting(sighting);
+//        sightingsDao.updateSighting(sighting);
 //    }
 //
 ////GET ALL SIGHTINGS ENDPOINT
 //    @RequestMapping(value = "/sightings", method = RequestMethod.GET)
 //    @ResponseBody
 //    public List<Map<String, String>> getAllSightings() {
-//        List<Map<String, String>> sightings = dao.getAllSightingsJoined();
+//        List<Map<String, String>> sightings = sightingsDao.getAllSightingsJoined();
 //        return sightings;
 //    }
 //
@@ -138,13 +141,13 @@ public class RestController {
 ////    @RequestMapping(value = "/sighting/{id}", method = RequestMethod.GET)
 ////    @ResponseBody
 ////    public Sighting getSighting(@PathVariable("id") long id) {
-////        return dao.getSightingById((int) id);
+////        return sightingsDao.getSightingById((int) id);
 ////    }
 ////    
 //    @RequestMapping(value = "/sightings/{id}", method = RequestMethod.GET)
 //    @ResponseBody
 //    public Map<String, String> getJoinedSighting(@PathVariable("id") long id) {
-//        return dao.getSightingByIdJoined((int) id);
+//        return sightingsDao.getSightingByIdJoined((int) id);
 //    }
 //
 //
@@ -154,14 +157,14 @@ public class RestController {
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @ResponseBody
 //    public Location addLocation(@RequestBody Location location) {
-//        return dao.addLocation(location);
+//        return sightingsDao.addLocation(location);
 //    }
 //
 ////DELETE LOCATION ENDPOINT
 //    @RequestMapping(value = "/locations/{id}", method = RequestMethod.DELETE)
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    public void deleteLocation(@PathVariable("id") long id) {
-//        dao.deleteLocation((int) id);
+//        sightingsDao.deleteLocation((int) id);
 //    }
 //
 ////UPDATE LOCATION ENDPOINT
@@ -169,33 +172,40 @@ public class RestController {
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    public void updateLocation(@PathVariable("id") long id, @RequestBody Location location) {
 ////        location.setLocationId((int) id);
-//        dao.updateLocation(location);
+//        sightingsDao.updateLocation(location);
 //    }
 //
-////GET ALL LOCATIONS ENDPOINT
-//    @RequestMapping(value = "/locations", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Location> getAllLocations() {
-//        return dao.getAllLocations();
-//    }
+//GET ALL LOCATIONS ENDPOINT
+
+    @RequestMapping(value = "/getLocations", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Location> getAllLocations() {
+        return locationDao.getAllLocations();
+    }
+    
+    @RequestMapping(value = "/locations", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Location> getLocations() {
+        return locationDao.getAllLocations();
+    }
 //    
 //    
 //
-////RETRIEVE LOCATIONS ENDPOINT
-//    @RequestMapping(value = "/locations/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Location  getLocation(@PathVariable("id") int id) {
-//
-//        Location locale = dao.getLocationById(id);
-//       
-//        List<Organization> orgs = dao.getOrganizationByLocationId(id);
-//        List<Sighting> sights = dao.getSightingByLocationId(id);
+//RETRIEVE LOCATIONS ENDPOINT
+    @RequestMapping(value = "/locations/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Location  getLocation(@PathVariable("id") int id) {
+
+        Location locale = locationDao.getLocationById(id);
+       
+//        List<Organization> orgs = organizationDao.getOrganizationByLocationId(id);
+//        List<Sighting> sights = locationDao.getSightingByLocationId(id);
 //        
 //        locale.setAssociatedOrgs(orgs);
 //        locale.setAssociatedSightings(sights);
-//
-//        return locale;
-//    }
+
+        return locale;
+    }
 //
 ////------------------------------------------------------------------------ ORGANIZATIONS
 //// CREATE ORGANIZATIONS ENDPOINT
@@ -203,14 +213,14 @@ public class RestController {
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @ResponseBody
 //    public Organization addOrganization(@RequestBody Organization organization) {
-//        return dao.addOrganization(organization);
+//        return sightingsDao.addOrganization(organization);
 //    }
 //
 ////DELETE ORGANIZATION ENDPOINT
 //    @RequestMapping(value = "/organizations/{id}", method = RequestMethod.DELETE)
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    public void deleteOrganization(@PathVariable("id") long id) {
-//        dao.deleteOrganization((int) id);
+//        sightingsDao.deleteOrganization((int) id);
 //    }
 //
 ////UPDATE ORGANIZATION ENDPOINT
@@ -218,21 +228,21 @@ public class RestController {
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    public void updateOrganization(@PathVariable("id") long id, @RequestBody Organization organization) {
 //        organization.setOrganizationId((int) id);
-//        dao.updateOrganization(organization);
+//        sightingsDao.updateOrganization(organization);
 //    }
 //
 ////GET ALL ORGANIZATION ENDPOINT
 //    @RequestMapping(value = "/organizations", method = RequestMethod.GET)
 //    @ResponseBody
 //    public List<Organization> getAllOrganizations() {
-//        return dao.getAllOrganizations();
+//        return sightingsDao.getAllOrganizations();
 //    }
 //
 ////RETRIEVE ORGANIZATION ENDPOINT
 //    @RequestMapping(value = "/organizations/{id}", method = RequestMethod.GET)
 //    @ResponseBody
 //    public Organization getOrganization(@PathVariable("id") long id) {
-//        return dao.getOrganizationById((int) id);
+//        return sightingsDao.getOrganizationById((int) id);
 //    }
 //
 

@@ -1,4 +1,12 @@
+#locationPage {
+    background-image: linear-gradient(to top, #ffe7e7, #ffc0c4, #ff97a5, #ff698b, #ff2474);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
 
+}
+
+ 
 .container {
     padding: 0;
 }
@@ -24,17 +32,17 @@
 #navigation li:first-child {
     margin-left: 0;
 }
-.active {
+a.active {
     width: 100%;
     border-bottom: 3px solid skyblue;
     padding-bottom: 20px;
 }
-.active:hover {
+/* .active:hover {
     width: 100%;
     border-bottom: 3px solid darkcyan;
     padding-bottom: 25px;
     transition: 0.3s;
-}
+} */
 #navigation a {
     color:black;
     text-decoration: none;
@@ -178,6 +186,7 @@ input[type=text]:focus {
     margin: 0;
 }
 .step {
+    text-align: center;
     height: 400px;
     border-left: 0.5px solid rgba(211, 211, 211, 0.459);
 }
@@ -221,6 +230,8 @@ tbody {
     height: 370px;
     overflow-y: auto;
 }
+
+
 
  
 .scrollable > #sightingsTable tbody td, .scrollable > #sightingsTable  thead th {
@@ -350,6 +361,14 @@ ul li .information{
     padding: 0;
 }
 
+.displayList2 {
+    list-style: none; 
+    padding: 0;
+    font-weight: bold;
+}
+
+
+
 
 
 /* .displayList > ul{
@@ -358,7 +377,7 @@ ul li .information{
 } */
 
 .displayList li a{
-    width: 150px;
+    /* width: 150px; */
     border-radius: none;
 }
 
@@ -413,4 +432,33 @@ ul li .information{
         opacity:0;
         max-height:0;
     }
+}
+
+
+.locationModal {
+    font-size: 12px; 
+
+}
+
+.character-type {
+    height: 150px;
+    overflow-y: auto;
+}
+
+.step-head {
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
+}
+.step-head h4, .step-head i {
+    padding: 0;
+    margin: 5px;
+
+}
+
+.step-head i {
+    color: red;
+}
+i.passed, i.passed {
+    color: green;
 }
