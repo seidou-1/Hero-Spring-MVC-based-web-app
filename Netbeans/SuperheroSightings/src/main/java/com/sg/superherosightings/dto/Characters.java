@@ -26,6 +26,15 @@ public class Characters {
     @Length(max = 100, message = "First Name must be no more than 50 characters in length.")
     String description;
 
+    String photo;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
     @NotEmpty(message = "Man is this a superhero or not?")
     boolean isSuperHero;

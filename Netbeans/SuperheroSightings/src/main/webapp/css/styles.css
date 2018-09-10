@@ -1,4 +1,12 @@
+#locationPage {
+    background-image: linear-gradient(to top, #ffe7e7, #ffc0c4, #ff97a5, #ff698b, #ff2474);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
 
+}
+
+ 
 .container {
     padding: 0;
 }
@@ -223,6 +231,8 @@ tbody {
     overflow-y: auto;
 }
 
+
+
  
 .scrollable > #sightingsTable tbody td, .scrollable > #sightingsTable  thead th {
     width: 16.66%;
@@ -351,6 +361,14 @@ ul li .information{
     padding: 0;
 }
 
+.displayList2 {
+    list-style: none; 
+    padding: 0;
+    font-weight: bold;
+}
+
+
+
 
 
 /* .displayList > ul{
@@ -359,7 +377,7 @@ ul li .information{
 } */
 
 .displayList li a{
-    width: 150px;
+    /* width: 150px; */
     border-radius: none;
 }
 
@@ -425,4 +443,22 @@ ul li .information{
 .character-type {
     height: 150px;
     overflow-y: auto;
+}
+
+.step-head {
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
+}
+.step-head h4, .step-head i {
+    padding: 0;
+    margin: 5px;
+
+}
+
+.step-head i {
+    color: red;
+}
+i.passed, i.passed {
+    color: green;
 }

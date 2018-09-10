@@ -1,68 +1,92 @@
 console.log(true)
 $(document).ready(function () {
+    // makeCorsRequest();
+    // getCharacterImages();
 
 
-    $(".locationSortModal").on('shown.bs.modal', () => {
-        $('#locationSubmit').click(() => {
-           $(".locationIn:checked").each((index, element) => {
-             $("#hiddenLocation").val($(element).val());
-           }); 
-        });
-    });
 
     $(".characterSortModal").on('shown.bs.modal', () => {
+        console.log("fork you")
         $('#characterSubmit').click(() => {
             var characters = "";
+            arrOfCharacters = [];
+            $(".charactersSelect:checked").each((index, element) => {
+                characters += $(element).val() + "_";
+                arrOfCharacters.push(+$(element).val());
+            });
 
-           $(".charactersSelect:checked").each((index, element) => {
-               characters += $(element).val() + "_";
-           }); 
-
-           $("#hiddenCharacters").val(characters);
+        
+       
         });
     });
 
-//
-//    console.log($("#datetimepicker").)
-//    // $("#sightingDate").val()
+    var arrOfCharacters = [];
+
+    $(".characterSortModal").on('hide.bs.modal', () => {
+        loadSelectedCharacters(arrOfCharacters);
+    });
 
 
-
-
-  
     $('#confirmDelete').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
-      })
+    })
 
- 
+
     loadEndpointsForSightings();
     loadPills();
     var organizationSave = $("#saveOrganizations");
     organizationSave.click(function () {
         loadPills();
     });
+
     $(".clickable-row").click(function () {
-        
+
         window.location = $(this).data("href");
     });
 });
-function removeChecks(pill) {
-    var allOrganizations = $(".organizationSelection");
-    allOrganizations.each((index, element) => {
+
+
+
+
+function removeChecks(pill, pillType) {
+    var allOfType;
+
+    if (pillType === "organization") {
+        allOfType = $(".organizationSelection");
+
+   } else {
+       allOfType = $(".superPowerSelection");
+   }
+
+    allOfType.each((index, element) => {
         if ($(element)[0].value === pill.dataset.type) {
             $(element)[0].checked = false;
         }
     });
-    loadPills();
+    loadPills(pillType);
+
 }
-function loadPills() {
-    var organizationDisplay = $("#myOrganizations");
-    var allOrganizations = $(".organizationSelection");
-    organizationDisplay.empty();
-    allOrganizations.each((index, element) => {
+
+
+function loadPills(pillType) {
+    var display, allOfType;
+
+    if (pillType === "organization") {
+        display = $("#myOrganizations");
+        allOfType = $(".organizationSelection");
+        stringDisplay = "organizations";
+    } else {
+        display = $("#mySuperPowers");
+        allOfType = $(".superPowerSelection");
+        stringDisplay = "super";
+    }
+
+
+    display.empty();
+    allOfType.each((index, element) => {
         if ($(element)[0].checked) {
-            console.log($(element)[0].dataset.name)
-            organizationDisplay.append(preparePill($(element)[0]));
+            // console.log($(element)[0].dataset.name)
+            display.append(preparePill($(element)[0]), pillType);
         }
     });
 }
@@ -74,13 +98,17 @@ function loadPills() {
 //     showing = (showing == "#map") ? "#sightingsTable" : "#map";
 //     hiding = (hiding == "#sightingsTable") ? "#map" : "#sightingsTable";
 // }
-function removePill(pill) {
-    removeChecks($(pill)[0]);
+
+const data = {
+
 }
-function preparePill(data) {
+function removePill(pill, pillType) {
+    removeChecks($(pill)[0], pillType);
+}
+function preparePill(data, pill) {
     return `</div>
             <div class="col-md-5 pill">
-            <div class="closePill" onclick="removePill(this)" data-type="${data.value}">
+            <div class="closePill" onclick="removePill(this, pill)" data-type="${data.value}">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </div>
             <div class="pillData">
@@ -137,7 +165,8 @@ Array.prototype.forEach.call(inputs, function (input) {
         }
         if (fileName) {
             label.querySelector('span').innerHTML = "true nuh";
-            label.querySelector('span').innerHTML = fileName; }
+            label.querySelector('span').innerHTML = fileName;
+        }
         else {
             label.innerHTML = labelVal;
         }
@@ -148,8 +177,58 @@ function setLocation() {
     console.log(true);
 }
 
+function loadSelectedCharacters(characters) {
+
+    const tbody = $("#charactersSelected tbody");
+    $(tbody).empty();
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/SuperheroSightings/getCharacters',
+        success: function (data) {
+            let count = 0;
+            data.forEach((el, i) => {
+                if (characters.includes(el.characterId)) {
+                    count += 1;
+                    tbody.append(`<tr>
+                <td> ${count}. </td>
+                <td>
+                    <img src="${el.photo} alt="Char Pic" class="mugshot">
+                </td>
+                <td> ${el.name} </td>
+                <td> ${el.isSuperHero ? "Hero" : "Villain"} </td>
+                <td>
+                    <a href=""> delete</a>
+                </td>
+            </tr>
+                `
+                    );
+                }
+            })
+        },
+        error: function () {
+            console.log("There was an issue finding the data")
+        }
+    });
+}
+
+
+function getCharacterImages() {
+    $.ajax({
+        type: 'GET',
+        data: null,
+        url: 'http://localhost:8080/SuperheroSightings/getCharacters',
+        success: function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                console.log(i, data[i].photo)
+            }
+
+        },
+        error: function () {
+            console.log("There was an issue finding the data")
+        }
+    });
+}
  
-
-
 
 

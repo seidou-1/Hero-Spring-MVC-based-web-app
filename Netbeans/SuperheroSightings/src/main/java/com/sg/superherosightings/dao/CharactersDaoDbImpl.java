@@ -171,7 +171,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
             charact.setName(rs.getString("CharacterName"));
             charact.setDescription(rs.getString("Description"));
             charact.setIsSuperHero(rs.getBoolean("IsSuperHero"));
-
+            charact.setPhoto(rs.getString("Photograph"));
             return charact;
 
         }
