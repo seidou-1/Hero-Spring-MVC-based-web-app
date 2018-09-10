@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 
+
 import com.sg.superherosightings.dao.CharactersDao;
 import com.sg.superherosightings.dao.LocationsDao;
 import com.sg.superherosightings.dao.SightingsDao;
@@ -32,6 +33,9 @@ public class RestController {
     private SightingsDao sightingsDao;
     private CharactersDao characterDao;
     private LocationsDao locationDao;
+
+//    private SuperheroSightingsDao dao;
+
 
     /*
     Mo: At some point will replace SuperheroSightingsDao with appropriate

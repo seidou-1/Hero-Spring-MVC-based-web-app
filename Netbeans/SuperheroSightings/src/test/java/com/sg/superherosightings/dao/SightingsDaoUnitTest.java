@@ -99,6 +99,24 @@ public class SightingsDaoUnitTest {
     }
 
 //    @Test
+
+        //Arrange
+        Characters myCharacter = createCharacter();
+        Location myLocation = createLocation();
+
+        Sighting mySighting = createSighting(myCharacter, myLocation);
+        Date myDate = createDate();
+        //Act
+        mySighting = sightingsDao.addSighting(mySighting);
+//
+//        //Assert
+        assert mySighting.getCharacterId() != 0;
+        assert mySighting.getLocationId() != 0;
+        assert mySighting.getSightingDate().equals(myDate);;
+
+    }
+
+    @Test
     public void testGetSightingByID() throws ParseException {
 
         //Arrange
@@ -118,7 +136,7 @@ public class SightingsDaoUnitTest {
 
     }
 
-//    @Test
+    @Test
     public void testDeletePost() {
         //Arrange
         Characters myCharacter = createCharacter();
@@ -128,14 +146,13 @@ public class SightingsDaoUnitTest {
         mySighting = sightingsDao.addSighting(mySighting);
 
         //Act
-        assert sightingsDao.getSightingById(mySighting.getSightingId()) != null;
-
+        assert sightingsDao.getSightingById(mySighting.getSightingId()) != null
         sightingsDao.deleteSighting(mySighting.getSightingId());
 
         assert sightingsDao.getSightingById(mySighting.getSightingId()) == null;
     }
 
-//    @Test
+    @Test
     public void testUpdatePost() {
         //Arrange
         Characters myCharacter = createCharacter();
