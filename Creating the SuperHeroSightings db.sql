@@ -1,11 +1,12 @@
-DROP DATABASE IF EXISTS `SuperheroSightingsTest`;
-CREATE DATABASE `SuperheroSightingsTest`;
-USE `SuperheroSightingsTest`;
+DROP DATABASE IF EXISTS `SuperheroSightings`;
+CREATE DATABASE `SuperheroSightings`;
+USE `SuperheroSightings`;
 CREATE TABLE IF NOT EXISTS `Characters` (
  `CharacterID` INT NOT NULL AUTO_INCREMENT,
  `CharacterName` VARCHAR(100) NOT NULL,
  `Description` VARCHAR(100) NULL,
  `IsSuperHero` BOOLEAN NOT NULL,
+ `Photograph` VARCHAR(100) NOT NULL,
  PRIMARY KEY (`CharacterID`));
 CREATE TABLE IF NOT EXISTS `Superpower` (
  `SuperpowerID` INT NOT NULL AUTO_INCREMENT,

@@ -1,24 +1,31 @@
 
 $(document).ready(function () {
+ 
+
+
+    $(".characterSortModal").on('shown.bs.modal', () => { 
+        $('#characterSubmit').click(() => {
+            var characters = "";
+            arrOfCharacters = [];
+            $(".charactersSelect:checked").each((index, element) => {
+                characters += $(element).val() + "_";
+                arrOfCharacters.push(+$(element).val());
+            }); 
+       
+        });
+    });
+
+    var arrOfCharacters = [];
+
+    $(".characterSortModal").on('hide.bs.modal', () => {
+        loadSelectedCharacters(arrOfCharacters);
+    });
+
 
     $('#confirmDelete').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
     })
 
-    // $.ajax({
-    //     type: 'GET',
-    //     url: 'https://api.imgur.com/3/image/w0S7um9',
-    //     success: function (data) {
-    //         data.forEach(e => {
-    //             locationChoice.append(` <label>
-    //             <input type="checkbox" value="${e.locationID}"> ${e.locationName}
-    //             </label><br>`);
-    //         })
-    //     },
-    //     error: function () {
-    //         console.log("Problems found")
-    //     }
-    // });
     loadEndpointsForSightings();
     loadPills("organizations");
     var organizationSave = $("#saveOrganizations");
@@ -158,7 +165,63 @@ Array.prototype.forEach.call(inputs, function (input) {
         }
     });
 });
-function uploadImages() {
-    var imagesToUpload = $("#imagesToUpload");
-    console.log(imagesToUpload[0].files);
+function setLocation() {
+    // var imagesToUpload = $("#imagesToUpload");
+    console.log(true);
 }
+
+function loadSelectedCharacters(characters) {
+
+    const tbody = $("#charactersSelected tbody");
+    $(tbody).empty();
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/SuperheroSightings/getCharacters',
+        success: function (data) {
+            let count = 0;
+            data.forEach((el, i) => {
+                if (characters.includes(el.characterId)) {
+                    count += 1;
+                    tbody.append(`<tr>
+                <td> ${count}. </td>
+                <td>
+                    <img src="${el.photo} alt="Char Pic" class="mugshot">
+                </td>
+                <td> ${el.name} </td>
+                <td> ${el.isSuperHero ? "Hero" : "Villain"} </td>
+                <td>
+                    <a href=""> delete</a>
+                </td>
+            </tr>
+                `
+                    );
+                }
+            })
+        },
+        error: function () {
+            console.log("There was an issue finding the data")
+        }
+    });
+}
+
+
+function getCharacterImages() {
+    $.ajax({
+        type: 'GET',
+        data: null,
+        url: 'http://localhost:8080/SuperheroSightings/getCharacters',
+        success: function (data) {
+
+            for (var i = 0; i < data.length; i++) {
+                console.log(i, data[i].photo)
+            }
+
+        },
+        error: function () {
+            console.log("There was an issue finding the data")
+        }
+    });
+}
+ 
+
+

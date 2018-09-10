@@ -83,7 +83,7 @@ public class SightingsDaoDbImpl implements SightingsDao{
         return sighting;
 
     }
-
+ 
     @Override
     public void deleteSighting(int sightingId) {
         jdbcTemplate.update(SQL_DELETE_SIGHTING, sightingId);
