@@ -6,6 +6,7 @@
 package com.sg.superherosightings.service;
 
 import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Power;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.List;
 
@@ -35,7 +36,9 @@ public interface CharactersService {
 
     public List<Characters> getAllVillains();
 
-    public List<String> getSuperPowersByCharacter(Characters tempChar);
+    public List<Power> getSuperPowersByCharacter(Characters tempChar);
     
     public void setCharactersSPList(List<Characters> temp);
+
+    public List<Power> getAllPowers();
 }   

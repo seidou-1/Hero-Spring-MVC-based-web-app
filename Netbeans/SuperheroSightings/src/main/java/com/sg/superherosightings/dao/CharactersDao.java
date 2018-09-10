@@ -6,6 +6,7 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Power;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.List;
 
@@ -35,9 +36,13 @@ public interface CharactersDao{
 
     public List<Characters> getAllVillains();
     
-    public List<String> getSuperPowersByCharacter(Characters tempChar);
+    public List<Power> getAllPowers();
+    
+    public List<Power> getSuperPowersByCharacter(Characters tempChar);
     
     public void setCharactersSPList(List<Characters> temp);
+    
+    
 
     
 }
