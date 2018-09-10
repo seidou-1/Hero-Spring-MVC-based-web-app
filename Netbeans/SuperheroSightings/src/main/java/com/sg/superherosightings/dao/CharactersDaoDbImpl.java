@@ -165,13 +165,13 @@ public class CharactersDaoDbImpl implements CharactersDao {
     @Override
     public List<Characters> getAllVillains() {
         return jdbcTemplate.query(SQL_SELECT_ALL_VILLAINS_JOIN_BY_SIGHTINGDATE,
-                new CharactersMapper());
+                new CharactersMapperWithSightingDate());
     }
 
     @Override
     public List<Characters> getAllHeroes() {
         return jdbcTemplate.query(SQL_SELECT_HEROES_JOIN_BY_SIGHTINGDATE,
-                new CharactersMapper());
+                new CharactersMapperWithSightingDate());
     }
 
     @Override
@@ -211,6 +211,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
         }
     }
+    
     private static final class CharactersMapperWithSightingDate implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {
