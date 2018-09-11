@@ -176,7 +176,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     @Override
     public List<Characters> getAllHeroes() {
-        List <Characters> heroes = jdbcTemplate.query(SQL_SELECT_HEROES_JOIN_BY_SIGHTINGDATE,
+        List <Characters> heroes = jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
                 new CharactersMapper());
         
         for (Characters myHero : heroes){
