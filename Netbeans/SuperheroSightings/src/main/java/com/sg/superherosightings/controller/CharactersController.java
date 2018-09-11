@@ -62,6 +62,8 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
     public String loadHeroes(HttpServletRequest request, Model model) {
         List<Characters> allHeroes = charactersService.getAllHeroes();
         organizationsService.setCharactersOrgList(allHeroes);
+        
+        System.out.println(11111 + " " + allHeroes.size());
         model.addAttribute("heroes", allHeroes);
         
         List<Organization> allOrganizations = organizationsService.getAllOrganizations();

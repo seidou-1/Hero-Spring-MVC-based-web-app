@@ -76,10 +76,21 @@
                                             </td>
 
                                             <td>
-                                            <c:out value="${heroes[i].mostRecentSightingDate}"></c:out>
-                                            </td>
-                                            <td>
-                                                <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit</a>
+
+                                            <c:choose>
+                                                <c:when test = "${empty heroes[i].mostRecentSightingDate}">
+                                                    <c:out value = "None"></c:out>
+                                                </c:when>
+
+                                                <c:otherwise>
+                                                    <c:out value="${heroes[i].mostRecentSightingDate}"></c:out>
+                                                </c:otherwise>
+
+                                            </c:choose>
+
+                                        </td>
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit</a>
                                         </td>
                                     </tr>
                                 </c:forEach> 
@@ -279,18 +290,18 @@
                                                         <!--Code here to display all organizations-->
 
 
-                                                            <c:forEach var="i" begin="1" end="${organizations.size()-1}">
+                                                        <c:forEach var="i" begin="1" end="${organizations.size()-1}">
 
-                                                                <label>
-                                                                    <input type="checkbox" class="organizationSelection" name="organizations" data-pill="organizations" data-name="${organizations[i].organizationName} " value="${organizations[i].organizationId}">
-                                                                    
-                                                                    <c:out value="${organizations[i].organizationName}"></c:out>
-                                                                    
+                                                            <label>
+                                                                <input type="checkbox" class="organizationSelection" name="organizations" data-pill="organizations" data-name="${organizations[i].organizationName} " value="${organizations[i].organizationId}">
+
+                                                                <c:out value="${organizations[i].organizationName}"></c:out>
+
                                                                 </label><br>
 
-                                                                
 
-                                                            </c:forEach>
+
+                                                        </c:forEach>
 
 
                                                         <!--Code here to display all organizations-->
@@ -325,21 +336,21 @@
                                                         <h4 class="modal-title" id="myModalLabel2">All Super Powers</h4>
                                                     </div>
                                                     <div class="modal-body" id="superPowerChoice">
-                                                        
+
                                                         <c:forEach var="i" begin="1" end="${powers.size()-1}">
 
-                                                                <label>
-                                                                    <input type="checkbox" class="superPowerSelection" name="powers" data-pillType = "superPowers" data-name="${powers[i].powerType} " value="${powers[i].powerId}">
-                                                                    
-                                                                    <c:out value="${powers[i].powerType}"></c:out>
-                                                                    
+                                                            <label>
+                                                                <input type="checkbox" class="superPowerSelection" name="powers" data-pillType = "superPowers" data-name="${powers[i].powerType} " value="${powers[i].powerId}">
+
+                                                                <c:out value="${powers[i].powerType}"></c:out>
+
                                                                 </label><br>
 
-                                                                
 
-                                                            </c:forEach>
-                                                        
-                                                        
+
+                                                        </c:forEach>
+
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
