@@ -176,6 +176,26 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     @Override
     public List<Characters> getAllHeroes() {
+        
+        /*
+        1. Query for all heroes and store the results of that into a List of Characters
+        
+        2. Call the CharactersMapper to map the DB columns to the member fields of the object
+        
+        3. For each character within the list of characters that we queried  (step 1), retrieve
+        the associated sighting date and store it as a List of Dates.
+        
+        Call the DateMapper to map the DB columns to the member field
+        
+        And also get the characterId of that respective character
+        
+        4. After we retrieved the latestSighting of that character, Set the MostRecentSightingDate of that character
+        But set only the first sighting (array List slot 0)
+        
+        5. catch any exceptions to null (empty sightings)
+        
+        6. return the hero
+        */
         List <Characters> heroes = jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
                 new CharactersMapper());
         
