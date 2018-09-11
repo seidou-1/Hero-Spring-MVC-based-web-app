@@ -52,6 +52,12 @@ public class CharactersDaoDbImpl implements CharactersDao {
     //Isolate characters
     private static final String SQL_SELECT_ALL_HEROES
             = "select * from `Characters` where isSuperHero = 1";
+    
+    private static final String SQL_SELECT_ALL_VILLAINS
+            = "select * from `Characters` where isSuperHero = 0";
+    
+    private static final String SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID
+            = "select SightingDate from `Sighting` where CharacterID = ? ORDER BY `SightingDate` DESC Limit 1";
 
     private static final String SQL_SELECT_ALL_VILLAINS_JOIN_BY_SIGHTINGDATE
             = "Select `CharacterName`, `SightingDate`, Characters.CharacterID from `Sighting`\n"
@@ -170,8 +176,19 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     @Override
     public List<Characters> getAllHeroes() {
-        return jdbcTemplate.query(SQL_SELECT_HEROES_JOIN_BY_SIGHTINGDATE,
-                new CharactersMapperWithSightingDate());
+        List <Characters> heroes = jdbcTemplate.query(SQL_SELECT_HEROES_JOIN_BY_SIGHTINGDATE,
+                new CharactersMapper());
+        
+        for (Characters myHero : heroes){
+            List<Date> latestSighting = jdbcTemplate.query(SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID, new DateMapper(), myHero.getCharacterId());
+            
+            try {
+                myHero.setMostRecentSightingDate(latestSighting.get(0));
+            } catch (Exception e) {
+                myHero.setMostRecentSightingDate(null);
+            }
+        }
+        return heroes;
     }
 
     @Override
@@ -227,8 +244,6 @@ public class CharactersDaoDbImpl implements CharactersDao {
         }
     }
 
-    
-
     private static final class SuperPowerMapper implements RowMapper<Power> {
 
         public Power mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -237,6 +252,15 @@ public class CharactersDaoDbImpl implements CharactersDao {
             newPower.setPowerId(Integer.parseInt(rs.getString("SuperpowerID")));
 
             return newPower;
+        }
+    }
+    
+    
+    private static final class DateMapper implements RowMapper<Date> {
+        
+        public Date mapRow (ResultSet rs, int rowNum) throws SQLException {
+            Date newDate = rs.getDate("SightingDate");
+            return newDate;
         }
     }
 

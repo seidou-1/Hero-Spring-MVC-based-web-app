@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS `SuperheroSightingsTest`;
-CREATE DATABASE `SuperheroSightingsTest`;
-USE `SuperheroSightingsTest`;
+DROP DATABASE IF EXISTS `SuperheroSightings`;
+CREATE DATABASE `SuperheroSightings`;
+USE `SuperheroSightings`;
 CREATE TABLE IF NOT EXISTS `Characters` (
  `CharacterID` INT NOT NULL AUTO_INCREMENT,
  `CharacterName` VARCHAR(100) NOT NULL,

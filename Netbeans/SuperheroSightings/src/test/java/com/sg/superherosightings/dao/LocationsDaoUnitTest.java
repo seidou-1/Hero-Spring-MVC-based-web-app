@@ -174,7 +174,7 @@ public class LocationsDaoUnitTest {
         List<String> superPowerList = new ArrayList<>();
         superPowerList.add("batman");
 
-        myCharacter.setSuperPowerList(superPowerList);
+//        myCharacter.setSuperPowerList(superPowerList);
 
 //      Create the List, add organization objects, set setOrganizationList using the organization(s)
         List<Organization> organizationList = new ArrayList<>();
