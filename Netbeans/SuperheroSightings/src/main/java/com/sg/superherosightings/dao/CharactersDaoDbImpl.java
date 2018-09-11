@@ -59,18 +59,19 @@ public class CharactersDaoDbImpl implements CharactersDao {
     private static final String SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID
             = "select SightingDate from `Sighting` where CharacterID = ? ORDER BY `SightingDate` DESC Limit 1";
 
+    private static final String SQL_SELECT_ALL_VILLAINS
+            = "select * from `Characters` where isSuperHero = 0";
+
+    private static final String SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID
+            = "select SightingDate from `Sighting` where CharacterID = ? ORDER BY `SightingDate` DESC Limit 1";
+
     private static final String SQL_SELECT_ALL_VILLAINS_JOIN_BY_SIGHTINGDATE
-            = "Select `CharacterName`, `SightingDate`, Characters.CharacterID from `Sighting`\n"
-            + "\n"
-            + "join  Characters\n"
-            + "\n"
-            + "On Characters.CharacterID = Sighting.CharacterID\n"
-            + "\n"
-            + "WHERE Characters.CharacterID = '?' and Characters.IsSuperHero='0'\n"
-            + "\n"
-            + "ORDER BY `SightingDate` DESC\n"
-            + "\n"
-            + "Limit 1;";
+            = "Select `CharacterName`, `SightingDate`, Characters.CharacterID from `Sighting` "
+            + "join  Characters "
+            + "On Characters.CharacterID = Sighting.CharacterID "
+            + "WHERE Characters.CharacterID = ? and Characters.IsSuperHero='0' "
+            + "ORDER BY `SightingDate` DESC "
+            + "Limit 1";
 
     private static final String SQL_SELECT_ALL_POWERS
             = "select * from `SuperPower`";
@@ -170,8 +171,23 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     @Override
     public List<Characters> getAllVillains() {
-        return jdbcTemplate.query(SQL_SELECT_ALL_VILLAINS_JOIN_BY_SIGHTINGDATE,
-                new CharactersMapperWithSightingDate());
+
+        List<Characters> villains = jdbcTemplate.query(SQL_SELECT_ALL_VILLAINS,
+                new CharactersMapper());
+
+        for (Characters myVillain : villains) {
+            List<Date> latestSighting = jdbcTemplate.query(SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID, new DateMapper(), myVillain.getCharacterId());
+            
+            try {
+//                System.out.println(latestSighting);
+                myVillain.setMostRecentSightingDate(latestSighting.get(0));
+              
+            } catch (Exception e) {
+                myVillain.setMostRecentSightingDate(null);
+            }
+        }
+
+        return villains;
     }
 
     @Override
@@ -248,7 +264,6 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
         }
     }
-    
     private static final class CharactersMapperWithSightingDate implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -279,6 +294,14 @@ public class CharactersDaoDbImpl implements CharactersDao {
     private static final class DateMapper implements RowMapper<Date> {
         
         public Date mapRow (ResultSet rs, int rowNum) throws SQLException {
+            Date newDate = rs.getDate("SightingDate");
+            return newDate;
+        }
+    }
+
+    private static final class DateMapper implements RowMapper<Date> {
+
+        public Date mapRow(ResultSet rs, int rowNum) throws SQLException {
             Date newDate = rs.getDate("SightingDate");
             return newDate;
         }
