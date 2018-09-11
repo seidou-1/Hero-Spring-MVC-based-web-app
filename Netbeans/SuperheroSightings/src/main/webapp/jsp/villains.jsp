@@ -76,7 +76,15 @@
                                                         </td>
 
                                                         <td>
-                                                            <c:out value="${villains[i].name}"></c:out>
+                                                            <%--<c:out value="${villains[i].mostRecentSightingDate}"></c:out>--%>
+                                                            <c:choose>
+                                                                <c:when test="${empty villains[i].mostRecentSightingDate}">
+                                                                     <c:out value="None"></c:out>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                     <c:out value="${villains[i].mostRecentSightingDate}"></c:out>
+                                                                </c:otherwise>
+                                                            </c:choose>
                                                         </td>
                                                         <td>
                                                             <a href="${pageContext.request.contextPath}/viewVillains?viewType=edit&characterId=${villains[i].characterId}">edit</a>

@@ -90,7 +90,8 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
         List<Characters> allVillains = charactersService.getAllVillains();
         organizationsService.setCharactersOrgList(allVillains);
         model.addAttribute("villains", allVillains);
-        
+        System.out.println(allVillains
+                .size());
         List<Organization> allOrganizations = organizationsService.getAllOrganizations();
         model.addAttribute("organizations", allOrganizations);
 
