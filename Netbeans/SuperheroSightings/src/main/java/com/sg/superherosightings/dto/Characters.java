@@ -57,6 +57,7 @@ public class Characters {
     }
 
     public void setMostRecentSightingDate(Date mostRecentSightingDate) {
+        System.out.println("Setting date to " + mostRecentSightingDate);
         this.mostRecentSightingDate = mostRecentSightingDate;
     }
 
