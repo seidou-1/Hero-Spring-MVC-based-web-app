@@ -59,11 +59,6 @@ public class CharactersDaoDbImpl implements CharactersDao {
     private static final String SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID
             = "select SightingDate from `Sighting` where CharacterID = ? ORDER BY `SightingDate` DESC Limit 1";
 
-    private static final String SQL_SELECT_ALL_VILLAINS
-            = "select * from `Characters` where isSuperHero = 0";
-
-    private static final String SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID
-            = "select SightingDate from `Sighting` where CharacterID = ? ORDER BY `SightingDate` DESC Limit 1";
 
     private static final String SQL_SELECT_ALL_VILLAINS_JOIN_BY_SIGHTINGDATE
             = "Select `CharacterName`, `SightingDate`, Characters.CharacterID from `Sighting` "
@@ -299,12 +294,6 @@ public class CharactersDaoDbImpl implements CharactersDao {
         }
     }
 
-    private static final class DateMapper implements RowMapper<Date> {
-
-        public Date mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Date newDate = rs.getDate("SightingDate");
-            return newDate;
-        }
-    }
+    
 
 }
