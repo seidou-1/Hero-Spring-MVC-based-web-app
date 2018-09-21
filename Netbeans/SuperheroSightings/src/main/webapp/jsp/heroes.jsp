@@ -17,7 +17,7 @@
 
                     <body>
                         <div class="container">
-                            <h1 id="logo">HERO</h1>
+                            <img style="width: 100px; margin: 5px;" src="${pageContext.request.contextPath}/img/hero_logo.svg">
 
                             <div class="row">
                                 <!-- <div class="col-md-8" id="maindisplay">  -->
