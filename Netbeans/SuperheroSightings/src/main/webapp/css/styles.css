@@ -462,3 +462,8 @@ ul li .information{
 i.passed, i.passed {
     color: green;
 }
+
+.selected {
+    background: #068b2e; 
+    border: 1px solid green;
+}

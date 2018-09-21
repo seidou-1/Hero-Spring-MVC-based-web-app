@@ -1,5 +1,7 @@
 
 $(document).ready(function () {
+
+    // setResults(null);
  
 
 
@@ -223,5 +225,11 @@ function getCharacterImages() {
     });
 }
  
+function setResults(data) {
+    $("#characterImg > img").attr("src", data[0].url);
+    $("#uploadImage").val(data[0].url);
+    $("#successfulAdd > span").html(`${data[0].original_filename} added!`);
+    $("#successfulAdd").show();
+}
 
 
