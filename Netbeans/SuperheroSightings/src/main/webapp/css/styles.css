@@ -102,13 +102,17 @@ body {
 }
 
 #sortingFilterMenu {
-    background: gainsboro;
+    background: rgba(126, 126, 126, 0.1);
     text-align: center;
     width: 75%;
     margin: 0 auto;
-    border: 1px solid grey;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 4px;
     height: 350px;
+}
+
+.filter-head {
+    color: rgb(248, 211, 62);
 }
 
 #heroForm,
@@ -186,7 +190,7 @@ body {
 
 footer {
     background: rgb(129, 33, 33);
-    border-top: 1px solid rgba(0, 0, 0, 0.514);
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
     height: 30px;
     position: fixed;
     bottom: 0;
@@ -302,9 +306,8 @@ input[type=text]:focus {
 }
 
 .scrollable thead th {
-    height: 30px;
-    text-align: center;
-    background: lightseagreen;
+    height: 35px;
+    letter-spacing: 1px;
 }
 
 tbody {
@@ -312,6 +315,34 @@ tbody {
     overflow-y: auto;
 }
 
+#sightingsTable  {
+    border-bottom: rgba(0, 0, 0, 0.5) 1px solid;
+}
+
+#sightingsTable thead {
+    background: rgba(0, 0, 0, 0.5);
+    color: rgb(252, 242, 109); 
+}
+
+#sightingsTable tbody tr {
+    border-left: rgba(0, 0, 0, 0.5) 1px solid;
+    background: rgba(0, 0, 0, 0.10);
+    color: rgb(224, 248, 185);
+}
+
+#sightingsTable tbody tr:hover { 
+    background: rgba(0, 0, 0, 0.25);
+    color: rgb(217, 252, 160);
+}
+
+.filter {
+    width: 175px;
+}
+
+
+.table-name {
+    color: white;
+}
 .scrollable>#sightingsTable tbody td,
 .scrollable>#sightingsTable thead th {
     width: 16.66%;
@@ -468,6 +499,17 @@ ul li .information {
 .modal-body ul { 
     font-weight: bold;
     list-style-type: none;
+}
+
+.modal-body { 
+    min-height: 200px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+
+.modal-footer {
+    display: block;
 }
 
 /* .displayList > ul{

@@ -28,7 +28,7 @@ $(document).ready(function () {
         $('#myInput').trigger('focus')
     })
 
-    loadEndpointsForSightings();
+    // loadEndpointsForSightings();
     loadPills("organizations");
     var organizationSave = $("#saveOrganizations");
     organizationSave.click(function () {
@@ -115,38 +115,39 @@ function preparePill(data, pill) {
 }
 
 /* Load checkboxes for various restpoints */
-function loadEndpointsForSightings() {
-    var organizationChoice = $('#organizationChoice');
-    var locationChoice = $('#locationChoice');
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/SuperheroSightings/organizations',
-        success: function (data) {
-            data.forEach(e => {
-                organizationChoice.append(` <label>
-                <input type="checkbox" class="organizationSelection" name="organizations" data-name="${e.organizationName} " value="${e.organizationId}"> ${e.organizationName}
-                </label><br>`);
-            })
-        },
-        error: function () {
-            console.log("Problems found")
-        }
-    });
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/SuperheroSightings/locations',
-        success: function (data) {
-            data.forEach(e => {
-                locationChoice.append(` <label>
-                <input type="checkbox" value="${e.locationID}"> ${e.locationName}
-                </label><br>`);
-            })
-        },
-        error: function () {
-            console.log("Problems found")
-        }
-    });
-}
+// function loadEndpointsForSightings() {
+//     var organizationChoice = $('#organizationChoice');
+//     var locationChoice = $('#locationChoice');
+//     $.ajax({
+//         type: 'GET',
+//         url: 'http://localhost:8080/SuperheroSightings/organizations',
+//         success: function (data) {
+//             data.forEach(e => {
+//                 organizationChoice.append(` <label>
+//                 <input type="checkbox" class="organizationSelection" name="organizations" data-name="${e.organizationName} " value="${e.organizationId}"> ${e.organizationName}
+//                 </label><br>`);
+//             })
+//         },
+//         error: function () {
+//             console.log("Problems found")
+//         }
+//     });
+//     $.ajax({
+//         type: 'GET',
+//         url: 'http://localhost:8080/SuperheroSightings/locations',
+//         success: function (data) {
+//             data.forEach(e => {
+//                 locationChoice.append(` <label>
+//                 <input type="checkbox" value="${e.locationID}"> ${e.locationName}
+//                 Fork you
+//                 </label><br>`);
+//             })
+//         },
+//         error: function () {
+//             console.log("Problems found")
+//         }
+//     });
+// }
 // Credits to https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
 var inputs = document.querySelectorAll('.inputfile');
 Array.prototype.forEach.call(inputs, function (input) {
