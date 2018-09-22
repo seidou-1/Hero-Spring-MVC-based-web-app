@@ -1,9 +1,4 @@
-#locationPage {
-    background-image: linear-gradient(to top, #ffe7e7, #ffc0c4, #ff97a5, #ff698b, #ff2474);
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-}
+
 
 body {
     background-color: #94232d;
@@ -126,7 +121,7 @@ body {
 }
 
 #locationTab {
-    background: rgb(236, 233, 233);
+    background: rgba(31, 31, 31, 0.164);
     text-align: center;
     margin-bottom: 50px;
     border: 1px solid rgb(104, 102, 102);
@@ -431,7 +426,7 @@ tbody {
     border-bottom-right-radius: 50px;
 }
 
-#newHero {
+#newHero, #myVillain {
     margin-top: 10px;
 }
 
@@ -610,13 +605,13 @@ ul li .information {
     animation: 2s showDetails ease-in-out forwards;
 }
 
-/* .showDetails {
+.showDetails {
     animation: 1s showDetails;
 }
 
 .hideDetails {
     animation: 1s hideDetails ease-out forwards;
-} */
+}
 
 @keyframes showDetails {
     0% {

@@ -7,7 +7,7 @@
                     <html>
 
                     <head>
-                        <title>Index Page</title>
+                        <title>Heroes</title>
                         <!-- Bootstrap core CSS -->
                         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
                         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">

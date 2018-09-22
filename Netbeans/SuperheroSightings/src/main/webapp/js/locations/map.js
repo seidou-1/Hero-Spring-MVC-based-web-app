@@ -1,25 +1,25 @@
-// import {initMap} from '../map.js';
+import {initMap} from '../map.js';
 
-// $(document).ready(function () {
+$(document).ready(function () {
 
-//     const map = initMap()
+    const map = initMap();
 
-//     $(".locationSortModal").on('shown.bs.modal', () => {
+    $(".locationSortModal").on('shown.bs.modal', () => {
  
-//         $('#locationSubmit').click(() => {
-//             $(".locationIn:checked").each((index, element) => {
-//                 $("#hiddenLocation").val($(element).val());
-//                 map.initMap($(element).val())
+        $('#locationSubmit').click(() => {
+            $(".locationIn:checked").each((index, element) => {
+                $("#hiddenLocation").val($(element).val());
+                map.initMap($(element).val())
    
-//             });
-//         });
-//     });
+            });
+        });
+    });
 
    
  
 
     
 
-// });
+});
 
 
