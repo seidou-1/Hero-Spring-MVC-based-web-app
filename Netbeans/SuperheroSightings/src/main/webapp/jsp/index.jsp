@@ -15,7 +15,7 @@
 
                 <body>
                     <div class="container">
-                        <img style="width: 120px; margin: 5px 0; color: green " src="${pageContext.request.contextPath}/img/hero_logo.svg">
+                        <img style="width: 120px; margin: 5px 0;" src="${pageContext.request.contextPath}/img/hero_logo.svg">
 
                         <div class="row">
                             <!-- <div class="col-md-8" id="maindisplay">  -->
@@ -152,6 +152,8 @@
                                     <h5 style="font-weight: bold">Below is a list of all contributers to this project</h5>
                                     <h6>Credit is given where credit is due, with that said I would like to give thanks to the following people who helped on this project!</h6>
                                     <ul> 
+                                        <!-- <li>Travon Campbell</li> -->
+                                        <!-- Comment in my name (Travon) and comment out yours -->
                                         <li>Mohamed Barry</li>
                                         <li>Jose Sosa</li>
                                         <li>Rich Taveras</li>

@@ -1,19 +1,19 @@
 
 $(document).ready(function () {
 
-    // setResults(null);
- 
 
 
-    $(".characterSortModal").on('shown.bs.modal', () => { 
+
+
+    $(".characterSortModal").on('shown.bs.modal', () => {
         $('#characterSubmit').click(() => {
             var characters = "";
             arrOfCharacters = [];
             $(".charactersSelect:checked").each((index, element) => {
                 characters += $(element).val() + "_";
                 arrOfCharacters.push(+$(element).val());
-            }); 
-       
+            });
+
         });
     });
 
@@ -44,48 +44,60 @@ $(document).ready(function () {
 
         window.location = $(this).data("href");
     });
+
+
+    $("#a-opt").on('click', function () {
+        setImage(true);
+    })
+
+    $("#b-opt").on('click', function () {
+        setImage(false);
+    })
+
+
+
 });
 function removeChecks(pill) {
-   var allOfType;
-   var pillType = pill.dataset.source;
-       
-   if (pillType === "organizations") {
-       allOfType = $(".organizationSelection");
+    var allOfType;
+    var pillType = pill.dataset.source;
 
-  } else {
-      allOfType = $(".superPowerSelection");
-  }
+    if (pillType === "organizations") {
+        allOfType = $(".organizationSelection");
 
-   allOfType.each((index, element) => {
-       if ($(element)[0].value === pill.dataset.type) {
-           $(element)[0].checked = false;
-       }
-   });
-   loadPills(pillType);
+    } else {
+        allOfType = $(".superPowerSelection");
+    }
+
+    allOfType.each((index, element) => {
+        if ($(element)[0].value === pill.dataset.type) {
+            $(element)[0].checked = false;
+        }
+    });
+    loadPills(pillType);
 
 }
 
 function loadPills(pillType) {
-   var display, allOfType;
+    var display, allOfType;
 
-   if (pillType === "organizations") {
-       display = $("#myOrganizations");
-       allOfType = $(".organizationSelection");
-       
-   } else {
-       display = $("#mySuperPowers");
-       allOfType = $(".superPowerSelection");
-       stringDisplay = "super";
-   }
+    if (pillType === "organizations") {
+        display = $("#myOrganizations");
+        allOfType = $(".organizationSelection");
+
+    } else {
+        display = $("#mySuperPowers");
+        allOfType = $(".superPowerSelection");
+        stringDisplay = "super";
+    }
 
 
-   display.empty();
-   allOfType.each((index, element) => {
-       if ($(element)[0].checked) {
-           // console.log($(element)[0].dataset.name)
-           display.append(preparePill($(element)[0],pillType));
-       }
-   });
+    display.empty();
+    allOfType.each((index, element) => {
+        if ($(element)[0].checked) {
+            // console.log($(element)[0].dataset.name)
+            display.append(preparePill($(element)[0], pillType));
+        }
+    });
 }
 // var showing = "#map";
 // var hiding = "#sightingsTable";
@@ -96,13 +108,36 @@ function loadPills(pillType) {
 //     hiding = (hiding == "#sightingsTable") ? "#map" : "#sightingsTable";
 // }
 function removePill(pill) {
-   removeChecks($(pill)[0]);
+    removeChecks($(pill)[0]);
+}
+
+function setImage(isDefault) {
+    if (isDefault) {
+
+        $("#characterImg > img").attr("src", "/SuperheroSightings/img/hero.jpg");
+        // $("#uploadImage").val(data[0].url);
+        $("#myButton").hide();
+        $("#successfulAdd").hide();
+
+    } else {
+        $("#characterImg > img").attr("src", "/SuperheroSightings/img/upload.jpg");
+        // $("#uploadImage").val(data[0].url);
+        $("#myButton").show();
+        if (myImage != null) {
+            $("#successfulAdd").show();
+            console.log(myImage)
+            $("#characterImg > img").attr("src", myImage[0].url);
+        }
+        else {
+            
+        }
+    }
 }
 
 
 function preparePill(data, pill) {
-   
-   return `</div>
+
+    return `</div>
            <div class="col-md-5 pill">
            <div class="closePill" onclick="removePill(this)" data-source="${data.dataset.pill}" data-type="${data.value}">
            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -152,7 +187,7 @@ function preparePill(data, pill) {
 var inputs = document.querySelectorAll('.inputfile');
 Array.prototype.forEach.call(inputs, function (input) {
     var label = input.nextElementSibling,
-            labelVal = label.innerHTML;
+        labelVal = label.innerHTML;
     input.addEventListener('change', function (e) {
         var fileName = '';
         if (this.files && this.files.length > 1) {
@@ -225,12 +260,24 @@ function getCharacterImages() {
         }
     });
 }
- 
+
+var myImage = null;
+
 function setResults(data) {
+    myImage = data;
     $("#characterImg > img").attr("src", data[0].url);
     $("#uploadImage").val(data[0].url);
-    $("#successfulAdd > span").html(`${data[0].original_filename} added!`);
+    $("#successfulAdd > i").css({
+        "color": "green",
+        "font-size": "20px"
+    });
+    $("#successfulAdd > span").css({
+        "color": "orange"
+    });
+    $("#successfulAdd > span").html(`Image uploaded!`);
     $("#successfulAdd").show();
+    $("#upload_widget_opener").html(`Change Image`);
+
 }
 
 

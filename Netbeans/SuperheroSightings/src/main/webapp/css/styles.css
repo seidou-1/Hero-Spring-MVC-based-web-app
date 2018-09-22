@@ -41,15 +41,14 @@ body {
     margin-left: 0;
 }
 
-#latest-sightings thead{
-    color: rgb(248, 241, 141); 
+#latest-sightings thead {
+    color: rgb(248, 241, 141);
 }
 
-#latest-sightings tbody tr{
+#latest-sightings tbody tr {
     color: rgb(224, 248, 185);
 }
- 
- 
+
 #navigation a {
     color: #00C2FF;
     letter-spacing: 0.5px;
@@ -90,7 +89,7 @@ body {
     text-decoration: none;
 }
 
-.carousel-inner > .item img {
+.carousel-inner>.item img {
     height: 350px;
     width: 100%;
     margin: 0 auto;
@@ -117,13 +116,13 @@ body {
 
 #heroForm,
 #organizationWindow {
-    background: rgb(236, 233, 233);
+    background: #94232c10;
     text-align: center;
     width: 100%;
-    border: 1px solid rgb(104, 102, 102);
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 4px;
     padding: 15px;
-    height: 400px;
+    min-height: 500px;
 }
 
 #locationTab {
@@ -139,20 +138,27 @@ body {
     height: 450px;
 }
 
+.myLabel {
+    color: black !important;
+}
+
 #characterForm,
 #organizationForm,
 #createHeroForm {
-    border-left: 1px solid blue;
-    height: 100%;
+    border-left: 3px solid white;
+    height: 450px;
     text-align: left;
     position: relative;
 }
 
-#myOrganizations {
-    max-height: 75px;
+#myOrganizations, #mySuperPowers {
+    max-height: 40px;
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+
+
 
 #characterImg img {
     width: 100%;
@@ -207,14 +213,18 @@ footer a:hover {
 }
 
 h4.formHead {
-    text-align: left;
-    font-weight: bold;
-    margin-top: -5px;
-    text-decoration: underline;
+    text-align: right;
+    color: white;
+    text-transform: capitalize;
 }
 
 .displayForm {
     padding: 5px;
+}
+
+.displayForm label {
+    color: rgb(224, 248, 185); 
+    padding: 10px;
 }
 
 form label {
@@ -223,24 +233,44 @@ form label {
 
 .formInput {
     margin-bottom: 10px;
-    border-radius: 50px;
+    border-radius: 10px;
     font-size: 10px;
     padding: 5px;
     width: 100%;
+    color: rgb(248, 211, 62);
+    background: rgba(0, 0, 0, 0.40) !important;
+    border: 0.5px solid rgba(0, 0, 0, 0.774);
+    font-size: 1.1em;
+    font-style: italic;
 }
 
 input[type=text]:focus {
-    border-color: darkcyan;
+    border-color: rgb(248, 211, 62);
     outline-width: 0;
+}
+
+.formInput::placeholder {
+    color: rgb(250, 236, 236);
 }
 
 #organizationsDisplay,
 #superPowerDisplay {
-    background: rgb(223, 220, 220);
-    border: 1px solid rgb(108, 108, 119);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.40) !important;
+    border: 0.5px solid rgba(0, 0, 0, 0.774);
     padding: 5px;
     font-weight: bold;
     font-size: 12px;
+    max-height: 100px; 
+}
+
+.modalSelect > a {
+    color: rgb(240, 228, 228);
+}
+
+.modalSelect > a:hover {
+    color: rgb(173, 173, 173);
+    text-decoration: none;
 }
 
 .formDropDown {
@@ -315,22 +345,26 @@ tbody {
     overflow-y: auto;
 }
 
-#sightingsTable  {
+#sightingsTable,
+.mytable {
     border-bottom: rgba(0, 0, 0, 0.5) 1px solid;
 }
 
-#sightingsTable thead {
+#sightingsTable thead,
+.mytable thead {
     background: rgba(0, 0, 0, 0.5);
-    color: rgb(252, 242, 109); 
+    color: rgb(252, 242, 109);
 }
 
-#sightingsTable tbody tr {
+#sightingsTable tbody tr,
+.mytable tbody tr {
     border-left: rgba(0, 0, 0, 0.5) 1px solid;
     background: rgba(0, 0, 0, 0.10);
     color: rgb(224, 248, 185);
 }
 
-#sightingsTable tbody tr:hover { 
+#sightingsTable tbody tr:hover,
+.mytable tbody tr:hover {
     background: rgba(0, 0, 0, 0.25);
     color: rgb(217, 252, 160);
 }
@@ -339,10 +373,10 @@ tbody {
     width: 175px;
 }
 
-
 .table-name {
     color: white;
 }
+
 .scrollable>#sightingsTable tbody td,
 .scrollable>#sightingsTable thead th {
     width: 16.66%;
@@ -358,21 +392,23 @@ tbody {
 .pill {
     display: flex;
     padding: 0;
-    border: 1px solid rgb(43, 11, 158);
+    border: 1px solid rgb(248, 211, 62);
     border-radius: 50px;
     margin: 5px;
     height: 25px;
     overflow: hidden;
+    color:rgb(248, 211, 62);
 }
 
 .pill:hover {
-    border-color: goldenrod;
+    border-color: rgb(194, 6, 6);
 }
 
 .closePill {
-    background: pink;
+    background: rgb(248, 211, 62);
     text-align: center;
     display: inline;
+    color: black;
     width: 25%;
     padding: 5px 0;
     border-top-left-radius: 50px;
@@ -381,12 +417,12 @@ tbody {
 
 .closePill:hover {
     cursor: pointer;
-    color: white;
-    background: gray;
+    color: rgb(248, 211, 62);
+    background: rgb(194, 6, 6);
 }
 
 .pillData {
-    background: whitesmoke;
+    background: rgba(0, 0, 0, 0.308);
     text-align: center;
     display: inline;
     width: 75%;
@@ -396,11 +432,10 @@ tbody {
 }
 
 #newHero {
-    position: absolute;
-    bottom: 0;
+    margin-top: 10px;
 }
 
-table tbody > tr:hover {
+table tbody>tr:hover {
     background: rgba(0, 0, 0, 0.459);
     cursor: pointer;
 }
@@ -448,7 +483,7 @@ table tbody > tr:hover {
 }
 
 .creatingImage {
-    height: 100px !important;
+    height: 120px !important;
 }
 
 ul.displayDetails {
@@ -462,20 +497,48 @@ ul.displayDetails {
 ul.displayDetails li {
     display: block;
     list-style-type: none;
-    margin: 10px;
+    margin: 5px;
 }
 
 ul li .heading {
-    font-weight: bold;
+    font-weight: normal;
     width: 100px;
-    font-size: 20px;
-    border-bottom: 2px solid brown;
+    font-size: 16px;
+    color: rgb(224, 248, 185);
+    border-bottom: 2px solid rgb(248, 211, 62);
 }
 
 ul li .information {
     font-weight: bold;
     width: 100px;
-    font-size: 16px;
+    font-size: 13px;
+    color: white;
+    font-style: italic;
+}
+
+#fans {
+    width: 100%;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.082);
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+#fans div {
+    width: 40%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.493);
+    padding: 10px;
+}
+
+#fans p {
+    color: white;
+}
+
+#fans .far{
+    font-size: 40px;
+    color: rgb(129, 155, 13);
 }
 
 .displayList {
@@ -485,37 +548,49 @@ ul li .information {
     padding: 0;
 }
 
+
+#viewTable td {
+    border: none !important;
+} 
+
+#viewTable tr:hover {
+    background: transparent;
+} 
+
+
 .displayList2 {
     list-style: none;
     padding: 0;
     font-weight: bold;
 }
 
- 
 .modal {
     text-align: justify;
-} 
+}
 
-.modal-body ul { 
+.modal-body ul {
     font-weight: bold;
     list-style-type: none;
 }
 
-.modal-body { 
+.modal-body {
     min-height: 200px;
+    max-height: 400px;
     padding: 10px;
     overflow-y: auto;
 }
-
 
 .modal-footer {
     display: block;
 }
 
-/* .displayList > ul{
+#viewDetails { 
+    margin: 0 auto;
+    background: #00000038;
+    min-height: 300px;
+    padding: 10px;
    
-   
-} */
+}
 
 .displayList li a {
     /* width: 150px; */
@@ -604,4 +679,87 @@ i.passed {
 .selected {
     background: #068b2e;
     border: 1px solid green;
+}
+
+.list {
+    flex: 0 80%;
+    list-style: none;
+}
+
+.list__item {
+    position: relative;
+}
+
+.list__item:hover label {
+    color: rgb(248, 211, 62);
+}
+
+.list__item:hover .label::before {
+    border: 7px solid rgb(248, 211, 62);
+    margin-right: 20px;
+}
+
+.radio-btn {
+    position: absolute;
+    visibility: hidden;
+}
+
+.radio-btn:checked~.label {
+    color: rgb(248, 211, 62);
+}
+
+.radio-btn:checked~.label::before {
+    margin-right: 20px;
+    border: 7px solid rgb(248, 211, 62);
+    background: rgb(0, 0, 0);
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    padding: 5px 0 5px 0;
+    color: #F8F7FF;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s linear;
+}
+
+.label::before {
+    display: block;
+    content: '';
+    border: 7px solid #F8F7FF;
+    border-radius: 50%;
+    height: 18px;
+    width: 18px;
+    margin-right: 10px;
+    transition: all .25s linear;
+}
+
+#myButton>button {
+    margin-bottom: 5px;
+    background: cornflowerblue;
+}
+
+#mySection {
+    min-height: 50px;
+    border-top: 3px solid white;
+}
+
+.myInstructions {
+    border-top: 3px solid white !important;
+    color: #F8F7FF;
+}
+
+.myInstructions h4 {
+    color: rgb(248, 211, 62);
+}
+
+.myInstructions i {
+    color: rgb(182, 147, 7);
+}
+
+.myInstructions>ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
 }
