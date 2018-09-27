@@ -6,7 +6,9 @@
 package com.sg.superherosightings.service;
 
 import com.sg.superherosightings.dao.CharactersDao;
+import com.sg.superherosightings.dao.OrganizationsDao;
 import com.sg.superherosightings.dto.Characters;
+import com.sg.superherosightings.dto.Organization;
 import com.sg.superherosightings.dto.Power;
 import com.sg.superherosightings.dto.Sighting;
 import java.util.ArrayList;
@@ -16,19 +18,30 @@ import java.util.List;
  *
  * @author laptop
  */
-public class CharactersServiceImpl implements CharactersService{
-    
-    CharactersDao charactersDao;
+public class CharactersServiceImpl implements CharactersService {
 
-    public CharactersServiceImpl(CharactersDao charactersDao) {
+    CharactersDao charactersDao;
+    OrganizationsDao organizationsDao;
+
+    public CharactersServiceImpl(CharactersDao charactersDao, OrganizationsDao organizationsDao) {
         this.charactersDao = charactersDao;
+        this.organizationsDao = organizationsDao;
+
     }
-    
-    
 
     @Override
     public Characters addCharacter(Characters character) {
-        return charactersDao.addCharacter(character);
+        Characters myChar =  charactersDao.addCharacter(character);
+        
+        for (int org: myChar.getOrganizationIDs()) {
+            charactersDao.addCharacterOrg(myChar.getCharacterId(), org);
+        }
+        
+        for (int pow: myChar.getSuperpowerIDs()) {
+            charactersDao.addCharacterPower(myChar.getCharacterId(), pow);
+        }
+        
+        return myChar;
     }
 
     @Override
@@ -43,7 +56,9 @@ public class CharactersServiceImpl implements CharactersService{
 
     @Override
     public Characters getCharacterById(int characterId) {
-        return charactersDao.getCharacterById(characterId);
+        Characters myCharacter = charactersDao.getCharacterById(characterId);
+        myCharacter.setOrganizationList(organizationsDao.getOrganizationsByCharacter(myCharacter)); 
+        return myCharacter;
     }
 
     @Override
@@ -60,7 +75,7 @@ public class CharactersServiceImpl implements CharactersService{
     public List<Characters> getAllCharacters() {
         return charactersDao.getAllCharacters();
     }
-    
+
     @Override
     public List<Characters> getAssociatedCharacters(List<Sighting> temp) {
         List<Characters> helperCharacterList = new ArrayList<Characters>();
@@ -77,10 +92,12 @@ public class CharactersServiceImpl implements CharactersService{
     public List<Characters> getAllVillains() {
         return charactersDao.getAllVillains();
     }
-    
+
     @Override
     public List<Characters> getAllHeroes() {
-        return charactersDao.getAllHeroes();
+        List<Characters> myHeroes = charactersDao.getAllHeroes();
+
+        return myHeroes;
     }
 
     @Override
@@ -97,5 +114,5 @@ public class CharactersServiceImpl implements CharactersService{
     public List<Power> getAllPowers() {
         return charactersDao.getAllPowers();
     }
-    
+
 }

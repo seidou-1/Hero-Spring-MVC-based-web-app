@@ -95,6 +95,7 @@ public class CharactersDaoUnitTest {
         assert myCharacter.getDescription().equals("Able to recover quickly");
         assert myCharacter.getIsSuperHero() == myCharacter.getIsSuperHero();//Initially got a a cannot be referenced error. So changing to "==" instead of .equals fixes it
         assert myCharacter.getName().equals("Sir Mixalot");
+        assert myCharacter.getPhoto().equals("www.google.com");
 //        assert myCharacter.getOrgList() == myCharacter.getOrgList();
 //        assert myCharacter.getOrganizationIDs() == myCharacter.getOrganizationIDs();
 //        assert myCharacter.getSuperPowerList() == myCharacter.getSuperPowerList();
@@ -201,6 +202,8 @@ public class CharactersDaoUnitTest {
         myCharacter.setDescription("Able to recover quickly");
         myCharacter.setIsSuperHero(true);
         myCharacter.setName("Sir Mixalot");
+        myCharacter.setName("Sir Mixalot");
+        myCharacter.setPhoto("www.google.com");
         
 //      Create the List, add values, set setSuperPowerList using the value(s)
 //        List <String> superPowerList = new ArrayList<>();

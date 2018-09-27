@@ -17,6 +17,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author laptop
  */
 public class Characters {
+
     int characterId;
 
     @NotEmpty(message = "Damn Daniel you forgot the Name?")
@@ -39,17 +40,35 @@ public class Characters {
 
     @NotEmpty(message = "Man is this a superhero or not?")
     boolean isSuperHero;
-    
+
     List<Organization> orgList; //used in the heroes JSP -  <c:out value="${heroes[i].orgList[0].organizationName}"></c:out>
- 
+
     List<Integer> organizationIDs = new ArrayList<>();
     
+    List<Integer> superpowerIDs = new ArrayList<>();
+
+    public List<Integer> getSuperpowerIDs() {
+        return superpowerIDs;
+    }
+
+    String orgListStr;
+
+    public String getOrgListStr() {
+        return orgListStr;
+    }
+
     List<Power> superPowerList = new ArrayList<>();
 
-    public List<Power> getSuperPowerList() {
-        return superPowerList;
+    String supPowerStr;
+
+    public String getSupPowerStr() {
+        return supPowerStr;
     }
-    
+
+    public List<Power> getSuperPowerList() {
+        return this.superPowerList;
+    }
+
     Date mostRecentSightingDate;
 
     public Date getMostRecentSightingDate() {
@@ -57,14 +76,22 @@ public class Characters {
     }
 
     public void setMostRecentSightingDate(Date mostRecentSightingDate) {
-        System.out.println("Setting date to " + mostRecentSightingDate);
         this.mostRecentSightingDate = mostRecentSightingDate;
     }
 
     public void setSuperPowerList(List<Power> superPowerList) {
+        String temp = "";
+        int count = superPowerList.size();
+        for (Power p : superPowerList) {
+            temp += p.getPowerType();
+            if (count > 1) {
+                temp += ", ";
+                count--;
+            }
+        }
+        this.supPowerStr = temp;
         this.superPowerList = superPowerList;
     }
-
 
     public String getName() {
         return name;
@@ -137,8 +164,13 @@ public class Characters {
     }
 
     public void addOrganization(String id) {
-        this.organizationIDs.add(Integer.parseInt(id));        
+        this.organizationIDs.add(Integer.parseInt(id));
     }
+    
+    public void addPower(String id) {
+        this.superpowerIDs.add(Integer.parseInt(id));
+    }
+
 
     public boolean isIsSuperHero() {
         return isSuperHero;
@@ -147,18 +179,23 @@ public class Characters {
     public List<Integer> getOrganizationIDs() {
         return organizationIDs;
     }
-    
-    
-    
+
     public void setOrganizationList(List<Organization> organizationsByCharacter) {
+        String temp = "";
+        int count = superPowerList.size();
+        for (Organization o : organizationsByCharacter) {
+            temp += o.organizationName;
+            if (count > 1) {
+                temp += ", ";
+                count--;
+            }
+        } 
+        this.orgListStr = temp;
         this.orgList = organizationsByCharacter;
     }
 
     public List<Organization> getOrgList() {
         return orgList;
     }
-    
-    
-
 
 }

@@ -157,7 +157,7 @@ body {
 
 #characterImg img {
     width: 100%;
-    border: 1px solid blue;
+     
 }
 
 #locationsMap {
@@ -195,6 +195,8 @@ footer {
     height: 30px;
     position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
     width: 100vw;
     padding: 5px 25px;
     display: flex;

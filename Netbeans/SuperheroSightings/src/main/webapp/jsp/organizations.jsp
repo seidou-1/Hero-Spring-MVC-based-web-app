@@ -38,7 +38,7 @@
                                             <a href="${pageContext.request.contextPath}/viewVillains?viewType=create">Villains</a>
                                         </li>
                                         <li role="presentation">
-                                            <a  class="active" href="${pageContext.request.contextPath}/viewOrganizations?viewType=create">Organizations</a>
+                                            <a class="active" href="${pageContext.request.contextPath}/viewOrganizations?viewType=create">Organizations</a>
                                         </li>
                                         <li role="presentation">
                                             <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=create&locationsID=all">Locations</a>
@@ -50,13 +50,13 @@
                             </div>
                             <div class="row">
                                 <!-- <div class="col-md-8" id="maindisplay">  -->
-                                <div class="col-md-6"> 
+                                <div class="col-md-6">
 
                                     <div class="scrollable">
 
                                         <table class="table displayTable text-center mytable">
                                             <thead>
-                                                <tr> 
+                                                <tr>
                                                     <th> Name </th>
                                                     <th> Disbanded</th>
                                                     <th> Description </th>
@@ -95,20 +95,20 @@
                                                 <c:when test="${display == 'edit'}">
                                                     <img src="${pageContext.request.contextPath}/img/headquarters.jpg" alt="small" class="viewImage">
                                                     <div class="myInstructions">
-                                                            <h4>
-                                                                <i class="fas fa-info-circle"></i> Instructions</h4>
-                                                            <ul>
-    
-                                                                <li>
-                                                                    <i class="fas fa-caret-right"></i>&nbsp;Enter new data then click update now to commit.</li>
-    
-                                                                <li>
-                                                                    <i class="fas fa-caret-right"></i>&nbsp;If the organization's location is not available in
-                                                                    the popup window, you can
-                                                                    <a href="${pageContext.request.contextPath}/viewOrganizations">
-                                                                        click here </a> to add a new one.</li>
-                                                            </ul>
-                                                        </div>
+                                                        <h4>
+                                                            <i class="fas fa-info-circle"></i> Instructions</h4>
+                                                        <ul>
+
+                                                            <li>
+                                                                <i class="fas fa-caret-right"></i>&nbsp;Enter new data then click update now to commit.</li>
+
+                                                            <li>
+                                                                <i class="fas fa-caret-right"></i>&nbsp;If the organization's location is not available
+                                                                in the popup window, you can
+                                                                <a href="${pageContext.request.contextPath}/viewOrganizations">
+                                                                    click here </a> to add a new one.</li>
+                                                        </ul>
+                                                    </div>
                                                 </c:when>
                                                 <c:when test="${display == 'view'}">
                                                     <img src="${pageContext.request.contextPath}/img/headquarters.jpg" alt="small" class="viewImage">
@@ -117,7 +117,7 @@
                                                     <br>
                                                     <div>
                                                         <table class="table" id="viewTable">
-                                                     
+
                                                             <tr>
                                                                 <td>
                                                                     <a href="${pageContext.request.contextPath}/viewOrganizations?viewType=edit&organizationId=${organization.organizationId}"
@@ -162,52 +162,52 @@
                                                     <br>
 
                                                     <ul class="list">
-                                                            <li class="list__item">
-                                                                <input type="radio" class="radio-btn" name="choice" id="a-opt" checked="checked" />
-                                                                <label for="a-opt" class="label">Use default
-                                                                    <picture></picture>
-                                                                </label>
-                                                            </li>
-                                                            <li class="list__item">
-                                                                <input type="radio" class="radio-btn" name="choice" id="b-opt" />
-                                                                <label for="b-opt" class="label">Upload picture </label>
-                                                            </li>
-                                                        </ul>
-    
-                                                        <section id="mySection">
-    
-                                                            <div id="myButton" hidden>
-                                                                <button class="btn selected" id="upload_widget_opener">Choose Image</button>
-                                                            </div>
-    
-                                                            <div id="successfulAdd" hidden>
-                                                                <br>
-                                                                <i class="fas fa-check-double"></i>
-                                                                <span></span>
-                                                            </div>
-                                                        </section>
-    
-    
-    
-    
-    
-                                                        <div class="myInstructions">
-                                                            <h4>
-                                                                <i class="fas fa-info-circle"></i> Instructions</h4>
-                                                            <ul>
-                                                                <li>
-                                                                    <i class="fas fa-caret-right"></i>&nbsp;Add image (Optional)</li>
-                                                                <li>
-                                                                    <i class="fas fa-caret-right"></i>&nbsp;Fill in the form with valid data then click submit
-                                                                    hero.
-                                                                </li>
-                                                                <li>
-                                                                    <i class="fas fa-caret-right"></i>&nbsp;If the hero's organization is not available in
-                                                                    the popup window, you can
-                                                                    <a href="${pageContext.request.contextPath}/viewOrganizations">
-                                                                        click here </a> to add a new one.</li>
-                                                            </ul>
+                                                        <li class="list__item">
+                                                            <input type="radio" class="radio-btn" name="choice" id="a-opt" checked="checked" />
+                                                            <label for="a-opt" class="label">Use default
+                                                                <picture></picture>
+                                                            </label>
+                                                        </li>
+                                                        <li class="list__item">
+                                                            <input type="radio" class="radio-btn" name="choice" id="b-opt" />
+                                                            <label for="b-opt" class="label">Upload picture </label>
+                                                        </li>
+                                                    </ul>
+
+                                                    <section id="mySection">
+
+                                                        <div id="myButton" hidden>
+                                                            <button class="btn selected" id="upload_widget_opener">Choose Image</button>
                                                         </div>
+
+                                                        <div id="successfulAdd" hidden>
+                                                            <br>
+                                                            <i class="fas fa-check-double"></i>
+                                                            <span></span>
+                                                        </div>
+                                                    </section>
+
+
+
+
+
+                                                    <div class="myInstructions">
+                                                        <h4>
+                                                            <i class="fas fa-info-circle"></i> Instructions</h4>
+                                                        <ul>
+                                                            <li>
+                                                                <i class="fas fa-caret-right"></i>&nbsp;Add image (Optional)</li>
+                                                            <li>
+                                                                <i class="fas fa-caret-right"></i>&nbsp;Fill in the form with valid data then click submit
+                                                                hero.
+                                                            </li>
+                                                            <li>
+                                                                <i class="fas fa-caret-right"></i>&nbsp;If the hero's organization is not available in
+                                                                the popup window, you can
+                                                                <a href="${pageContext.request.contextPath}/viewOrganizations">
+                                                                    click here </a> to add a new one.</li>
+                                                        </ul>
+                                                    </div>
                                                 </c:otherwise>
 
 
@@ -252,8 +252,8 @@
                                                             <span class="information">
                                                                 <c:out value="${organization.description}"></c:out>
                                                             </span>
-                                                        </li> 
-                                         
+                                                        </li>
+
                                                         <li>
                                                             <span class="heading">Contact Phone</span>
                                                             <br>
@@ -263,7 +263,7 @@
                                                         </li>
 
                                                     </ul>
- 
+
 
                                                 </c:when>
 
@@ -273,12 +273,12 @@
                                                         <label for="organizationName">Name: </label>
                                                         <br>
                                                         <input class="formInput" type="text" value="${organization.organizationName}" id="organizationName" name="organizationName"
-                                                            placeholder="Enter Villain name" /> 
+                                                            placeholder="Enter Villain name" />
                                                         <label for="description">Description: </label>
                                                         <br>
                                                         <input class="formInput" type="text" value="${organization.description}" id="description" name="description" placeholder="Enter description"
                                                         />
- 
+
 
                                                         <label for="organizationPhone">Contact Phone: </label>
                                                         <br>
@@ -312,12 +312,12 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div> 
+                                                        </div>
                                                         <div style="text-align: center">
-                                                                <button class="btn btn-primary" id="myVillain">
-                                                                    <i class="fas fa-plus-circle"></i>  Submit Organization </button>
-    
-                                                            </div>
+                                                            <button class="btn btn-primary" id="myVillain">
+                                                                <i class="fas fa-plus-circle"></i> Submit Organization </button>
+
+                                                        </div>
                                                     </form>
                                                 </c:otherwise>
                                             </c:choose>
@@ -327,68 +327,67 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
 
 
-                        
+
                         <footer>
-                                <a href="#" data-toggle="modal" data-target="#moreInfo">Developers</a>
-                                Copyright 2018 &copy;
-                            </footer>
-    
-    
-                            <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="moreInfoTitle">Developer Credits</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h5 style="font-weight: bold">Below is a list of all contributers to this project</h5>
-                                            <h6>Credit is given where credit is due, with that said I would like to give thanks to
-                                                the following people who helped on this project!</h6>
-                                            <ul>
-                                                <!-- <li>Travon Campbell</li> -->
-                                                <!-- Comment in my name (Travon) and comment out yours -->
-                                                <li>Mohamed Barry</li>
-                                                <li>Jose Sosa</li>
-                                                <li>Rich Taveras</li>
-                                            </ul>
-    
-                                            <h5>This project is intended to demonstrate the skill of developers listed above. It
-                                                is not intended for profit. With that said. If you would like to donate. Hit
-                                                me up on the DM and I'll give my paypal. Lol</h5>
-    
-                                            <ul>
-                                                <li>
-                                                    <a href="https://fontawesome.com/icons?d=gallery">Font Awesome (Icons) </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://www.flaticon.com/">Flaticon (Logo)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://www.superherodb.com/">Character Images</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a href="https://github.com/seidou-1/Hero-Spring-MVC-based-web-app" target="_blank" class="btn btn-primary">See Code</a>
-                                            <a href="http://www.tenderlovingcode.org" class="btn btn-success" target="_blank">Read Story</a>
-                                        </div>
+                            <a href="#" data-toggle="modal" data-target="#moreInfo">Developers</a>
+                            Copyright 2018 &copy;
+                        </footer>
+
+
+                        <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="moreInfoTitle">Developer Credits</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 style="font-weight: bold">Below is a list of all contributers to this project</h5>
+                                        <h6>Credit is given where credit is due, with that said I would like to give thanks to
+                                            the following people who helped on this project!</h6>
+                                        <ul>
+                                            <!-- <li>Travon Campbell</li> -->
+                                            <!-- Comment in my name (Travon) and comment out yours -->
+                                            <li>Mohamed Barry</li>
+                                            <li>Jose Sosa</li>
+                                            <li>Rich Taveras</li>
+                                        </ul>
+
+                                        <h5>This project is intended to demonstrate the skill of developers listed above. It
+                                            is not intended for profit. With that said. If you would like to donate. Hit
+                                            me up on the DM and I'll give my paypal. Lol</h5>
+
+                                        <ul>
+                                            <li>
+                                                <a href="https://fontawesome.com/icons?d=gallery">Font Awesome (Icons) </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.flaticon.com/">Flaticon (Logo)</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.superherodb.com/">Character Images</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a href="https://github.com/seidou-1/Hero-Spring-MVC-based-web-app" target="_blank" class="btn btn-primary">See Code</a>
+                                        <a href="http://www.tenderlovingcode.org" class="btn btn-success" target="_blank">Read Story</a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <!-- Placed at the end of the document so the pages load faster -->
-                        
+
                         <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 
                         <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
                         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-                        <script src="${pageContext.request.contextPath}/js/script.js"></script>
+                      <script type="module" src="${pageContext.request.contextPath}/js/script.js"></script>
                         <script type="text/javascript">  
                             document.getElementById("upload_widget_opener").addEventListener("click", function () {
                                 cloudinary.openUploadWidget({ cloud_name: 'jollystudios', upload_preset: 'riznjxyv' },

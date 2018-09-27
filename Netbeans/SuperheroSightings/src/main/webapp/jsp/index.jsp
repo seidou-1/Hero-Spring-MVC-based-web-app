@@ -106,7 +106,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="i" begin="0" end="9">
-                                            <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
+                                            <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=map&sightingsID=${i+1}">
                                                 <td>
                                                     <c:out value="${characters[i].name}"></c:out>
                                                 </td>
@@ -180,7 +180,7 @@
                     <!-- Placed at the end of the document so the pages load faster -->
                     <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
                     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-                    <script src="${pageContext.request.contextPath}/js/script.js"></script>
+                  <script type="module" src="${pageContext.request.contextPath}/js/script.js"></script>
 
                 </body>
 

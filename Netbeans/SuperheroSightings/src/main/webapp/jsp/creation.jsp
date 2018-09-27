@@ -17,7 +17,8 @@
 
                 <body id="locationPage">
                     <div class="container">
-                        <h1 id="logo">HERO</h1>
+                        <img style="width: 120px; margin: 5px 0; color: green " src="${pageContext.request.contextPath}/img/hero_logo.svg">
+
 
                         <div class="row">
                             <!-- <div class="col-md-8" id="maindisplay">  -->
@@ -26,17 +27,17 @@
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/index">Home</a>
                                     </li>
-                                    <li role="presentation" class="active">
-                                        <a href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table">Sightings</a>
+                                    <li role="presentation">
+                                        <a class="active" href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=table">Sightings</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewHeroes?viewType=create">Heroes</a>
+                                        <a href="${pageContext.request.contextPath}/viewHeroes?page=heroes&viewType=create">Heroes</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewVillains?viewType=create">Villains</a>
+                                        <a href="${pageContext.request.contextPath}/viewVillains?page=villains&viewType=create">Villains</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="${pageContext.request.contextPath}/viewOrganizations?viewType=create">Organizations</a>
+                                        <a href="${pageContext.request.contextPath}/viewOrganizations?page=organizations&viewType=create">Organizations</a>
                                     </li>
                                     <li role="presentation">
                                         <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=create&locationsID=all">Locations</a>
@@ -48,22 +49,21 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 style="text-align: center">Create a new Sighting</h3>
+                                <h4 style="text-align: center; font-weight: bold; color: gold">Create a new Sighting</h4>
                                 <hr>
-                            </div>
+                            </div> 
                             <div class="col-md-4 step">
 
                                 <div class="step-head" id="locationsHead">
-                                    <h4>Step One</h4>
-                                    <i class="far fa-times-circle"></i>
+                                    <h5 style="font-weight: bold; color: rgb(226, 197, 29); margin-top: 5px">Step One</h5> 
                                     <i class="fas fa-check-double"></i>
                                 </div>
 
-                                <p>Select the location of the sighting</p>
+                                <p style="font-style: italic; color: rgb(253, 253, 252); margin-top: 5px">Select the location of the sighting</p>
 
                                 <!--Sort by location-->
                                 <div id="locationSort">
-                                    <a href="#" data-toggle="modal" data-target=".locationSortModal" class="btn btn-primary">Add Location</a>
+                                    <a href="#" data-toggle="modal" data-target=".locationSortModal" class="btn btn-primary"><i class="fas fa-map-pin"></i> Add Location</a>
                                 </div>
 
                                 <div class="modal fade locationSortModal" tabindex="-1" role="dialog" aria-labelledby="myLocationSortModal" aria-hidden="true">
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <!--end-->
-                                <h5>Known locations in database</h5>
+                                <h6 style="font-style: italic; color: rgb(27, 162, 220); margin-top: 5px"> Known locations in database</h6>
 
                                 <div id="locationsMap">
 
@@ -107,16 +107,15 @@
                             </div>
                             <div class="col-md-4 step">
                                 <div class="step-head" id="charactersHead">
-                                    <h4>Step Two</h4>
-                                    <i class="far fa-times-circle"></i>
+                                    <h5 style="font-weight: bold; color: rgb(226, 197, 29); margin-top: 5px">Step Two</h5> 
                                     <i class="fas fa-check-double"></i>
                                 </div>
-                                <p>Select the characters involved in the sighting</p>
+                                <p style="font-style: italic; color: rgb(253, 253, 252); margin-top: 5px">Select the characters involved in the sighting</p>
 
                                 <!--Sort by character-->
 
                                 <div id="characterSort">
-                                    <a href="#" data-toggle="modal" data-target=".characterSortModal" class="btn btn-primary">Add Character</a>
+                                    <a href="#" data-toggle="modal" data-target=".characterSortModal" class="btn btn-primary"><i class="fas fa-user"></i> Add Character</a>
                                 </div>
 
                                 <div class="modal fade characterSortModal" tabindex="-1" role="dialog" aria-labelledby="myCharacterSortModal" aria-hidden="true">
@@ -163,8 +162,8 @@
                                 <!--end-->
                                 <hr>
 
-                                <h5>All of the characters spotted </h5>
-                                <table class="table" id="charactersSelected">
+                                <h6 style="font-style: italic; color: rgb(27, 162, 220); margin-top: 5px">All of the characters spotted </h5>
+                                <table class="table mytable" id="charactersSelected">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -185,11 +184,10 @@
                             </div>
                             <div class="col-md-4 step">
                                 <div class="step-head">
-                                    <h4>Step Three</h4>
-                                    <i class="far fa-times-circle"></i>
+                                    <h5 style="font-weight: bold; color: #e2c51d; margin-top: 5px">Step Three</h5>
                                     <i class="fas fa-check-double"></i>
                                 </div>
-                                <p>Select the date and time of the sighting</p>
+                                <p style="font-style: italic; color: rgb(253, 253, 252); margin-top: 5px">Select the date and time of the sighting</p>
                                 <form action="newSighting" method="POST">
                                     <table class=" table-condensed">
                                         <tr>
@@ -199,9 +197,9 @@
 
                                     </table>
                                     <hr>
-                                    <h4>Step Four</h4>
+                                    <h5 style="font-weight: bold; color: rgb(226, 197, 29); margin-top: 5px">Step Four</h5>
                                     <div class="col-md-12">
-                                        <h5>Validate Data and Submit</h5>
+                                        <h5 style="font-style: italic; color: rgb(253, 253, 252); margin-top: 5px">Validate Data and Submit</h5>
 
                                         <input id="hiddenLocation" type="text" name="locationid" hidden value="1">
                                         <input id="hiddenCharacters" type="text" name="charID" hidden value="1">

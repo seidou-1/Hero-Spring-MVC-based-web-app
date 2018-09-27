@@ -129,15 +129,13 @@ public class LocationsDaoUnitTest {
 
         assert locationDao.getLocationById(myLocation.getLocationID()) == null;
     }
-    
-    
+
     @Test
     public void testUpdatePost() {
         //Arrange
         Location myLocation = createLocation();
         myLocation = locationDao.addLocation(myLocation);
 //        assert locationDao.getLocationById(myLocation.getLocationID()) != null;
-
 
         //Act
         myLocation.setAssociatedOrgs(new ArrayList<>());
@@ -150,14 +148,12 @@ public class LocationsDaoUnitTest {
         myLocation.setState("Streets");
         myLocation.setStreetName("StreetName");
         myLocation.setZip("12");
-        
-        
+
         locationDao.updateLocation(myLocation);
         Location daoLocation = locationDao.getLocationById(myLocation.getLocationID());
-        
+
 //        assert locationDao.getLocationById(myLocation.getLocationID()) == null;
     }
-
 
     @After
     public void tearDown() {
@@ -169,13 +165,13 @@ public class LocationsDaoUnitTest {
         myCharacter.setDescription("Able to recover quickly");
         myCharacter.setIsSuperHero(true);
         myCharacter.setName("Sir Mixalot");
+        myCharacter.setPhoto("www.google.com");
 
 //      Create the List, add values, set setSuperPowerList using the value(s)
         List<String> superPowerList = new ArrayList<>();
         superPowerList.add("batman");
 
 //        myCharacter.setSuperPowerList(superPowerList);
-
 //      Create the List, add organization objects, set setOrganizationList using the organization(s)
         List<Organization> organizationList = new ArrayList<>();
 //        Organization myOrganization = createOrganization(); //Calls the createOrganization method below which already has all the values

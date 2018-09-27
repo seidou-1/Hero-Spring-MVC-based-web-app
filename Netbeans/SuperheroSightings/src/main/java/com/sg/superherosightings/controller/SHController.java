@@ -41,8 +41,7 @@ public class SHController {
 
     @RequestMapping(value = {"/", "index", ""}, method = RequestMethod.GET)
     public String loadWindow(HttpServletRequest request, Model model) {
-        List<Sighting> sightings = sightingsService.getAllSightings();
-        System.out.println(sightings);
+        List<Sighting> sightings = sightingsService.getAllSightings(); ;
         List<Characters> characters = charactersService.getAssociatedCharacters(sightings);
         List<Location> locations = locationsService.getAssociatedLocations(sightings);
         model.addAttribute("sightings", sightings);
@@ -83,7 +82,7 @@ public class SHController {
 //        for (String e : request.getParameterValues("organizations")) {
 //            hero.addOrganization(e);
 //        }
-//        System.out.println(hero);
+//        
 //        model.addAttribute("organization", request.getParameterValues("organizations"));
 //        dao.addCharacter(hero);
 //        return "redirect:viewHeroes";

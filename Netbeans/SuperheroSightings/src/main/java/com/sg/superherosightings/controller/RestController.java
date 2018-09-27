@@ -5,15 +5,17 @@
  */
 package com.sg.superherosightings.controller;
 
-
 import com.sg.superherosightings.dao.CharactersDao;
 import com.sg.superherosightings.dao.LocationsDao;
+import com.sg.superherosightings.dao.OrganizationsDao;
 import com.sg.superherosightings.dao.SightingsDao;
 import com.sg.superherosightings.dto.Characters;
 import com.sg.superherosightings.dto.Location;
 import com.sg.superherosightings.dto.Organization;
 import com.sg.superherosightings.dto.Sighting;
+import com.sg.superherosightings.service.CharactersService;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,22 +32,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class RestController {
 
-    private SightingsDao sightingsDao;
-    private CharactersDao characterDao;
+    private SightingsDao sightingsDao; 
     private LocationsDao locationDao;
+    private OrganizationsDao organizationsDao;
+    private CharactersService characterSrv;
 
 //    private SuperheroSightingsDao dao;
-
-
     /*
     Mo: At some point will replace SuperheroSightingsDao with appropriate
     dependency injection
      */
     @Inject
-    public RestController(SightingsDao sightingsDao, CharactersDao characterDao, LocationsDao locationDao) {
+    public RestController(SightingsDao sightingsDao, CharactersService characterSrv, LocationsDao locationDao, OrganizationsDao organizationsDao) {
         this.sightingsDao = sightingsDao;
-        this.characterDao = characterDao;
+        this.characterSrv = characterSrv;
         this.locationDao = locationDao;
+        this.organizationsDao = organizationsDao;
     }
 //
 //    //----------------------------------------------------------------- CHARACTERS  
@@ -93,15 +95,15 @@ public class RestController {
     @RequestMapping(value = "/getCharacters", method = RequestMethod.GET)
     @ResponseBody
     public List<Characters> getAllCharacters() {
-        return characterDao.getAllCharacters();
+        return characterSrv.getAllCharacters();
     }
 //
 ////RETRIEVE CHARACTER ENDPOINT
-//    @RequestMapping(value = "/character/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Characters getCharacter(@PathVariable("id") long id) {
-//        return sightingsDao.getCharacterById((int) id);
-//    }
+    @RequestMapping(value = "/character/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Characters getCharacter(@PathVariable("id") long id) {
+        return characterSrv.getCharacterById((int) id);
+    }
 //
 ////----------------------Sighting
 //// 
@@ -129,26 +131,29 @@ public class RestController {
 //        sightingsDao.updateSighting(sighting);
 //    }
 //
-////GET ALL SIGHTINGS ENDPOINT
-//    @RequestMapping(value = "/sightings", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Map<String, String>> getAllSightings() {
-//        List<Map<String, String>> sightings = sightingsDao.getAllSightingsJoined();
-//        return sightings;
-//    }
+//GET ALL SIGHTINGS ENDPOINT
+
+    @RequestMapping(value = "/sightings", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Map<String, String>> getAllSightings() {
+        List<Map<String, String>> sightings = sightingsDao.getAllSightingsJoined();
+        return sightings;
+    }
 //
-////RETRIEVE SIGHTING ENDPOINT
-////    @RequestMapping(value = "/sighting/{id}", method = RequestMethod.GET)
-////    @ResponseBody
-////    public Sighting getSighting(@PathVariable("id") long id) {
-////        return sightingsDao.getSightingById((int) id);
-////    }
+//RETRIEVE SIGHTING ENDPOINT
+
+    @RequestMapping(value = "/sighting/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Sighting getSighting(@PathVariable("id") long id) {
+        return sightingsDao.getSightingById((int) id);
+    }
 ////    
-//    @RequestMapping(value = "/sightings/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Map<String, String> getJoinedSighting(@PathVariable("id") long id) {
-//        return sightingsDao.getSightingByIdJoined((int) id);
-//    }
+
+    @RequestMapping(value = "/sightings/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, String> getJoinedSighting(@PathVariable("id") long id) {
+        return sightingsDao.getSightingByIdJoined((int) id);
+    }
 //
 //
 ////----------------------------------------------------------------- LOCATION
@@ -182,7 +187,7 @@ public class RestController {
     public List<Location> getAllLocations() {
         return locationDao.getAllLocations();
     }
-    
+
     @RequestMapping(value = "/locations", method = RequestMethod.GET)
     @ResponseBody
     public List<Location> getLocations() {
@@ -192,17 +197,18 @@ public class RestController {
 //    
 //
 //RETRIEVE LOCATIONS ENDPOINT
+
     @RequestMapping(value = "/locations/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Location  getLocation(@PathVariable("id") int id) {
+    public Location getLocation(@PathVariable("id") int id) {
 
         Location locale = locationDao.getLocationById(id);
-       
-//        List<Organization> orgs = organizationDao.getOrganizationByLocationId(id);
-//        List<Sighting> sights = locationDao.getSightingByLocationId(id);
-//        
-//        locale.setAssociatedOrgs(orgs);
-//        locale.setAssociatedSightings(sights);
+
+        List<Organization> orgs = organizationsDao.getOrganizationByLocationId(id);
+        List<Sighting> sights = sightingsDao.getSightingByLocationId(id);
+        locale.setAssociatedOrgs(orgs);
+        locale.setAssociatedSightings(sights);
+
 
         return locale;
     }

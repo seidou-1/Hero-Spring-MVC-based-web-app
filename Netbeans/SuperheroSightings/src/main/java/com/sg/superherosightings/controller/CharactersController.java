@@ -22,53 +22,80 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author laptop
  */
-
 @Controller
 public class CharactersController {
-    
+
     CharactersService charactersService;
     OrganizationsService organizationsService;
 
-@Inject
-public CharactersController(CharactersService charactersService, OrganizationsService organizationsService) {
-		this.charactersService = charactersService;
-                this.organizationsService = organizationsService;
-	}
-    
-@RequestMapping(value = "/createHero", method = RequestMethod.POST)
+    @Inject
+    public CharactersController(CharactersService charactersService, OrganizationsService organizationsService) {
+        this.charactersService = charactersService;
+        this.organizationsService = organizationsService;
+    }
+
+    @RequestMapping(value = "/createHero", method = RequestMethod.POST)
     public String createHero(HttpServletRequest request, Model model) {
         Characters hero = new Characters();
         hero.setName(request.getParameter("heroName"));
         hero.setDescription(request.getParameter("description"));
         hero.setIsSuperHero(true);
-        
-        
+        hero.setPhoto(request.getParameter("userImage"));
+
         for (String e : request.getParameterValues("organizations")) {
-            hero.addOrganization(e);  
+            hero.addOrganization(e);
         }
+
+        for (String e : request.getParameterValues("superPowers")) {
+            hero.addPower(e);
+        }
+
         model.addAttribute("organization", request.getParameterValues("organizations"));
         charactersService.addCharacter(hero);
         return "redirect:viewHeroes";
     }
 
-@RequestMapping(value = "/deleteHero", method = RequestMethod.GET)
+    
+
+    
+    @RequestMapping(value = "/editHero", method = RequestMethod.POST)
+    public String editHero(HttpServletRequest request, Model model) {
+        Characters hero = new Characters();
+        hero.setName(request.getParameter("heroName"));
+        hero.setDescription(request.getParameter("description"));
+        hero.setIsSuperHero(true);
+        hero.setPhoto(request.getParameter("userImage"));
+
+        for (String e : request.getParameterValues("organizations")) {
+            hero.addOrganization(e);
+        }
+
+        for (String e : request.getParameterValues("superPowers")) {
+            hero.addPower(e);
+            System.out.print(e + " => ");
+        }
+
+        charactersService.updateCharacter(hero);
+        return "redirect:viewHeroes";
+    }
+
+    @RequestMapping(value = "/deleteHero", method = RequestMethod.GET)
     public String deletHero(HttpServletRequest request, Model model) {
         int heroID = Integer.parseInt(request.getParameter("characterId"));
         charactersService.deleteCharacter(heroID);
         return "redirect:viewHeroes";
     }
-    
-@RequestMapping(value = {"/viewHeroes"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/viewHeroes"}, method = RequestMethod.GET)
     public String loadHeroes(HttpServletRequest request, Model model) {
         List<Characters> allHeroes = charactersService.getAllHeroes();
         organizationsService.setCharactersOrgList(allHeroes);
-        
-        System.out.println(11111 + " " + allHeroes.size());
+
         model.addAttribute("heroes", allHeroes);
-        
+
         List<Organization> allOrganizations = organizationsService.getAllOrganizations();
         model.addAttribute("organizations", allOrganizations);
-        
+
         List<Power> allPowers = charactersService.getAllPowers();
         model.addAttribute("powers", allPowers);
 
@@ -87,15 +114,18 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
         return "heroes";
     }
 
-@RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/viewVillains"}, method = RequestMethod.GET)
     public String loadVillains(HttpServletRequest request, Model model) {
         List<Characters> allVillains = charactersService.getAllVillains();
         organizationsService.setCharactersOrgList(allVillains);
+
         model.addAttribute("villains", allVillains);
-        System.out.println(allVillains
-                .size());
+
         List<Organization> allOrganizations = organizationsService.getAllOrganizations();
         model.addAttribute("organizations", allOrganizations);
+
+        List<Power> allPowers = charactersService.getAllPowers();
+        model.addAttribute("powers", allPowers);
 
         String display = (request.getParameter("viewType"));
         model.addAttribute("display", display);
@@ -110,13 +140,5 @@ public CharactersController(CharactersService charactersService, OrganizationsSe
 
         return "villains";
     }
-
-
-
-
-
-
-
-
 
 }

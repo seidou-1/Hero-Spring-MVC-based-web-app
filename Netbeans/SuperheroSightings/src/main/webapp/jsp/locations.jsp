@@ -77,8 +77,7 @@
                                                             <c:out value="${locations[i].city }"></c:out>
                                                         </td>
                                                         <td>
-                                                            <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=edit&locationsID=${locations[i].locationID}">edit |</a>
-                                                            <a href="${pageContext.request.contextPath}/deleteLocation?locationsID=${locations[i].locationID}">delete</a>
+                                                            <a href="${pageContext.request.contextPath}/viewLocations?page=locations&viewType=edit&locationsID=${locations[i].locationID}">edit</a>
                                                         </td>
 
                                                     </tr>
@@ -110,13 +109,12 @@
                                         </c:when>
                                         <c:otherwise>
 
-                                            <div class="col-md-12" id="locationsMap">
+                                            <div class="col-md-12" id="locationsMap" style="height: 400px">
                                                 <div></div>
                                             </div>
                                             <div class="col-md-12">
                                                 <h3></h3>
-                                                <p>Pro Tip: You could fill in the details manually, or you could use the interactive
-                                                    map to select the address.</p>
+                                                <p style="font-style: italic; color: whitesmoke">Pro Tip: It's better to enter the name and the description, and then just click on the map above to populate the rest of the fields!</p>
                                             </div>
 
 
@@ -194,9 +192,9 @@
                         <!-- Placed at the end of the document so the pages load faster -->
                         <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
                         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-                        <script src="${pageContext.request.contextPath}/js/script.js"></script>
+                      <script type="module" src="${pageContext.request.contextPath}/js/script.js"></script>
                         <script type="module" src="${pageContext.request.contextPath}/js/locations/map.js"></script>
-                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYul2fBF6a03a9OqShrMK6SVzJdfAm-NY&callback=initMap" async
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYul2fBF6a03a9OqShrMK6SVzJdfAm-NY" async
                             defer></script>
 
                 </body>

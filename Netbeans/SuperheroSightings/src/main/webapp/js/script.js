@@ -1,8 +1,21 @@
-
 $(document).ready(function () {
 
 
 
+    if (searchUrl("page") === "characters" && searchUrl("viewType") === "edit") {
+        const data = performAjaxCall("character", searchUrl("characterId"));
+        
+        data.orgList.forEach(e => {
+            $(`.organizationSelection[value=${e.organizationId}]`).prop("checked", true); 
+        });
+        data.superPowerList.forEach(e => {
+            $(`.superPowerSelection[value=${e.powerId}]`).prop("checked", true); 
+            console.log(e)
+        });
+    }
+
+    loadPills("organizations");
+    loadPills("superPowers");
 
 
     $(".characterSortModal").on('shown.bs.modal', () => {
@@ -29,7 +42,7 @@ $(document).ready(function () {
     })
 
     // loadEndpointsForSightings();
-    loadPills("organizations");
+
     var organizationSave = $("#saveOrganizations");
     organizationSave.click(function () {
         loadPills("organizations");
@@ -41,7 +54,7 @@ $(document).ready(function () {
     });
 
     $(".clickable-row").click(function () {
-
+        console.log($(this).data("href"))
         window.location = $(this).data("href");
     });
 
@@ -77,17 +90,27 @@ function removeChecks(pill) {
 
 }
 
+function searchUrl(keyword) {
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    return url.searchParams.get(keyword);
+}
+
+
 function loadPills(pillType) {
     var display, allOfType;
 
     if (pillType === "organizations") {
+
+
         display = $("#myOrganizations");
         allOfType = $(".organizationSelection");
 
+
+
     } else {
         display = $("#mySuperPowers");
-        allOfType = $(".superPowerSelection");
-        stringDisplay = "super";
+        allOfType = $(".superPowerSelection"); 
     }
 
 
@@ -129,7 +152,7 @@ function setImage(isDefault) {
             $("#characterImg > img").attr("src", myImage[0].url);
         }
         else {
-            
+
         }
     }
 }
@@ -281,3 +304,33 @@ function setResults(data) {
 }
 
 
+function toggleDetails() {
+
+    var myDisplay = $("#displayDetails");
+    myDisplay.toggle(
+        function () {
+            myDisplay.addClass('hideDetails')
+        },
+        function () {
+            myDisplay.addClass('showDetails')
+        }
+    )
+}
+
+
+function performAjaxCall(endpoint, extraParameter) {
+    var returnData;
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        type: 'GET',
+        url: `http://localhost:8080/SuperheroSightings/${endpoint}/${extraParameter}`,
+        success: function (data) {
+            returnData = data;
+        },
+        error: function () {
+            returnData = null;
+        }
+    });
+    return returnData;
+}

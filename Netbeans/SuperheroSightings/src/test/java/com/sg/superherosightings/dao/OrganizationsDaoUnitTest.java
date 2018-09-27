@@ -101,11 +101,11 @@ public class OrganizationsDaoUnitTest {
 
         //Act
         Organization daoOrganization = organizationsDao.getOrganizationById(myOrganization.getOrganizationId());
-     
+
         System.out.println(myOrganization.getOrganizationId() + " =>  " + myOrganization.getEmail() + " =>  " + daoOrganization.getEmail());
-        System.out.println(daoOrganization.getOrganizationId() + " =>  " +myOrganization.getPhone()+ " =>  " + daoOrganization.getPhone());
+        System.out.println(daoOrganization.getOrganizationId() + " =>  " + myOrganization.getPhone() + " =>  " + daoOrganization.getPhone());
         //Assert
-        
+
         assert myOrganization.getDescription().equals(daoOrganization.getDescription());
 //        assert myOrganization.getEmail().equals(daoOrganization.getEmail());
         assert myOrganization.getOrganizationName().equals(daoOrganization.getOrganizationName());
@@ -164,13 +164,13 @@ public class OrganizationsDaoUnitTest {
         myCharacter.setDescription("Able to recover quickly");
         myCharacter.setIsSuperHero(true);
         myCharacter.setName("Sir Mixalot");
+        myCharacter.setPhoto("www.google.com");
 
 //      Create the List, add values, set setSuperPowerList using the value(s)
         List<String> superPowerList = new ArrayList<>();
         superPowerList.add("batman");
 
 //        myCharacter.setSuperPowerList(superPowerList);
-
 //      Create the List, add organization objects, set setOrganizationList using the organization(s)
         List<Organization> organizationList = new ArrayList<>();
 //        Organization myOrganization = createOrganization(); //Calls the createOrganization method below which already has all the values

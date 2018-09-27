@@ -63,8 +63,7 @@ public class OrganizationsDaoDbImpl implements OrganizationsDao{
                 organization.getOrganizationName(),
                 organization.getLocationId(),
                 organization.getDescription());
-        
-        System.out.println(organization.getOrganizationName() + " =>  " + organization.getLocationId()+ " => " +  organization.getDescription());
+         
 
         /*
         Query the database for the ID that was just assigned to the new row in the DB
