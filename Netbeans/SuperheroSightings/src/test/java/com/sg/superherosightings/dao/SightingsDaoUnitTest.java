@@ -191,6 +191,7 @@ public class SightingsDaoUnitTest {
         myCharacter.setDescription("Able to recover quickly");
         myCharacter.setIsSuperHero(true);
         myCharacter.setName("Sir Mixalot");
+           myCharacter.setPhoto("www.google.com");
 
 //      Create the List, add values, set setSuperPowerList using the value(s)
         List<String> superPowerList = new ArrayList<>();

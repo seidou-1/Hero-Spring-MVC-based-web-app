@@ -14,6 +14,7 @@ import com.sg.superherosightings.service.LocationsService;
 import com.sg.superherosightings.service.OrganizationsService;
 import com.sg.superherosightings.service.SightingsService;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -46,11 +47,11 @@ public class SightingsController {
     @RequestMapping(value = {"/viewSightings"}, method = RequestMethod.GET)
     public String loadsightings(HttpServletRequest request, Model model) {
         List<Sighting> sightings = sightingsService.getAllSightings();
+        Collections.reverse(sightings);
         List<Characters> characters = charactersService.getAssociatedCharacters(sightings);
         List<Location> locations = locationsService.getAssociatedLocations(sightings);
         List<Location> locate = locationsService.getAllLocations();
-        List<Organization> organizations = organizationsService.getAllOrganizations();
-        System.out.println(organizations);
+        List<Organization> organizations = organizationsService.getAllOrganizations();;
         List<Characters> heroes = charactersService.getAllHeroes();
         List<Characters> villians = charactersService.getAllVillains();
 
@@ -61,8 +62,8 @@ public class SightingsController {
         model.addAttribute("characters", characters);
         model.addAttribute("organizations", organizations);
         model.addAttribute("locations", locations);
-        String sightingID = request.getParameter("sightingID");
-        String viewType = (request.getParameter("viewType"));
+        String sightingID = request.getParameter("sightingID") == null ? "all" : request.getParameter("sightingID");
+        String viewType = (request.getParameter("viewType")) == null  ? "table" : request.getParameter("viewType");;
         model.addAttribute("sightingID", sightingID);
         model.addAttribute("viewType", viewType);
         return "sightings";
@@ -84,6 +85,26 @@ public class SightingsController {
     @RequestMapping(value = {"/newSighting"}, method = RequestMethod.POST)
     public String createSighting(HttpServletRequest request, Model model) throws Exception {
 
+        List<Sighting> sightings = sightingsService.getAllSightings();
+        List<Characters> charactersdao = charactersService.getAssociatedCharacters(sightings);
+        List<Location> locations = locationsService.getAssociatedLocations(sightings);
+        List<Location> locate = locationsService.getAllLocations();
+        List<Organization> organizations = organizationsService.getAllOrganizations();;
+        List<Characters> heroes = charactersService.getAllHeroes();
+        List<Characters> villians = charactersService.getAllVillains();
+
+        model.addAttribute("heroes", heroes);
+        model.addAttribute("villians", villians);
+        model.addAttribute("locate", locate);
+        model.addAttribute("sightings", sightings);
+        model.addAttribute("characters", charactersdao);
+        model.addAttribute("organizations", organizations);
+        model.addAttribute("locations", locations);
+        String sightingID = request.getParameter("sightingID");
+        String viewType = (request.getParameter("viewType"));
+        model.addAttribute("sightingID", sightingID);
+        model.addAttribute("viewType", viewType);
+
         String[] characters = request.getParameter("charID").split("_");
         int locationID = Integer.parseInt(request.getParameter("locationid"));
         String date = request.getParameter("sightingDate");
@@ -100,12 +121,11 @@ public class SightingsController {
             newSighting.setCharacterId(Integer.parseInt(characterID));
             newSighting.setLocationId(locationID);
             newSighting.setSightingDate(my_date);
-            System.out.println(newSighting.getLocationId() + "  => " + newSighting.getCharacterId() + "  => " + newSighting.getSightingDate());
 
             sightingsService.addSighting(newSighting);
 
         }
-        return "sightings";
+        return "redirect:viewSightings";
     }
 
 }

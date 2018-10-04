@@ -20,35 +20,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class LocationsController {
-    
+
     LocationsService locationsService;
 
-	public LocationsController(LocationsService locationsService) {
-		this.locationsService = locationsService;
-	}
-    
+    public LocationsController(LocationsService locationsService) {
+        this.locationsService = locationsService;
+    }
+
     @RequestMapping(value = {"/viewLocations"}, method = RequestMethod.GET)
     public String loadLocations(HttpServletRequest request, Model model) {
         List<Location> allLocations = locationsService.getAllLocations();
         model.addAttribute("locations", allLocations);
-        
-        
+
         String display = (request.getParameter("viewType"));
         model.addAttribute("display", display);
 
         try {
-            int id = Integer.parseInt(request.getParameter("locationID"));
+            int id = Integer.parseInt(request.getParameter("locationsID"));
             Location location = locationsService.getLocationById(id);
             model.addAttribute("location", location);
         } catch (Exception e) {
 
         }
-        
-        
+
         return "locations";
-    }      
-        
-  @RequestMapping(value = {"/newLocation"}, method = RequestMethod.POST)
+    }
+
+    @RequestMapping(value = {"/newLocation"}, method = RequestMethod.POST)
     public String createLocation(HttpServletRequest request, Model model) {
         Location myLocation = new Location();
         myLocation.setLocationName(request.getParameter("locationNameJSP"));
@@ -66,6 +64,6 @@ public class LocationsController {
 
         return "redirect:viewLocations";
 
-    }  
-    
+    }
+
 }

@@ -11,6 +11,8 @@
                     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
                     <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        
+                    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favi.png" type="image/x-icon" />
                 </head>
 
                 <body>
@@ -106,7 +108,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="i" begin="0" end="9">
-                                            <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?viewType=map&sightingID=${i}">
+                                            <tr class='clickable-row' data-href="${pageContext.request.contextPath}/viewSightings?page=sightings&viewType=map&sightingsID=${i+1}">
                                                 <td>
                                                     <c:out value="${characters[i].name}"></c:out>
                                                 </td>
@@ -180,7 +182,7 @@
                     <!-- Placed at the end of the document so the pages load faster -->
                     <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
                     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-                    <script src="${pageContext.request.contextPath}/js/script.js"></script>
+                  <script type="module" src="${pageContext.request.contextPath}/js/script.js"></script>
 
                 </body>
 

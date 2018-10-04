@@ -17,6 +17,7 @@ import java.util.List;
 public interface CharactersService {
 
     public Characters addCharacter(Characters character);
+     
 
     public void deleteCharacter(int characterId);
 

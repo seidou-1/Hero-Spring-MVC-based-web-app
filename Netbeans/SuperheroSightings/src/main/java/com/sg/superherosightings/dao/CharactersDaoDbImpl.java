@@ -32,7 +32,13 @@ public class CharactersDaoDbImpl implements CharactersDao {
     }
 
     private static final String SQL_INSERT_CHARACTER
-            = "insert into Characters (CharacterName, Description, IsSuperHero )" + " values (?, ?, ?)";
+            = "insert into Characters (CharacterName, Description, IsSuperHero, Photograph)" + " values (?, ?, ?, ?)";
+
+    private static final String SQL_INSERT_CHARACTER_ORGANIZATION
+            = "insert into Character_Organization (CharacterID, OrganizationID)" + " values (?, ?)";
+    
+     private static final String SQL_INSERT_CHARACTER_POWER
+            = "insert into Character_SuperPower (CharacterID, SuperpowerID)" + " values (?, ?)";
 
     private static final String SQL_DELETE_CHARACTER
             = "delete from Characters where CharacterID = ?";
@@ -46,19 +52,21 @@ public class CharactersDaoDbImpl implements CharactersDao {
     private static final String SQL_SELECT_CHARACTERS_BY_ORGANIZATION
             = ""; // revisit after checking out join statements;
 
+    private static final String SQL_SELECT_ORGANIZATION_BY_CHARACTERID
+            = "select * from Characters where CharacterId = ?";
+
     private static final String SQL_SELECT_ALL_CHARACTERS
             = "select * from Characters";
 
     //Isolate characters
     private static final String SQL_SELECT_ALL_HEROES
             = "select * from `Characters` where isSuperHero = 1";
-    
+
     private static final String SQL_SELECT_ALL_VILLAINS
             = "select * from `Characters` where isSuperHero = 0";
-    
+
     private static final String SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID
             = "select SightingDate from `Sighting` where CharacterID = ? ORDER BY `SightingDate` DESC Limit 1";
-
 
     private static final String SQL_SELECT_ALL_VILLAINS_JOIN_BY_SIGHTINGDATE
             = "Select `CharacterName`, `SightingDate`, Characters.CharacterID from `Sighting` "
@@ -95,7 +103,8 @@ public class CharactersDaoDbImpl implements CharactersDao {
         jdbcTemplate.update(SQL_INSERT_CHARACTER,
                 character.getName(),
                 character.getDescription(),
-                character.getIsSuperHero());
+                character.getIsSuperHero(),
+                character.getPhoto());
 
         /*
         The above creates the character
@@ -108,6 +117,20 @@ public class CharactersDaoDbImpl implements CharactersDao {
         //This sets the new id value on the Characters object and returns it
         character.setCharacterId(newId);
         return character;
+    }
+
+    @Override
+    public void addCharacterOrg(int charId, int orgId) {
+        jdbcTemplate.update(SQL_INSERT_CHARACTER_ORGANIZATION,
+                charId,
+                orgId);
+    }
+
+    @Override
+    public void addCharacterPower(int charId, int powerId) {
+        jdbcTemplate.update(SQL_INSERT_CHARACTER_POWER,
+                charId,
+                powerId);
     }
 
     @Override
@@ -127,8 +150,11 @@ public class CharactersDaoDbImpl implements CharactersDao {
     @Override
     public Characters getCharacterById(int characterId) {
         try {
-            return jdbcTemplate.queryForObject(SQL_SELECT_CHARACTER,
+            Characters myCharacter = jdbcTemplate.queryForObject(SQL_SELECT_CHARACTER,
                     new CharactersDaoDbImpl.CharactersMapper(), characterId);
+            myCharacter.setSuperPowerList(getSuperPowersByCharacter(myCharacter));
+
+            return myCharacter;
         } catch (EmptyResultDataAccessException ex) {
             // there were no results for the given contact id - we just 
             // want to return null in this case
@@ -172,11 +198,11 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
         for (Characters myVillain : villains) {
             List<Date> latestSighting = jdbcTemplate.query(SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID, new DateMapper(), myVillain.getCharacterId());
-            
+
             try {
-//                System.out.println(latestSighting);
+//                 
                 myVillain.setMostRecentSightingDate(latestSighting.get(0));
-              
+
             } catch (Exception e) {
                 myVillain.setMostRecentSightingDate(null);
             }
@@ -187,7 +213,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
     @Override
     public List<Characters> getAllHeroes() {
-        
+
         /*
         1. Query for all heroes and store the results of that into a List of Characters
         
@@ -206,13 +232,13 @@ public class CharactersDaoDbImpl implements CharactersDao {
         5. catch any exceptions to null (empty sightings)
         
         6. return the hero
-        */
-        List <Characters> heroes = jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
+         */
+        List<Characters> heroes = jdbcTemplate.query(SQL_SELECT_ALL_HEROES,
                 new CharactersMapper());
-        
-        for (Characters myHero : heroes){
+
+        for (Characters myHero : heroes) {
             List<Date> latestSighting = jdbcTemplate.query(SQL_SELECT_LATEST_SIGHTING_BY_CHARACTERID, new DateMapper(), myHero.getCharacterId());
-            
+
             try {
                 myHero.setMostRecentSightingDate(latestSighting.get(0));
             } catch (Exception e) {
@@ -232,15 +258,10 @@ public class CharactersDaoDbImpl implements CharactersDao {
     @Override
     public void setCharactersSPList(List<Characters> temp) {
 
-        for (Characters charact : temp) {
-            charact.setSuperPowerList(getSuperPowersByCharacter(charact));
-
-        }
     }
 
     @Override
     public List<Power> getAllPowers() {
-
         return jdbcTemplate.query(SQL_SELECT_ALL_POWERS,
                 new SuperPowerMapper());
 
@@ -259,6 +280,7 @@ public class CharactersDaoDbImpl implements CharactersDao {
 
         }
     }
+
     private static final class CharactersMapperWithSightingDate implements RowMapper<Characters> {
 
         public Characters mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -284,16 +306,13 @@ public class CharactersDaoDbImpl implements CharactersDao {
             return newPower;
         }
     }
-    
-    
+
     private static final class DateMapper implements RowMapper<Date> {
-        
-        public Date mapRow (ResultSet rs, int rowNum) throws SQLException {
+
+        public Date mapRow(ResultSet rs, int rowNum) throws SQLException {
             Date newDate = rs.getDate("SightingDate");
             return newDate;
         }
     }
-
-    
 
 }

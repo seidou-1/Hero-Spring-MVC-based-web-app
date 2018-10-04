@@ -13,6 +13,8 @@
                         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
                         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
                             crossorigin="anonymous">
+                            
+                    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favi.png" type="image/x-icon" />
                     </head>
 
                     <body>
@@ -100,7 +102,7 @@
                                         <div class="col-md-5" id="characterImg">
                                             <c:choose>
                                                 <c:when test="${display == 'edit'}">
-                                                    <img src="${pageContext.request.contextPath}/img/villains.jpg" alt="small" class="viewImage">
+                                                    <img src="${villain.photo}" alt="small" class="viewImage">
                                                     <div class="myInstructions">
                                                         <h4>
                                                             <i class="fas fa-info-circle"></i> Instructions</h4>
@@ -118,7 +120,7 @@
                                                     </div>
                                                 </c:when>
                                                 <c:when test="${display == 'view'}">
-                                                    <img src="${pageContext.request.contextPath}/img/villains.jpg" alt="small" class="viewImage">
+                                                    <img src="${villain.photo}" alt="small" class="viewImage">
                                                     <br>
                                                     <br>
                                                     <br>
@@ -131,7 +133,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${villain.characterId}" class="btn btn-success viewButtons">Edit Villain</a>
+                                                                    <a href="${pageContext.request.contextPath}/viewVillains?viewType=edit&characterId=${villain.characterId}" class="btn btn-success viewButtons">Edit Villain</a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -268,14 +270,14 @@
                                                                 <span class="heading">Super Powers</span>
                                                                 <br>
                                                                 <span class="information">
-                                                                    <c:out value="Regeneration"></c:out>
+                                                                    <c:out value="${villain.supPowerStr}"></c:out>
                                                                 </span>
                                                             </li>
                                                             <li>
                                                                 <span class="heading">Organizations</span>
                                                                 <br>
                                                                 <span class="information">
-                                                                    <c:out value="Akatsuki"></c:out>
+                                                                    <c:out value="${villain.orgListStr}"></c:out>
                                                                 </span>
                                                             </li>
 
@@ -298,81 +300,94 @@
                                                 </c:when>
 
                                                 <c:otherwise>
-                                                    <form action="createHero" class="displayForm" method="POST">
 
-                                                        <label for="villainName">Name: </label>
-                                                        <br>
-                                                        <input class="formInput" type="text" value="${villain.name}" id="villainName" name="villainName" placeholder="Enter Villain name"
-                                                        />
+                                                    <c:choose>
+                                                        <c:when test="${display == 'edit'}">
+                                                            <form action="ediVillain" class="displayForm" method="POST">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form action="createVillain" class="displayForm" method="POST">
+                                                        </c:otherwise>
+                                                    </c:choose>
 
-                                                        <label for="description">Description: </label>
-                                                        <br>
-                                                        <input class="formInput" type="text" value="${villain.description}" id="description" name="description" placeholder="Enter description"
-                                                        />
+                                                    <label for="villainName">Name: </label>
+                                                    <br>
+                                                    <input class="formInput" type="text" value="${villain.name}" id="villainName" name="villainName" placeholder="Enter Villain name"
+                                                    />
 
-                                                        <label for="description">Organizations: </label>
-                                                        <div id="organizationsDisplay">
-                                                            <div class="row">
-                                                                <div class="col-md-12" id="myOrganizations">
+                                                    <input type="text" name="userImage" id="uploadImage" value="https://res.cloudinary.com/jollystudios/image/upload/q_78/v1537823403/hero.jpg"
+                                                     hidden>
+
+                                                     <input type="text" name="userType" id="userType" value="0" hidden>
+
+                                                    <label for="description">Description: </label>
+                                                    <br>
+                                                    <input class="formInput" type="text" value="${villain.description}" id="description" name="description" placeholder="Enter description"
+                                                    />
+
+                                                    <label for="description">Organizations: </label>
+                                                    <div id="organizationsDisplay">
+                                                        <div class="row">
+                                                            <div class="col-md-12" id="myOrganizations">
+                                                            </div>
+                                                            <div class="col-md-12 text-center">
+                                                                <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add an Organization</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-md">
+
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                    <h4 class="modal-title" id="myModalLabel">All Organization</h4>
                                                                 </div>
-                                                                <div class="col-md-12 text-center">
-                                                                    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add an Organization</a>
+                                                                <div class="modal-body" id="organizationChoice"></div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveOrganizations">Save</button>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-md">
+                                                    <label for="description">Super Powers: </label>
+                                                    <div id="superPowerDisplay">
+                                                        <div class="row">
+                                                            <div class="col-md-12" id="mySuperPowers">
+                                                            </div>
+                                                            <div class="col-md-12 text-center">
+                                                                <a href="#" data-toggle="modal" data-target=".superPowerModal">
+                                                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Super Power</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                        <h4 class="modal-title" id="myModalLabel">All Organization</h4>
-                                                                    </div>
-                                                                    <div class="modal-body" id="organizationChoice"></div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveOrganizations">Save</button>
-                                                                    </div>
+                                                    <div class="modal fade superPowerModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-md">
+
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                    <h4 class="modal-title" id="myModalLabel2">All Super Powers</h4>
+                                                                </div>
+                                                                <div class="modal-body" id="superPowerChoice"></div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <label for="description">Super Powers: </label>
-                                                        <div id="superPowerDisplay">
-                                                            <div class="row">
-                                                                <div class="col-md-12" id="mySuperPowers">
-                                                                </div>
-                                                                <div class="col-md-12 text-center">
-                                                                    <a href="#" data-toggle="modal" data-target=".superPowerModal">
-                                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Super Power</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div style="text-align: center">
+                                                        <button class="btn btn-primary" id="myVillain">
+                                                            <i class="fas fa-plus-circle"></i> Submit Villain </button>
 
-                                                        <div class="modal fade superPowerModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-md">
-
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                        <h4 class="modal-title" id="myModalLabel2">All Super Powers</h4>
-                                                                    </div>
-                                                                    <div class="modal-body" id="superPowerChoice"></div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div style="text-align: center">
-                                                            <button class="btn btn-primary" id="myVillain">
-                                                                <i class="fas fa-plus-circle"></i> Submit Villain </button>
-
-                                                        </div>
+                                                    </div>
                                                     </form>
                                                 </c:otherwise>
                                             </c:choose>
@@ -385,58 +400,58 @@
                         </div>
 
 
-                        
+
                         <footer>
-                                <a href="#" data-toggle="modal" data-target="#moreInfo">Developers</a>
-                                Copyright 2018 &copy;
-                            </footer>
-    
-    
-                            <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="moreInfoTitle">Developer Credits</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h5 style="font-weight: bold">Below is a list of all contributers to this project</h5>
-                                            <h6>Credit is given where credit is due, with that said I would like to give thanks to
-                                                the following people who helped on this project!</h6>
-                                            <ul>
-                                                <!-- <li>Travon Campbell</li> -->
-                                                <!-- Comment in my name (Travon) and comment out yours -->
-                                                <li>Mohamed Barry</li>
-                                                <li>Jose Sosa</li>
-                                                <li>Rich Taveras</li>
-                                            </ul>
-    
-                                            <h5>This project is intended to demonstrate the skill of developers listed above. It
-                                                is not intended for profit. With that said. If you would like to donate. Hit
-                                                me up on the DM and I'll give my paypal. Lol</h5>
-    
-                                            <ul>
-                                                <li>
-                                                    <a href="https://fontawesome.com/icons?d=gallery">Font Awesome (Icons) </a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://www.flaticon.com/">Flaticon (Logo)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="https://www.superherodb.com/">Character Images</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <a href="https://github.com/seidou-1/Hero-Spring-MVC-based-web-app" target="_blank" class="btn btn-primary">See Code</a>
-                                            <a href="http://www.tenderlovingcode.org" class="btn btn-success" target="_blank">Read Story</a>
-                                        </div>
+                            <a href="#" data-toggle="modal" data-target="#moreInfo">Developers</a>
+                            Copyright 2018 &copy;
+                        </footer>
+
+
+                        <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="moreInfoTitle">Developer Credits</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 style="font-weight: bold">Below is a list of all contributers to this project</h5>
+                                        <h6>Credit is given where credit is due, with that said I would like to give thanks to
+                                            the following people who helped on this project!</h6>
+                                        <ul>
+                                            <!-- <li>Travon Campbell</li> -->
+                                            <!-- Comment in my name (Travon) and comment out yours -->
+                                            <li>Mohamed Barry</li>
+                                            <li>Jose Sosa</li>
+                                            <li>Rich Taveras</li>
+                                        </ul>
+
+                                        <h5>This project is intended to demonstrate the skill of developers listed above. It
+                                            is not intended for profit. With that said. If you would like to donate. Hit
+                                            me up on the DM and I'll give my paypal. Lol</h5>
+
+                                        <ul>
+                                            <li>
+                                                <a href="https://fontawesome.com/icons?d=gallery">Font Awesome (Icons) </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.flaticon.com/">Flaticon (Logo)</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.superherodb.com/">Character Images</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a href="https://github.com/seidou-1/Hero-Spring-MVC-based-web-app" target="_blank" class="btn btn-primary">See Code</a>
+                                        <a href="http://www.tenderlovingcode.org" class="btn btn-success" target="_blank">Read Story</a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         <!-- Placed at the end of the document so the pages load faster -->
                         <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
                         <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

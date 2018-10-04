@@ -66,7 +66,7 @@ public class SightingsDaoDbImpl implements SightingsDao{
             + " where sight.sightingID = ?";
     
     private static final String SQL_SELECT_SIGHTING_BY_LOCATION_ID
-            = "select * from Sighting where LocationId = ?";
+            = "select * from `Sighting` where LocationId = ?";
     
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)

@@ -14,12 +14,6 @@ $(document).ready(function () {
             });
         });
     });
-
-   
- 
-
-    
-
 });
 
 

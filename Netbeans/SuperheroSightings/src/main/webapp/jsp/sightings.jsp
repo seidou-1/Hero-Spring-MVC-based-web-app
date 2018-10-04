@@ -6,12 +6,14 @@
                 <html>
 
                 <head>
-                    <title>Index Page</title>
+                    <title>Sightings</title>
                     <!-- Bootstrap core CSS -->
                     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
                     <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
                         crossorigin="anonymous">
+
+                    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favi.png" type="image/x-icon" />
 
                 </head>
 
@@ -110,9 +112,8 @@
                                                         <td>
                                                             <c:out value="${locations[i].locationName}"></c:out>
                                                         </td>
-                                                        <td>
-                                                            <a href="${pageContext.request.contextPath}/edit">edit |</a>
-                                                            <a href="${pageContext.request.contextPath}">delete</a>
+                                                        <td style="text-align: center">
+                                                            <a href="${pageContext.request.contextPath}/edit">edit</a>
                                                         </td>
 
                                                     </tr>
@@ -189,7 +190,7 @@
                                     </div>
                                     <!--end-->
                                     <!-- <hr > -->
-                                <p style="margin: 10px 0; color: white;">or</p>
+                                    <p style="margin: 10px 0; color: white;">or</p>
                                     <!--Sort by organization-->
                                     <div id="organizationSort">
                                         <a href="#" data-toggle="modal" data-target=".organizationSortModal" class="btn btn-primary filter">Filters by Organization</a>
@@ -265,7 +266,7 @@
                                         </div>
                                     </div>
                                     <!--end-->
-                                    
+
                                     <br>
                                     <a style="color:lightblue; font-weight: bold" href="#/filterReset"> Reset filter </a>
 
@@ -328,10 +329,9 @@
                     <!-- Placed at the end of the document so the pages load faster -->
                     <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
                     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-                    <script src="${pageContext.request.contextPath}/js/script.js"></script>
-                    <script src="${pageContext.request.contextPath}/js/map.js"></script>
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYul2fBF6a03a9OqShrMK6SVzJdfAm-NY&callback=initMap" async
-                        defer></script>
+                    <script type="module" src="${pageContext.request.contextPath}/js/script.js"></script>
+                    <script type="module" src="${pageContext.request.contextPath}/js/sightings/map.js"></script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYul2fBF6a03a9OqShrMK6SVzJdfAm-NY" async defer></script>
 
                 </body>
 

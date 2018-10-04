@@ -22,6 +22,10 @@ public interface CharactersDao{
 
     public void updateCharacter(Characters character);
 
+    public void addCharacterOrg(int charID, int orgID);
+    
+    public void addCharacterPower(int charId, int powerId);
+    
     public Characters getCharacterById(int characterId);
 
     public List<Characters> getCharactersBySightingId(int sightingId);

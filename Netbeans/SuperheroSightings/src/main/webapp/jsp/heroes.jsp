@@ -13,6 +13,8 @@
                         <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
                         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
                             crossorigin="anonymous">
+                            
+                    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/favi.png" type="image/x-icon" />
 
                     </head>
 
@@ -88,7 +90,7 @@
 
                                                         </td>
                                                         <td>
-                                                            <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${heroes[i].characterId}">edit</a>
+                                                            <a href="${pageContext.request.contextPath}/viewHeroes?page=characters&viewType=edit&characterId=${heroes[i].characterId}">edit</a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -105,7 +107,7 @@
 
                                             <c:choose>
                                                 <c:when test="${display == 'edit'}">
-                                                    <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="small" class="viewImage">
+                                                    <img src="${hero.photo}" alt="small" class="viewImage">
                                                     <div class="myInstructions">
                                                         <h4>
                                                             <i class="fas fa-info-circle"></i> Instructions</h4>
@@ -124,7 +126,7 @@
                                                 </c:when>
 
                                                 <c:when test="${display == 'view'}">
-                                                    <img src="${pageContext.request.contextPath}/img/hero.jpg" alt="small" class="viewImage">
+                                                    <img src="${hero.photo}" alt="small" class="viewImage">
                                                     <br>
                                                     <br>
                                                     <br>
@@ -137,7 +139,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <a href="${pageContext.request.contextPath}/viewHeroes?viewType=edit&characterId=${hero.characterId}" class="btn btn-success viewButtons">Edit Hero</a>
+                                                                    <a href="${pageContext.request.contextPath}/viewHeroes?page=characters&viewType=edit&characterId=${hero.characterId}" class="btn btn-success viewButtons">Edit Hero</a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -279,14 +281,14 @@
                                                                 <span class="heading">Super Powers</span>
                                                                 <br>
                                                                 <span class="information">
-                                                                    <c:out value="Regeneration"></c:out>
+                                                                    <c:out value="${hero.supPowerStr}"></c:out>
                                                                 </span>
                                                             </li>
                                                             <li>
                                                                 <span class="heading">Organizations</span>
                                                                 <br>
                                                                 <span class="information">
-                                                                    <c:out value="Akatsuki"></c:out>
+                                                                    <c:out value="${hero.orgListStr}"></c:out>
                                                                 </span>
                                                             </li>
 
@@ -310,116 +312,138 @@
                                                 </c:when>
 
                                                 <c:otherwise>
-                                                    <form action="createHero" class="displayForm" method="POST">
 
-                                                        <label for="heroName">Name: </label>
-                                                        <br>
-                                                        <input class="formInput" type="text" value="${hero.name}" id="name" name="heroName" placeholder="Enter the hero's name" />
 
-                                                        <input type="text" name="userImage" id="uploadImage" hidden>
+                                                    <c:choose>
+                                                        <c:when test="${display == 'edit'}">
+                                                            <form action="editHero" class="displayForm" method="POST">
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form action="createHero" class="displayForm" method="POST">
+                                                        </c:otherwise>
+                                                    </c:choose>
 
-                                                        <label for="description">Description: </label>
-                                                        <br>
-                                                        <input class="formInput" type="text" value="${hero.description}" id="description" name="description" placeholder="Enter a description for the hero"
-                                                        />
 
-                                                        <label for="organizations">Organizations: </label>
-                                                        <div id="organizationsDisplay">
-                                                            <div class="row">
-                                                                <div class="col-md-12" id="myOrganizations">
+                                                    <label for="heroName">Name: </label>
+                                                    <br>
+                                                    <input class="formInput" type="text" value="${hero.name}" id="name" name="heroName" placeholder="Enter the hero's name" />
+
+                                                    <input type="text" name="userImage" id="uploadImage" value="https://res.cloudinary.com/jollystudios/image/upload/q_78/v1537823403/hero.jpg"
+                                                        hidden>
+
+                                                    <label for="description">Description: </label>
+                                                    <br>
+                                                    <input class="formInput" type="text" value="${hero.description}" id="description" name="description" placeholder="Enter a description for the hero"
+                                                    />
+
+                                                    <label for="organizations">Organizations: </label>
+                                                    <div id="organizationsDisplay">
+                                                        <div class="row">
+                                                            <div class="col-md-12" id="myOrganizations">
+
+                                                            </div>
+                                                            <div class="col-md-12 text-center modalSelect">
+                                                                <a href="#" data-toggle="modal" data-target=".organizationModal">
+                                                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add an Organization</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal fade organizationModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-md">
+
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                    <h4 class="modal-title" id="myModalLabel">All Organization</h4>
                                                                 </div>
-                                                                <div class="col-md-12 text-center modalSelect">
-                                                                    <a href="#" data-toggle="modal" data-target=".organizationModal">
-                                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add an Organization</a>
+                                                                <div class="modal-body" id="organizationChoice">
+
+                                                                    <!--Code here to display all organizations-->
+
+
+
+                                                                    <c:forEach var="i" begin="1" end="${organizations.size()-1}">
+
+                                                                        <label class="myLabel col-md-6 col-lg-6 col-sm-12">
+                                                                            <input type="checkbox" class="organizationSelection" name="organizations" data-pill="organizations" data-name="${organizations[i].organizationName} "
+                                                                                value="${organizations[i].organizationId}">
+
+                                                                            <c:out value="${organizations[i].organizationName}"></c:out>
+                                                                        </label>
+                                                                        <br>
+                                                                    </c:forEach>
+
+                                                                    <!--Code here to display all organizations-->
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveOrganizations">Save</button>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
 
-                                                        <div class="modal fade organizationModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-md">
+                                                    <label for="superPowers">Super Powers: </label>
+                                                    <div id="superPowerDisplay">
+                                                        <div class="row">
+                                                            <div class="col-md-12" id="mySuperPowers">
+                                                            </div>
+                                                            <div class="col-md-12 text-center modalSelect">
+                                                                <a href="#" data-toggle="modal" data-target=".superPowerModal">
+                                                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Super Power</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                        <h4 class="modal-title" id="myModalLabel">All Organization</h4>
-                                                                    </div>
-                                                                    <div class="modal-body" id="organizationChoice">
+                                                    <div class="modal fade superPowerModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-md">
 
-                                                                        <!--Code here to display all organizations-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                    <h4 class="modal-title" id="myModalLabel2">All Super Powers</h4>
+                                                                </div>
+                                                                <div class="modal-body" id="superPowerChoice">
+
+                                                                    <c:forEach var="i" begin="1" end="${powers.size()-1}">
+
+                                                                        <label class="myLabel col-md-4 col-lg-4 col-sm-12">
+                                                                            <input type="checkbox" class="superPowerSelection" name="superPowers" data-pillType="superPowers" data-name="${powers[i].powerType} "
+                                                                                value="${powers[i].powerId}">
+                                                                            <c:out value="${powers[i].powerType}"></c:out>
+                                                                        </label>
+                                                                        <br>
 
 
 
-                                                                        <c:forEach var="i" begin="1" end="${organizations.size()-1}">
+                                                                    </c:forEach>
 
-                                                                            <label class="myLabel col-md-6 col-lg-6 col-sm-12">
-                                                                                <input type="checkbox" class="organizationSelection" name="organizations" data-pill="organizations" data-name="${organizations[i].organizationName} "
-                                                                                    value="${organizations[i].organizationId}">
 
-                                                                                <c:out value="${organizations[i].organizationName}"></c:out>
-                                                                            </label>
-                                                                            <br>
-                                                                        </c:forEach>
-
-                                                                        <!--Code here to display all organizations-->
-                                                                    </div>
-
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveOrganizations">Save</button>
-                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="savePowers">Save</button>
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <label for="superPowers">Super Powers: </label>
-                                                        <div id="superPowerDisplay">
-                                                            <div class="row">
-                                                                <div class="col-md-12" id="mySuperPowers">
-                                                                </div>
-                                                                <div class="col-md-12 text-center modalSelect">
-                                                                    <a href="#" data-toggle="modal" data-target=".superPowerModal">
-                                                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a Super Power</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal fade superPowerModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-md">
-
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                        <h4 class="modal-title" id="myModalLabel2">All Super Powers</h4>
-                                                                    </div>
-                                                                    <div class="modal-body" id="superPowerChoice">
-
-                                                                        <c:forEach var="i" begin="1" end="${powers.size()-1}">
-
-                                                                            <label class="myLabel col-md-4 col-lg-4 col-sm-12">
-                                                                                <input type="checkbox" class="superPowerSelection" name="powers" data-pillType="superPowers" data-name="${powers[i].powerType} "
-                                                                                    value="${powers[i].powerId}">
-                                                                                <c:out value="${powers[i].powerType}"></c:out>
-                                                                            </label>
-                                                                            <br>
+                                                    </div>
+                                                    <div style="text-align: center">
 
 
+                                                        <c:choose>
+                                                            <c:when test="${display == 'edit'}">
+                                                                <button class="btn btn-warning" id="newHero">
+                                                                    <i class="fas fa-plus-circle"></i> Edit Hero </button>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <button class="btn btn-success" id="newHero">
+                                                                    <i class="fas fa-plus-circle"></i> Submit Hero </button>
+                                                            </c:otherwise>
+                                                        </c:choose>
 
-                                                                        </c:forEach>
-
-
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savePowers">Save</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div style="text-align: center">
-                                                            <button class="btn btn-primary" id="newHero">
-                                                                <i class="fas fa-plus-circle"></i> Submit Hero </button>
-
-                                                        </div>
+                                                    </div>
                                                     </form>
                                                 </c:otherwise>
                                             </c:choose>
