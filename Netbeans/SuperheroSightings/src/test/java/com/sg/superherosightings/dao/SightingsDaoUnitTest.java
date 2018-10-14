@@ -137,7 +137,7 @@ public class SightingsDaoUnitTest {
     }
 
     @Test
-    public void testDeletePost() {
+    public void testDeleteSighting() {
         //Arrange
         Characters myCharacter = createCharacter();
         Location myLocation = createLocation();
@@ -153,7 +153,7 @@ public class SightingsDaoUnitTest {
     }
 
     @Test
-    public void testUpdatePost() {
+    public void testUpdateSighting() {
         //Arrange
         Characters myCharacter = createCharacter();
         Location myLocation = createLocation();
