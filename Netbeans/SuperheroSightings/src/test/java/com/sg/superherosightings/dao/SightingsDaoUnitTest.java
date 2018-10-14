@@ -30,10 +30,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-applicationContext.xml"})
-@Rollback
-@Transactional
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"/test-applicationContext.xml"})
+//@Rollback
+//@Transactional
 
 /*
 Mo:
@@ -116,7 +116,7 @@ public class SightingsDaoUnitTest {
 
     }
 
-    @Test
+//    @Test
     public void testGetSightingByID() throws ParseException {
 
         //Arrange
@@ -136,7 +136,7 @@ public class SightingsDaoUnitTest {
 
     }
 
-    @Test
+//    @Test
     public void testDeletePost() {
         //Arrange
         Characters myCharacter = createCharacter();
@@ -152,7 +152,7 @@ public class SightingsDaoUnitTest {
         assert sightingsDao.getSightingById(mySighting.getSightingId()) == null;
     }
 
-    @Test
+//    @Test
     public void testUpdatePost() {
         //Arrange
         Characters myCharacter = createCharacter();
