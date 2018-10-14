@@ -95,7 +95,7 @@ public class LocationsDaoUnitTest {
     }
 
     @Test
-    public void testGetSightingByID() throws ParseException {
+    public void testGetLocationByID() throws ParseException {
 
         //Arrange
         Location myLocation = createLocation();
@@ -131,7 +131,7 @@ public class LocationsDaoUnitTest {
     }
 
     @Test
-    public void testUpdatePost() {
+    public void testUpdateLocation() {
         //Arrange
         Location myLocation = createLocation();
         myLocation = locationDao.addLocation(myLocation);
