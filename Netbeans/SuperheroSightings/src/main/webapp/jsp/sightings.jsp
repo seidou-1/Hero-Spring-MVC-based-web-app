@@ -292,19 +292,19 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h5 style="font-weight: bold">Below is a list of all contributers to this project</h5>
-                        <h6>Credit is given where credit is due, with that said I would like to give thanks to
-                            the following people who helped on this project!</h6>
+                        <h5 style="font-weight: bold">Below is the list of contributers in alphabetical order, who completed this project</h5>
+
                         <ul>
-                            <li>Travon Campbell</li>  
                             <li>Mohamed Barry</li>
+                            <li>Travon Campbell</li>  
                             <li>Jose Sosa</li>
                             <li>Rich Taveras</li>
                         </ul>
 
                         <h5>This project is intended to demonstrate the skill of developers listed above. It
                             is not intended for profit. With that said. If you would like to donate. Hit
-                            me up on the DM and I'll give my paypal. Lol</h5>
+                            me us on the DM and we'll give you the paypal account. Lol</h5>
+
 
                         <ul>
                             <li>
