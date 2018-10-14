@@ -93,7 +93,7 @@ public class OrganizationsDaoUnitTest {
     }
 
     @Test
-    public void testGetSightingByID() throws ParseException {
+    public void testGetOrganizationByID() throws ParseException {
         // Arrange
         Location myLocation = createLocation();
         Organization myOrganization = createOrganization(myLocation);
@@ -116,7 +116,7 @@ public class OrganizationsDaoUnitTest {
     }
 
 //    @Test
-    public void testDeleteLocation() {
+    public void testDeleteOrganization() {
         //Arrange
         Location myLocation = createLocation();
         myLocation = locationDao.addLocation(myLocation);
@@ -130,7 +130,7 @@ public class OrganizationsDaoUnitTest {
     }
 
 //    @Test
-    public void testUpdatePost() {
+    public void testUpdateOrganzation() {
         //Arrange
         Location myLocation = createLocation();
         myLocation = locationDao.addLocation(myLocation);

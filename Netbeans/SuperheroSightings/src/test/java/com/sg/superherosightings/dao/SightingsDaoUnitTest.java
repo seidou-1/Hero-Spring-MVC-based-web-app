@@ -136,8 +136,8 @@ public class SightingsDaoUnitTest {
 
     }
 
-//    @Test
-    public void testDeletePost() {
+    @Test
+    public void testDeleteSighting() {
         //Arrange
         Characters myCharacter = createCharacter();
         Location myLocation = createLocation();
@@ -152,8 +152,8 @@ public class SightingsDaoUnitTest {
         assert sightingsDao.getSightingById(mySighting.getSightingId()) == null;
     }
 
-//    @Test
-    public void testUpdatePost() {
+    @Test
+    public void testUpdateSighting() {
         //Arrange
         Characters myCharacter = createCharacter();
         Location myLocation = createLocation();
