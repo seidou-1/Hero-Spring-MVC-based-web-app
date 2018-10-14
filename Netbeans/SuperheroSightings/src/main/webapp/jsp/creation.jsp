@@ -220,6 +220,50 @@
                         <a>Developers</a>
                         Copyright 2018 &copy;
                     </footer>
+                                                    <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="moreInfoTitle">Developer Credits</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 style="font-weight: bold">Below is a list of all contributers to this project</h5>
+                                        <h6>Credit is given where credit is due, with that said I would like to give thanks to
+                                            the following people who helped on this project!</h6>
+                                        <ul>
+                                            <li>Travon Campbell</li>  
+                                            <li>Mohamed Barry</li>
+                                            <li>Jose Sosa</li>
+                                            <li>Rich Taveras</li>
+                                        </ul>
+
+                                        <h5>This project is intended to demonstrate the skill of developers listed above. It
+                                            is not intended for profit. With that said. If you would like to donate. Hit
+                                            me up on the DM and I'll give my paypal. Lol</h5>
+
+                                        <ul>
+                                            <li>
+                                                <a href="https://fontawesome.com/icons?d=gallery">Font Awesome (Icons) </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.flaticon.com/">Flaticon (Logo)</a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.superherodb.com/">Character Images</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a href="https://github.com/seidou-1/Hero-Spring-MVC-based-web-app" target="_blank" class="btn btn-primary">See Code</a>
+                                        <a href="http://www.tenderlovingcode.org/hero" class="btn btn-success" target="_blank">Read Story</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <!-- Placed at the end of the document so the pages load faster -->
                     <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
                     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

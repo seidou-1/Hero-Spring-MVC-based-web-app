@@ -337,8 +337,7 @@
                             Copyright 2018 &copy;
                         </footer>
 
-
-                        <div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
+<div class="modal fade" id="moreInfo" tabindex="-1" role="dialog" aria-labelledby="moreInfoTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -352,8 +351,7 @@
                                         <h6>Credit is given where credit is due, with that said I would like to give thanks to
                                             the following people who helped on this project!</h6>
                                         <ul>
-                                            <!-- <li>Travon Campbell</li> -->
-                                            <!-- Comment in my name (Travon) and comment out yours -->
+                                            <li>Travon Campbell</li>  
                                             <li>Mohamed Barry</li>
                                             <li>Jose Sosa</li>
                                             <li>Rich Taveras</li>
@@ -378,7 +376,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <a href="https://github.com/seidou-1/Hero-Spring-MVC-based-web-app" target="_blank" class="btn btn-primary">See Code</a>
-                                        <a href="http://www.tenderlovingcode.org" class="btn btn-success" target="_blank">Read Story</a>
+                                        <a href="http://www.tenderlovingcode.org/hero" class="btn btn-success" target="_blank">Read Story</a>
                                     </div>
                                 </div>
                             </div>
