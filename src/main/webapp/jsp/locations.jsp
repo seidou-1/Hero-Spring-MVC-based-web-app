@@ -188,7 +188,7 @@
             </div>
 
             <footer>
-                <a>Developers</a>
+                <a href="#" data-toggle="modal" data-target="#moreInfo">Developers</a>
                 Copyright 2018 &copy;
             </footer>
 
