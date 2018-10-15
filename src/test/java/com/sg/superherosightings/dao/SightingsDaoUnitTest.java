@@ -136,7 +136,7 @@ public class SightingsDaoUnitTest {
 
     }
 
-    @Test
+//    @Test
     public void testDeleteSighting() {
         //Arrange
         Characters myCharacter = createCharacter();
@@ -152,7 +152,7 @@ public class SightingsDaoUnitTest {
         assert sightingsDao.getSightingById(mySighting.getSightingId()) == null;
     }
 
-    @Test
+//    @Test
     public void testUpdateSighting() {
         //Arrange
         Characters myCharacter = createCharacter();

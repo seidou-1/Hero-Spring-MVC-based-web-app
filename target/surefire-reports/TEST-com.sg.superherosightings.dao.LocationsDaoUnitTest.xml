@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="com.sg.superherosightings.dao.LocationsDaoUnitTest" time="1.678" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="com.sg.superherosightings.dao.LocationsDaoUnitTest" time="1.965" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib"/>
     <property name="java.vm.version" value="25.161-b12"/>
     <property name="gopherProxySet" value="false"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/laptop/Development/GitHub/2. Database Driven Web Apps/Hero Sightings/Netbeans/SuperheroSightings"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/laptop/Development/GitHub/2. Database Driven Web Apps/Hero Sightings"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/laptop/Development/GitHub/2. Database Driven Web Apps/Hero Sightings/Netbeans/SuperheroSightings"/>
+    <property name="user.dir" value="/Users/laptop/Development/GitHub/2. Database Driven Web Apps/Hero Sightings"/>
     <property name="java.runtime.version" value="1.8.0_161-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/endorsed"/>
@@ -65,8 +65,8 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testDeleteLocation" time="1.507"/>
-  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testUpdatePost" time="0.061"/>
-  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testGetSightingByID" time="0.092"/>
-  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testAddLocation" time="0.018"/>
+  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testDeleteLocation" time="1.829"/>
+  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testAddLocation" time="0.024"/>
+  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testGetLocationByID" time="0.07"/>
+  <testcase classname="com.sg.superherosightings.dao.LocationsDaoUnitTest" name="testUpdateLocation" time="0.042"/>
 </testsuite>
