@@ -202,7 +202,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h5 style="font-weight: bold">Below is the list of contributers in alphabetical order, who completed this project</h5>
+                            <h5 style="font-weight: bold">Below is the list of contributers listed by sir name who completed this project</h5>
 
                             <ul>
                                 <li>Mohamed Barry</li>
@@ -211,9 +211,9 @@
                                 <li>Rich Taveras</li>
                             </ul>
 
-                            <h5>This project is intended to demonstrate the skill of developers listed above. It
-                                is not intended for profit. With that said. If you would like to donate. Hit
-                                me us on the DM and we'll give you the paypal account. Lol</h5>
+                            <h5>This project is intended to demonstrate the skill of the developers listed above. It
+                                            is not intended for profit. With that said, if you would like to donate, hit
+                                            us up on the DM and we'll give you that PayPal account! </h5>
 
                             <ul>
                                 <li>
